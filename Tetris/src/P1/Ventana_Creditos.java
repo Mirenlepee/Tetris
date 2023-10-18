@@ -3,6 +3,8 @@ package P1;
 import javax.swing.*;
 
 public class Ventana_Creditos {
-	private JTextArea textoCreditos;
+	private JLabel lblTitulo;
+    private JLabel lblCreadoras;
+    private JButton btnVolver;
 
 }

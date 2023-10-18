@@ -1,10 +1,11 @@
 package P1;
 
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 public class Ventana_Instrucciones {
-	private JTextArea textoInstrucciones;
-
+	private JLabel lblTitle;
+    private JTextArea TextAreaInstructions;
+    private JButton btnClose;
 }
 
 

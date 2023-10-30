@@ -5,8 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Ventana_Registro extends JFrame{
-    public Ventana_Registro() {
+public class Ventana_SignUp extends JFrame{
+    public Ventana_SignUp() {
      
         JFrame ventana = new JFrame("SIGN UP");
         ventana.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

@@ -2,7 +2,7 @@ package P1;
 
 import javax.swing.*;
 
-public class Ventana_Estadistica {
+public class Ventana_Estadistica extends JFrame{
     private JLabel lblTitle;
     private JLabel lblTotalTime;
     private JLabel lblDailyTime;

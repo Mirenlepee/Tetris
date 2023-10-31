@@ -5,62 +5,89 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Ventana_SignUp extends JFrame{
+public class Ventana_SignUp {
     public Ventana_SignUp() {
-     
-        JFrame ventana = new JFrame("SIGN UP");
-        ventana.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        ventana.setSize(400, 300);
-        ventana.setVisible(true);
+        JFrame ventana = new JFrame("Sign Up");
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ventana.setSize(400, 200);
+        ventana.setLayout(new BorderLayout());
 
-        JPanel panel = new JPanel();
-        ventana.add(panel);
-        panel.setLayout(new BorderLayout());
+        JLabel signUplbl = new JLabel("Sign Up");
+        signUplbl.setFont(new Font("Cambria", Font.BOLD, 24));
+        
+        JPanel pnllbl=new JPanel();
+        pnllbl.add(signUplbl,BorderLayout.CENTER);
+        
+
+        ventana.add(pnllbl, BorderLayout.NORTH);
+
+
+        JPanel pnlPrincipal = new JPanel();
+        pnlPrincipal.setLayout(new GridLayout(4, 2));
+
+
+        JLabel usernamelbl = new JLabel("Username:");
+        JTextField usernamefld = new JTextField(20);
+        pnlPrincipal.add(usernamelbl);
+        pnlPrincipal.add(usernamefld);
+
+        
+        JLabel passwordlbl = new JLabel("Password:");
+        JTextField passwordfld = new JTextField(20);
+        pnlPrincipal.add(passwordlbl);
+        pnlPrincipal.add(passwordfld);
+
+
+        JLabel confirmPasswordlbl = new JLabel("Confirm Password:");
+        JPasswordField confirmPasswordfld = new JPasswordField(20);
+        pnlPrincipal.add(confirmPasswordlbl);
+        pnlPrincipal.add(confirmPasswordfld);
 
       
- 
-   
+        JLabel emaillbl = new JLabel("Email:");
+        JTextField emailfld = new JTextField(20);
+        pnlPrincipal.add(emaillbl);
+        pnlPrincipal.add(emailfld);
 
-        JLabel lblTitulo = new JLabel("Sign Up");
-        JLabel lblUsuario = new JLabel("Usuario:");
-        JTextField txtUsuario = new JTextField(20);
-        JLabel lblPassword = new JLabel("Contraseña:");
-        JTextField txtPassword = new JTextField(20);
-        JLabel lblConfirmPassword = new JLabel("Confirmar Contraseña:");
-        JTextField txtConfirmPassword = new JTextField(20);
-        JLabel lblEmail = new JLabel("Correo Electrónico:");
-        JTextField txtEmail = new JTextField(20);
-
-        JButton btnAtras = new JButton("Atrás");
-        JButton btnContinuar = new JButton("Continuar");
-        JButton btnSalir = new JButton("Salir");
+        ventana.add(pnlPrincipal, BorderLayout.CENTER);
 
     
-  
-        
-        btnAtras.addActionListener(new ActionListener() {
+        JPanel buttonPanel = new JPanel();
+
+
+        JButton backbtn = new JButton("Atrás");
+        backbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // CODIFICAR PARA IR A LA VENTANA ANTERIOR
+             ventana.dispose();
+             new Ventana_SignIn();
             }
         });
-      
+        buttonPanel.add(backbtn);
 
-        btnContinuar.addActionListener(new ActionListener() {
+        JButton exitbtn= new JButton("Salir");
+        exitbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // CODIFICAR PARA IR A LA SIGUIENTE VENTANA
+                System.exit(0); 
             }
         });
+        buttonPanel.add(exitbtn);
 
-
-        btnSalir.addActionListener(new ActionListener() {
+        JButton continuebtn = new JButton("Continuar");
+        continuebtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //CODIFICAR PARA IR A LA VENTANA DE CONFIRMACIÓN DE SALIR DEL JUEGO
+                
+                System.out.println("Ir a la ventana de Perfil de Usuario.");
             }
         });
+        buttonPanel.add(continuebtn);
 
-      
+        ventana.add(buttonPanel, BorderLayout.SOUTH);
+
+        ventana.setVisible(true);
     }
+
+   
 }

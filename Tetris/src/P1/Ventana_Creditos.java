@@ -23,8 +23,7 @@ public class Ventana_Creditos extends JFrame{
     	add(lblTitulo, BorderLayout.NORTH);
     	lblTexto1 = new JLabel (" Oihane Camacho ");
     	add(lblTexto1, BorderLayout.NORTH);
-    	lblTexto2 = new JLabel (" Miren Lépée ");
-    	add(lblTexto2, BorderLayout.NORTH);
+    	
     	lblTexto3 = new JLabel (" Naia Lorente ");
     	add(lblTexto3, BorderLayout.NORTH);
     	btnVolver = new JButton();

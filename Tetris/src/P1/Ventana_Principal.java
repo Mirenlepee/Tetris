@@ -12,11 +12,11 @@ public class Ventana_Principal extends JFrame{
 	
 	public Ventana_Principal() {
 		setTitle("Ventana Principal");
-		setSize(600, 900);
+		setSize(600, 800);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
-		ImageIcon imgLogotipo = new ImageIcon("Logotipo.jpg");
+		ImageIcon imgLogotipo = new ImageIcon(Ventana_Principal.class.getResource("Logotipo.png"));
 		JLabel lblLogotipo = new JLabel(imgLogotipo);
 		this.add(lblLogotipo, BorderLayout.NORTH);
 		
@@ -37,5 +37,9 @@ public class Ventana_Principal extends JFrame{
 		pnlBotonera.add(btnCredits);
 		
 		
+	}
+	public static void main(String[] args) {
+		JFrame vent = new Ventana_Principal();
+		vent.setVisible(true);
 	}
 }

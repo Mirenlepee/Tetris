@@ -7,6 +7,7 @@
 	
 	public class Ventana_Creditos extends JFrame{
 		private JPanel pnlContenido;
+		private JPanel pnlMedio;
 		private JLabel lblTitulo;
 		private JLabel lblCreadoras;
 	    private JTextArea txtCreadoras;
@@ -28,50 +29,47 @@
 	        lblTitulo.setForeground(Color.BLUE);
 	        lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 
+	        //pnlMedio = new JPanel(new BoxLayout(pnlMedio, BoxLayout.Y_AXIS));
+	        pnlMedio = new JPanel();
+	        pnlMedio.setLayout(new BoxLayout(pnlMedio, BoxLayout.Y_AXIS)); // Set a vertical layout
+
 
 	        //CREADORAS    	
 	    	lblCreadoras = new JLabel ("CREATORS: ");
-	    	lblCreadoras.setFont(new Font("Verdana", Font.BOLD, 20));
+	    	lblCreadoras.setFont(new Font("Verdana", Font.BOLD, 18));
 	    	lblCreadoras.setForeground(Color.BLACK);
-	        lblCreadoras.setHorizontalAlignment(SwingConstants.CENTER);
+	        //lblCreadoras.setHorizontalAlignment(SwingConstants.CENTER);
 	    	
 	    	txtCreadoras = new JTextArea(
 	                "Oihane Camacho\n" +
 	                "Miren Lépée\n" +
 	                "Naia Lorente \n\n"
 	            );
-	    	txtCreadoras.setFont(new Font("Verdana", Font.PLAIN, 16));
+	    	txtCreadoras.setFont(new Font("Verdana", Font.PLAIN, 14));
 	    	txtCreadoras.setForeground(Color.BLACK);
 	    	txtCreadoras.setLineWrap(true);
 	    	txtCreadoras.setWrapStyleWord(true);
 	    	txtCreadoras.setEditable(false);
 	    	
-	    	add(txtCreadoras, BorderLayout.CENTER);
 	    	
 	    	//DISEÑADORAS    	
 	    	lblDiseñadoras = new JLabel ("DESIGNERS: ");
-	    	lblDiseñadoras.setFont(new Font("Verdana", Font.BOLD, 20));
+	    	lblDiseñadoras.setFont(new Font("Verdana", Font.BOLD, 18));
 	    	lblDiseñadoras.setForeground(Color.BLACK);
 	    	lblDiseñadoras.setHorizontalAlignment(SwingConstants.CENTER);
 	    	
 	    	txtDiseñadoras = new JTextArea(
 	                "Oihane Camacho\n" +
 	                "Miren Lépée\n" +
-	                "Naia Lorente \n\n" +
-	                "Diseñadoras: \n" +
-	                "Oihane Camacho\n" +
-	                "Miren Lépée\n" +
-	                "Naia Lorente \n\n" +
-	                "Versión: 1.0\n"
+	                "Naia Lorente \n\n" 
 	            );
 	    	// Personaliza la apariencia del JTextArea
-	    	txtDiseñadoras.setFont(new Font("Verdana", Font.PLAIN, 16));
+	    	txtDiseñadoras.setFont(new Font("Verdana", Font.PLAIN, 14));
 	    	txtDiseñadoras.setForeground(Color.BLACK);
 	    	txtDiseñadoras.setLineWrap(true);
 	    	txtDiseñadoras.setWrapStyleWord(true);
 	    	txtDiseñadoras.setEditable(false);
 	    	
-	    	add(txtDiseñadoras, BorderLayout.CENTER);
 	    	
 	    	//BOTON
 	    	btnVolver = new JButton("Volver");
@@ -84,11 +82,13 @@
 				}
 	    	});
 	    	
+	    	pnlMedio.add(lblCreadoras);
+	    	pnlMedio.add(txtCreadoras);
+	    	pnlMedio.add(lblDiseñadoras);
+	    	pnlMedio.add(txtDiseñadoras);
+	    	
 	    	pnlContenido.add(lblTitulo, BorderLayout.NORTH);
-	    	pnlContenido.add(lblCreadoras, BorderLayout.CENTER);
-	    	pnlContenido.add(txtCreadoras, BorderLayout.CENTER);
-	    	pnlContenido.add(lblDiseñadoras, BorderLayout.CENTER);
-	    	pnlContenido.add(txtDiseñadoras, BorderLayout.CENTER);
+	    	pnlContenido.add(pnlMedio, BorderLayout.CENTER);
 	    	pnlContenido.add(btnVolver, BorderLayout.SOUTH);
 	        add(pnlContenido);
 	    	setVisible(true);

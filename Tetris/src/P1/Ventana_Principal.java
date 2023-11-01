@@ -1,6 +1,8 @@
 package P1;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -34,6 +36,16 @@ public class Ventana_Principal extends JFrame{
 		pnlBotonera.add(btnStatistics);
 		
 		JButton btnCredits = new JButton("CREDITS");
+		btnCredits.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new Ventana_Creditos();
+			}
+			
+		});
+		
 		pnlBotonera.add(btnCredits);
 		
 		

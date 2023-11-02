@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Ventana_SignUp {
+	
     public Ventana_SignUp() {
         JFrame ventana = new JFrame("Sign Up");
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,7 +56,7 @@ public class Ventana_SignUp {
         JPanel buttonPanel = new JPanel();
 
 
-        JButton backbtn = new JButton("Atrás");
+        JButton backbtn = new JButton("Back");
         backbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -65,7 +66,7 @@ public class Ventana_SignUp {
         });
         buttonPanel.add(backbtn);
 
-        JButton exitbtn= new JButton("Salir");
+        JButton exitbtn= new JButton("Quit");
         exitbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,12 +75,13 @@ public class Ventana_SignUp {
         });
         buttonPanel.add(exitbtn);
 
-        JButton continuebtn = new JButton("Continuar");
+        JButton continuebtn = new JButton("Continue");
         continuebtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
                 System.out.println("Ir a la ventana de Perfil de Usuario.");
+                new Ventana_PerfilDeUsuario();
             }
         });
         buttonPanel.add(continuebtn);

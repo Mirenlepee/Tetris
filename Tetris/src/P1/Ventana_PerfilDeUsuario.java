@@ -8,37 +8,40 @@ import java.awt.event.ActionListener;
 public class Ventana_PerfilDeUsuario extends JFrame {
   
        public Ventana_PerfilDeUsuario() {
-        JFrame ventana = new JFrame("Perfil de Usuario");
-        ventana.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        ventana.setSize(400, 300);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setSize(600, 800);
 
-        JPanel panel = new JPanel();
-        ventana.setVisible(true);
-       
-
+        JPanel pnlPerfilDeUsuario = new JPanel();
+        this.add(pnlPerfilDeUsuario, BorderLayout.CENTER);
         
-        JLabel lblNombre = new JLabel("Nombre de Usuario:");
+        ImageIcon imgAvatar = new ImageIcon("Avatar.png");
+        JLabel lblAvatar = new JLabel(imgAvatar);
+        pnlPerfilDeUsuario.add(lblAvatar);
+       
+        JLabel lblNombre = new JLabel("User Name:");
+        pnlPerfilDeUsuario.add(lblNombre);
+        
         JTextField txtNombre = new JTextField(20);
-        JLabel lblBiografia = new JLabel("Biografía:");
+        pnlPerfilDeUsuario.add(txtNombre);
+        
+        JLabel lblBiografia = new JLabel("Biografy:");
+        pnlPerfilDeUsuario.add(lblBiografia);
+        
         JTextArea txtBiografia = new JTextArea(5, 20);
-        JButton btnGuardar = new JButton("Continuar");
+        pnlPerfilDeUsuario.add(txtBiografia);
+        
+        JButton btnGuardar = new JButton("Continue");
+        pnlPerfilDeUsuario.add(btnGuardar);
 
-       
-      
-
-        ventana.add(panel);
-
-       
         btnGuardar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //CODIFICAR PARA GUARDAR EL NUEVO USUARIO
+            	new Ventana_Juego();
             }
         });
-
         
-        
-
+        this.setVisible(true);
         
     }
 }

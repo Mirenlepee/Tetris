@@ -1,9 +1,12 @@
 package P1;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,23 +19,56 @@ public class Ventana_Principal extends JFrame{
 		setTitle("Ventana Principal");
 		setSize(600, 800);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setLayout(new BorderLayout());
 		setLocationRelativeTo(null);
 		
 		ImageIcon imgLogotipo = new ImageIcon(Ventana_Principal.class.getResource("Logotipo.png"));
 		JLabel lblLogotipo = new JLabel(imgLogotipo);
 		this.add(lblLogotipo, BorderLayout.NORTH);
 		
-		JPanel pnlBotonera = new JPanel();
-		this.add(pnlBotonera, BorderLayout.CENTER);
+		JPanel pnlCentro = new JPanel();
+		this.add(pnlCentro, BorderLayout.CENTER);
+		
+		JPanel pnlBotonera = new JPanel(new GridBagLayout());
+		pnlBotonera.setLayout(new BoxLayout(pnlBotonera, BoxLayout.Y_AXIS));
+		pnlCentro.add(pnlBotonera);
 		
 		JButton btnPlay = new JButton("PLAY");
+		btnPlay.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new Ventana_SignIn();
+				
+			}
+			
+		});
 		pnlBotonera.add(btnPlay);
 		
-		ImageIcon imgSettings = new ImageIcon("");
+		ImageIcon imgSettings = new ImageIcon("Settings.png");
 		JButton btnSettings = new JButton(imgSettings);
+		btnSettings.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new Ventana_Options();
+			}
+			
+		});
 		pnlBotonera.add(btnSettings);
 		
 		JButton btnStatistics = new JButton("STATISTICS");
+		btnStatistics.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new Ventana_Estadistica();
+			}
+			
+		});
 		pnlBotonera.add(btnStatistics);
 		
 		JButton btnCredits = new JButton("CREDITS");

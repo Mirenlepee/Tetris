@@ -44,16 +44,17 @@ public class Ventana_SignIn {
 
         ventana.add(pnlPrincipal, BorderLayout.CENTER);
 
-        JButton continuebtn = new JButton("Continuar");
+        JButton continuebtn = new JButton("Continue");
         continuebtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Continuar al juego.");
+                new Ventana_Juego();
             }
         });
         ventana.add(continuebtn, BorderLayout.SOUTH);
 
-        JLabel noAccountlbl = new JLabel("<html><u>No tienes cuenta?</u></html>");
+        JLabel noAccountlbl = new JLabel("<html><u>Don't have an account? Create one</u></html>");
         noAccountlbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         noAccountlbl.setForeground(Color.BLUE);
         noAccountlbl.setHorizontalAlignment(JLabel.CENTER);

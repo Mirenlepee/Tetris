@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,8 +28,11 @@ public class Ventana_Principal extends JFrame{
 		JPanel pnlCentro = new JPanel();
 		this.add(pnlCentro, BorderLayout.CENTER);
 		
-		JPanel pnlBotonera = new JPanel(new GridBagLayout());
+		JPanel pnlBotonera = new JPanel();
 		pnlBotonera.setLayout(new BoxLayout(pnlBotonera, BoxLayout.Y_AXIS));
+		// Agrega un espacio fijo vertical entre los botones para centrarlos
+		pnlBotonera.add(Box.createRigidArea(new Dimension(0, 10)));
+		//pnlBotonera.setLayout(new BoxLayout(pnlBotonera, BoxLayout.Y_AXIS));
 		pnlCentro.add(pnlBotonera);
 		
 		JButton btnPlay = new JButton("PLAY");
@@ -43,14 +47,14 @@ public class Ventana_Principal extends JFrame{
 			
 		});
 		pnlBotonera.add(btnPlay);
+		pnlBotonera.add(Box.createRigidArea(new Dimension(0, 10)));
 		
 		ImageIcon imgSettings = new ImageIcon("C:\\Users\\miren\\git\\.project\\Tetris\\src\\P1\\Settings.png");
 		JButton btnSettings = new JButton();
-
+		//Editar el tamaño del logo
 		int nuevoAncho = 50;
 		int nuevoAlto = 50;
 		Image imagenDef = imgSettings.getImage().getScaledInstance(nuevoAncho, nuevoAlto, Image.SCALE_SMOOTH);
-
 		ImageIcon iconoDef = new ImageIcon(imagenDef);
 
 		btnSettings.setIcon(iconoDef);
@@ -64,6 +68,7 @@ public class Ventana_Principal extends JFrame{
 		});
 
 		pnlBotonera.add(btnSettings);
+		pnlBotonera.add(Box.createRigidArea(new Dimension(0, 10)));
 		
 		JButton btnStatistics = new JButton("STATISTICS");
 		btnStatistics.addActionListener(new ActionListener() {
@@ -76,6 +81,7 @@ public class Ventana_Principal extends JFrame{
 			
 		});
 		pnlBotonera.add(btnStatistics);
+		pnlBotonera.add(Box.createRigidArea(new Dimension(0, 10)));
 		
 		JButton btnCredits = new JButton("CREDITS");
 		btnCredits.addActionListener(new ActionListener() {
@@ -89,7 +95,6 @@ public class Ventana_Principal extends JFrame{
 		});
 		
 		pnlBotonera.add(btnCredits);
-		
 		
 	}
 	public static void main(String[] args) {

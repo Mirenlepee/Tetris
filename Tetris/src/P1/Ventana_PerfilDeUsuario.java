@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 public class Ventana_PerfilDeUsuario extends JFrame {
   
        public Ventana_PerfilDeUsuario() {
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setSize(600, 800);
 
         JPanel pnlPerfilDeUsuario = new JPanel();

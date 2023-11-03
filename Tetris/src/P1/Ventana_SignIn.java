@@ -7,12 +7,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Ventana_SignIn {
+public class Ventana_SignIn extends JFrame {
     private JFrame ventana; // Declarar el marco como miembro de la clase.
 
     public Ventana_SignIn() {
         ventana = new JFrame("Sign In");
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setSize(400, 200);
         ventana.setLayout(new BorderLayout());
 

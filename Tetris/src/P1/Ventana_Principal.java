@@ -36,6 +36,7 @@ public class Ventana_Principal extends JFrame{
 		pnlCentro.add(pnlBotonera);
 		
 		JButton btnPlay = new JButton("PLAY");
+		btnPlay.setFont(new Font("Vendana", Font.BOLD, 16));
 		btnPlay.addActionListener(new ActionListener() {
 
 			@Override
@@ -52,8 +53,8 @@ public class Ventana_Principal extends JFrame{
 		ImageIcon imgSettings = new ImageIcon("C:\\Users\\miren\\git\\.project\\Tetris\\src\\P1\\Settings.png");
 		JButton btnSettings = new JButton();
 		//Editar el tamaño del logo
-		int nuevoAncho = 50;
-		int nuevoAlto = 50;
+		int nuevoAncho = 30;
+		int nuevoAlto = 30;
 		Image imagenDef = imgSettings.getImage().getScaledInstance(nuevoAncho, nuevoAlto, Image.SCALE_SMOOTH);
 		ImageIcon iconoDef = new ImageIcon(imagenDef);
 
@@ -71,6 +72,7 @@ public class Ventana_Principal extends JFrame{
 		pnlBotonera.add(Box.createRigidArea(new Dimension(0, 10)));
 		
 		JButton btnStatistics = new JButton("STATISTICS");
+		btnStatistics.setFont(new Font("Vendana", Font.BOLD, 16));
 		btnStatistics.addActionListener(new ActionListener() {
 
 			@Override
@@ -84,6 +86,7 @@ public class Ventana_Principal extends JFrame{
 		pnlBotonera.add(Box.createRigidArea(new Dimension(0, 10)));
 		
 		JButton btnCredits = new JButton("CREDITS");
+		btnCredits.setFont(new Font("Vendana", Font.BOLD, 16));
 		btnCredits.addActionListener(new ActionListener() {
 
 			@Override

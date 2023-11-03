@@ -1,8 +1,6 @@
 package P1;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridBagLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -46,17 +44,25 @@ public class Ventana_Principal extends JFrame{
 		});
 		pnlBotonera.add(btnPlay);
 		
-		ImageIcon imgSettings = new ImageIcon("Settings.png");
-		JButton btnSettings = new JButton(imgSettings);
-		btnSettings.addActionListener(new ActionListener() {
+		ImageIcon imgSettings = new ImageIcon("C:\\Users\\miren\\git\\.project\\Tetris\\src\\P1\\Settings.png");
+		JButton btnSettings = new JButton();
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				new Ventana_Options();
-			}
-			
+		int nuevoAncho = 50;
+		int nuevoAlto = 50;
+		Image imagenDef = imgSettings.getImage().getScaledInstance(nuevoAncho, nuevoAlto, Image.SCALE_SMOOTH);
+
+		ImageIcon iconoDef = new ImageIcon(imagenDef);
+
+		btnSettings.setIcon(iconoDef);
+
+		btnSettings.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        // TODO Auto-generated method stub
+		        new Ventana_Options();
+		    }
 		});
+
 		pnlBotonera.add(btnSettings);
 		
 		JButton btnStatistics = new JButton("STATISTICS");

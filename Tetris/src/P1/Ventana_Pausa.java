@@ -17,16 +17,18 @@ public class Ventana_Pausa{
 	public Ventana_Pausa() {
 		ventana = new JFrame("Pausa");
 		ventana.setTitle("Pausa");
-		ventana.setSize(600, 800);
-		ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		ventana.setSize(600, 200);
 		ventana.setLayout(new BorderLayout());
-		
-		JPanel pnl1 = new JPanel();
+	
 		JPanel pnl2 = new JPanel();
+		JPanel pnlCentro = new JPanel();
 		
 		JLabel lblPausa = new JLabel("Paused");
         lblPausa.setFont(new Font("Cambria", Font.BOLD, 24));
-        pnl1.add(lblPausa, BorderLayout.CENTER);
+        
+        JPanel pnlLbl = new JPanel();
+        pnlLbl.add(lblPausa, BorderLayout.CENTER);
+        ventana.add(pnlLbl, BorderLayout.NORTH);
         
         JButton btnResume = new JButton("Resume");
         pnl2.add(btnResume);
@@ -53,12 +55,16 @@ public class Ventana_Pausa{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				JOptionPane.showConfirmDialog(ventana, "Quit game?", "Confirm", JOptionPane.YES_NO_OPTION);
+				int option = JOptionPane.showConfirmDialog(ventana, "Quit game?", "Confirm", JOptionPane.YES_NO_OPTION);
+				if(option == JOptionPane.YES_OPTION) {
+					ventana.dispose();
+					Ventana_Principal ventPrincipal = new Ventana_Principal();
+					ventPrincipal.setVisible(true);
+				}
 			}
         	
         });
-        
-        ventana.add(pnl1, BorderLayout.NORTH);
+       
         ventana.add(pnl2, BorderLayout.CENTER);
         ventana.setVisible(true); 
 	}

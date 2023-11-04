@@ -12,5 +12,11 @@ public class Ventana_Estadistica extends JFrame{
     private JLabel lblTotalPoints;
     private JLabel lblDailyAverage;
     private JButton btnBack;
+    
+    public Ventana_Estadistica() {
+    	setSize(600, 800);
+    	setTitle("Estadística");
+    	setVisible(true);
+    }
 
 }

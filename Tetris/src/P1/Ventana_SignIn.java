@@ -12,7 +12,6 @@ public class Ventana_SignIn {
 
     public Ventana_SignIn() {
         ventana = new JFrame("Sign In");
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setSize(400, 200);
         ventana.setLayout(new BorderLayout());
 

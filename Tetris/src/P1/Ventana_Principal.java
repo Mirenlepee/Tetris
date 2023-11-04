@@ -3,15 +3,22 @@ package P1;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 public class Ventana_Principal extends JFrame{
+	
+	private BufferedImage imgFondo;
 	
 	public Ventana_Principal() {
 		setTitle("Ventana Principal");
@@ -19,6 +26,21 @@ public class Ventana_Principal extends JFrame{
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLayout(new BorderLayout());
 		setLocationRelativeTo(null);
+		
+		try {
+			imgFondo = ImageIO.read(new File("C:\\Users\\Oihane\\git\\Tetris\\Tetris\\src\\P1\\Fondo_VentanaPrincipal.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        
+		setContentPane(new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(imgFondo, 0, 0, getWidth(), getHeight(), this);
+            }
+        });
 		
 		ImageIcon imgLogotipo = new ImageIcon(Ventana_Principal.class.getResource("Logotipo.png"));
 		JLabel lblLogotipo = new JLabel(imgLogotipo);
@@ -95,5 +117,6 @@ public class Ventana_Principal extends JFrame{
 	public static void main(String[] args) {
 		JFrame vent = new Ventana_Principal();
 		vent.setVisible(true);
+		
 	}
 }

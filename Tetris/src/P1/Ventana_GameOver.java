@@ -13,6 +13,7 @@ public class Ventana_GameOver{
 	private JFrame ventana;
 	
 	public Ventana_GameOver() {
+		ventana = new JFrame("Game Over");
 		ventana.setSize(500, 300);
 		ventana.setTitle("Game Over");
 		ventana.setLayout(new BorderLayout());

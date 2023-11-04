@@ -5,11 +5,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Ventana_PerfilDeUsuario extends JFrame {
+public class Ventana_PerfilDeUsuario extends JFrame { 
 	
 	public Ventana_PerfilDeUsuario() {
-		this.setSize(600, 800);
-		this.setTitle("Perfil");
+        this.setSize(600, 800);
+        this.setTitle("Perfil");
 		this.setLayout(new BorderLayout());
 		
 		JPanel pnlCentro = new JPanel();

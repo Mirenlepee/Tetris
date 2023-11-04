@@ -18,6 +18,7 @@ public class Ventana_Pausa{
 		ventana = new JFrame("Pausa");
 		ventana.setTitle("Pausa");
 		ventana.setSize(600, 200);
+		ventana.setSize(600, 800);
 		ventana.setLayout(new BorderLayout());
 	
 		JPanel pnl2 = new JPanel();

@@ -43,12 +43,13 @@ public class Ventana_SignIn extends JFrame {
 
         ventana.add(pnlPrincipal, BorderLayout.CENTER);
 
-        JPanel pnlBoton = new JPanel();
-        pnlBoton.setLayout(new BoxLayout(pnlBoton, BoxLayout.Y_AXIS));
-        ventana.add(pnlBoton, BorderLayout.SOUTH);
+        JPanel pnlSouth = new JPanel();
+        pnlSouth.setLayout(new GridLayout(2,1));
+        ventana.add(pnlSouth, BorderLayout.SOUTH);
         
         
-        
+        JPanel Botonpnl = new JPanel();
+        Botonpnl.setLayout(new FlowLayout(FlowLayout.CENTER));
         JButton continuebtn = new JButton("Continue");
         continuebtn.addActionListener(new ActionListener() {
             @Override
@@ -57,9 +58,10 @@ public class Ventana_SignIn extends JFrame {
                 new Ventana_Juego();
             }
         });
-        pnlBoton.add(continuebtn);
+        Botonpnl.add(continuebtn);
         
 
+        JPanel Mensagepnl = new JPanel();
         JLabel noAccountlbl = new JLabel("<html><u>Don't have an account? Create one</u></html>");
         noAccountlbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         noAccountlbl.setForeground(Color.BLUE);
@@ -73,7 +75,10 @@ public class Ventana_SignIn extends JFrame {
             }
         });
         //ventana.add(noAccountlbl, BorderLayout.PAGE_END);
-        pnlBoton.add(noAccountlbl);
+        Mensagepnl.add(noAccountlbl);
+        
+        pnlSouth.add(Botonpnl);
+        pnlSouth.add(noAccountlbl);
 
         ventana.setVisible(true);
     }

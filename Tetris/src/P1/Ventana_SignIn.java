@@ -43,6 +43,12 @@ public class Ventana_SignIn extends JFrame {
 
         ventana.add(pnlPrincipal, BorderLayout.CENTER);
 
+        JPanel pnlBoton = new JPanel();
+        pnlBoton.setLayout(new BoxLayout(pnlBoton, BoxLayout.Y_AXIS));
+        ventana.add(pnlBoton, BorderLayout.SOUTH);
+        
+        
+        
         JButton continuebtn = new JButton("Continue");
         continuebtn.addActionListener(new ActionListener() {
             @Override
@@ -51,7 +57,8 @@ public class Ventana_SignIn extends JFrame {
                 new Ventana_Juego();
             }
         });
-        ventana.add(continuebtn, BorderLayout.SOUTH);
+        pnlBoton.add(continuebtn);
+        
 
         JLabel noAccountlbl = new JLabel("<html><u>Don't have an account? Create one</u></html>");
         noAccountlbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -65,7 +72,8 @@ public class Ventana_SignIn extends JFrame {
                 new Ventana_SignUp();
             }
         });
-        ventana.add(noAccountlbl, BorderLayout.PAGE_END);
+        //ventana.add(noAccountlbl, BorderLayout.PAGE_END);
+        pnlBoton.add(noAccountlbl);
 
         ventana.setVisible(true);
     }

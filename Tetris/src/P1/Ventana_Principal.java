@@ -31,12 +31,20 @@ public class Ventana_Principal extends JFrame{
 		setLayout(new BorderLayout());
 		setLocationRelativeTo(null);
 		
-		try {
+		
+/*		try {
 			imgFondo = ImageIO.read(new File("C:\\Users\\Oihane\\git\\Tetris\\Tetris\\src\\P1\\Fondo_VentanaPrincipal.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+*/
+		
+		 try {
+	            imgFondo = ImageIO.read(getClass().getResource("Fondo_VentanaPrincipal.png"));
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		
         
 		setContentPane(new JPanel() {
             @Override
@@ -46,9 +54,14 @@ public class Ventana_Principal extends JFrame{
             }
         });
 		
-		ImageIcon imgLogotipo = new ImageIcon(Ventana_Principal.class.getResource("Logotipo.png"));
+/*		ImageIcon imgLogotipo = new ImageIcon(Ventana_Principal.class.getResource("Logotipo.png"));
 		JLabel lblLogotipo = new JLabel(imgLogotipo);
 		this.add(lblLogotipo, BorderLayout.NORTH);
+*/
+		
+		ImageIcon imgLogotipo = new ImageIcon(getClass().getResource("Logotipo.png"));
+        JLabel lblLogotipo = new JLabel(imgLogotipo);
+        add(lblLogotipo, BorderLayout.NORTH);
 		
 		JPanel pnlCentro = new JPanel();
 		this.add(pnlCentro, BorderLayout.CENTER);

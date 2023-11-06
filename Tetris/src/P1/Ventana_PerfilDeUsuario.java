@@ -1,6 +1,8 @@
 package P1;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,11 +15,11 @@ public class Ventana_PerfilDeUsuario extends JFrame {
 		this.setLayout(new BorderLayout());
 		
 		JPanel pnlCentro = new JPanel();
-		this.add(pnlCentro, BorderLayout.CENTER);
 
         JPanel pnlPerfilDeUsuario = new JPanel(new GridBagLayout());
         pnlPerfilDeUsuario.setLayout(new BoxLayout(pnlPerfilDeUsuario, BoxLayout.Y_AXIS));
-        pnlCentro.add(pnlPerfilDeUsuario);
+        
+        JPanel pnlBoton = new JPanel();
         
         ImageIcon imgAvatar = new ImageIcon(getClass().getResource("Avatar.png"));
         JButton btnAvatar = new JButton();
@@ -26,6 +28,8 @@ public class Ventana_PerfilDeUsuario extends JFrame {
         Image imagenDef = imgAvatar.getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
         ImageIcon iconoDef = new ImageIcon(imagenDef);
         btnAvatar.setIcon(iconoDef);
+        btnAvatar.setBackground(Color.WHITE);
+        btnAvatar.setBorder(new EmptyBorder(0, 0, 0, 0));
         btnAvatar.addActionListener(new ActionListener() {
 
 			@Override
@@ -50,7 +54,7 @@ public class Ventana_PerfilDeUsuario extends JFrame {
         pnlPerfilDeUsuario.add(txtBiografia);
         
         JButton btnGuardar = new JButton("Continue");
-        pnlPerfilDeUsuario.add(btnGuardar);
+        pnlBoton.add(btnGuardar);
 
         btnGuardar.addActionListener(new ActionListener() {
             @Override
@@ -60,7 +64,14 @@ public class Ventana_PerfilDeUsuario extends JFrame {
             }
         });
         
+        pnlPerfilDeUsuario.add(pnlBoton, BorderLayout.CENTER);
+        pnlCentro.add(pnlPerfilDeUsuario);
+        this.add(pnlCentro, BorderLayout.CENTER);
         this.setVisible(true);
         
     }
+	public static void main(String[] args) {
+		Ventana_PerfilDeUsuario vent = new Ventana_PerfilDeUsuario();
+		
+	}
 }

@@ -2,9 +2,12 @@ package P1;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,12 +20,9 @@ public class Ventana_Pausa{
 	public Ventana_Pausa() {
 		ventana = new JFrame("Pausa");
 		ventana.setTitle("Pausa");
-		ventana.setSize(600, 800);
+		ventana.setSize(400, 400);
 		ventana.setLayout(new BorderLayout());
 	
-		JPanel pnl2 = new JPanel();
-		JPanel pnlCentro = new JPanel();
-		
 		JLabel lblPausa = new JLabel("Paused");
         lblPausa.setFont(new Font("Cambria", Font.BOLD, 24));
         
@@ -30,14 +30,22 @@ public class Ventana_Pausa{
         pnlLbl.add(lblPausa, BorderLayout.CENTER);
         ventana.add(pnlLbl, BorderLayout.NORTH);
         
+        JPanel pnlBotones = new JPanel();
+		pnlBotones.setLayout(new BoxLayout(pnlBotones, BoxLayout.Y_AXIS));
+		
+		JPanel pnlCentro = new JPanel();
+		
         JButton btnResume = new JButton("Resume");
-        pnl2.add(btnResume);
+        pnlBotones.add(btnResume);
+        pnlBotones.add(Box.createVerticalStrut(10));
         
         JButton btnRestart = new JButton("Restart");
-        pnl2.add(btnRestart);
+        pnlBotones.add(btnRestart);
+        pnlBotones.add(Box.createVerticalStrut(10));
         
         JButton btnOptions = new JButton("Options");
-        pnl2.add(btnOptions);
+        pnlBotones.add(btnOptions);
+        pnlBotones.add(Box.createVerticalStrut(10));
         btnOptions.addActionListener( new ActionListener() {
 
 			@Override
@@ -49,7 +57,7 @@ public class Ventana_Pausa{
         });
         
         JButton btnQuit = new JButton("Quit");
-        pnl2.add(btnQuit);
+        pnlBotones.add(btnQuit);
         btnQuit.addActionListener(new ActionListener() {
 
 			@Override
@@ -65,7 +73,8 @@ public class Ventana_Pausa{
         	
         });
        
-        ventana.add(pnl2, BorderLayout.CENTER);
+        pnlCentro.add(pnlBotones);
+        ventana.add(pnlCentro, BorderLayout.CENTER);
         ventana.setVisible(true); 
 	}
 	

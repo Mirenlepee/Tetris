@@ -17,13 +17,12 @@ public class Ventana_Creditos extends JFrame{
     public Ventana_Creditos () {
     	setTitle("Tetris - Credits");
         setSize(600, 400);
-        setLocationRelativeTo(null);
 
         pnlContenido = new JPanel(new BorderLayout());
         pnlContenido.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 	       
         // TITULO
-        lblTitulo = new JLabel("CREDITS");
+        lblTitulo = new JLabel("Credits");
         lblTitulo.setFont(new Font("Cambria", Font.BOLD, 24));
         lblTitulo.setForeground(Color.BLUE);
         lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -32,7 +31,7 @@ public class Ventana_Creditos extends JFrame{
         pnlMedio.setLayout(new BoxLayout(pnlMedio, BoxLayout.Y_AXIS)); // Set a vertical layout
 
         //CREADORAS    	
-    	lblCreadoras = new JLabel ("CREATORS: ");
+    	lblCreadoras = new JLabel ("Creators: ");
     	lblCreadoras.setFont(new Font("Cambria", Font.BOLD, 18));
     	lblCreadoras.setForeground(Color.BLACK);
         //lblCreadoras.setHorizontalAlignment(SwingConstants.CENTER);
@@ -50,7 +49,7 @@ public class Ventana_Creditos extends JFrame{
     	
 	    	
     	//DISEÑADORAS    	
-    	lblDiseñadoras = new JLabel ("DESIGNERS: ");
+    	lblDiseñadoras = new JLabel ("Designers: ");
     	lblDiseñadoras.setFont(new Font("Cambria", Font.BOLD, 18));
     	lblDiseñadoras.setForeground(Color.BLACK);
     	lblDiseñadoras.setHorizontalAlignment(SwingConstants.CENTER);
@@ -69,7 +68,7 @@ public class Ventana_Creditos extends JFrame{
     	
    	
     	//BOTON
-    	btnVolver = new JButton("Volver");
+    	btnVolver = new JButton("Return");
     	btnVolver.setFont(new Font("Cambria", Font.PLAIN, 16));
     	
     	btnVolver.addActionListener(new ActionListener() {

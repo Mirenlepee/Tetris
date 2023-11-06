@@ -1,10 +1,13 @@
 package P1;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,7 +18,7 @@ public class Ventana_Options{
 	
 	public Ventana_Options() {
 		ventana = new JFrame("Options");
-		ventana.setSize(600, 800);
+		ventana.setSize(400, 400);
 		ventana.setTitle("Options");
 		ventana.setLayout(new BorderLayout());
     	
@@ -26,7 +29,23 @@ public class Ventana_Options{
         pnlLbl.add(lblOptions, BorderLayout.CENTER);
         ventana.add(pnlLbl, BorderLayout.NORTH);
         
+        JPanel pnlPrincipal = new JPanel();
+        pnlPrincipal.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 10));
+        
+        JPanel fila1 = new JPanel();
+        JPanel fila2 = new JPanel();
+        JPanel fila3 = new JPanel();
+        JPanel fila4 = new JPanel();
+        
+        ImageIcon imgSound = new ImageIcon(getClass().getResource("Sound.png"));
         JButton btnSound = new JButton();
+        int ancho1 = 30;
+		int alto1 = 30;
+		Image imagenDef1 = imgSound.getImage().getScaledInstance(ancho1, alto1, Image.SCALE_SMOOTH);
+		ImageIcon iconoDef1 = new ImageIcon(imagenDef1);
+		btnSound.setIcon(iconoDef1);
+		fila1.add(btnSound);
+		
         btnSound.addActionListener(new ActionListener() {
 
 			@Override
@@ -38,8 +57,17 @@ public class Ventana_Options{
         });
         
         JLabel lblSound = new JLabel("Sound");
+        fila1.add(lblSound);
         
+        ImageIcon imgLanguage = new ImageIcon(getClass().getResource("Language.png"));
         JButton btnLanguage = new JButton();
+        int ancho2 = 30;
+		int alto2 = 30;
+		Image imagenDef2 = imgLanguage.getImage().getScaledInstance(ancho2, alto2, Image.SCALE_SMOOTH);
+		ImageIcon iconoDef2 = new ImageIcon(imagenDef2);
+		btnLanguage.setIcon(iconoDef2);
+        fila2.add(btnLanguage);
+        
         btnLanguage.addActionListener(new ActionListener() {
 
 			@Override
@@ -51,8 +79,18 @@ public class Ventana_Options{
         });
         
         JLabel lblLanguage = new JLabel("Language");
+        fila2.add(lblLanguage);
+       
         
+        ImageIcon imgHTP = new ImageIcon(getClass().getResource("HTP.png"));
         JButton btnHTP = new JButton();
+        int ancho3 = 30;
+		int alto3 = 30;
+		Image imagenDef3 = imgHTP.getImage().getScaledInstance(ancho3, alto3, Image.SCALE_SMOOTH);
+		ImageIcon iconoDef3 = new ImageIcon(imagenDef3);
+		btnHTP.setIcon(iconoDef3);
+        fila3.add(btnHTP);
+        
         btnHTP.addActionListener(new ActionListener() {
 
 			@Override
@@ -64,8 +102,11 @@ public class Ventana_Options{
         });
         
         JLabel lblHTP = new JLabel("How to play");
+        fila3.add(lblHTP);
         
         JButton btnReturn = new JButton("Return");
+        fila4.add(btnReturn);
+        
         btnReturn.addActionListener( new ActionListener() {
 
 			@Override
@@ -76,10 +117,13 @@ public class Ventana_Options{
         	
         });
         
+        pnlPrincipal.add(fila1);
+        pnlPrincipal.add(fila2);
+        pnlPrincipal.add(fila3);
+        pnlPrincipal.add(fila4);
+        ventana.add(pnlPrincipal);
         ventana.setVisible(true);
 	}
 	
-	public static void main(String[] args) {
-        Ventana_Options v = new Ventana_Options();
-    }
+	
 }

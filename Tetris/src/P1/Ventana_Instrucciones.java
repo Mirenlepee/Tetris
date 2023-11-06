@@ -11,7 +11,7 @@ import javax.swing.*;
 
 public class Ventana_Instrucciones extends JFrame{
 	private JLabel lblTitle;
-    private JTextArea TextAreaInstructions;
+    private JTextArea TxtAreaInstructions;
     private JButton btnClose;
     
     public Ventana_Instrucciones () {
@@ -25,7 +25,8 @@ public class Ventana_Instrucciones extends JFrame{
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
         add(lblTitle, BorderLayout.NORTH);
         //Contenido
-        
+        TxtAreaInstructions = new JTextArea();
+        add(TxtAreaInstructions, BorderLayout.CENTER);        
         //Boton
         JButton closeBtn = new JButton("Continue");
         closeBtn.setFont(new Font("Cambria", Font.BOLD, 16));

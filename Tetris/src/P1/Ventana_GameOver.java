@@ -40,7 +40,7 @@ public class Ventana_GameOver{
         pnlPrincipal.add(lblBestScore);
         pnlPrincipal.add(tfBestScore);
         
-        ImageIcon imgHome = new ImageIcon("C:\\Users\\Oihane\\git\\Tetris\\Tetris\\src\\P1\\Home.png");
+        ImageIcon imgHome = new ImageIcon(getClass().getResource("Home.png"));
 		JButton btnHome = new JButton();
 		int ancho1 = 50;
 		int alto1 = 50;
@@ -60,7 +60,7 @@ public class Ventana_GameOver{
 		});
 		pnlPrincipal.add(btnHome);
 		
-		ImageIcon imgRetry = new ImageIcon("C:\\Users\\Oihane\\git\\Tetris\\Tetris\\src\\P1\\Retry.png");
+		ImageIcon imgRetry = new ImageIcon(getClass().getResource("Retry.png"));
 		JButton btnRetry = new JButton();
 		int ancho2 = 50;
 		int alto2 = 50;

@@ -19,7 +19,7 @@ public class Ventana_PerfilDeUsuario extends JFrame {
         pnlPerfilDeUsuario.setLayout(new BoxLayout(pnlPerfilDeUsuario, BoxLayout.Y_AXIS));
         pnlCentro.add(pnlPerfilDeUsuario);
         
-        ImageIcon imgAvatar = new ImageIcon("C:\\Users\\Oihane\\git\\Tetris\\Tetris\\src\\P1\\Avatar.png");
+        ImageIcon imgAvatar = new ImageIcon(getClass().getResource("Avatar.png"));
         JButton btnAvatar = new JButton();
         int ancho = 100;
         int alto = 100;

@@ -24,7 +24,7 @@ public class Ventana_Creditos extends JFrame{
 	       
         // TITULO
         lblTitulo = new JLabel("CREDITS");
-        lblTitulo.setFont(new Font("Verdana", Font.BOLD, 24));
+        lblTitulo.setFont(new Font("Cambria", Font.BOLD, 24));
         lblTitulo.setForeground(Color.BLUE);
         lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
         //pnlMedio = new JPanel(new BoxLayout(pnlMedio, BoxLayout.Y_AXIS));
@@ -33,7 +33,7 @@ public class Ventana_Creditos extends JFrame{
 
         //CREADORAS    	
     	lblCreadoras = new JLabel ("CREATORS: ");
-    	lblCreadoras.setFont(new Font("Verdana", Font.BOLD, 18));
+    	lblCreadoras.setFont(new Font("Cambria", Font.BOLD, 18));
     	lblCreadoras.setForeground(Color.BLACK);
         //lblCreadoras.setHorizontalAlignment(SwingConstants.CENTER);
     	
@@ -42,7 +42,7 @@ public class Ventana_Creditos extends JFrame{
                 "Miren Lépée\n" +
                 "Naia Lorente \n\n"
             );
-    	txtCreadoras.setFont(new Font("Verdana", Font.PLAIN, 14));
+    	txtCreadoras.setFont(new Font("Cambria", Font.PLAIN, 14));
     	txtCreadoras.setForeground(Color.BLACK);
     	txtCreadoras.setLineWrap(true);
 	    txtCreadoras.setWrapStyleWord(true);
@@ -51,7 +51,7 @@ public class Ventana_Creditos extends JFrame{
 	    	
     	//DISEÑADORAS    	
     	lblDiseñadoras = new JLabel ("DESIGNERS: ");
-    	lblDiseñadoras.setFont(new Font("Verdana", Font.BOLD, 18));
+    	lblDiseñadoras.setFont(new Font("Cambria", Font.BOLD, 18));
     	lblDiseñadoras.setForeground(Color.BLACK);
     	lblDiseñadoras.setHorizontalAlignment(SwingConstants.CENTER);
     	
@@ -61,7 +61,7 @@ public class Ventana_Creditos extends JFrame{
                 "Naia Lorente \n\n" 
             );
     	// Personaliza la apariencia del JTextArea
-    	txtDiseñadoras.setFont(new Font("Verdana", Font.PLAIN, 14));
+    	txtDiseñadoras.setFont(new Font("Cambria", Font.PLAIN, 14));
     	txtDiseñadoras.setForeground(Color.BLACK);
     	txtDiseñadoras.setLineWrap(true);
     	txtDiseñadoras.setWrapStyleWord(true);
@@ -70,7 +70,7 @@ public class Ventana_Creditos extends JFrame{
    	
     	//BOTON
     	btnVolver = new JButton("Volver");
-    	btnVolver.setFont(new Font("Verdana", Font.PLAIN, 16));
+    	btnVolver.setFont(new Font("Cambria", Font.PLAIN, 16));
     	
     	btnVolver.addActionListener(new ActionListener() {
 			@Override

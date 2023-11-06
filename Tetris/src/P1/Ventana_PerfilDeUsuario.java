@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class Ventana_PerfilDeUsuario extends JFrame { 
 	
 	public Ventana_PerfilDeUsuario() {
-        this.setSize(600, 800);
+        this.setSize(400, 400);
         this.setTitle("Perfil");
 		this.setLayout(new BorderLayout());
 		

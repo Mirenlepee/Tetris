@@ -68,7 +68,7 @@ public class Ventana_Principal extends JFrame{
 		btnPlay.setBounds(100, 200, 200, 30);
 		layeredPane.add(btnPlay, JLayeredPane.PALETTE_LAYER);
 				
-		ImageIcon imgSettings = new ImageIcon("C:\\Users\\miren\\git\\.project\\Tetris\\src\\P1\\Settings.png");
+		ImageIcon imgSettings = new ImageIcon(getClass().getResource("Settings.png"));
 		JButton btnSettings = new JButton();
 		//Editar el tamaño del logo
 		int nuevoAncho = 30;

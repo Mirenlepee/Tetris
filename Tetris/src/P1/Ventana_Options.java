@@ -73,7 +73,7 @@ public class Ventana_Options{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				new Ventana_Idioma();
 			}
         	
         });
@@ -96,7 +96,7 @@ public class Ventana_Options{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				new Ventana_Instrucciones();
 			}
         	
         });

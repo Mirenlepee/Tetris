@@ -15,12 +15,12 @@ public class Ventana_Instrucciones extends JFrame{
     private JButton btnClose;
     
     public Ventana_Instrucciones () {
-    	setTitle("Tetris - Credits");
+    	setTitle("Tetris - Instructions");
         setSize(600, 400);
         setLocationRelativeTo(null);
         
         //Title
-        lblTitle = new JLabel("INSTRUCTIONS");
+        lblTitle = new JLabel("Instructions");
         lblTitle.setFont(new Font("Cambria", Font.BOLD, 24));
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
         add(lblTitle, BorderLayout.NORTH);

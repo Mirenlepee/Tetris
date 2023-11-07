@@ -17,7 +17,6 @@ public class Ventana_Instrucciones extends JFrame{
     public Ventana_Instrucciones () {
     	setTitle("Tetris - Instructions");
         setSize(600, 400);
-        JScrollBar scroll = new JScrollBar();
         
         //Title
         lblTitle = new JLabel("Instructions");
@@ -26,7 +25,15 @@ public class Ventana_Instrucciones extends JFrame{
         add(lblTitle, BorderLayout.NORTH);
         //Contenido
         TxtAreaInstructions = new JTextArea("");
-        add(TxtAreaInstructions, BorderLayout.CENTER);        
+        TxtAreaInstructions.setText("The aim in Tetris is simple; you bring down blocks from the top of the screen. \n "
+        		+ "You can move the blocks around, either left to right and/or you can rotate them. \n "
+        		+ "The blocks fall at a certain rate, but you can make them fall faster if you're sure of your positioning.");
+        TxtAreaInstructions.setEnabled(false);
+        add(TxtAreaInstructions, BorderLayout.CENTER);    
+        
+        JScrollPane scroll = new JScrollPane(TxtAreaInstructions);
+        add(scroll);
+        
         //Boton
         JButton closeBtn = new JButton("Continue");
         closeBtn.setFont(new Font("Cambria", Font.BOLD, 16));

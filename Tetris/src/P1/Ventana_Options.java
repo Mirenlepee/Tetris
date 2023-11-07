@@ -31,6 +31,7 @@ public class Ventana_Options{
         
         JPanel pnlPrincipal = new JPanel();
         pnlPrincipal.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 10));
+        pnlPrincipal.setLayout(new javax.swing.BoxLayout(pnlPrincipal, javax.swing.BoxLayout.Y_AXIS));
         
         JPanel fila1 = new JPanel();
         JPanel fila2 = new JPanel();

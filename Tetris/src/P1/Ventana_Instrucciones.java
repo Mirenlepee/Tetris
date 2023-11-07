@@ -18,6 +18,7 @@ public class Ventana_Instrucciones extends JFrame{
     	setTitle("Tetris - Credits");
         setSize(600, 400);
         setLocationRelativeTo(null);
+        JScrollPane scroll = new JScrollPane();
         
         //Title
         lblTitle = new JLabel("INSTRUCTIONS");
@@ -25,7 +26,7 @@ public class Ventana_Instrucciones extends JFrame{
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
         add(lblTitle, BorderLayout.NORTH);
         //Contenido
-        TxtAreaInstructions = new JTextArea();
+        TxtAreaInstructions = new JTextArea("");
         add(TxtAreaInstructions, BorderLayout.CENTER);        
         //Boton
         JButton closeBtn = new JButton("Continue");

@@ -4,11 +4,10 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Ventana_Idioma {
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Selección de Idioma");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 200);
+public class Ventana_Idioma extends JFrame{
+	public Ventana_Idioma () {
+		setTitle("Language");
+        setSize(300, 200);
 
         JPanel panel = new JPanel();
 
@@ -18,7 +17,12 @@ public class Ventana_Idioma {
 
         panel.add(comboBox);
 
-        frame.add(panel);
-        frame.setVisible(true);
-    }
+        add(panel);
+        setVisible(true);
+	}
+	
+	public static void main(String[] args) {
+		Ventana_Idioma idiomas = new Ventana_Idioma();
+	}    
+		
 }

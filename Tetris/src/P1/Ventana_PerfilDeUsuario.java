@@ -23,22 +23,29 @@ public class Ventana_PerfilDeUsuario extends JFrame {
         
         ImageIcon imgAvatar = new ImageIcon(getClass().getResource("Avatar.png"));
         JButton btnAvatar = new JButton();
-        int ancho = 100;
-        int alto = 100;
+        int ancho = 150;
+        int alto = 150;
         Image imagenDef = imgAvatar.getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
         ImageIcon iconoDef = new ImageIcon(imagenDef);
+        
+        
+
+        btnAvatar.setContentAreaFilled(false); 
+        
         btnAvatar.setIcon(iconoDef);
         btnAvatar.setBackground(Color.WHITE);
         btnAvatar.setBorder(new EmptyBorder(0, 0, 0, 0));
+     
+        
         btnAvatar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				new Ventana_AvatarUsuario();
-			}
-        	
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Ventana_AvatarUsuario ventanaAvatar = new Ventana_AvatarUsuario();
+                ventanaAvatar.setAvatarButton(btnAvatar); 
+            }
         });
+        
+        
         this.add(btnAvatar, BorderLayout.NORTH);
        
         JLabel lblNombre = new JLabel("User Name:");

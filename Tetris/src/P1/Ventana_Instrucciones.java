@@ -17,7 +17,6 @@ public class Ventana_Instrucciones extends JFrame{
     public Ventana_Instrucciones () {
     	setTitle("Tetris - Instructions");
         setSize(600, 400);
-        setLocationRelativeTo(null);
         
         //Title
         lblTitle = new JLabel("Instructions");

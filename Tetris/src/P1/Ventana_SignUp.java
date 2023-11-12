@@ -33,7 +33,7 @@ public class Ventana_SignUp {
 
         
         JLabel passwordlbl = new JLabel("Password:");
-        JTextField passwordfld = new JTextField(20);
+        JPasswordField passwordfld = new JPasswordField(20);
         pnlPrincipal.add(passwordlbl);
         pnlPrincipal.add(passwordfld);
 

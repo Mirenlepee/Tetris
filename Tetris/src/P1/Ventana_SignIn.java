@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class Ventana_SignIn extends JFrame {
     private JFrame ventana; // Declarar el marco como miembro de la clase.
@@ -31,13 +32,26 @@ public class Ventana_SignIn extends JFrame {
         pnlPrincipal.add(usernamefld);
 
         JLabel passwordlbl = new JLabel("Password:");
-        JTextField passwordfld = new JTextField(15);
+        JPasswordField passwordfld = new JPasswordField(15);
         pnlPrincipal.add(passwordlbl);
         pnlPrincipal.add(passwordfld);
 
         JLabel forgotPasswordlbl = new JLabel("<html><u>Forgot Password?</u></html>");
         forgotPasswordlbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         forgotPasswordlbl.setForeground(Color.BLUE);
+        JTextField emailRecuperaPass = new JTextField();
+        forgotPasswordlbl.addMouseListener( new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				 int option = JOptionPane.showOptionDialog(null,emailRecuperaPass, "Ingresa tu email", JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE, null, null, null);
+				 if (option == JOptionPane.OK_OPTION) {
+			            String textoIngresado = emailRecuperaPass.getText();       
+			        }
+			}
+        	
+        });
         pnlPrincipal.add(forgotPasswordlbl);
         pnlPrincipal.add(new JLabel());
 

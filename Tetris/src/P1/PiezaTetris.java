@@ -5,7 +5,7 @@ import java.awt.Color;
 
 public class PiezaTetris {
 
-    private static final int[][][] FORMAS = {
+    static final int[][][] FORMAS = {
             //I
             {
                 {1, 1, 1, 1}

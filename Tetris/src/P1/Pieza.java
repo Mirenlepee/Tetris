@@ -14,7 +14,7 @@ public class Pieza {
         //Apartir de las formas de la clase Pieza coger una forma aleatoria
     	forma = PiezaTetris.obtenerFormaAleatoria();
         
-    	//La fila inicial
+    	
         fila = 0; 
         //Para centrar la pieza en el tablero
         columna =(10- forma[0].length)/2;

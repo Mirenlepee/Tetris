@@ -24,7 +24,7 @@ public class Ventana_Estadistica extends JFrame {
 
         lblTitle = new JLabel("Estadísticas");
 
-        lblTitle.setFont(new Font("Arial", Font.BOLD, 20));
+        lblTitle.setFont(new Font("Cambria", Font.BOLD, 24));
         lblTotalTime = new JLabel("Total Time: ");
         lblDailyTime = new JLabel("Daily Time: ");
         lblGamesPlayed = new JLabel("Games Played: ");

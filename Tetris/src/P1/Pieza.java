@@ -65,15 +65,18 @@ public class Pieza {
         fila++;
     }
 
-    //Mover la pieza hacia la izquierda, hacia la izquierda en el eje horizontal
     public void moverIzquierda() {
-        columna--;
+        if (columna > 0) {
+            columna--;
+        }
     }
 
-    //Mover la pieza hacia la derecha, derecha del eje horizontal
     public void moverDerecha() {
-        columna++;
+        if (columna + forma[0].length < 10) { // 10 es el ancho del tablero
+            columna++;
+        }
     }
+
 
   
    

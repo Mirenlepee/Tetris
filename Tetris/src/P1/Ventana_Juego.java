@@ -19,6 +19,7 @@ public class Ventana_Juego extends JFrame {
     private int[][] tablero; // Matriz
     private BufferedImage buffer; // Buffer para dibujar las piezas mejor
     private Clip clip; 
+    private ImageIcon vidaIcono;
 
     public Ventana_Juego() {
         try {
@@ -28,6 +29,8 @@ public class Ventana_Juego extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        vidaIcono = new ImageIcon("C:\\Users\\pemma\\git\\Tetris\\Tetris\\src\\P1\\hearts.png");
 
         setVentanaPropiedades();
         iniciarJuego();
@@ -135,8 +138,14 @@ public class Ventana_Juego extends JFrame {
         dibujarPiezasFijas(bufferGraphics);
         dibujarPiezaActual(bufferGraphics);
 
+        
+                                                     //Derecha o Izquierda,Arriba o Abajo,Tamaño
+        bufferGraphics.drawImage(vidaIcono.getImage(), 20, 35, 4 * TAMANO_CELDA, 2 * TAMANO_CELDA, this);
         g.drawImage(buffer, 0, 0, this);
+        
     }
+
+
 
     private void dibujarFondo(Graphics g) {
         for (int i = 0; i < getHeight() / TAMANO_CELDA; i++) {
@@ -180,11 +189,4 @@ public class Ventana_Juego extends JFrame {
         g.drawRect(x, y, TAMANO_CELDA, TAMANO_CELDA);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new Ventana_Juego();
-            }
-        });
-    }
 }

@@ -4,8 +4,6 @@ package P1;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
-import P1.VentanaJuego_.PanelJuego;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +13,7 @@ import java.awt.image.BufferedImage;
 public class Ventana_Juego extends JFrame {
 
     //Tamaño de cada celda en el tablero del juego
-	private static final int ANCHO_TABLERO = 10;
+	static final int ANCHO_TABLERO = 10;
     private static final int ALTO_TABLERO = 20;
     private static final int TAMANO_CELDA = 30;
     
@@ -102,10 +100,34 @@ public class Ventana_Juego extends JFrame {
             fijarPiezaEnTablero();
             piezaActual = new Pieza();
         }
+        if (verificarColision()) {// Verificar si hay colisión después del movimiento
+            fijarPiezaEnTablero();
+            piezaActual = new Pieza();
+        }
     }
 
 
-    private void teclaPresionada(java.awt.event.KeyEvent evt) {
+    private boolean verificarColisionLateral() {
+    	int[][] forma = piezaActual.obtenerForma();
+        int columna = piezaActual.obtenerColumna();
+
+        for (int i = 0; i < forma.length; i++) {
+            for (int j = 0; j < forma[i].length; j++) {
+                if (forma[i][j] == 1) {
+                    int columnaTablero = columna + j;
+
+                    // Verificar límites laterales del tablero
+                    if (columnaTablero < 0 || columnaTablero >= ANCHO_TABLERO) {
+                        return true; // Hay colisión lateral
+                    }
+                }
+            }
+        }
+        return false;
+	}
+
+
+	private void teclaPresionada(java.awt.event.KeyEvent evt) {
         switch (evt.getKeyCode()) {
             case KeyEvent.VK_LEFT:
                 piezaActual.moverIzquierda();
@@ -120,7 +142,6 @@ public class Ventana_Juego extends JFrame {
                 piezaActual.rotar();
                 break;
         }
-        repaint();
     }
 
 

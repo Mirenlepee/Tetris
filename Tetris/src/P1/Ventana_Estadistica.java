@@ -186,7 +186,6 @@ public class Ventana_Estadistica extends JFrame {
     public Ventana_Estadistica() {
         setSize(600, 800);
         setTitle("Estadística");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(9, 2));
 
         lblTitle = new JLabel("Estadísticas");

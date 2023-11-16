@@ -1,9 +1,11 @@
 package P1;
 
 
-
-
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+
+import P1.VentanaJuego_.PanelJuego;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,28 +15,66 @@ import java.awt.image.BufferedImage;
 public class Ventana_Juego extends JFrame {
 
     //Tamaño de cada celda en el tablero del juego
+	private static final int ANCHO_TABLERO = 10;
+    private static final int ALTO_TABLERO = 20;
     private static final int TAMANO_CELDA = 30;
-
+    
+    private int puntos = 0;    
     
     private Timer timer;//Temporizador para la caida de las piezas
     private Pieza piezaActual;//Pieza que el jugador  controla
     private int[][] tablero;//Matriz
-    private BufferedImage buffer;//buffer para dibujar las piezas mejor
+    //private BufferedImage buffer;//buffer para dibujar las piezas mejor
  
     
     
     public Ventana_Juego() {
-    	setVisible(true);
-        setTitle("Tetris");
+    	setTitle("Tetris");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(300, 600);
 
+        JPanel panelPrincipal = new JPanel(new BorderLayout());
+
+        PanelJuego panelJuego = new PanelJuego();
+        panelJuego.setPreferredSize(new Dimension(ANCHO_TABLERO * TAMANO_CELDA, ALTO_TABLERO * TAMANO_CELDA));
+
+        JPanel panelDerecho = new JPanel();
+        panelDerecho.setLayout(new BoxLayout(panelDerecho, BoxLayout.Y_AXIS)); // Utilizamos un layout vertical
+
+        JLabel etiquetaPuntos = new JLabel("Puntos: " + puntos); // Etiqueta para mostrar los puntos
+        etiquetaPuntos.setAlignmentX(Component.CENTER_ALIGNMENT); // Centrar la etiqueta horizontalmente
+        
+        JLabel etiquetaEspacio1 = new JLabel("    ");
+        etiquetaEspacio1.setPreferredSize(new Dimension(100, 50));
+        etiquetaEspacio1.setBorder(new LineBorder(Color.BLACK));
+
+        JLabel etiquetaEspacio2 = new JLabel("    "); 
+        etiquetaEspacio2.setPreferredSize(new Dimension(100, 50)); 
+     // Crear un borde compuesto con bordes negros en los cuatro lados
+        etiquetaEspacio2.setBorder(new LineBorder(Color.BLACK));
+
+        panelDerecho.add(Box.createVerticalGlue());
+        panelDerecho.add(etiquetaPuntos);
+        panelDerecho.add(Box.createVerticalStrut(10)); // Espacio entre los componentes
+        panelDerecho.add(etiquetaEspacio1);
+        panelDerecho.add(Box.createVerticalStrut(10)); // Espacio entre los componentes
+        panelDerecho.add(etiquetaEspacio2);
+        panelDerecho.add(Box.createVerticalGlue());
+
+        panelPrincipal.add(panelJuego, BorderLayout.CENTER);
+        panelPrincipal.add(Box.createHorizontalStrut(10), BorderLayout.EAST);
+        panelPrincipal.add(panelDerecho, BorderLayout.EAST);
+
+
+        // Agregar el panel principal a la ventana
+        add(panelPrincipal);
+        pack();
+        
         piezaActual = new Pieza();
-        tablero = new int[getHeight()/ TAMANO_CELDA][getWidth() / TAMANO_CELDA];
-        buffer = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+        tablero = new int[ALTO_TABLERO][ANCHO_TABLERO];
+        //buffer = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
 
 
-        timer = new Timer(1000, (ActionListener) new ActionListener() {
+        timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 moverPiezaAbajo();
@@ -44,13 +84,15 @@ public class Ventana_Juego extends JFrame {
         timer.start();
 
 
-        addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        panelJuego.addKeyListener(new java.awt.event.KeyAdapter() {
+        	public void keyPressed(KeyEvent evt) {
                 teclaPresionada(evt);
             }
         });
 
-        setFocusable(true);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
    
@@ -119,8 +161,8 @@ public class Ventana_Juego extends JFrame {
     }
 
     
-    @Override
-    public void paint(Graphics g) {
+    
+/*    public void paint(Graphics g) {
         super.paint(g);
 
         //Gráficos para el búfer de imagen
@@ -135,7 +177,7 @@ public class Ventana_Juego extends JFrame {
         //Dibujar el búfer en la ventana
         g.drawImage(buffer, 0, 0, this);
     }
-
+*/
     //dibujar el fondo del tablero con cuadrados
     private void dibujarFondo(Graphics g) {
         for (int i = 0; i < getHeight() / TAMANO_CELDA; i++) {
@@ -180,6 +222,23 @@ public class Ventana_Juego extends JFrame {
         g.setColor(Color.BLACK);
         g.drawRect(x, y, TAMANO_CELDA, TAMANO_CELDA);
     }
+    class PanelJuego extends JPanel {
 
-    
+        public PanelJuego() {
+            // Configurar el panel de juego
+            setPreferredSize(new Dimension(ANCHO_TABLERO * TAMANO_CELDA, ALTO_TABLERO * TAMANO_CELDA));
+            setBackground(Color.BLACK);
+
+            // Agregar listeners de teclado si se necesitan para el control del juego
+            setFocusable(true);
+            // Agregar listeners de teclado aquí si es necesario
+        }
+
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            dibujarFondo(g);
+            dibujarPiezasFijas(g);
+            dibujarPiezaActual(g);
+        }
+    }
 }

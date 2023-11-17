@@ -26,6 +26,7 @@ public class Ventana_Juego extends JFrame {
     private Clip clip; 
     private ImageIcon vidaIcono;
 
+
     public Ventana_Juego() {
 
     	setTitle("Tetris");
@@ -145,11 +146,9 @@ public class Ventana_Juego extends JFrame {
             fijarPiezaEnTablero();
             piezaActual = new Pieza();
         }
-        if (verificarColision()) {// Verificar si hay colisión después del movimiento
-            fijarPiezaEnTablero();
-            piezaActual = new Pieza();
-        }
+        repaint();
     }
+
 
     private void teclaPresionada(KeyEvent evt) {
         switch (evt.getKeyCode()) {
@@ -212,6 +211,7 @@ public class Ventana_Juego extends JFrame {
         return false;
     }
 
+
     private void fijarPiezaEnTablero() {
         int[][] forma = piezaActual.obtenerForma();
         int fila = piezaActual.obtenerFila();
@@ -224,28 +224,6 @@ public class Ventana_Juego extends JFrame {
             }
         }
     }
-//    public void paint(Graphics g) {
-
-/*    @Override
-    public void paint(Graphics g) {
-		super.paint(g);
-
-        Graphics bufferGraphics = buffer.getGraphics();
-        bufferGraphics.clearRect(0, 0, getWidth(), getHeight());
-
-        dibujarFondo(bufferGraphics);
-        dibujarPiezasFijas(bufferGraphics);
-        dibujarPiezaActual(bufferGraphics);
-
-        
-                                                     //Derecha o Izquierda,Arriba o Abajo,Tamaño
-        bufferGraphics.drawImage(vidaIcono.getImage(), 20, 35, 4 * TAMANO_CELDA, 2 * TAMANO_CELDA, this);
-        g.drawImage(buffer, 0, 0, this);   
-    }
-
-    //dibujar el fondo del tablero con cuadrados
-
-*/
 
     private void dibujarFondo(Graphics g) {
         for (int i = 0; i < getHeight() / TAMANO_CELDA; i++) {

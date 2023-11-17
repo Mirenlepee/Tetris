@@ -7,10 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+
 public class DataSetUsuarios {
 
 	private static List<Usuario> lUsuarios = new ArrayList<Usuario>();
-	//lUsuarios.add(new Usuario(1, "oihaneCam", "hi154", "oihane.cam@gmail.com", "https://www.google.com/url", "me gusta jugar al tetris"));
 	private static HashMap<String, Usuario> mapaUsuarios = new HashMap<String, Usuario>();
 	
 	public DataSetUsuarios(String nombreFichero) throws IOException{
@@ -34,7 +35,7 @@ public class DataSetUsuarios {
 				String AvatarURL = partes[4];
 				String descripcion = partes[5];
 				Usuario u = new Usuario( id, userName, password, email, AvatarURL, descripcion );
-				lUsuarios.add(u);
+				mapaUsuarios.put(email, u);
 			} catch (IndexOutOfBoundsException | NumberFormatException e) {
 				System.err.println( "Error en lectura de línea " + numLinea );
 			}
@@ -54,7 +55,7 @@ public class DataSetUsuarios {
 	}
 	
 	public void anyadir(Usuario u) {
-		lUsuarios.add(u);
+		cargarMapaUsuarios(u.getEmail(), u);
 	}
 
 }

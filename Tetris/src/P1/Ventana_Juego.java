@@ -140,7 +140,7 @@ public class Ventana_Juego extends JFrame {
             fijarPiezaEnTablero();
             piezaActual = new Pieza();
         }
-        if (verificarColision()) {// Verificar si hay colisión después del movimiento
+        if (verificarColision()) {
             fijarPiezaEnTablero();
             piezaActual = new Pieza();
         }
@@ -149,13 +149,13 @@ public class Ventana_Juego extends JFrame {
     private void teclaPresionada(KeyEvent evt) {
         switch (evt.getKeyCode()) {
             case KeyEvent.VK_LEFT:
-                if (!verificarColisionLateral(-1)) { // -1 para mover a la izquierda
+                if (!verificarColisionLateral(-1)) { 
                     piezaActual.moverIzquierda();
                     repaint();
                 }
                 break;
             case KeyEvent.VK_RIGHT:
-                if (!verificarColisionLateral(1)) { // 1 para mover a la derecha
+                if (!verificarColisionLateral(1)) {
                     piezaActual.moverDerecha();
                     repaint();
                 }
@@ -168,7 +168,10 @@ public class Ventana_Juego extends JFrame {
                 repaint();
                 break;
         }
+      
+        
     }
+
     
     private boolean verificarColisionLateral(int k) {
         int[][] forma = piezaActual.obtenerForma();
@@ -176,15 +179,16 @@ public class Ventana_Juego extends JFrame {
         for (int i = 0; i < forma.length; i++) {
             for (int j = 0; j < forma[i].length; j++) {
                 if (forma[i][j] == 1) {
-                    int columnaTablero = columna + j;
+                    int columnaTablero = columna + j + k;
                     if (columnaTablero < 0 || columnaTablero >= ANCHO_TABLERO) {
-                        return true; // Hay colisión lateral
+                        return true; 
                     }
                 }
             }
         }
         return false;
     }
+
 
     private boolean verificarColision() {
         int[][] forma = piezaActual.obtenerForma();

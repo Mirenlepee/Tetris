@@ -41,6 +41,7 @@ public class Ventana_Juego extends JFrame {
         }
         JPanel panelPrincipal = new JPanel(new BorderLayout());
 
+
         PanelJuego panelJuego = new PanelJuego();
         panelJuego.setPreferredSize(new Dimension(ANCHO_TABLERO * TAMANO_CELDA, ALTO_TABLERO * TAMANO_CELDA));
 
@@ -77,7 +78,11 @@ public class Ventana_Juego extends JFrame {
         piezaActual = new Pieza();
         tablero = new int[ALTO_TABLERO][ANCHO_TABLERO];
         //buffer = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-        vidaIcono = new ImageIcon("C:\\Users\\pemma\\git\\Tetris\\Tetris\\src\\P1\\hearts.png");
+        vidaIcono = new ImageIcon(getClass().getResource("hearts.png"));
+
+        vidaIcono = new ImageIcon( getClass().getResource("hearts.png"));
+       
+
 
         setVentanaPropiedades();
         iniciarJuego();

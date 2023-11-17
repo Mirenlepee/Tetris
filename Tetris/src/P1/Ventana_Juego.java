@@ -30,15 +30,23 @@ public class Ventana_Juego extends JFrame {
 
     	setTitle("Tetris");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
         try {
-        	InputStream audioStream = getClass().getResourceAsStream("tetris.wav");
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioStream);
-            clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
+            File audioFile = new File("Tetris/src/tetris.wav");
+            
+            if (audioFile.exists()) {
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
+                clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+            } else {
+                System.out.println("Audio file not found!");
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
         JPanel panelPrincipal = new JPanel(new BorderLayout());
 
 
@@ -78,10 +86,7 @@ public class Ventana_Juego extends JFrame {
         piezaActual = new Pieza();
         tablero = new int[ALTO_TABLERO][ANCHO_TABLERO];
         //buffer = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-        vidaIcono = new ImageIcon(getClass().getResource("hearts.png"));
-
-        vidaIcono = new ImageIcon( getClass().getResource("hearts.png"));
-       
+        vidaIcono = new ImageIcon(getClass().getResource("hearts.png"));      
 
 
         setVentanaPropiedades();
@@ -97,8 +102,10 @@ public class Ventana_Juego extends JFrame {
         });
         timer.start();
 
+        if (clip != null) {
+            clip.start();
+        }
 
-        clip.start(); // Comenzar a reproducir la música
 
         panelJuego.addKeyListener(new KeyAdapter() {
         	public void keyPressed(KeyEvent evt) {

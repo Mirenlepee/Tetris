@@ -30,7 +30,8 @@ public class Ventana_Juego extends JFrame {
             e.printStackTrace();
         }
 
-        vidaIcono = new ImageIcon("C:\\Users\\pemma\\git\\Tetris\\Tetris\\src\\P1\\hearts.png");
+        vidaIcono = new ImageIcon( getClass().getResource("hearts.png"));
+       
 
         setVentanaPropiedades();
         iniciarJuego();

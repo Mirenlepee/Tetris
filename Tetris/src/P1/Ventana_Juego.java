@@ -6,6 +6,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.InputStream;
+
 import javax.sound.sampled.*;
 
 public class Ventana_Juego extends JFrame {
@@ -30,7 +32,8 @@ public class Ventana_Juego extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\pemma\\git\\Tetris\\Tetris\\src\\P1\\tetris.wav"));
+        	InputStream audioStream = getClass().getResourceAsStream("/tetris.wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioStream);
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
         } catch (Exception e) {

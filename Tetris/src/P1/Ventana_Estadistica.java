@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,9 +17,173 @@ import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
 
+public class Ventana_Estadistica{
+	private JFrame ventana;
+	private JTable tablaDatos;
+	private DefaultTableModel modeloDatos;
+	
+	public Ventana_Estadistica() {
+		ventana = new JFrame("Estadística");
+		ventana.setSize(600, 800);
+		ventana.setTitle("Estadística");
+		ventana.setLayout(new BorderLayout());
+		
+		JLabel signInlbl = new JLabel("Statistics");
+		signInlbl.setFont(new Font("Cambria", Font.BOLD, 24));
+		
+		JPanel pnlLbl = new JPanel();
+		pnlLbl.add(signInlbl, BorderLayout.CENTER);
+		ventana.add(pnlLbl, BorderLayout.NORTH);
+		
+		JPanel pnlBoton = new JPanel();
+		
+		JButton btnReturn = new JButton("Return");
+		 pnlBoton.add(btnReturn);
+		 btnReturn.addActionListener(new ActionListener() {
+			 @Override
+			 public void actionPerformed(ActionEvent e) {
+			 	// TODO Auto-generated method stub
+			 	ventana.dispose();
+			 }
+			         	
+		 });
+		 tablaDatos = new JTable();
+		 modeloDatos = new DefaultTableModel();
+		 modeloDatos.addColumn("");
+		 modeloDatos.addColumn("");
+		 modeloDatos.addRow(new Object[]{"Time played"});
+		 modeloDatos.addRow(new Object[]{"Daily playtime"});
+		 modeloDatos.addRow(new Object[]{"Rounds played"});
+		 modeloDatos.addRow(new Object[]{"Max points"});
+		 modeloDatos.addRow(new Object[]{"Min points"});
+		 modeloDatos.addRow(new Object[]{"Total points"});
+		 modeloDatos.addRow(new Object[]{"Daily average points"});
+		 tablaDatos.setModel(modeloDatos);
+		 ventana.add(new JScrollPane(tablaDatos), BorderLayout.CENTER);
+    
+		 ventana.add(pnlBoton, BorderLayout.SOUTH);
+		 ventana.setVisible(true);
+	}
+	public void setDatos() {
+		
+	}
+	
+//	private class MiTableModel implements TableModel{
+//
+//		private final Class<?>[] CLASES_COLS = {String.class, Integer.class};
+//		@Override
+//		public Class<?> getColumnClass(int columnIndex) {
+//			// TODO Auto-generated method stub
+//			return CLASES_COLS[columnIndex];
+//		}
+//
+//		@Override
+//		public int getColumnCount() {
+//			// TODO Auto-generated method stub
+//			return 2;
+//		}
+//
+//		@Override
+//		public int getRowCount() {
+//			// TODO Auto-generated method stub
+//			return 7;
+//		}
+//		
+//		private String[] cabeceras = {"Time played", "Daily playtime", "Rounds played", "Max points", "Min points", "Total points", "Daily average points"};
+//
+//		@Override
+//		public String getColumnName(int columnIndex) {
+//			// TODO Auto-generated method stub
+//			return null;
+//		}
+//		
+//		@Override
+//		public Object getValueAt(int rowIndex, int columnIndex) {
+//			// TODO Auto-generated method stub
+//			switch(columnIndex) {
+//			case 0:
+//				return null;
+//			case 1:
+//				return null;
+//			case 2:
+//				return null;
+//			case 3:
+//				return null;
+//			case 4:
+//				return null;
+//			case 5:
+//				return null;
+//			case 6: 
+//				return null;
+//			case 7: 
+//				return null;
+//			default:
+//				return null;
+//			}
+//			
+//		}
+//		
+//		@Override
+//		public boolean isCellEditable(int rowIndex, int columnIndex) {
+//			// TODO Auto-generated method stub
+//			return false;
+//		}
+//
+//		@Override
+//		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+//			// TODO Auto-generated method stub
+//			switch(columnIndex) {
+//			case 0:
+//				break;
+//			case 1:
+//				break;
+//			case 2:
+//				break;
+//			case 3:
+//				break;
+//			case 4:
+//				break;
+//			case 5:
+//				break;
+//			case 6:
+//				break;
+//			case 7:
+//				break;
+//		
+//			}
+//		}
+//		//Paso 5: trabajar con los escuchadores
+//		ArrayList<TableModelListener> listaEsc = new ArrayList<>();
+//
+//		@Override
+//		public void addTableModelListener(TableModelListener l) {
+//			// TODO Auto-generated method stub
+//			listaEsc.add(l);
+//			
+//		}
+//		
+//		@Override
+//		public void removeTableModelListener(TableModelListener l) {
+//			// TODO Auto-generated method stub
+//			listaEsc.remove(l);
+//			
+//		}
+//	
+//		//DefaultTableModel lo hace así
+//		public void fireTableChanged(TableModelEvent e) {
+//			for(TableModelListener l: listaEsc) {
+//				l.tableChanged(e);
+//			}
+//		}
+//	}
+//
+}
 
 //public class Ventana_Estadistica extends AbstractTableModel{
 //	private JFrame ventana;
@@ -171,84 +336,84 @@ import javax.swing.table.TableModel;
 //		}
 //    }
 
-public class Ventana_Estadistica extends JFrame {
-    private JLabel lblTitle;
-    private JLabel lblTotalTime;
-    private JLabel lblDailyTime;
-    private JLabel lblGamesPlayed;
-    private JLabel lblMaxPoints;
-    private JLabel lblMinPoints;
-    private JLabel lblTotalPoints;
-    private JLabel lblDailyAverage;
-    private JButton btnBack;
-
-
-    public Ventana_Estadistica() {
-        setSize(600, 800);
-        setTitle("Estadística");
-        setLayout(new GridLayout(9, 2));
-
-        lblTitle = new JLabel("Estadísticas");
-
-        lblTitle.setFont(new Font("Cambria", Font.BOLD, 24));
-        lblTotalTime = new JLabel("Total Time: ");
-        lblDailyTime = new JLabel("Daily Time: ");
-        lblGamesPlayed = new JLabel("Games Played: ");
-        lblMaxPoints = new JLabel("Max Points: ");
-        lblMinPoints = new JLabel("Min Points: ");
-        lblTotalPoints = new JLabel("Total Points: ");
-        lblDailyAverage = new JLabel("Daily Average: ");
-        btnBack = new JButton("Back");
-
-      
-        JTextField txtTotalTime = new JTextField();
-        txtTotalTime.setEditable(false);
-
-        JTextField txtDailyTime = new JTextField();
-        txtDailyTime.setEditable(false);
-
-        JTextField txtGamesPlayed = new JTextField();
-        txtGamesPlayed.setEditable(false);
-
-        JTextField txtMaxPoints = new JTextField();
-        txtMaxPoints.setEditable(false);
-
-        JTextField txtMinPoints = new JTextField();
-        txtMinPoints.setEditable(false);
-
-        JTextField txtTotalPoints = new JTextField();
-        txtTotalPoints.setEditable(false);
-
-        JTextField txtDailyAverage = new JTextField();
-        txtDailyAverage.setEditable(false);
-
-        btnBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
-
-        add(lblTitle);
-        add(new JLabel());
-        add(lblTotalTime);
-        add(txtTotalTime);
-        add(lblDailyTime);
-        add(txtDailyTime);
-        add(lblGamesPlayed);
-        add(txtGamesPlayed);
-        add(lblMaxPoints);
-        add(txtMaxPoints);
-        add(lblMinPoints);
-        add(txtMinPoints);
-        add(lblTotalPoints);
-        add(txtTotalPoints);
-        add(lblDailyAverage);
-        add(txtDailyAverage);
-        add(btnBack);
-        
-        txtTotalTime.setText("Texto de Prueba");
-        
-        setVisible(true);
-    }
-}
+//public class Ventana_Estadistica extends JFrame {
+//    private JLabel lblTitle;
+//    private JLabel lblTotalTime;
+//    private JLabel lblDailyTime;
+//    private JLabel lblGamesPlayed;
+//    private JLabel lblMaxPoints;
+//    private JLabel lblMinPoints;
+//    private JLabel lblTotalPoints;
+//    private JLabel lblDailyAverage;
+//    private JButton btnBack;
+//
+//
+//    public Ventana_Estadistica() {
+//        setSize(600, 800);
+//        setTitle("Estadística");
+//        setLayout(new GridLayout(9, 2));
+//
+//        lblTitle = new JLabel("Estadísticas");
+//
+//        lblTitle.setFont(new Font("Cambria", Font.BOLD, 24));
+//        lblTotalTime = new JLabel("Total Time: ");
+//        lblDailyTime = new JLabel("Daily Time: ");
+//        lblGamesPlayed = new JLabel("Games Played: ");
+//        lblMaxPoints = new JLabel("Max Points: ");
+//        lblMinPoints = new JLabel("Min Points: ");
+//        lblTotalPoints = new JLabel("Total Points: ");
+//        lblDailyAverage = new JLabel("Daily Average: ");
+//        btnBack = new JButton("Back");
+//
+//      
+//        JTextField txtTotalTime = new JTextField();
+//        txtTotalTime.setEditable(false);
+//
+//        JTextField txtDailyTime = new JTextField();
+//        txtDailyTime.setEditable(false);
+//
+//        JTextField txtGamesPlayed = new JTextField();
+//        txtGamesPlayed.setEditable(false);
+//
+//        JTextField txtMaxPoints = new JTextField();
+//        txtMaxPoints.setEditable(false);
+//
+//        JTextField txtMinPoints = new JTextField();
+//        txtMinPoints.setEditable(false);
+//
+//        JTextField txtTotalPoints = new JTextField();
+//        txtTotalPoints.setEditable(false);
+//
+//        JTextField txtDailyAverage = new JTextField();
+//        txtDailyAverage.setEditable(false);
+//
+//        btnBack.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                dispose();
+//            }
+//        });
+//
+//        add(lblTitle);
+//        add(new JLabel());
+//        add(lblTotalTime);
+//        add(txtTotalTime);
+//        add(lblDailyTime);
+//        add(txtDailyTime);
+//        add(lblGamesPlayed);
+//        add(txtGamesPlayed);
+//        add(lblMaxPoints);
+//        add(txtMaxPoints);
+//        add(lblMinPoints);
+//        add(txtMinPoints);
+//        add(lblTotalPoints);
+//        add(txtTotalPoints);
+//        add(lblDailyAverage);
+//        add(txtDailyAverage);
+//        add(btnBack);
+//        
+//        txtTotalTime.setText("Texto de Prueba");
+//        
+//        setVisible(true);
+//    }
+//}

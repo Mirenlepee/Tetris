@@ -106,7 +106,6 @@ public class Ventana_Juego extends JFrame {
     private void setVentanaPropiedades() {
         setVisible(true);
         setTitle("Tetris");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 600);
     }
 

@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 
 public class Ventana_Options{
 	private JFrame ventana;
+	private JButton btnSound;
+	private boolean imgSound = true;
 	
     
 	public Ventana_Options() {
@@ -40,13 +42,8 @@ public class Ventana_Options{
         JPanel fila3 = new JPanel();
         JPanel fila4 = new JPanel();
         
-        ImageIcon imgSound = new ImageIcon(getClass().getResource("Sound.png"));
-        JButton btnSound = new JButton();
-        int ancho1 = 30;
-		int alto1 = 30;
-		Image imagenDef1 = imgSound.getImage().getScaledInstance(ancho1, alto1, Image.SCALE_SMOOTH);
-		ImageIcon iconoDef1 = new ImageIcon(imagenDef1);
-		btnSound.setIcon(iconoDef1);
+        btnSound = new JButton();
+        cambiarImgBtn();
 		fila1.add(btnSound);
 		
         btnSound.addActionListener(new ActionListener() {
@@ -54,7 +51,7 @@ public class Ventana_Options{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				cambiarImgBtn();
 			}
         	
         });
@@ -127,6 +124,23 @@ public class Ventana_Options{
         ventana.add(pnlPrincipal);
         ventana.setVisible(true);
 	}
-	
+	private void cambiarImgBtn() {
+		if(imgSound) {
+			ImageIcon imgSound = new ImageIcon(getClass().getResource("Sound.png"));
+	        int ancho1 = 30;
+			int alto1 = 30;
+			Image imagenDef1 = imgSound.getImage().getScaledInstance(ancho1, alto1, Image.SCALE_SMOOTH);
+			ImageIcon iconoDef1 = new ImageIcon(imagenDef1);
+			btnSound.setIcon(iconoDef1);
+		}else {
+			ImageIcon imgNoSound = new ImageIcon(getClass().getResource("NoSound.png"));
+	        int ancho = 30;
+			int alto = 30;
+			Image imagenDef = imgNoSound.getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
+			ImageIcon iconoDef = new ImageIcon(imagenDef);
+			btnSound.setIcon(iconoDef);
+		}
+		imgSound = !imgSound;
+	}
 	
 }

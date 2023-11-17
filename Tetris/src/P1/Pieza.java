@@ -63,39 +63,17 @@ public class Pieza {
         fila++;
     }
 
-    //Mover la pieza hacia la izquierda, hacia la izquierda en el eje horizontal
     public void moverIzquierda() {
-        if (!verificarColisionLateral(-1)) { // Verificar colisión antes de mover a la izquierda
-            columna--;
-        }
+        columna--;
     }
 
     public void moverDerecha() {
-        if (!verificarColisionLateral(1)) { // Verificar colisión antes de mover a la derecha
-            columna++;
-        }
+    	columna++;
     }
-
-    private boolean verificarColisionLateral(int movimiento) {
-        int nuevaColumna;
-        int[][] forma = obtenerForma();
-
-        for (int i = 0; i < forma.length; i++) {
-            for (int j = 0; j < forma[i].length; j++) {
-                if (forma[i][j] == 1) {
-                    nuevaColumna = columna + movimiento + j;
-
-                    // Verificar límites laterales del tablero
-                    if (nuevaColumna < 0 || nuevaColumna >= Ventana_Juego.ANCHO_TABLERO) {
-                        return true; // Hay colisión lateral
-                    }
-                }
-            }
-        }
-        return false;
-    }
+   
     
 	public void rotar() {
+
        //Con la fila y columna se cogen las dimensiones de la pieza que esta cayendo
         int nuevaFila = forma.length;
         int nuevaColumna = forma[0].length;

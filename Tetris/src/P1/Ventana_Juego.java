@@ -1,14 +1,12 @@
 package P1;
 
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.sound.sampled.*;
 
 public class Ventana_Juego extends JFrame {
 
@@ -23,23 +21,31 @@ public class Ventana_Juego extends JFrame {
     private Pieza piezaActual;//Pieza que el jugador  controla
     private int[][] tablero;//Matriz
     //private BufferedImage buffer;//buffer para dibujar las piezas mejor
- 
-    
-    
+    private Clip clip; 
+    private ImageIcon vidaIcono;
+
     public Ventana_Juego() {
+
     	setTitle("Tetris");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\pemma\\git\\Tetris\\Tetris\\src\\P1\\tetris.wav"));
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         JPanel panelPrincipal = new JPanel(new BorderLayout());
 
         PanelJuego panelJuego = new PanelJuego();
         panelJuego.setPreferredSize(new Dimension(ANCHO_TABLERO * TAMANO_CELDA, ALTO_TABLERO * TAMANO_CELDA));
 
         JPanel panelDerecho = new JPanel();
-        panelDerecho.setLayout(new BoxLayout(panelDerecho, BoxLayout.Y_AXIS)); // Utilizamos un layout vertical
+        panelDerecho.setLayout(new BoxLayout(panelDerecho, BoxLayout.Y_AXIS));
 
-        JLabel etiquetaPuntos = new JLabel("Puntos: " + puntos); // Etiqueta para mostrar los puntos
-        etiquetaPuntos.setAlignmentX(Component.CENTER_ALIGNMENT); // Centrar la etiqueta horizontalmente
+        JLabel etiquetaPuntos = new JLabel("Puntos: " + puntos); 
+        etiquetaPuntos.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         JLabel etiquetaEspacio1 = new JLabel("    ");
         etiquetaEspacio1.setPreferredSize(new Dimension(100, 50));
@@ -47,14 +53,13 @@ public class Ventana_Juego extends JFrame {
 
         JLabel etiquetaEspacio2 = new JLabel("    "); 
         etiquetaEspacio2.setPreferredSize(new Dimension(100, 50)); 
-     // Crear un borde compuesto con bordes negros en los cuatro lados
         etiquetaEspacio2.setBorder(new LineBorder(Color.BLACK));
 
         panelDerecho.add(Box.createVerticalGlue());
         panelDerecho.add(etiquetaPuntos);
-        panelDerecho.add(Box.createVerticalStrut(10)); // Espacio entre los componentes
+        panelDerecho.add(Box.createVerticalStrut(10)); 
         panelDerecho.add(etiquetaEspacio1);
-        panelDerecho.add(Box.createVerticalStrut(10)); // Espacio entre los componentes
+        panelDerecho.add(Box.createVerticalStrut(10)); 
         panelDerecho.add(etiquetaEspacio2);
         panelDerecho.add(Box.createVerticalGlue());
 
@@ -63,13 +68,16 @@ public class Ventana_Juego extends JFrame {
         panelPrincipal.add(panelDerecho, BorderLayout.EAST);
 
 
-        // Agregar el panel principal a la ventana
         add(panelPrincipal);
         pack();
         
         piezaActual = new Pieza();
         tablero = new int[ALTO_TABLERO][ANCHO_TABLERO];
         //buffer = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+        vidaIcono = new ImageIcon("C:\\Users\\pemma\\git\\Tetris\\Tetris\\src\\P1\\hearts.png");
+
+        setVentanaPropiedades();
+        iniciarJuego();
 
 
         timer = new Timer(1000, new ActionListener() {
@@ -82,7 +90,9 @@ public class Ventana_Juego extends JFrame {
         timer.start();
 
 
-        panelJuego.addKeyListener(new java.awt.event.KeyAdapter() {
+        clip.start(); // Comenzar a reproducir la música
+
+        panelJuego.addKeyListener(new KeyAdapter() {
         	public void keyPressed(KeyEvent evt) {
                 teclaPresionada(evt);
             }
@@ -93,10 +103,31 @@ public class Ventana_Juego extends JFrame {
         setVisible(true);
     }
 
-   
+    private void setVentanaPropiedades() {
+        setVisible(true);
+        setTitle("Tetris");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(300, 600);
+    }
+
+    private void iniciarJuego() {
+        piezaActual = new Pieza();
+        tablero = new int[getHeight() / TAMANO_CELDA][getWidth() / TAMANO_CELDA];
+        //buffer = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+
+        timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                moverPiezaAbajo();
+                repaint();
+            }
+        });
+        timer.start();
+    }
+
     private void moverPiezaAbajo() {
         piezaActual.moverAbajo();
-        if (verificarColision()) {//Mirar si la pieza a tocado otra pieza o el suelo
+        if (verificarColision()) {
             fijarPiezaEnTablero();
             piezaActual = new Pieza();
         }
@@ -106,17 +137,37 @@ public class Ventana_Juego extends JFrame {
         }
     }
 
-
-    private boolean verificarColisionLateral() {
-    	int[][] forma = piezaActual.obtenerForma();
+    private void teclaPresionada(KeyEvent evt) {
+        switch (evt.getKeyCode()) {
+            case KeyEvent.VK_LEFT:
+                if (!verificarColisionLateral(-1)) { // -1 para mover a la izquierda
+                    piezaActual.moverIzquierda();
+                    repaint();
+                }
+                break;
+            case KeyEvent.VK_RIGHT:
+                if (!verificarColisionLateral(1)) { // 1 para mover a la derecha
+                    piezaActual.moverDerecha();
+                    repaint();
+                }
+                break;
+            case KeyEvent.VK_DOWN:
+                moverPiezaAbajo();
+                break;
+            case KeyEvent.VK_UP:
+                piezaActual.rotar();
+                repaint();
+                break;
+        }
+    }
+    
+    private boolean verificarColisionLateral(int k) {
+        int[][] forma = piezaActual.obtenerForma();
         int columna = piezaActual.obtenerColumna();
-
         for (int i = 0; i < forma.length; i++) {
             for (int j = 0; j < forma[i].length; j++) {
                 if (forma[i][j] == 1) {
                     int columnaTablero = columna + j;
-
-                    // Verificar límites laterales del tablero
                     if (columnaTablero < 0 || columnaTablero >= ANCHO_TABLERO) {
                         return true; // Hay colisión lateral
                     }
@@ -124,39 +175,17 @@ public class Ventana_Juego extends JFrame {
             }
         }
         return false;
-	}
-
-
-	private void teclaPresionada(java.awt.event.KeyEvent evt) {
-        switch (evt.getKeyCode()) {
-            case KeyEvent.VK_LEFT:
-                piezaActual.moverIzquierda();
-                break;
-            case KeyEvent.VK_RIGHT:
-                piezaActual.moverDerecha();
-                break;
-            case KeyEvent.VK_DOWN:
-                moverPiezaAbajo();
-                break;
-            case KeyEvent.VK_UP:
-                piezaActual.rotar();
-                break;
-        }
     }
 
-
-    
     private boolean verificarColision() {
-        int[][] forma= piezaActual.obtenerForma(); //forma de la pieza que se esta manejando
-        int fila= piezaActual.obtenerFila();
-        int columna= piezaActual.obtenerColumna();
-
-        for (int i=0; i < forma.length; i++) {
+        int[][] forma = piezaActual.obtenerForma();
+        int fila = piezaActual.obtenerFila();
+        int columna = piezaActual.obtenerColumna();
+        for (int i = 0; i < forma.length; i++) {
             for (int j = 0; j < forma[i].length; j++) {
-                if (forma[i][j]== 1) {
-                    int filaTablero= fila + i + 1;
-                    int columnaTablero= columna + j;
-                    //si hay colisión
+                if (forma[i][j] == 1) {
+                    int filaTablero = fila + i + 1;
+                    int columnaTablero = columna + j;
                     if (filaTablero >= getHeight() / TAMANO_CELDA || tablero[filaTablero][columnaTablero] == 1) {
                         return true;
                     }
@@ -166,40 +195,41 @@ public class Ventana_Juego extends JFrame {
         return false;
     }
 
-    //Fijar la pieza si hay colisión
     private void fijarPiezaEnTablero() {
         int[][] forma = piezaActual.obtenerForma();
         int fila = piezaActual.obtenerFila();
         int columna = piezaActual.obtenerColumna();
-
-        for (int i = 0;i< forma.length; i++) {
-            for (int j = 0; j< forma[i].length; j++) {
+        for (int i = 0; i < forma.length; i++) {
+            for (int j = 0; j < forma[i].length; j++) {
                 if (forma[i][j] == 1) {
                     tablero[fila + i][columna + j] = 1;
                 }
             }
         }
     }
+//    public void paint(Graphics g) {
 
-    
-    
-/*    public void paint(Graphics g) {
-        super.paint(g);
+/*    @Override
+    public void paint(Graphics g) {
+		super.paint(g);
 
-        //Gráficos para el búfer de imagen
         Graphics bufferGraphics = buffer.getGraphics();
         bufferGraphics.clearRect(0, 0, getWidth(), getHeight());
 
-        //Dibujar el fondo, las piezas fijas y la pieza actual en el búfer
         dibujarFondo(bufferGraphics);
         dibujarPiezasFijas(bufferGraphics);
         dibujarPiezaActual(bufferGraphics);
 
-        //Dibujar el búfer en la ventana
-        g.drawImage(buffer, 0, 0, this);
+        
+                                                     //Derecha o Izquierda,Arriba o Abajo,Tamaño
+        bufferGraphics.drawImage(vidaIcono.getImage(), 20, 35, 4 * TAMANO_CELDA, 2 * TAMANO_CELDA, this);
+        g.drawImage(buffer, 0, 0, this);   
     }
-*/
+
     //dibujar el fondo del tablero con cuadrados
+
+*/
+
     private void dibujarFondo(Graphics g) {
         for (int i = 0; i < getHeight() / TAMANO_CELDA; i++) {
             for (int j = 0; j < getWidth() / TAMANO_CELDA; j++) {
@@ -209,7 +239,6 @@ public class Ventana_Juego extends JFrame {
         }
     }
 
-    //Piezas fijas dibujar
     private void dibujarPiezasFijas(Graphics g) {
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
@@ -220,7 +249,6 @@ public class Ventana_Juego extends JFrame {
         }
     }
 
-    //Pieza actual dibujo
     private void dibujarPiezaActual(Graphics g) {
         int[][] forma = piezaActual.obtenerForma();
         int fila = piezaActual.obtenerFila();
@@ -230,13 +258,13 @@ public class Ventana_Juego extends JFrame {
         for (int i = 0; i < forma.length; i++) {
             for (int j = 0; j < forma[i].length; j++) {
                 if (forma[i][j] == 1) {
-                    dibujarCelda(g, columna * TAMANO_CELDA + j * TAMANO_CELDA, fila * TAMANO_CELDA + i * TAMANO_CELDA, colorPieza);
+                    dibujarCelda(g, columna * TAMANO_CELDA + j * TAMANO_CELDA, fila * TAMANO_CELDA + i * TAMANO_CELDA,
+                            colorPieza);
                 }
             }
         }
     }
 
-    //dibujar una celda individual borde negro
     private void dibujarCelda(Graphics g, int x, int y, Color color) {
         g.setColor(color);
         g.fillRect(x, y, TAMANO_CELDA, TAMANO_CELDA);
@@ -245,14 +273,12 @@ public class Ventana_Juego extends JFrame {
     }
     class PanelJuego extends JPanel {
 
+
         public PanelJuego() {
             // Configurar el panel de juego
-            setPreferredSize(new Dimension(ANCHO_TABLERO * TAMANO_CELDA, ALTO_TABLERO * TAMANO_CELDA));
+        	setPreferredSize(new Dimension(ANCHO_TABLERO * TAMANO_CELDA, ALTO_TABLERO * TAMANO_CELDA));
             setBackground(Color.BLACK);
-
-            // Agregar listeners de teclado si se necesitan para el control del juego
             setFocusable(true);
-            // Agregar listeners de teclado aquí si es necesario
         }
 
         protected void paintComponent(Graphics g) {

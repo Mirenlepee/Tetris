@@ -14,7 +14,7 @@ public class Ventana_GameOver{
 	
 	public Ventana_GameOver() {
 		ventana = new JFrame("Game Over");
-		ventana.setSize(500, 300);
+		ventana.setSize(400, 200);
 		ventana.setTitle("Game Over");
 		ventana.setLayout(new BorderLayout());
     	
@@ -26,7 +26,7 @@ public class Ventana_GameOver{
         ventana.add(pnlLbl, BorderLayout.NORTH);
         
         JPanel pnlPrincipal = new JPanel();
-        pnlPrincipal.setLayout(new GridLayout(3,2));
+        pnlPrincipal.setLayout(new GridLayout(2,2));
         
         JLabel lblScore = new JLabel("Score:");
         JTextField tfScore = new JTextField(15);
@@ -40,10 +40,12 @@ public class Ventana_GameOver{
         pnlPrincipal.add(lblBestScore);
         pnlPrincipal.add(tfBestScore);
         
+        JPanel pnlBotonera = new JPanel();
+        
         ImageIcon imgHome = new ImageIcon(getClass().getResource("Home.png"));
 		JButton btnHome = new JButton();
-		int ancho1 = 50;
-		int alto1 = 50;
+		int ancho1 = 30;
+		int alto1 = 30;
 		Image imagenDef1 = imgHome.getImage().getScaledInstance(ancho1, alto1, Image.SCALE_SMOOTH);
 		ImageIcon iconoDef1 = new ImageIcon(imagenDef1);
 		btnHome.setIcon(iconoDef1);
@@ -58,12 +60,12 @@ public class Ventana_GameOver{
 			}
 			
 		});
-		pnlPrincipal.add(btnHome);
+		pnlBotonera.add(btnHome);
 		
 		ImageIcon imgRetry = new ImageIcon(getClass().getResource("Retry.png"));
 		JButton btnRetry = new JButton();
-		int ancho2 = 50;
-		int alto2 = 50;
+		int ancho2 = 30;
+		int alto2 = 30;
 		Image imagenDef2 = imgRetry.getImage().getScaledInstance(ancho2, alto2, Image.SCALE_SMOOTH);
 		ImageIcon iconoDef2 = new ImageIcon(imagenDef2);
 		btnRetry.setIcon(iconoDef2);
@@ -76,9 +78,10 @@ public class Ventana_GameOver{
 			}
 			
 		});
-		pnlPrincipal.add(btnRetry);
+		pnlBotonera.add(btnRetry);
         
 		ventana.add(pnlPrincipal, BorderLayout.CENTER);
+		ventana.add(pnlBotonera, BorderLayout.SOUTH);
 		ventana.setVisible(true);
 	}
 	public static void main(String[] args) {

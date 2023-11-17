@@ -13,9 +13,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+
 public class Ventana_Options{
 	private JFrame ventana;
 	
+    
 	public Ventana_Options() {
 		ventana = new JFrame("Options");
 		ventana.setSize(400, 400);

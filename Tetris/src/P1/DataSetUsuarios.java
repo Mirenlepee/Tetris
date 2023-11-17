@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class DataSetUsuarios {
 
-	private List<Usuario> lUsuarios = new ArrayList<Usuario>();
+	private static List<Usuario> lUsuarios = new ArrayList<Usuario>();
 	//lUsuarios.add(new Usuario(1, "oihaneCam", "hi154", "oihane.cam@gmail.com", "https://www.google.com/url", "me gusta jugar al tetris"));
 	private static HashMap<String, Usuario> mapaUsuarios = new HashMap<String, Usuario>();
 	
@@ -41,13 +41,13 @@ public class DataSetUsuarios {
 		}
 	}
 	
-//	public static void cargarMapaUsuarios(String email, Usuario u) {
-//		for(int i = 0; i<lUsuarios.length(); i++) {
-//			if(!mapaUsuarios.containsKey(u)) {
-//				mapaUsuarios.put(u.getEmail(), u);
-//			}
-//		}
-//	}
+	public static void cargarMapaUsuarios(String email, Usuario u) {
+		for(int i = 0; i<lUsuarios.size(); i++) {
+			if(!mapaUsuarios.containsKey(u)) {
+				mapaUsuarios.put(u.getEmail(), u);
+			}
+		}
+	}
 	
 	public List<Usuario> getListaUsuario(){
 		return lUsuarios;

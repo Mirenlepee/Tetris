@@ -175,15 +175,18 @@ public class Ventana_Juego extends JFrame {
         }
     }
     
+    
+    
+    
     private boolean verificarColisionLateral(int k) {
         int[][] forma = piezaActual.obtenerForma();
         int columna = piezaActual.obtenerColumna();
         for (int i = 0; i < forma.length; i++) {
             for (int j = 0; j < forma[i].length; j++) {
                 if (forma[i][j] == 1) {
-                    int columnaTablero = columna + j;
+                    int columnaTablero = columna + j + k; 
                     if (columnaTablero < 0 || columnaTablero >= ANCHO_TABLERO) {
-                        return true; // Hay colisión lateral
+                        return true; 
                     }
                 }
             }

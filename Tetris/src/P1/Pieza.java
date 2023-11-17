@@ -1,7 +1,5 @@
 package P1;
 
-
-
 import java.awt.Color;
 
 public class Pieza {
@@ -66,21 +64,16 @@ public class Pieza {
     }
 
     public void moverIzquierda() {
-        if (columna > 0) {
-            columna--;
-        }
+        columna--;
     }
 
     public void moverDerecha() {
-        if (columna + forma[0].length < 10) { // 10 es el ancho del tablero
-            columna++;
-        }
+    	columna++;
     }
-
-
-  
    
-    public void rotar() {
+    
+	public void rotar() {
+
        //Con la fila y columna se cogen las dimensiones de la pieza que esta cayendo
         int nuevaFila = forma.length;
         int nuevaColumna = forma[0].length;
@@ -96,4 +89,5 @@ public class Pieza {
       //Actualiza la forma de la pieza con la nueva forma rotada
         forma = nuevaForma;
     }
+	
 }

@@ -30,9 +30,9 @@ public class Ventana_Juego extends JFrame {
 
     	setTitle("Tetris");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        
         try {
-        	InputStream audioStream = getClass().getResourceAsStream("/tetris.wav");
+        	InputStream audioStream = getClass().getResourceAsStream("tetris.wav");
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioStream);
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
@@ -280,13 +280,12 @@ public class Ventana_Juego extends JFrame {
     }
     class PanelJuego extends JPanel {
 
-
-        public PanelJuego() {
-            // Configurar el panel de juego
-        	setPreferredSize(new Dimension(ANCHO_TABLERO * TAMANO_CELDA, ALTO_TABLERO * TAMANO_CELDA));
+    	public PanelJuego() {
+            setPreferredSize(new Dimension(ANCHO_TABLERO * TAMANO_CELDA, ALTO_TABLERO * TAMANO_CELDA));
             setBackground(Color.BLACK);
             setFocusable(true);
         }
+    	
 
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);

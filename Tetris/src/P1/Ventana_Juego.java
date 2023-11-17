@@ -58,21 +58,21 @@ public class Ventana_Juego extends JFrame {
         JLabel etiquetaPuntos = new JLabel("Puntos: " + puntos);
         etiquetaPuntos.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-/*        JLabel etiquetaEspacio1 = new JLabel("    ");
+        JLabel etiquetaEspacio1 = new JLabel("    ");
         etiquetaEspacio1.setPreferredSize(new Dimension(100, 50));
         etiquetaEspacio1.setBorder(new LineBorder(Color.BLACK));
 
         JLabel etiquetaEspacio2 = new JLabel("    "); 
         etiquetaEspacio2.setPreferredSize(new Dimension(100, 50)); 
         etiquetaEspacio2.setBorder(new LineBorder(Color.BLACK));
-*/
+
         panelDerecho.add(Box.createVerticalGlue());
         panelDerecho.add(etiquetaPuntos);
         panelDerecho.add(Box.createVerticalStrut(10)); 
- /*       panelDerecho.add(etiquetaEspacio1);
+        panelDerecho.add(etiquetaEspacio1);
         panelDerecho.add(Box.createVerticalStrut(10)); 
         panelDerecho.add(etiquetaEspacio2);
-*/        panelDerecho.add(Box.createVerticalGlue());
+        panelDerecho.add(Box.createVerticalGlue());
 
         panelPrincipal.add(panelJuego, BorderLayout.CENTER);
         panelPrincipal.add(Box.createHorizontalStrut(10), BorderLayout.EAST);

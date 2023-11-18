@@ -39,8 +39,8 @@ public class Ventana_SignIn extends JFrame {
 	
 	
     private void enviarCorreo(String destinatario, String asunto, String cuerpo) {
-        final String usuario = "cl4183119@gmail.com"; 
-        final String contraseña = "qqzp zjzz rthn etxn"; 
+        final String usuario = "tetristeamhelp@gmail.com"; 
+        final String contraseña = "lhbu fanv qyiv fdvo"; 
 
         
         Properties propiedades = new Properties();
@@ -105,16 +105,16 @@ public class Ventana_SignIn extends JFrame {
         JLabel forgotPasswordlbl = new JLabel("<html><u>Forgot Password?</u></html>");
         forgotPasswordlbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         forgotPasswordlbl.setForeground(Color.BLUE);
-        JTextField emailRecuperaPass = new JTextField();
         forgotPasswordlbl.addMouseListener( new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				JPanel dialogPanel = new JPanel();
-		        dialogPanel.setLayout(new GridLayout(2, 2));
+				
+		        dialogPanel.setLayout(new GridLayout(2,2));
 
-		        JTextField emailRecuperaPass = new JTextField();
+		        JTextField emailRecuperaPass = new JTextField("@gmail.com");
 		        JTextField usernameField = new JTextField();
 
 		        dialogPanel.add(new JLabel("Email:"));
@@ -130,9 +130,7 @@ public class Ventana_SignIn extends JFrame {
 					    String username = usernameField.getText();
 					    String textoIngresado = emailRecuperaPass.getText();
 					    StringBuilder tx = new StringBuilder();
-				        tx.append("Subject: Password Recovery for Your Tetris Account\r\n")
-				          .append("\r\n")
-				          .append("Dear [Username],\r\n")
+				        tx.append("Dear [Username],\r\n")
 				          .append("\r\n")
 				          .append("We recently received a request to recover the password for your Tetris account associated with this email address. To enhance the security of your account, we have generated a new temporary password for you.\r\n")
 				          .append("\r\n")
@@ -140,7 +138,7 @@ public class Ventana_SignIn extends JFrame {
 				          .append("\r\n")
 				          .append("For security reasons, we recommend changing this temporary password to a personalized one as soon as you log in. You can update your password in the account settings section.\r\n")
 				          .append("\r\n")
-				          .append("If you did not initiate this password recovery request, please contact our support team immediately at support@tetris.com.\r\n")
+				          .append("If you did not initiate this password recovery request, please contact our support team immediately at tetristeamhelp@gmail.com.\r\n")
 				          .append("\r\n")
 				          .append("Thank you for choosing Tetris!\r\n")
 				          .append("\r\n")

@@ -111,9 +111,23 @@ public class Ventana_SignIn extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				 int option = JOptionPane.showOptionDialog(null,emailRecuperaPass, "Type in your email", JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE, null, null, null);
+				JPanel dialogPanel = new JPanel();
+		        dialogPanel.setLayout(new GridLayout(2, 2));
+
+		        JTextField emailRecuperaPass = new JTextField();
+		        JTextField usernameField = new JTextField();
+
+		        dialogPanel.add(new JLabel("Email:"));
+		        dialogPanel.add(emailRecuperaPass);
+		        dialogPanel.add(new JLabel("Username:"));
+		        dialogPanel.add(usernameField);
+
+		        int option = JOptionPane.showOptionDialog(null, dialogPanel, "Type in your email and username",
+		                JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
 				 
 				 if (option == JOptionPane.OK_OPTION) {
+					    String username = usernameField.getText();
 					    String textoIngresado = emailRecuperaPass.getText();
 					    StringBuilder tx = new StringBuilder();
 				        tx.append("Subject: Password Recovery for Your Tetris Account\r\n")
@@ -137,6 +151,7 @@ public class Ventana_SignIn extends JFrame {
 
 				        String generatedPassword = generateRandomPassword();
 			            rr = rr.replace("[GeneratedPassword]", generatedPassword);
+			            rr=rr.replace("[Username]", username);
 
 			            enviarCorreo(textoIngresado, "Password Recovery", rr);
 

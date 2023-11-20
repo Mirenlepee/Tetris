@@ -23,11 +23,18 @@ public class Ventana_Instrucciones extends JFrame{
         lblTitle.setFont(new Font("Cambria", Font.BOLD, 24));
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
         add(lblTitle, BorderLayout.NORTH);
-        //Contenido
+       
         TxtAreaInstructions = new JTextArea("");
         TxtAreaInstructions.setText("The aim in Tetris is simple; you bring down blocks from the top of the screen. \n "
         		+ "You can move the blocks around, either left to right and/or you can rotate them. \n "
-        		+ "The blocks fall at a certain rate, but you can make them fall faster if you're sure of your positioning.");
+        		+ "The blocks fall at a certain rate, but you can make them fall faster if you're sure of your positioning.\n"
+        		  + "1. Use the left and right arrow keys to move the falling blocks horizontally.\n"
+        		    + "2. Press the down arrow key to make the blocks fall faster.\n"
+        		    + "3. Rotate the blocks using the up arrow key to fit them into empty spaces.\n"
+        		    + "4. Complete a horizontal line with no gaps to make it disappear and earn points.\n"
+        		    + "5. As the game progresses, the blocks fall faster, challenging your speed and agility.\n"
+        		    + "6. The game ends if the blocks reach the top of the screen.\n\n"
+        		    + "Challenge yourself and see how high you can score breaking your own records! Good luck!");
         TxtAreaInstructions.setEnabled(false);
         add(TxtAreaInstructions, BorderLayout.CENTER);    
         
@@ -40,7 +47,8 @@ public class Ventana_Instrucciones extends JFrame{
         closeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+            	dispose();
+            
             }
         });
         add(closeBtn, BorderLayout.SOUTH);

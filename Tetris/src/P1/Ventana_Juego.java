@@ -1,6 +1,7 @@
 package P1;
 
 import javax.swing.*;
+import java.util.List;
 import javax.swing.border.LineBorder;
 
 import java.awt.*;
@@ -8,17 +9,18 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import javax.sound.sampled.*;
 
 public class Ventana_Juego extends JFrame {
 
-    //Tamaño de cada celda en el tablero del juego
 	private static final int ANCHO_TABLERO = 10;
     private static final int ALTO_TABLERO = 20;
     private static final int TAMANO_CELDA = 30;
     
     private int puntos = 0;    
+    private List<Pieza> piezasEnTablero = new ArrayList<>();
 
     
     private int[][] tablero;
@@ -89,7 +91,6 @@ public class Ventana_Juego extends JFrame {
         
         vidaIcono = new ImageIcon(getClass().getResource("hearts.png"));      
 
-        //setVentanaPropiedades();
         iniciarJuego();
 
         timer = new Timer(200, new ActionListener() {
@@ -122,8 +123,6 @@ public class Ventana_Juego extends JFrame {
     private void iniciarJuego() {
         piezaActual = new Pieza();
         tablero = new int[getHeight() / TAMANO_CELDA][getWidth() / TAMANO_CELDA];
-        //buffer = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-
         timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -209,7 +208,6 @@ public class Ventana_Juego extends JFrame {
         return false;
     }
 
-
     private void fijarPiezaEnTablero() {
         int[][] forma = piezaActual.obtenerForma();
         int fila = piezaActual.obtenerFila();
@@ -221,7 +219,9 @@ public class Ventana_Juego extends JFrame {
                 }
             }
         }
+        piezasEnTablero.add(piezaActual); 
     }
+
 
     private void dibujarFondo(Graphics g) {
         for (int i = 0; i < getHeight() / TAMANO_CELDA; i++) {
@@ -231,16 +231,30 @@ public class Ventana_Juego extends JFrame {
             }
         }
     }
-
     private void dibujarPiezasFijas(Graphics g) {
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
                 if (tablero[i][j] == 1) {
-                    dibujarCelda(g, j * TAMANO_CELDA, i * TAMANO_CELDA, Color.BLUE);
+                    Color colorPieza = obtenerColorPiezaEnTablero(i, j);
+                    dibujarCelda(g, j * TAMANO_CELDA, i * TAMANO_CELDA, colorPieza);
                 }
             }
         }
     }
+
+    private Color obtenerColorPiezaEnTablero(int fila, int columna) {
+        for (Pieza pieza : piezasEnTablero) {
+            int[][] forma = pieza.obtenerForma();
+            int filaPieza = pieza.obtenerFila();
+            int columnaPieza = pieza.obtenerColumna();
+            if (fila >= filaPieza && fila < filaPieza + forma.length
+                    && columna >= columnaPieza && columna < columnaPieza + forma[0].length) {
+                return pieza.obtenerColor();
+            }
+        }
+        return Color.BLUE; 
+    }
+
 
     private void dibujarPiezaActual(Graphics g) {
         int[][] forma = piezaActual.obtenerForma();
@@ -251,8 +265,9 @@ public class Ventana_Juego extends JFrame {
         for (int i = 0; i < forma.length; i++) {
             for (int j = 0; j < forma[i].length; j++) {
                 if (forma[i][j] == 1) {
-                    dibujarCelda(g, columna * TAMANO_CELDA + j * TAMANO_CELDA, fila * TAMANO_CELDA + i * TAMANO_CELDA,
-                            colorPieza);
+                   
+                    dibujarCelda(g, columna * TAMANO_CELDA + j * TAMANO_CELDA, fila * TAMANO_CELDA + i * TAMANO_CELDA, colorPieza);
+
                 }
             }
         }

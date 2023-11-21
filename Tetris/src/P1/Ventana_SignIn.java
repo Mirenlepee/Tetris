@@ -5,10 +5,8 @@ import javax.swing.*;
 
 import java.util.Properties;
 
-import java.awt.*;import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.PasswordAuthentication;
+import java.awt.*;
+
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,7 +49,6 @@ public class Ventana_SignIn extends JFrame {
 
 
         Session sesion = Session.getInstance(propiedades, new javax.mail.Authenticator() {
-            @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(usuario, contraseña);
             }

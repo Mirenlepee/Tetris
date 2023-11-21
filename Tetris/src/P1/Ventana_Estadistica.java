@@ -1,6 +1,5 @@
 package P1;
 
-
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -21,7 +20,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
-
 
 public class Ventana_Estadistica{
 	private JFrame ventana;
@@ -417,3 +415,5 @@ public class Ventana_Estadistica{
 //        setVisible(true);
 //    }
 //}
+
+

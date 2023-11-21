@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 
 public class Ventana_Options{
@@ -19,8 +20,9 @@ public class Ventana_Options{
 	private JButton btnSound;
 	private boolean imgSound = true;
 	
-    
+	
 	public Ventana_Options() {
+	
 		ventana = new JFrame("Options");
 		ventana.setSize(400, 400);
 		ventana.setTitle("Options");
@@ -46,15 +48,15 @@ public class Ventana_Options{
         cambiarImgBtn();
 		fila1.add(btnSound);
 		
-        btnSound.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				cambiarImgBtn();
-			}
-        	
-        });
+	    btnSound.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            cambiarImgBtn();
+	        
+	        }
+	    });
+
         
         JLabel lblSound = new JLabel("Sound");
         fila1.add(lblSound);
@@ -124,6 +126,7 @@ public class Ventana_Options{
         ventana.add(pnlPrincipal);
         ventana.setVisible(true);
 	}
+ 
 	private void cambiarImgBtn() {
 		if(imgSound) {
 			ImageIcon imgSound = new ImageIcon(getClass().getResource("Sound.png"));
@@ -143,4 +146,5 @@ public class Ventana_Options{
 		imgSound = !imgSound;
 	}
 	
-}
+	 
+	}

@@ -19,6 +19,7 @@ public class Ventana_Juego extends JFrame {
     private static final int TAMANO_CELDA = 30;
     
     private int puntos = 0;    
+
     
     private int[][] tablero;
     private Pieza piezaActual;
@@ -27,7 +28,7 @@ public class Ventana_Juego extends JFrame {
     private ImageIcon vidaIcono;
 
     public Ventana_Juego() {
-
+    
     	setTitle("Tetris");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -46,7 +47,7 @@ public class Ventana_Juego extends JFrame {
             e.printStackTrace();
         }
 
-
+    	clip.start();
         JPanel panelPrincipal = new JPanel(new BorderLayout());
 
         PanelJuego panelJuego = new PanelJuego();
@@ -66,6 +67,8 @@ public class Ventana_Juego extends JFrame {
         etiquetaEspacio2.setPreferredSize(new Dimension(100, 50)); 
         etiquetaEspacio2.setBorder(new LineBorder(Color.BLACK));
 
+        
+        
         panelDerecho.add(Box.createVerticalGlue());
         panelDerecho.add(etiquetaPuntos);
         panelDerecho.add(Box.createVerticalStrut(10)); 
@@ -97,10 +100,7 @@ public class Ventana_Juego extends JFrame {
             }
         });
         timer.start();
-
-        if (clip != null) {
-            clip.start();
-        }
+      
 
         panelJuego.addKeyListener(new KeyAdapter() {
         	public void keyPressed(KeyEvent evt) {
@@ -171,6 +171,7 @@ public class Ventana_Juego extends JFrame {
       
         
     }
+   
 
     
     private boolean verificarColisionLateral(int k) {
@@ -199,7 +200,7 @@ public class Ventana_Juego extends JFrame {
                 if (forma[i][j] == 1) {
                     int filaTablero = fila + i + 1;
                     int columnaTablero = columna + j;
-                    if (filaTablero >= getHeight() / TAMANO_CELDA || tablero[filaTablero][columnaTablero] == 1) {
+                    if (filaTablero >= ALTO_TABLERO || tablero[filaTablero][columnaTablero] == 1) {
                         return true;
                     }
                 }
@@ -207,6 +208,7 @@ public class Ventana_Juego extends JFrame {
         }
         return false;
     }
+
 
     private void fijarPiezaEnTablero() {
         int[][] forma = piezaActual.obtenerForma();
@@ -255,13 +257,14 @@ public class Ventana_Juego extends JFrame {
             }
         }
     }
-
+   
     private void dibujarCelda(Graphics g, int x, int y, Color color) {
         g.setColor(color);
         g.fillRect(x, y, TAMANO_CELDA, TAMANO_CELDA);
         g.setColor(Color.BLACK);
         g.drawRect(x, y, TAMANO_CELDA, TAMANO_CELDA);
     }
+  
     class PanelJuego extends JPanel {
 
         public PanelJuego() {
@@ -277,4 +280,5 @@ public class Ventana_Juego extends JFrame {
             dibujarPiezaActual(g);
         }
     }
+    
 }

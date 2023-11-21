@@ -76,15 +76,19 @@ public class Ventana_Estadistica{
 		Object[][] datos = {{"Time played"}, {"Daily playtime"}, {"Rounds played"}, {"Max points"}, {"Min points"}, {"Total points"}, {"Daily average points"}};
 		modeloDatos = new MiTableModel();
 		tablaDatos.setModel(modeloDatos);
-		for(Object d: datos) {
-			((DefaultTableModel) modeloDatos).addRow((Vector<?>) d);
+		for(Object[] d: datos) {
+			((MiTableModel) modeloDatos).addRow(d);
 		}
-		 
+		// Establecer ceros en la segunda columna (por el momento)
+	    for (int i = 0; i < modeloDatos.getRowCount(); i++) {
+	        modeloDatos.setValueAt(0, i, 1);
+	    }
 	}
 	
 	private class MiTableModel implements TableModel{
 
 		private final Class<?>[] CLASES_COLS = {String.class, Integer.class};
+		private ArrayList<Object[]> filas = new ArrayList<>();
 		@Override
 		public Class<?> getColumnClass(int columnIndex) {
 			// TODO Auto-generated method stub
@@ -100,7 +104,7 @@ public class Ventana_Estadistica{
 		@Override
 		public int getRowCount() {
 			// TODO Auto-generated method stub
-			return 7;
+			return filas.size();
 		}
 		
 		private String[] cabeceras = {"Statistics", "Values"};
@@ -114,14 +118,15 @@ public class Ventana_Estadistica{
 		@Override
 		public Object getValueAt(int rowIndex, int columnIndex) {
 			// TODO Auto-generated method stub
-			switch(columnIndex) {
-			case 1:
-				return null; //aquí tendrá que devolver el dato de la fila indicada
-			default:
-				return null;
-			}
+			return filas.get(rowIndex)[columnIndex];
 			
 		}
+		
+		public void addRow(Object[] rowData) {
+            filas.add(rowData);
+            TableModelEvent event = new TableModelEvent(this, filas.size() - 1, filas.size() - 1, TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT);
+            fireTableChanged(event);
+        }
 		
 		@Override
 		public boolean isCellEditable(int rowIndex, int columnIndex) {

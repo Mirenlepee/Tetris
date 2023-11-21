@@ -92,7 +92,7 @@ public class Ventana_Juego extends JFrame {
         //setVentanaPropiedades();
         iniciarJuego();
 
-        timer = new Timer(1000, new ActionListener() {
+        timer = new Timer(200, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 moverPiezaAbajo();

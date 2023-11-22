@@ -124,25 +124,7 @@ public class Ventana_SignUp {
 		            enviarCorreo(textoIngresado, " Welcome to Tetris - Let the Fun Begin!", rr);
 
                 new Ventana_PerfilDeUsuario();
-                ventana.dispose();
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+                ventana.dispose();     
                 
             }
         });

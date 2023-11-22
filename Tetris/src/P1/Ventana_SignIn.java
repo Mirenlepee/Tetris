@@ -56,11 +56,8 @@ public class Ventana_SignIn extends JFrame {
 
 
         Session sesion = Session.getInstance(propiedades, new javax.mail.Authenticator() {
-<<<<<<< HEAD
-=======
-            
+
         	@Override
->>>>>>> branch 'master' of https://github.com/Mirenlepee/Tetris.git
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(usuario, contraseña);
             }

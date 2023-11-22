@@ -52,7 +52,7 @@ public class Ventana_Estadistica{
 			         	
 		 });
 		 tablaDatos = new JTable();
-		 
+		 //Otra opción:
 //		 ((DefaultTableModel) modeloDatos).addColumn("");
 //		 ((DefaultTableModel) modeloDatos).addColumn("");
 //		 ((DefaultTableModel) modeloDatos).addRow(new Object[]{"Time played"});

@@ -3,6 +3,7 @@ package P1;
 public class Usuario {
 	
 	//Atributos
+	protected static int cont = 0;
 	private int id;
 	private String userName;
 	private String password;
@@ -13,7 +14,8 @@ public class Usuario {
 	//Constructor
 	public Usuario(int id, String userName, String password, String email, String avatarURL, String descripcion) {
 		super();
-		this.id = id;
+		this.id = cont;
+		cont++;
 		this.userName = userName;
 		this.password = password;
 		this.email = email;

@@ -24,7 +24,7 @@ import javax.swing.table.TableModel;
 public class Ventana_Estadistica{
 	private JFrame ventana;
 	private JTable tablaDatos;
-	private DefaultTableModel modeloDatos;
+	private TableModel modeloDatos;
 	
 	public Ventana_Estadistica() {
 		ventana = new JFrame("Estadística");
@@ -52,135 +52,121 @@ public class Ventana_Estadistica{
 			         	
 		 });
 		 tablaDatos = new JTable();
-		 modeloDatos = new DefaultTableModel();
-		 modeloDatos.addColumn("");
-		 modeloDatos.addColumn("");
-		 modeloDatos.addRow(new Object[]{"Time played"});
-		 modeloDatos.addRow(new Object[]{"Daily playtime"});
-		 modeloDatos.addRow(new Object[]{"Rounds played"});
-		 modeloDatos.addRow(new Object[]{"Max points"});
-		 modeloDatos.addRow(new Object[]{"Min points"});
-		 modeloDatos.addRow(new Object[]{"Total points"});
-		 modeloDatos.addRow(new Object[]{"Daily average points"});
-		 tablaDatos.setModel(modeloDatos);
+		 
+//		 ((DefaultTableModel) modeloDatos).addColumn("");
+//		 ((DefaultTableModel) modeloDatos).addColumn("");
+//		 ((DefaultTableModel) modeloDatos).addRow(new Object[]{"Time played"});
+//		 ((DefaultTableModel) modeloDatos).addRow(new Object[]{"Daily playtime"});
+//		 ((DefaultTableModel) modeloDatos).addRow(new Object[]{"Rounds played"});
+//		 ((DefaultTableModel) modeloDatos).addRow(new Object[]{"Max points"});
+//		 ((DefaultTableModel) modeloDatos).addRow(new Object[]{"Min points"});
+//		 ((DefaultTableModel) modeloDatos).addRow(new Object[]{"Total points"});
+//		 ((DefaultTableModel) modeloDatos).addRow(new Object[]{"Daily average points"});
+		
 		 ventana.add(new JScrollPane(tablaDatos), BorderLayout.CENTER);
+		 setDatos();
     
 		 ventana.add(pnlBoton, BorderLayout.SOUTH);
 		 ventana.setVisible(true);
 	}
+	
 	public void setDatos() {
-		
+		Object[][] datos = {{"Time played"}, {"Daily playtime"}, {"Rounds played"}, {"Max points"}, {"Min points"}, {"Total points"}, {"Daily average points"}};
+		modeloDatos = new MiTableModel();
+		tablaDatos.setModel(modeloDatos);
+		for(Object[] d: datos) {
+			((MiTableModel) modeloDatos).addRow(d);
+		}
+		// Establecer ceros en la segunda columna (por el momento)
+	    for (int i = 0; i < modeloDatos.getRowCount(); i++) {
+	        modeloDatos.setValueAt(0, i, 1);
+	    }
 	}
 	
-//	private class MiTableModel implements TableModel{
-//
-//		private final Class<?>[] CLASES_COLS = {String.class, Integer.class};
-//		@Override
-//		public Class<?> getColumnClass(int columnIndex) {
-//			// TODO Auto-generated method stub
-//			return CLASES_COLS[columnIndex];
-//		}
-//
-//		@Override
-//		public int getColumnCount() {
-//			// TODO Auto-generated method stub
-//			return 2;
-//		}
-//
-//		@Override
-//		public int getRowCount() {
-//			// TODO Auto-generated method stub
-//			return 7;
-//		}
-//		
-//		private String[] cabeceras = {"Time played", "Daily playtime", "Rounds played", "Max points", "Min points", "Total points", "Daily average points"};
-//
-//		@Override
-//		public String getColumnName(int columnIndex) {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//		
-//		@Override
-//		public Object getValueAt(int rowIndex, int columnIndex) {
-//			// TODO Auto-generated method stub
-//			switch(columnIndex) {
-//			case 0:
-//				return null;
-//			case 1:
-//				return null;
-//			case 2:
-//				return null;
-//			case 3:
-//				return null;
-//			case 4:
-//				return null;
-//			case 5:
-//				return null;
-//			case 6: 
-//				return null;
-//			case 7: 
-//				return null;
-//			default:
-//				return null;
-//			}
-//			
-//		}
-//		
-//		@Override
-//		public boolean isCellEditable(int rowIndex, int columnIndex) {
-//			// TODO Auto-generated method stub
-//			return false;
-//		}
-//
-//		@Override
-//		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-//			// TODO Auto-generated method stub
-//			switch(columnIndex) {
-//			case 0:
-//				break;
-//			case 1:
-//				break;
-//			case 2:
-//				break;
-//			case 3:
-//				break;
-//			case 4:
-//				break;
-//			case 5:
-//				break;
-//			case 6:
-//				break;
-//			case 7:
-//				break;
-//		
-//			}
-//		}
-//		//Paso 5: trabajar con los escuchadores
-//		ArrayList<TableModelListener> listaEsc = new ArrayList<>();
-//
-//		@Override
-//		public void addTableModelListener(TableModelListener l) {
-//			// TODO Auto-generated method stub
-//			listaEsc.add(l);
-//			
-//		}
-//		
-//		@Override
-//		public void removeTableModelListener(TableModelListener l) {
-//			// TODO Auto-generated method stub
-//			listaEsc.remove(l);
-//			
-//		}
-//	
-//		//DefaultTableModel lo hace así
-//		public void fireTableChanged(TableModelEvent e) {
-//			for(TableModelListener l: listaEsc) {
-//				l.tableChanged(e);
-//			}
-//		}
-//	}
-//
+	private class MiTableModel implements TableModel{
+
+		private final Class<?>[] CLASES_COLS = {String.class, Integer.class};
+		private ArrayList<Object[]> filas = new ArrayList<>();
+		@Override
+		public Class<?> getColumnClass(int columnIndex) {
+			// TODO Auto-generated method stub
+			return CLASES_COLS[columnIndex];
+		}
+
+		@Override
+		public int getColumnCount() {
+			// TODO Auto-generated method stub
+			return 2;
+		}
+
+		@Override
+		public int getRowCount() {
+			// TODO Auto-generated method stub
+			return filas.size();
+		}
+		
+		private String[] cabeceras = {"Statistics", "Values"};
+
+		@Override
+		public String getColumnName(int columnIndex) {
+			// TODO Auto-generated method stub
+			return cabeceras[columnIndex];
+		}
+		
+		@Override
+		public Object getValueAt(int rowIndex, int columnIndex) {
+			// TODO Auto-generated method stub
+			return filas.get(rowIndex)[columnIndex];
+			
+		}
+		
+		public void addRow(Object[] rowData) {
+            filas.add(rowData);
+            TableModelEvent event = new TableModelEvent(this, filas.size() - 1, filas.size() - 1, TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT);
+            fireTableChanged(event);
+        }
+		
+		@Override
+		public boolean isCellEditable(int rowIndex, int columnIndex) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+			// TODO Auto-generated method stub
+			switch(columnIndex) {
+			case 1:
+				// aquí se pondrá el dato en la segunda columna y en la fila correspondiente.
+				break;
+		
+			}
+		}
+		
+		ArrayList<TableModelListener> listaEsc = new ArrayList<>();
+
+		@Override
+		public void addTableModelListener(TableModelListener l) {
+			// TODO Auto-generated method stub
+			listaEsc.add(l);
+			
+		}
+		
+		@Override
+		public void removeTableModelListener(TableModelListener l) {
+			// TODO Auto-generated method stub
+			listaEsc.remove(l);
+			
+		}
+	
+		//DefaultTableModel lo hace así
+		public void fireTableChanged(TableModelEvent e) {
+			for(TableModelListener l: listaEsc) {
+				l.tableChanged(e);
+			}
+		}
+	}
+
 }
 
 //public class Ventana_Estadistica extends AbstractTableModel{

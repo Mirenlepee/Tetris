@@ -1,5 +1,11 @@
 package P1;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.*;
 
 
@@ -13,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.util.Random;
 import java.awt.event.MouseEvent;
+import java.net.PasswordAuthentication;
 
 public class Ventana_SignIn extends JFrame {
 	
@@ -49,6 +56,11 @@ public class Ventana_SignIn extends JFrame {
 
 
         Session sesion = Session.getInstance(propiedades, new javax.mail.Authenticator() {
+<<<<<<< HEAD
+=======
+            
+        	@Override
+>>>>>>> branch 'master' of https://github.com/Mirenlepee/Tetris.git
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(usuario, contraseña);
             }

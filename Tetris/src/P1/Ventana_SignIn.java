@@ -7,7 +7,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.*;
-
+import javax.mail.PasswordAuthentication;
 
 import java.util.Properties;
 
@@ -19,7 +19,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.util.Random;
 import java.awt.event.MouseEvent;
-import javax.mail.PasswordAuthentication;
+
 
 public class Ventana_SignIn extends JFrame {
 	
@@ -217,12 +217,7 @@ public class Ventana_SignIn extends JFrame {
         
         pnlSouth.add(Botonpnl);
         pnlSouth.add(noAccountlbl);
-        
-        
-  
-        
-        
-        
+    
         
 
         ventana.setVisible(true);
@@ -233,4 +228,3 @@ public class Ventana_SignIn extends JFrame {
         Ventana_SignIn v = new Ventana_SignIn();
     }
 }
-

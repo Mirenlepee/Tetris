@@ -27,7 +27,7 @@ public class Ventana_Estadistica{
 	private TableModel modeloDatos;
 	
 	public Ventana_Estadistica() {
-		ventana = new JFrame("Estadística");
+		ventana = new JFrame("Estadística__");
 		ventana.setSize(600, 800);
 		ventana.setTitle("Estadística");
 		ventana.setLayout(new BorderLayout());

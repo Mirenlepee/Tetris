@@ -8,5 +8,4 @@
 module Tetris {
 	requires java.desktop;
 	requires java.mail;
-	requires javax.mail;
 }

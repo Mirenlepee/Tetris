@@ -79,5 +79,18 @@ public class Usuario {
 				+ ", AvatarURL=" + AvatarURL + ", descripcion=" + descripcion + "]";
 	}
 	
+//	public void establecerContraseña(String contraseña) {
+//        // Genera un salt aleatorio con un costo de trabajo de 12
+//        String salt = BCrypt.gensalt(12);
+//
+//        // Genera el hash de la contraseña con el salt
+//        this.password = BCrypt.hashpw(contraseña, salt);
+//    }
+//
+//    public boolean validarContraseña(String contraseña) {
+//        // Compara el hash almacenado con el hash de la contraseña proporcionada
+//        return BCrypt.checkpw(contraseña, this.password);
+//    }
+	
 	
 }

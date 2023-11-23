@@ -20,7 +20,6 @@ import java.awt.event.MouseAdapter;
 import java.util.Random;
 import java.awt.event.MouseEvent;
 
-
 public class Ventana_SignIn extends JFrame {
 	
 	 private String generateRandomPassword() {

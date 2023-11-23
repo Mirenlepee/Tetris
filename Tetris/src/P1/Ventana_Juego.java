@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.sound.sampled.*;
 
@@ -212,6 +213,7 @@ public class Ventana_Juego extends JFrame {
         int[][] forma = piezaActual.obtenerForma();
         int fila = piezaActual.obtenerFila();
         int columna = piezaActual.obtenerColumna();
+
         for (int i = 0; i < forma.length; i++) {
             for (int j = 0; j < forma[i].length; j++) {
                 if (forma[i][j] == 1) {
@@ -219,8 +221,33 @@ public class Ventana_Juego extends JFrame {
                 }
             }
         }
-        piezasEnTablero.add(piezaActual); 
+
+        for (int i = ALTO_TABLERO - 1; i >= 0; i--) {
+            boolean filaCompleta = true;
+            for (int j = 0; j < ANCHO_TABLERO; j++) {
+                if (tablero[i][j] != 1) {
+                    filaCompleta = false;
+                    break;
+                }
+            }
+
+            if (filaCompleta) {
+                for (int k = i; k > 0; k--) {
+                    System.arraycopy(tablero[k - 1], 0, tablero[k], 0, ANCHO_TABLERO);
+                }
+                Arrays.fill(tablero[0], 0);
+                puntos += 100; 
+                actualizarEtiquetaPuntos();
+            }
+        }
+
+        piezasEnTablero.add(piezaActual);
+        piezaActual = new Pieza();
     }
+    private void actualizarEtiquetaPuntos() {
+        etiquetaPuntos.setText("Puntos: " + puntos);
+    }
+
 
 
     private void dibujarFondo(Graphics g) {

@@ -22,7 +22,7 @@ public class Ventana_Juego extends JFrame {
     private int puntos = 0;    
     private List<Pieza> piezasEnTablero = new ArrayList<>();
 
-    
+    private JLabel etiquetaPuntos;
     private int[][] tablero;
     private Pieza piezaActual;
     private Timer timer;
@@ -58,7 +58,7 @@ public class Ventana_Juego extends JFrame {
         JPanel panelDerecho = new JPanel();
         panelDerecho.setLayout(new BoxLayout(panelDerecho, BoxLayout.Y_AXIS));
 
-        JLabel etiquetaPuntos = new JLabel("Puntos: " + puntos);
+        etiquetaPuntos = new JLabel("Puntos: " + puntos);
         etiquetaPuntos.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         JLabel etiquetaEspacio1 = new JLabel("    ");

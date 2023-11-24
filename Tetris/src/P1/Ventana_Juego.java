@@ -21,7 +21,6 @@ public class Ventana_Juego extends JFrame {
     private static final int TAMANO_CELDA = 30;
     private boolean gameOver = false;
 
-    private boolean gameOverDisplayed = false;
 
     private int puntos = 0;    
     private List<Pieza> piezasEnTablero = new ArrayList<>();
@@ -97,18 +96,22 @@ public class Ventana_Juego extends JFrame {
 
         iniciarJuego();
 
- //       timer = new Timer(200, new ActionListener() {
-   //         @Override
-     //       public void actionPerformed(ActionEvent e) {
-       //         if (!gameOver) {
-         //           moverPiezaAbajo();
-           //         repaint();
-             //   }
-            //}
-        //});
-        //timer.start();
+      timer = new Timer(200, new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+                if (!gameOver) {
+                   moverPiezaAbajo();
+                    repaint();
+              }
+           }
+        });
+      timer.start();
+
+
+      
     
       
+       
 
         panelJuego.addKeyListener(new KeyAdapter() {
         	public void keyPressed(KeyEvent evt) {
@@ -133,7 +136,7 @@ public class Ventana_Juego extends JFrame {
                 repaint();
             }
         });
-        timer.start();
+        
     }
 
     private void moverPiezaAbajo() {
@@ -166,7 +169,6 @@ public class Ventana_Juego extends JFrame {
     }
 
     private void mostrarGameOverMessage() {
-    	if (!gameOverDisplayed) {
     	Object[] options = {"New Game", "Exit","Exit to Main menu"};
         int choice = JOptionPane.showOptionDialog(
                 this,
@@ -182,16 +184,15 @@ public class Ventana_Juego extends JFrame {
             reiniciarJuego();
         } else if (choice == JOptionPane.NO_OPTION) {
             System.exit(0);
-        } else if (choice == JOptionPane.CLOSED_OPTION) {
+        } else if (choice == JOptionPane.CANCEL_OPTION) {
             volverAlMenu();
         }
-        gameOverDisplayed = true; 
-    	}
     }
+    
     private void volverAlMenu() {
         dispose();
         Ventana_Principal m=new Ventana_Principal();
-
+        clip.stop();
         m.setVisible(true);
     }
 

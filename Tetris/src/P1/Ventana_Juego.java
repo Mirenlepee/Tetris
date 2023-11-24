@@ -167,8 +167,35 @@ public class Ventana_Juego extends JFrame {
     }
 
     private void mostrarGameOverMessage() {
-        JOptionPane.showMessageDialog(this, "Game Over! Your final score is: " + puntos, "Game Over", JOptionPane.INFORMATION_MESSAGE);
+        Object[] options = {"Continue", "Exit"};
+        int choice = JOptionPane.showOptionDialog(
+                this,
+                "Game Over! Your final score is: " + puntos,
+                "Game Over",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                options,
+                options[0]);
+
+        if (choice == JOptionPane.YES_OPTION) {
+            reiniciarJuego();
+        } else {
+            
+            System.exit(0);
+        }
+    }
+
+    private void reiniciarJuego() {
         
+        puntos = 0;
+        piezasEnTablero.clear();
+        tablero = new int[ALTO_TABLERO][ANCHO_TABLERO];
+        piezaActual = new Pieza();
+        gameOver = false;
+        timer.start();
+
+        repaint();
     }
 
 

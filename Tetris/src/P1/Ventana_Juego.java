@@ -19,7 +19,8 @@ public class Ventana_Juego extends JFrame {
 	private static final int ANCHO_TABLERO = 10;
     private static final int ALTO_TABLERO = 20;
     private static final int TAMANO_CELDA = 30;
-    
+    private boolean gameOver = false;
+
     private int puntos = 0;    
     private List<Pieza> piezasEnTablero = new ArrayList<>();
 
@@ -97,11 +98,14 @@ public class Ventana_Juego extends JFrame {
         timer = new Timer(200, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                moverPiezaAbajo();
-                repaint();
+                if (!gameOver) {
+                    moverPiezaAbajo();
+                    repaint();
+                }
             }
         });
         timer.start();
+    
       
 
         panelJuego.addKeyListener(new KeyAdapter() {
@@ -139,12 +143,34 @@ public class Ventana_Juego extends JFrame {
         if (verificarColision()) {
             fijarPiezaEnTablero();
             piezaActual = new Pieza();
-        }
-        if (verificarColision()) {
-            fijarPiezaEnTablero();
-            piezaActual = new Pieza();
+            if (verificarGameOver()) {
+                gameOver = true;
+                timer.stop();
+                mostrarGameOverMessage();
+            }
         }
     }
+
+    private boolean verificarGameOver() {
+      
+        int[][] forma = piezaActual.obtenerForma();
+        int fila = piezaActual.obtenerFila();
+        int columna = piezaActual.obtenerColumna();
+        for (int i = 0; i < forma.length; i++) {
+            for (int j = 0; j < forma[i].length; j++) {
+                if (forma[i][j] == 1 && tablero[fila + i][columna + j] == 1) {
+                    return true; 
+                }
+            }
+        }
+        return false;
+    }
+
+    private void mostrarGameOverMessage() {
+        JOptionPane.showMessageDialog(this, "Game Over! Your final score is: " + puntos, "Game Over", JOptionPane.INFORMATION_MESSAGE);
+        
+    }
+
 
     private void teclaPresionada(KeyEvent evt) {
         switch (evt.getKeyCode()) {

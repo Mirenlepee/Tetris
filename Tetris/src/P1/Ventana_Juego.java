@@ -21,6 +21,8 @@ public class Ventana_Juego extends JFrame {
     private static final int TAMANO_CELDA = 30;
     private boolean gameOver = false;
 
+    private boolean gameOverDisplayed = false;
+
     private int puntos = 0;    
     private List<Pieza> piezasEnTablero = new ArrayList<>();
 
@@ -95,16 +97,16 @@ public class Ventana_Juego extends JFrame {
 
         iniciarJuego();
 
-        timer = new Timer(200, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!gameOver) {
-                    moverPiezaAbajo();
-                    repaint();
-                }
-            }
-        });
-        timer.start();
+ //       timer = new Timer(200, new ActionListener() {
+   //         @Override
+     //       public void actionPerformed(ActionEvent e) {
+       //         if (!gameOver) {
+         //           moverPiezaAbajo();
+           //         repaint();
+             //   }
+            //}
+        //});
+        //timer.start();
     
       
 
@@ -119,11 +121,7 @@ public class Ventana_Juego extends JFrame {
         setVisible(true);
     }
 
-    private void setVentanaPropiedades() {
-        setVisible(true);
-        setTitle("Tetris");
-        setSize(300, 600);
-    }
+  
 
     private void iniciarJuego() {
         piezaActual = new Pieza();
@@ -147,6 +145,7 @@ public class Ventana_Juego extends JFrame {
                 gameOver = true;
                 timer.stop();
                 mostrarGameOverMessage();
+                
             }
         }
     }
@@ -167,7 +166,8 @@ public class Ventana_Juego extends JFrame {
     }
 
     private void mostrarGameOverMessage() {
-        Object[] options = {"New Game", "Exit","Exit to Main menu"};
+    	if (!gameOverDisplayed) {
+    	Object[] options = {"New Game", "Exit","Exit to Main menu"};
         int choice = JOptionPane.showOptionDialog(
                 this,
                 "Game Over! Your final score is: " + puntos,
@@ -182,9 +182,11 @@ public class Ventana_Juego extends JFrame {
             reiniciarJuego();
         } else if (choice == JOptionPane.NO_OPTION) {
             System.exit(0);
-        } else if (choice == JOptionPane.CANCEL_OPTION) {
+        } else if (choice == JOptionPane.CLOSED_OPTION) {
             volverAlMenu();
         }
+        gameOverDisplayed = true; 
+    	}
     }
     private void volverAlMenu() {
         dispose();

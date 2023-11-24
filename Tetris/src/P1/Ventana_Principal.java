@@ -65,6 +65,7 @@ public class Ventana_Principal extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				dispose();
 				new Ventana_SignIn();
 			}
 		});

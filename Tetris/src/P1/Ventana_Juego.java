@@ -167,7 +167,7 @@ public class Ventana_Juego extends JFrame {
     }
 
     private void mostrarGameOverMessage() {
-        Object[] options = {"Continue", "Exit"};
+        Object[] options = {"New Game", "Exit","Exit to Main menu"};
         int choice = JOptionPane.showOptionDialog(
                 this,
                 "Game Over! Your final score is: " + puntos,
@@ -180,10 +180,17 @@ public class Ventana_Juego extends JFrame {
 
         if (choice == JOptionPane.YES_OPTION) {
             reiniciarJuego();
-        } else {
-            
+        } else if (choice == JOptionPane.NO_OPTION) {
             System.exit(0);
+        } else if (choice == JOptionPane.CANCEL_OPTION) {
+            volverAlMenu();
         }
+    }
+    private void volverAlMenu() {
+        dispose();
+        Ventana_Principal m=new Ventana_Principal();
+
+        m.setVisible(true);
     }
 
     private void reiniciarJuego() {

@@ -21,7 +21,8 @@ public class Ventana_Juego extends JFrame {
     private static final int TAMANO_CELDA = 30;
     private boolean gameOver = false;
 
-
+    private long tiempoInicio; 
+    
     private int puntos = 0;    
     private List<Pieza> piezasEnTablero = new ArrayList<>();
 
@@ -33,7 +34,7 @@ public class Ventana_Juego extends JFrame {
     private ImageIcon vidaIcono;
 
     public Ventana_Juego() {
-    
+    	 tiempoInicio = System.currentTimeMillis();
     	setTitle("Tetris");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -169,10 +170,19 @@ public class Ventana_Juego extends JFrame {
     }
 
     private void mostrarGameOverMessage() {
+    
+        long tiempoTotalJugado = (System.currentTimeMillis() - tiempoInicio) / 1000;  
+
+        long minutos = tiempoTotalJugado / 60;
+        long segundos = tiempoTotalJugado % 60;
+
+
+        
     	Object[] options = {"New Game", "Exit","Exit to Main menu"};
         int choice = JOptionPane.showOptionDialog(
                 this,
-                "Game Over! Your final score is: " + puntos,
+                "Game Over! Your final score is: " + puntos+ "\n" +
+                        "Total time played: " + minutos + " minutes and " + segundos + " seconds",
                 "Game Over",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,
@@ -197,13 +207,17 @@ public class Ventana_Juego extends JFrame {
     }
 
     private void reiniciarJuego() {
+    	tiempoInicio = System.currentTimeMillis(); 
         
         puntos = 0;
         piezasEnTablero.clear();
         tablero = new int[ALTO_TABLERO][ANCHO_TABLERO];
         piezaActual = new Pieza();
         gameOver = false;
+
+       
         timer.start();
+        
 
         repaint();
     }

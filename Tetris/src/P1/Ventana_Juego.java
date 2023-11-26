@@ -20,9 +20,11 @@ public class Ventana_Juego extends JFrame {
     private static final int ALTO_TABLERO = 20;
     private static final int TAMANO_CELDA = 30;
     private boolean gameOver = false;
+    private Pieza siguientePieza;
 
-    private long tiempoInicio; 
     
+    private long tiempoInicio; 
+    private JPanel PanelEspacio1;
     private int puntos = 0;    
     private List<Pieza> piezasEnTablero = new ArrayList<>();
 
@@ -65,9 +67,14 @@ public class Ventana_Juego extends JFrame {
         etiquetaPuntos = new JLabel("Puntos: " + puntos);
         etiquetaPuntos.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        JLabel etiquetaEspacio1 = new JLabel("    ");
-        etiquetaEspacio1.setPreferredSize(new Dimension(100, 50));
-        etiquetaEspacio1.setBorder(new LineBorder(Color.BLACK));
+
+        PanelEspacio1 = new JPanel();
+        PanelEspacio1.setPreferredSize(new Dimension(100, 50));
+        PanelEspacio1.setBorder(new LineBorder(Color.BLACK));
+
+        
+
+   
 
         JLabel etiquetaEspacio2 = new JLabel("    "); 
         etiquetaEspacio2.setPreferredSize(new Dimension(100, 50)); 
@@ -78,7 +85,7 @@ public class Ventana_Juego extends JFrame {
         panelDerecho.add(Box.createVerticalGlue());
         panelDerecho.add(etiquetaPuntos);
         panelDerecho.add(Box.createVerticalStrut(10)); 
-        panelDerecho.add(etiquetaEspacio1);
+        panelDerecho.add(PanelEspacio1);
         panelDerecho.add(Box.createVerticalStrut(10)); 
         panelDerecho.add(etiquetaEspacio2);
         panelDerecho.add(Box.createVerticalGlue());
@@ -107,10 +114,6 @@ public class Ventana_Juego extends JFrame {
            }
         });
       timer.start();
-
-
-      
-    
       
        
 
@@ -119,6 +122,7 @@ public class Ventana_Juego extends JFrame {
                 teclaPresionada(evt);
             }
         });
+
 
         setResizable(false);
         setLocationRelativeTo(null);
@@ -129,6 +133,8 @@ public class Ventana_Juego extends JFrame {
 
     private void iniciarJuego() {
         piezaActual = new Pieza();
+        siguientePieza = new Pieza();
+        actualizarPanelEspacio1();
         tablero = new int[getHeight() / TAMANO_CELDA][getWidth() / TAMANO_CELDA];
         timer = new Timer(1000, new ActionListener() {
             @Override
@@ -137,22 +143,32 @@ public class Ventana_Juego extends JFrame {
                 repaint();
             }
         });
-        
     }
+
+    private void actualizarPanelEspacio1() {
+        PanelEspacio1.removeAll();
+        PiezaPanel piezaPanel = new PiezaPanel(siguientePieza);
+        PanelEspacio1.add(piezaPanel);
+        PanelEspacio1.revalidate();
+        PanelEspacio1.repaint();
+    }
+
 
     private void moverPiezaAbajo() {
         piezaActual.moverAbajo();
         if (verificarColision()) {
             fijarPiezaEnTablero();
-            piezaActual = new Pieza();
+            piezaActual = siguientePieza;  
+            siguientePieza = new Pieza();  
+            actualizarPanelEspacio1();      
             if (verificarGameOver()) {
                 gameOver = true;
                 timer.stop();
                 mostrarGameOverMessage();
-                
             }
         }
     }
+
 
     private boolean verificarGameOver() {
       
@@ -386,18 +402,45 @@ public class Ventana_Juego extends JFrame {
   
     class PanelJuego extends JPanel {
 
-        public PanelJuego() {
-            setPreferredSize(new Dimension(ANCHO_TABLERO * TAMANO_CELDA, ALTO_TABLERO * TAMANO_CELDA));
-            setBackground(Color.BLACK);
-            setFocusable(true);
+    	  public PanelJuego() {
+              setPreferredSize(new Dimension(ANCHO_TABLERO * TAMANO_CELDA, ALTO_TABLERO * TAMANO_CELDA));
+              setBackground(Color.BLACK);
+              setFocusable(true);
         }
 
         protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
+        	super.paintComponent(g);
             dibujarFondo(g);
             dibujarPiezasFijas(g);
             dibujarPiezaActual(g);
         }
     }
+   
+    class PiezaPanel extends JPanel {
+        private Pieza pieza;
+
+        public PiezaPanel(Pieza pieza) {
+            this.pieza = pieza;
+            setPreferredSize(new Dimension(TAMANO_CELDA * pieza.obtenerForma()[0].length, TAMANO_CELDA * pieza.obtenerForma().length));
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            int[][] forma = pieza.obtenerForma();
+            int fila = pieza.obtenerFila();
+            int columna = pieza.obtenerColumna();
+            Color colorPieza = pieza.obtenerColor();
+
+            for (int i = 0; i < forma.length; i++) {
+                for (int j = 0; j < forma[i].length; j++) {
+                    if (forma[i][j] == 1) {
+                        dibujarCelda(g, j * TAMANO_CELDA, i * TAMANO_CELDA, colorPieza);
+                    }
+                }
+            }
+        }
+    }
+
     
 }

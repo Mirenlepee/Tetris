@@ -75,8 +75,8 @@ public class Ventana_Juego extends JFrame {
         
 
         PanelEspacio1 = new JPanel();
-        PanelEspacio1.setPreferredSize(new Dimension(100, 50));
-        PanelEspacio1.setBorder(new LineBorder(Color.BLACK));
+        PanelEspacio1.setPreferredSize(new Dimension(130, 50));
+        PanelEspacio1.setBorder(new LineBorder(Color.WHITE));
 
         
 
@@ -84,7 +84,7 @@ public class Ventana_Juego extends JFrame {
 
         PanelEspacio2 = new CorazonPanel(); 
         PanelEspacio2.setPreferredSize(new Dimension(100, 50));
-        PanelEspacio2.setBorder(new LineBorder(Color.BLACK));
+        PanelEspacio2.setBorder(new LineBorder(Color.WHITE));
 
         
         
@@ -433,8 +433,7 @@ public class Ventana_Juego extends JFrame {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             int[][] forma = pieza.obtenerForma();
-            int fila = pieza.obtenerFila();
-            int columna = pieza.obtenerColumna();
+        
             Color colorPieza = pieza.obtenerColor();
 
             for (int i = 0; i < forma.length; i++) {
@@ -463,17 +462,16 @@ public class Ventana_Juego extends JFrame {
             int totalWidth = 3 * heartWidth;
             int separation = panelWidth / 13;  
             int initialX = (panelWidth - totalWidth - 2 * separation) / 2;
+            int initialY = (panelHeight - heartHeight) / 2;  
 
             for (int i = 0; i < 3; i++) {
-                drawHeart(g2d, initialX + i * (heartWidth + separation), 0, heartWidth, heartHeight);
+                drawHeart(g2d, initialX + i * (heartWidth + separation), initialY, heartWidth, heartHeight);
             }
         }
 
         private void drawHeart(Graphics2D g2d, int x, int y, int width, int height) {
             GeneralPath heart = new GeneralPath();
 
-            int controlHeight = height / 4;
-            int controlWidth = width / 4;
 
             heart.moveTo(x + width / 2, y + height / 4);
             heart.curveTo(x + width / 2, y, x, y, x, y + height / 4);
@@ -488,37 +486,7 @@ public class Ventana_Juego extends JFrame {
 
 
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
 
     

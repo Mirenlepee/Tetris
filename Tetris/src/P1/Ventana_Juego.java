@@ -6,11 +6,16 @@ import javax.swing.border.LineBorder;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.GeneralPath;
+import javax.swing.JPanel;
 
 import javax.sound.sampled.*;
 
@@ -25,6 +30,7 @@ public class Ventana_Juego extends JFrame {
     
     private long tiempoInicio; 
     private JPanel PanelEspacio1;
+    private JPanel PanelEspacio2;
     private int puntos = 0;    
     private List<Pieza> piezasEnTablero = new ArrayList<>();
 
@@ -33,7 +39,7 @@ public class Ventana_Juego extends JFrame {
     private Pieza piezaActual;
     private Timer timer;
     private Clip clip; 
-    private ImageIcon vidaIcono;
+    
 
     public Ventana_Juego() {
     	 tiempoInicio = System.currentTimeMillis();
@@ -74,11 +80,11 @@ public class Ventana_Juego extends JFrame {
 
         
 
-   
 
-        JLabel etiquetaEspacio2 = new JLabel("    "); 
-        etiquetaEspacio2.setPreferredSize(new Dimension(100, 50)); 
-        etiquetaEspacio2.setBorder(new LineBorder(Color.BLACK));
+
+        PanelEspacio2 = new CorazonPanel(); 
+        PanelEspacio2.setPreferredSize(new Dimension(100, 50));
+        PanelEspacio2.setBorder(new LineBorder(Color.BLACK));
 
         
         
@@ -87,7 +93,7 @@ public class Ventana_Juego extends JFrame {
         panelDerecho.add(Box.createVerticalStrut(10)); 
         panelDerecho.add(PanelEspacio1);
         panelDerecho.add(Box.createVerticalStrut(10)); 
-        panelDerecho.add(etiquetaEspacio2);
+        panelDerecho.add(PanelEspacio2);
         panelDerecho.add(Box.createVerticalGlue());
 
         panelPrincipal.add(panelJuego, BorderLayout.CENTER);
@@ -99,8 +105,7 @@ public class Ventana_Juego extends JFrame {
         
 	    tablero = new int[ALTO_TABLERO][ANCHO_TABLERO];
         piezaActual = new Pieza();
-        
-        vidaIcono = new ImageIcon(getClass().getResource("hearts.png"));      
+             
 
         iniciarJuego();
 
@@ -441,6 +446,80 @@ public class Ventana_Juego extends JFrame {
             }
         }
     }
+
+    private class CorazonPanel extends JPanel {
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+
+            Graphics2D g2d = (Graphics2D) g;
+            int panelWidth = getWidth();
+            int panelHeight = getHeight();
+
+            int heartWidth = panelWidth / 4;  
+            int heartHeight = panelHeight / 5;  
+
+            int totalWidth = 3 * heartWidth;
+            int separation = panelWidth / 13;  
+            int initialX = (panelWidth - totalWidth - 2 * separation) / 2;
+
+            for (int i = 0; i < 3; i++) {
+                drawHeart(g2d, initialX + i * (heartWidth + separation), 0, heartWidth, heartHeight);
+            }
+        }
+
+        private void drawHeart(Graphics2D g2d, int x, int y, int width, int height) {
+            GeneralPath heart = new GeneralPath();
+
+            int controlHeight = height / 4;
+            int controlWidth = width / 4;
+
+            heart.moveTo(x + width / 2, y + height / 4);
+            heart.curveTo(x + width / 2, y, x, y, x, y + height / 4);
+            heart.quadTo(x, y + height / 2, x + width / 2, y + height);
+            heart.quadTo(x + width, y + height / 2, x + width, y + height / 4);
+            heart.curveTo(x + width, y, x + width / 2, y, x + width / 2, y + height / 4);
+
+            g2d.setColor(Color.RED);
+            g2d.fill(heart);
+        }
+    }
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     
 }

@@ -9,13 +9,8 @@ import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
-import javax.swing.JPanel;
 
 import javax.sound.sampled.*;
 
@@ -39,7 +34,8 @@ public class Ventana_Juego extends JFrame {
     private Pieza piezaActual;
     private Timer timer;
     private Clip clip; 
-    
+
+    private int vidas=3;
 
     public Ventana_Juego() {
     	 tiempoInicio = System.currentTimeMillis();
@@ -166,13 +162,18 @@ public class Ventana_Juego extends JFrame {
             piezaActual = siguientePieza;  
             siguientePieza = new Pieza();  
             actualizarPanelEspacio1();      
-            if (verificarGameOver()) {
+            if (verificarGameOver() && vidas > 0) {
                 gameOver = true;
                 timer.stop();
-                mostrarGameOverMessage();
+                mostrarMessageCorazon();
+            }else if(verificarGameOver() && vidas == 0) {
+            	gameOver = true;
+                timer.stop();
+            	mostrarGameOverMessage();
             }
         }
     }
+    
 
 
     private boolean verificarGameOver() {
@@ -212,6 +213,8 @@ public class Ventana_Juego extends JFrame {
                 options[0]);
 
         if (choice == JOptionPane.YES_OPTION) {
+        	vidas=3;
+        	((CorazonPanel) PanelEspacio2).vidasMostradas = vidas;
             reiniciarJuego();
         } else if (choice == JOptionPane.NO_OPTION) {
             System.exit(0);
@@ -219,7 +222,30 @@ public class Ventana_Juego extends JFrame {
             volverAlMenu();
         }
     }
-    
+  private void mostrarMessageCorazon() {
+        
+    	vidas=vidas-1;
+    	Object[] options = {"Continue"};
+
+
+        int choice = JOptionPane.showOptionDialog(
+                this,
+                "You lost a life!",
+                ":(",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                options,
+                options[0]);
+        
+        if (choice == JOptionPane.OK_OPTION) {
+           reiniciarJuego();
+           ((CorazonPanel) PanelEspacio2).restarVida();
+        }
+      
+    }
+   
+
     private void volverAlMenu() {
         dispose();
         Ventana_Principal m=new Ventana_Principal();
@@ -446,7 +472,18 @@ public class Ventana_Juego extends JFrame {
         }
     }
 
+
     private class CorazonPanel extends JPanel {
+        private int vidasMostradas;
+
+        public CorazonPanel() {
+            vidasMostradas = vidas;
+        }
+
+        public void restarVida() {
+            vidasMostradas--;
+            repaint();
+        }
 
         @Override
         protected void paintComponent(Graphics g) {
@@ -456,15 +493,15 @@ public class Ventana_Juego extends JFrame {
             int panelWidth = getWidth();
             int panelHeight = getHeight();
 
-            int heartWidth = panelWidth / 4;  
-            int heartHeight = panelHeight / 5;  
+            int heartWidth = panelWidth / 4;
+            int heartHeight = panelHeight / 5;
 
-            int totalWidth = 3 * heartWidth;
-            int separation = panelWidth / 13;  
-            int initialX = (panelWidth - totalWidth - 2 * separation) / 2;
-            int initialY = (panelHeight - heartHeight) / 2;  
+            int totalWidth = vidasMostradas * heartWidth;
+            int separation = panelWidth / 13;
+            int initialX = (panelWidth - totalWidth - (vidasMostradas - 1) * separation) / 2;
+            int initialY = (panelHeight - heartHeight) / 2;
 
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < vidasMostradas; i++) {
                 drawHeart(g2d, initialX + i * (heartWidth + separation), initialY, heartWidth, heartHeight);
             }
         }

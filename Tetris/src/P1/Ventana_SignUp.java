@@ -10,8 +10,10 @@ import javax.mail.internet.MimeMessage;
 import javax.swing.*;
 import javax.mail.PasswordAuthentication;
 
+import java.util.Arrays;
 import java.util.Properties;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.awt.*;
 
 
@@ -122,7 +124,42 @@ public class Ventana_SignUp {
 		            rr=rr.replace("[Username]", username);
 
 		            enviarCorreo(textoIngresado, " Welcome to Tetris - Let the Fun Begin!", rr);
-
+		            Pattern patternPassword = Pattern.compile("");
+	                char[] password = passwordfld.getPassword();
+	                char[] confirmed = confirmPasswordfld.getPassword();
+	                String email = emailfld.getText();
+	                if(username.equals("") || email.equals("") || password.length == 0 || confirmed.length == 0) {
+	                	JOptionPane.showMessageDialog(null, "To register, you must fill all the information requested.");
+	                	return;
+	                }
+	                if(!Arrays.equals(password, confirmed)) {
+	                	JOptionPane.showMessageDialog(null, "The passwords do not match.", "Error", JOptionPane.ERROR_MESSAGE);
+	                	return;
+	                }
+	                String pass = new String(password);
+	                Matcher matcher = patternPassword.matcher(pass);
+//	                if(!matcher.matches()) {
+//	                	StringBuilder errorMessage = new StringBuilder("The password does not meet the requirements:\n");
+//	                	if(!matcher.matches()) {
+//	                		if(!passwordMeetsRequirements("[A-Z]", pass)) {
+//	                			errorMessage.append("- It must contain at least one uppercase letter.\n");
+//	                		}
+//	                		errorMessage.append("- It must have at least 6 characters.\n");
+//	                		
+//	                		JOptionPane.showMessageDialog(null, errorMessage.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+//	                		return;
+//	                	}
+//	                }else {
+//	                	String hashPassword = BCrypt.hashpw(pass, BCrypt.gensalt());
+//	                	Usuario u = new Usuario(username, hashPassword, email, "", "");
+//	                	if(!usuariosRegistrados.containsKey(email)) {
+//	                		registrarUsuario(u);
+//	                		JOptionPane.showMessageDialog(null, "You have successfully been registered");
+//	                		ventana.log.log(Level.INFO, "New user registerd - Username: " + username + ", email: " + email);
+//	                	}else {
+//	                		JOptionPane.showMessageDialog(null, "The email is already in use. Please choose a different one.");
+//	                	}
+//	                }
                 new Ventana_PerfilDeUsuario();
                 ventana.dispose();     
                 

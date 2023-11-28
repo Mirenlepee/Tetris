@@ -192,7 +192,18 @@ public class Ventana_SignIn extends JFrame {
         continuebtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Ventana_Juego();
+            	char[] passwordChar = passwordfld.getPassword();
+                String password = new String(passwordChar);
+                String email = usernamefld.getText();
+//                if(autentificarUsuario(email, password)) {
+//                	JOptionPane.showMessageDialog(null, "Welcome!");
+//                	log.log(Level.INFO, "Successful login - Email: " + email);
+//                	dispose();
+//                }else {
+//                	JOptionPane.showMessageDialog(null, "Incorrect email or password.");
+//                	log.log(Level.WARNING, "Alert - Failled login for the email: " + email);
+//                }
+            	new Ventana_Juego();
             }
         });
         Botonpnl.add(continuebtn);

@@ -1,4 +1,4 @@
-package P1;
+package BD;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

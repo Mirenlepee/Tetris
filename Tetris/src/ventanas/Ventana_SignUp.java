@@ -1,4 +1,4 @@
-package P1;
+package ventanas;
 
 import javax.mail.Message;
 import javax.mail.Message;

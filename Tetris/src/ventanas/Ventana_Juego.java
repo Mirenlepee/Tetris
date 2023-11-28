@@ -1,8 +1,10 @@
-package P1;
+package ventanas;
 
 import javax.swing.*;
 import java.util.List;
 import javax.swing.border.LineBorder;
+
+import juego.Pieza;
 
 import java.awt.*;
 import java.awt.event.*;

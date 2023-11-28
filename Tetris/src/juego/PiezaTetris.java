@@ -1,4 +1,4 @@
-package P1;
+package juego;
 
 
 import java.awt.Color;

@@ -1,4 +1,4 @@
-package P1;
+package ventanas;
 
 import java.awt.*;
 

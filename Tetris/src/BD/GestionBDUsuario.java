@@ -1,8 +1,10 @@
-package P1;
+package BD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import gestionUsuarios.Usuario;
 
 public class GestionBDUsuario {
 	

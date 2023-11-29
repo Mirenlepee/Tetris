@@ -42,14 +42,15 @@ public class Ventana_Juego extends JFrame {
     private Ventana_Options VentOpt;
 
     public Ventana_Juego() {
-    	 tiempoInicio = System.currentTimeMillis();
+    	tiempoInicio = System.currentTimeMillis();
     	setTitle("Tetris");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Ventana_Options opciones = new Ventana_Options();
+        VentOpt = new Ventana_Options();
         //opciones.setVentanaJuego(this); // Establece la referencia a Ventana_Juego en Ventana_Options
 
-        opciones.reproducirMusica("Tetris/src/tetris.wav");
-        
+        VentOpt.reproducirMusica("Tetris/src/tetris.wav");
+        VentOpt.detenerMusica();
+        gestionMusica();
 /*        try {
             File audioFile = new File("Tetris/src/tetris.wav");
             
@@ -82,16 +83,10 @@ public class Ventana_Juego extends JFrame {
         PanelEspacio1.setPreferredSize(new Dimension(130, 50));
         PanelEspacio1.setBorder(new LineBorder(Color.WHITE));
 
-        
-
-
-
         PanelEspacio2 = new CorazonPanel(); 
         PanelEspacio2.setPreferredSize(new Dimension(100, 50));
         PanelEspacio2.setBorder(new LineBorder(Color.WHITE));
 
-        
-        
         panelDerecho.add(Box.createVerticalGlue());
         panelDerecho.add(etiquetaPuntos);
         panelDerecho.add(Box.createVerticalStrut(10)); 
@@ -109,7 +104,6 @@ public class Ventana_Juego extends JFrame {
         
 	    tablero = new int[ALTO_TABLERO][ANCHO_TABLERO];
         piezaActual = new Pieza();
-             
 
         iniciarJuego();
 
@@ -132,13 +126,11 @@ public class Ventana_Juego extends JFrame {
             }
         });
 
-
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
-  
 
     private void iniciarJuego() {
         piezaActual = new Pieza();
@@ -527,12 +519,5 @@ public class Ventana_Juego extends JFrame {
             g2d.setColor(Color.RED);
             g2d.fill(heart);
         }
-    }
-
-
-
-
-    
-
-    
+    }   
 }

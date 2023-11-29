@@ -65,6 +65,13 @@ public class Ventana_Juego extends JFrame {
          }
 
      	clip.start();
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
+    
      	
      	timerContador = new Timer(1000, new ActionListener() {
      	    @Override
@@ -79,6 +86,7 @@ public class Ventana_Juego extends JFrame {
      	        actualizarEtiquetaTiempo();
      	    }
      	});
+     	
 
      	timerContador.start();
        JPanel panelPrincipal = new JPanel(new BorderLayout());

@@ -26,14 +26,14 @@ public class Ventana_Juego extends JFrame {
     
 
     
-    private int minutos = 0;
-    private int segundos = 0;
-    private Timer timerContador;
+    protected int minutos = 0;
+    protected int segundos = 0;
+    protected Timer timerContador;
 
     
    
     private JPanel PanelEspacio1;
-    private JPanel PanelEspacio2;
+    protected JPanel PanelEspacio2;
     private int puntos = 0;    
     private List<Pieza> piezasEnTablero = new ArrayList<>();
 
@@ -42,9 +42,9 @@ public class Ventana_Juego extends JFrame {
     private Pieza piezaActual;
     private Timer timer;
 
-    private JLabel etiquetaTiempo;
-    private Clip clip;
-    private int vidas=3;
+    protected JLabel etiquetaTiempo;
+    protected Clip clip;
+    protected int vidas=3;
 
     public Ventana_Juego() {
 
@@ -199,7 +199,7 @@ public class Ventana_Juego extends JFrame {
             }else if(verificarGameOver() && vidas == 0) {
             	gameOver = true;
                 timer.stop();
-            	mostrarGameOverMessage();
+            	mostrarGameOver();
             }
         }
     }
@@ -221,37 +221,39 @@ public class Ventana_Juego extends JFrame {
         return false;
     }
 
-    private void mostrarGameOverMessage() {
+    private void mostrarGameOver() {
 
 
     	timerContador.stop();
-
+    	Ventana_GameOver ventGO = new Ventana_GameOver();
+    	ventGO.tfScore.setText(String.valueOf(puntos));
+    	ventGO.tfTimePlayed.setText(etiquetaTiempo.getText());
         
-    	Object[] options = {"New Game", "Exit","Exit to Main menu"};
-        int choice = JOptionPane.showOptionDialog(
-                this,
-                "Game Over! Your final score is: " + puntos+ "\n"+ "The total time played was: "+etiquetaTiempo.getText() ,
-                "Game Over",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.INFORMATION_MESSAGE,
-                null,
-                options,
-                options[0]);
-
-        if (choice == JOptionPane.YES_OPTION) {
-        	vidas=3;
-        	((CorazonPanel) PanelEspacio2).vidasMostradas = vidas;
-        	etiquetaTiempo.setText("00:00"); 
-        	minutos = 0;
-        	 segundos = 0;
-        	 timerContador.restart();
-            reiniciarJuego();
-        } else if (choice == JOptionPane.NO_OPTION) {
-        	clip.stop();
-            System.exit(0);
-        } else if (choice == JOptionPane.CANCEL_OPTION) {
-            volverAlMenu();
-        }
+//    	Object[] options = {"New Game", "Exit","Exit to Main menu"};
+//        int choice = JOptionPane.showOptionDialog(
+//                this,
+//                "Game Over! Your final score is: " + puntos+ "\n"+ "The total time played was: "+etiquetaTiempo.getText() ,
+//                "Game Over",
+//                JOptionPane.YES_NO_OPTION,
+//                JOptionPane.INFORMATION_MESSAGE,
+//                null,
+//                options,
+//                options[0]);
+//
+//        if (choice == JOptionPane.YES_OPTION) {
+//        	vidas=3;
+//        	((CorazonPanel) PanelEspacio2).vidasMostradas = vidas;
+//        	etiquetaTiempo.setText("00:00"); 
+//        	minutos = 0;
+//        	 segundos = 0;
+//        	 timerContador.restart();
+//            reiniciarJuego();
+//        } else if (choice == JOptionPane.NO_OPTION) {
+//        	clip.stop();
+//            System.exit(0);
+//        } else if (choice == JOptionPane.CANCEL_OPTION) {
+//            volverAlMenu();
+//        }
     }
   private void mostrarMessageCorazon() {
         
@@ -277,14 +279,14 @@ public class Ventana_Juego extends JFrame {
     }
    
 
-    private void volverAlMenu() {
+    protected void volverAlMenu() {
         dispose();
         Ventana_Principal m=new Ventana_Principal();
         clip.stop();
         m.setVisible(true);
     }
 
-    private void reiniciarJuego() {
+    protected void reiniciarJuego() {
     
 
         puntos = 0;
@@ -504,8 +506,8 @@ public class Ventana_Juego extends JFrame {
     }
 
 
-    private class CorazonPanel extends JPanel {
-        private int vidasMostradas;
+    public class CorazonPanel extends JPanel {
+        protected int vidasMostradas;
 
         public CorazonPanel() {
             vidasMostradas = vidas;

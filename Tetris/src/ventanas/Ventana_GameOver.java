@@ -9,8 +9,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import ventanas.Ventana_Juego.CorazonPanel;
+
 public class Ventana_GameOver{
 	private JFrame ventana;
+	protected JTextField tfScore;
+	protected JTextField tfTimePlayed;
+	private Ventana_Juego ventJuego;
 	
 	public Ventana_GameOver() {
 		ventana = new JFrame("Game Over");
@@ -26,10 +31,10 @@ public class Ventana_GameOver{
         ventana.add(pnlLbl, BorderLayout.NORTH);
         
         JPanel pnlPrincipal = new JPanel();
-        pnlPrincipal.setLayout(new GridLayout(2,2));
+        pnlPrincipal.setLayout(new GridLayout(3,3));
         
         JLabel lblScore = new JLabel("Score:");
-        JTextField tfScore = new JTextField(15);
+        tfScore = new JTextField(15);
         tfScore.setEnabled(false);
         pnlPrincipal.add(lblScore);
         pnlPrincipal.add(tfScore);
@@ -39,6 +44,12 @@ public class Ventana_GameOver{
         tfBestScore.setEnabled(false);
         pnlPrincipal.add(lblBestScore);
         pnlPrincipal.add(tfBestScore);
+        
+        JLabel lblTimePlayed = new JLabel("Time played:");
+        tfTimePlayed = new JTextField(15);
+        tfTimePlayed.setEnabled(false);
+        pnlPrincipal.add(lblTimePlayed);
+        pnlPrincipal.add(tfTimePlayed);
         
         JPanel pnlBotonera = new JPanel();
         
@@ -54,9 +65,7 @@ public class Ventana_GameOver{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				ventana.dispose();
-				Ventana_Principal ventPrincipal = new Ventana_Principal();
-				ventPrincipal.setVisible(true);
+				ventJuego.volverAlMenu();
 			}
 			
 		});
@@ -74,17 +83,34 @@ public class Ventana_GameOver{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				ventJuego.vidas = 3;
+				((CorazonPanel) ventJuego.PanelEspacio2).vidasMostradas = ventJuego.vidas;
+				ventJuego.etiquetaTiempo.setText("00:00");
+				ventJuego.minutos = 0;
+	        	ventJuego.segundos = 0;
+	        	ventJuego.timerContador.restart();
+	        	ventJuego.reiniciarJuego();
 			}
 			
 		});
 		pnlBotonera.add(btnRetry);
+		
+		JButton btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				ventJuego.clip.stop();
+	            System.exit(0);
+			}
+			
+		});
+		pnlBotonera.add(btnExit);
         
 		ventana.add(pnlPrincipal, BorderLayout.CENTER);
 		ventana.add(pnlBotonera, BorderLayout.SOUTH);
 		ventana.setVisible(true);
 	}
-//	public static void main(String[] args) {
-//        Ventana_GameOver v = new Ventana_GameOver();
-//    }
+	
 }

@@ -23,9 +23,15 @@ public class Ventana_Juego extends JFrame {
     private static final int TAMANO_CELDA = 30;
     private boolean gameOver = false;
     private Pieza siguientePieza;
+    
 
     
-    private long tiempoInicio; 
+    private int minutos = 0;
+    private int segundos = 0;
+    private Timer timerContador;
+
+    
+   
     private JPanel PanelEspacio1;
     private JPanel PanelEspacio2;
     private int puntos = 0;    
@@ -36,12 +42,12 @@ public class Ventana_Juego extends JFrame {
     private Pieza piezaActual;
     private Timer timer;
 
+    private JLabel etiquetaTiempo;
     private Clip clip;
-    private boolean sonidoActivado = true; // Estado inicial del sonido
     private int vidas=3;
 
     public Ventana_Juego() {
-    	tiempoInicio = System.currentTimeMillis();
+
     	setTitle("Tetris");
     	 try {
              File audioFile = new File("Tetris/src/tetris.wav");
@@ -59,6 +65,22 @@ public class Ventana_Juego extends JFrame {
          }
 
      	clip.start();
+     	
+     	timerContador = new Timer(1000, new ActionListener() {
+     	    @Override
+     	    public void actionPerformed(ActionEvent e) {
+     	        segundos++;
+
+     	        if (segundos == 60) {
+     	            minutos++;
+     	            segundos = 0;
+     	        }
+
+     	        actualizarEtiquetaTiempo();
+     	    }
+     	});
+
+     	timerContador.start();
        JPanel panelPrincipal = new JPanel(new BorderLayout());
 
         PanelJuego panelJuego = new PanelJuego();
@@ -69,6 +91,10 @@ public class Ventana_Juego extends JFrame {
 
         etiquetaPuntos = new JLabel("Puntos: " + puntos);
         etiquetaPuntos.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        etiquetaTiempo = new JLabel("00:00");
+        panelDerecho.add(Box.createVerticalStrut(10)); 
+        panelDerecho.add(etiquetaTiempo);
         
 
         PanelEspacio1 = new JPanel();
@@ -121,6 +147,10 @@ public class Ventana_Juego extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+    private void actualizarEtiquetaTiempo() {
+        String tiempoFormateado = String.format("%02d:%02d", minutos, segundos);
+        etiquetaTiempo.setText(tiempoFormateado);
     }
 
 
@@ -184,19 +214,15 @@ public class Ventana_Juego extends JFrame {
     }
 
     private void mostrarGameOverMessage() {
-    
-        long tiempoTotalJugado = (System.currentTimeMillis() - tiempoInicio) / 1000;  
 
-        long minutos = tiempoTotalJugado / 60;
-        long segundos = tiempoTotalJugado % 60;
 
+    	timerContador.stop();
 
         
     	Object[] options = {"New Game", "Exit","Exit to Main menu"};
         int choice = JOptionPane.showOptionDialog(
                 this,
-                "Game Over! Your final score is: " + puntos+ "\n" +
-                        "Total time played: " + minutos + " minutes and " + segundos + " seconds",
+                "Game Over! Your final score is: " + puntos+ "\n"+ "The total time played was: "+etiquetaTiempo.getText() ,
                 "Game Over",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,
@@ -207,8 +233,13 @@ public class Ventana_Juego extends JFrame {
         if (choice == JOptionPane.YES_OPTION) {
         	vidas=3;
         	((CorazonPanel) PanelEspacio2).vidasMostradas = vidas;
+        	etiquetaTiempo.setText("00:00"); 
+        	minutos = 0;
+        	 segundos = 0;
+        	 timerContador.restart();
             reiniciarJuego();
         } else if (choice == JOptionPane.NO_OPTION) {
+        	clip.stop();
             System.exit(0);
         } else if (choice == JOptionPane.CANCEL_OPTION) {
             volverAlMenu();
@@ -223,7 +254,7 @@ public class Ventana_Juego extends JFrame {
         int choice = JOptionPane.showOptionDialog(
                 this,
                 "You lost a life!",
-                ":(",
+                "Oh No!",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,
                 null,
@@ -246,8 +277,8 @@ public class Ventana_Juego extends JFrame {
     }
 
     private void reiniciarJuego() {
-    	tiempoInicio = System.currentTimeMillis(); 
-        
+    
+
         puntos = 0;
         piezasEnTablero.clear();
         tablero = new int[ALTO_TABLERO][ANCHO_TABLERO];

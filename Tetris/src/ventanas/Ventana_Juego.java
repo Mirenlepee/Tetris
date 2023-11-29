@@ -43,28 +43,23 @@ public class Ventana_Juego extends JFrame {
     public Ventana_Juego() {
     	tiempoInicio = System.currentTimeMillis();
     	setTitle("Tetris");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //opciones.setVentanaJuego(this); // Establece la referencia a Ventana_Juego en Ventana_Options
+    	 try {
+             File audioFile = new File("Tetris/src/tetris.wav");
+             
+             if (audioFile.exists()) {
+                 AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
+                 clip = AudioSystem.getClip();
+                 clip.open(audioInputStream);
+             } else {
+                 System.out.println("Audio file not found!");
+             }
 
-        Ventana_Options.reproducirMusica("Tetris/src/tetris.wav");
-        Ventana_Options.detenerMusica();
-/*        try {
-            File audioFile = new File("Tetris/src/tetris.wav");
-            
-            if (audioFile.exists()) {
-                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
-                clip = AudioSystem.getClip();
-                clip.open(audioInputStream);
-            } else {
-                System.out.println("Audio file not found!");
-            }
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    	clip.start();
-*/       JPanel panelPrincipal = new JPanel(new BorderLayout());
+     	clip.start();
+       JPanel panelPrincipal = new JPanel(new BorderLayout());
 
         PanelJuego panelJuego = new PanelJuego();
         panelJuego.setPreferredSize(new Dimension(ANCHO_TABLERO * TAMANO_CELDA, ALTO_TABLERO * TAMANO_CELDA));

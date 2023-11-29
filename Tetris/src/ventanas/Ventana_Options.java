@@ -6,7 +6,11 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,7 +23,7 @@ public class Ventana_Options{
 	private JFrame ventana;
 	private JButton btnSound;
 	private boolean imgSound = true;
-	
+	private Clip clip;
 	
 	public Ventana_Options() {
 	
@@ -145,6 +149,25 @@ public class Ventana_Options{
 		}
 		imgSound = !imgSound;
 	}
-	
-	 
+
+	public void reproducirMusica(String archivo) {
+		try {
+            File file = new File(archivo);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY); // Reproduce la música en bucle
+            clip.start();
+        } catch (Exception e) {
+            System.out.println("Error al reproducir el archivo de audio: " + e.getMessage());
+        }		
 	}
+	 
+	public void detenerMusica() {
+        if (clip != null && clip.isRunning()) {
+            clip.stop();
+            clip.close();
+        }
+    }
+	 
+}

@@ -35,16 +35,22 @@ public class Ventana_Juego extends JFrame {
     private int[][] tablero;
     private Pieza piezaActual;
     private Timer timer;
-    private Clip clip; 
 
+    private Clip clip;
+    private boolean sonidoActivado = true; // Estado inicial del sonido
     private int vidas=3;
+    private Ventana_Options VentOpt;
 
     public Ventana_Juego() {
     	 tiempoInicio = System.currentTimeMillis();
     	setTitle("Tetris");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Ventana_Options opciones = new Ventana_Options();
+        //opciones.setVentanaJuego(this); // Establece la referencia a Ventana_Juego en Ventana_Options
 
-        try {
+        opciones.reproducirMusica("Tetris/src/tetris.wav");
+        
+/*        try {
             File audioFile = new File("Tetris/src/tetris.wav");
             
             if (audioFile.exists()) {
@@ -60,7 +66,7 @@ public class Ventana_Juego extends JFrame {
         }
 
     	clip.start();
-        JPanel panelPrincipal = new JPanel(new BorderLayout());
+*/       JPanel panelPrincipal = new JPanel(new BorderLayout());
 
         PanelJuego panelJuego = new PanelJuego();
         panelJuego.setPreferredSize(new Dimension(ANCHO_TABLERO * TAMANO_CELDA, ALTO_TABLERO * TAMANO_CELDA));

@@ -39,18 +39,15 @@ public class Ventana_Juego extends JFrame {
     private Clip clip;
     private boolean sonidoActivado = true; // Estado inicial del sonido
     private int vidas=3;
-    private Ventana_Options VentOpt;
 
     public Ventana_Juego() {
     	tiempoInicio = System.currentTimeMillis();
     	setTitle("Tetris");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        VentOpt = new Ventana_Options();
         //opciones.setVentanaJuego(this); // Establece la referencia a Ventana_Juego en Ventana_Options
 
-        VentOpt.reproducirMusica("Tetris/src/tetris.wav");
-        VentOpt.detenerMusica();
-        gestionMusica();
+        Ventana_Options.reproducirMusica("Tetris/src/tetris.wav");
+        Ventana_Options.detenerMusica();
 /*        try {
             File audioFile = new File("Tetris/src/tetris.wav");
             

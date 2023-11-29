@@ -23,7 +23,7 @@ public class Ventana_Options{
 	private JFrame ventana;
 	private JButton btnSound;
 	private boolean imgSound = true;
-	private Clip clip;
+	private static Clip clip;
 	
 	public Ventana_Options() {
 	
@@ -150,7 +150,7 @@ public class Ventana_Options{
 		imgSound = !imgSound;
 	}
 
-	public void reproducirMusica(String archivo) {
+	public static void reproducirMusica(String archivo) {
 		try {
             File file = new File(archivo);
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
@@ -163,7 +163,7 @@ public class Ventana_Options{
         }		
 	}
 	 
-	public void detenerMusica() {
+	public static void detenerMusica() {
         if (clip != null && clip.isRunning()) {
             clip.stop();
             clip.close();

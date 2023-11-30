@@ -3,15 +3,12 @@ package ventanas;
 import javax.swing.*;
 import java.util.List;
 import javax.swing.border.LineBorder;
-
 import juego.Pieza;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
 
 import javax.sound.sampled.*;
@@ -23,15 +20,11 @@ public class Ventana_Juego extends JFrame {
     private static final int TAMANO_CELDA = 30;
     private boolean gameOver = false;
     private Pieza siguientePieza;
-    
-
-    
+        
     protected int minutos = 0;
     protected int segundos = 0;
     protected Timer timerContador;
 
-    
-   
     private JPanel PanelEspacio1;
     protected JPanel PanelEspacio2;
     private int puntos = 0;    
@@ -49,7 +42,7 @@ public class Ventana_Juego extends JFrame {
     public Ventana_Juego() {
 
     	setTitle("Tetris");
-    	 try {
+    	try {
              File audioFile = new File("Tetris/src/tetris.wav");
              
              if (audioFile.exists()) {
@@ -71,18 +64,15 @@ public class Ventana_Juego extends JFrame {
                 System.exit(0);
             }
         });
-    
      	
      	timerContador = new Timer(1000, new ActionListener() {
      	    @Override
      	    public void actionPerformed(ActionEvent e) {
      	        segundos++;
-
      	        if (segundos == 60) {
      	            minutos++;
      	            segundos = 0;
      	        }
-
      	        actualizarEtiquetaTiempo();
      	    }
      	});

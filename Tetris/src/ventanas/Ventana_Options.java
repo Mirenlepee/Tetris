@@ -1,29 +1,18 @@
 package ventanas;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import javax.sound.sampled.*;
+import javax.swing.*;
 
 
 public class Ventana_Options{
 	private JFrame ventana;
 	private JButton btnSound;
 	private boolean imgSound = true;
-	private static Clip clip;
+	private static Clip clip;	
 	
 	public Ventana_Options() {
 	
@@ -57,7 +46,6 @@ public class Ventana_Options{
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
 	            cambiarImgBtn();
-	        
 	        }
 	    });
 
@@ -104,7 +92,6 @@ public class Ventana_Options{
 				// TODO Auto-generated method stub
 				new Ventana_Instrucciones();
 			}
-        	
         });
         
         JLabel lblHTP = new JLabel("How to play");
@@ -120,7 +107,6 @@ public class Ventana_Options{
 				// TODO Auto-generated method stub
 				ventana.dispose();
 			}
-        	
         });
         
         pnlPrincipal.add(fila1);

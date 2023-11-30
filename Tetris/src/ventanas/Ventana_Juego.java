@@ -215,7 +215,7 @@ public class Ventana_Juego extends JFrame {
 
 
     	timerContador.stop();
-    	Ventana_GameOver ventGO = new Ventana_GameOver();
+    	Ventana_GameOver ventGO = new Ventana_GameOver(this);
     	ventGO.tfScore.setText(String.valueOf(puntos));
     	ventGO.tfTimePlayed.setText(etiquetaTiempo.getText());
         

@@ -291,8 +291,37 @@ public class Ventana_Juego extends JFrame {
 
         repaint();
     }
+    
+    private void bajarPiezaRapidamente() {
+        int originalFila = piezaActual.obtenerFila();
+        int[][] originalForma = piezaActual.obtenerForma();
 
+        while (!verificarColision()) {
+            if (originalFila + originalForma.length < ALTO_TABLERO) {
+                piezaActual.moverAbajo();
+            } else {
+                break;
+            }
+        }
 
+        fijarPiezaEnTablero();
+        piezaActual = siguientePieza;
+        siguientePieza = new Pieza();
+        actualizarPanelEspacio1();
+
+        if (verificarGameOver() && vidas > 0) {
+            gameOver = true;
+            timer.stop();
+            mostrarMessageCorazon();
+        } else if (verificarGameOver() && vidas == 0) {
+            gameOver = true;
+            timer.stop();
+            mostrarGameOver();
+        }
+
+        repaint();
+    }
+    
     private void teclaPresionada(KeyEvent evt) {
         switch (evt.getKeyCode()) {
             case KeyEvent.VK_LEFT:
@@ -313,6 +342,9 @@ public class Ventana_Juego extends JFrame {
             case KeyEvent.VK_UP:
                 piezaActual.rotar();
                 repaint();
+                break;
+            case KeyEvent.VK_SPACE:
+                bajarPiezaRapidamente();
                 break;
         }
       

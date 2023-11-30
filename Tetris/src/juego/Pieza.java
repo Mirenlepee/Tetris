@@ -70,7 +70,9 @@ public class Pieza {
     public void moverDerecha() {
     	columna++;
     }
-   
+    public void moverArriba() {
+        fila--;
+    }
     
 	public void rotar() {
 

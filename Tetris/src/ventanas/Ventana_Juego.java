@@ -20,6 +20,7 @@ public class Ventana_Juego extends JFrame {
     private static final int TAMANO_CELDA = 30;
     private boolean gameOver = false;
     private Pieza siguientePieza;
+    private JButton btnPausa;
         
     protected int minutos = 0;
     protected int segundos = 0;
@@ -103,6 +104,18 @@ public class Ventana_Juego extends JFrame {
         PanelEspacio2.setPreferredSize(new Dimension(100, 50));
         PanelEspacio2.setBorder(new LineBorder(Color.WHITE));
 
+		ImageIcon imgSettings = new ImageIcon(getClass().getResource("pausa.png"));
+		btnPausa = new JButton();
+		btnPausa.setBackground(Color.WHITE);
+
+		int nuevoAncho = 30;
+		int nuevoAlto = 30;
+		Image imagenDef = imgSettings.getImage().getScaledInstance(nuevoAncho, nuevoAlto, Image.SCALE_SMOOTH);
+		ImageIcon iconoDef = new ImageIcon(imagenDef);
+
+		btnPausa.setIcon(iconoDef);
+        
+        
         panelDerecho.add(Box.createVerticalGlue());
         panelDerecho.add(etiquetaPuntos);
         panelDerecho.add(Box.createVerticalStrut(10)); 
@@ -110,6 +123,8 @@ public class Ventana_Juego extends JFrame {
         panelDerecho.add(Box.createVerticalStrut(10)); 
         panelDerecho.add(PanelEspacio2);
         panelDerecho.add(Box.createVerticalGlue());
+        panelDerecho.add(btnPausa);
+        
 
         panelPrincipal.add(panelJuego, BorderLayout.CENTER);
         panelPrincipal.add(Box.createHorizontalStrut(10), BorderLayout.EAST);

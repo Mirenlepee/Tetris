@@ -128,6 +128,7 @@ public class Ventana_Juego extends JFrame {
         btnPausa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	clip.stop();
             	timer.stop();
             	timerContador.stop();
                 Object[] options = { "Resume", "New Game", "Exit" };
@@ -143,7 +144,9 @@ public class Ventana_Juego extends JFrame {
                         options[0]);
 
                 if (choice == JOptionPane.YES_OPTION) {
-                    
+                	clip.start();
+                    timer.start();
+                    timerContador.start();
                     
                 } else if (choice == JOptionPane.NO_OPTION) {
                 	vidas=3;

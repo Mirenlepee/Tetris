@@ -24,6 +24,7 @@ public class Ventana_Juego extends JFrame {
         
     protected int minutos = 0;
     protected int segundos = 0;
+    private boolean gameOverDisplayed = false;
     protected Timer timerContador;
 
     private JPanel PanelEspacio1;
@@ -264,20 +265,22 @@ public class Ventana_Juego extends JFrame {
     }
 
     private void mostrarGameOver() {
+        
+        if (!gameOverDisplayed) {
+            
+            gameOverDisplayed = true;
 
-    	   timerContador.stop();
+            timerContador.stop();
 
+            Ventana_GameOver ventGO = new Ventana_GameOver(this);
 
-    	    Ventana_GameOver ventGO = new Ventana_GameOver(this);
-
-    	   
-    	    if (!ventGO.isVisible()) {
-    	    	
-    	        ventGO.tfScore.setText(String.valueOf(puntos));
-    	        ventGO.tfTimePlayed.setText(etiquetaTiempo.getText());
-    	        ventGO.setVisible(true);
-    	        
-    	    }
+            if (!ventGO.isVisible()) {
+            	ventGO.setResizable(false);
+                ventGO.tfScore.setText(String.valueOf(puntos));
+                ventGO.tfTimePlayed.setText(etiquetaTiempo.getText());
+                ventGO.setVisible(true);
+            }
+        }
     }
     
   private void mostrarMessageCorazon() {

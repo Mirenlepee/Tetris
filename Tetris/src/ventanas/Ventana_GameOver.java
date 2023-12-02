@@ -2,6 +2,7 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -26,7 +27,7 @@ public class Ventana_GameOver extends JFrame{
 		ventana.setLocationRelativeTo(null);
 		ventana.setLayout(new BorderLayout());
     	
-    	JLabel lblGameOver = new JLabel("Game Over :(");
+    	JLabel lblGameOver = new JLabel("Game Over");
     	lblGameOver.setFont(new Font("Cambria", Font.BOLD, 24));
     	
     	JPanel pnlLbl = new JPanel();
@@ -106,8 +107,9 @@ public class Ventana_GameOver extends JFrame{
 			
 		});
 		pnlBotonera.add(btnRetry);
-		
+
 		JButton btnExit = new JButton("Exit");
+		btnExit.setPreferredSize(btnHome.getPreferredSize());
 		btnExit.addActionListener(new ActionListener() {
 
 			@Override

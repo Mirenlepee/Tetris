@@ -203,6 +203,8 @@ public class Ventana_SignIn extends JFrame {
 //                	JOptionPane.showMessageDialog(null, "Incorrect email or password.");
 //                	log.log(Level.WARNING, "Alert - Failled login for the email: " + email);
 //                }
+              
+                ventana.dispose();
             	new Ventana_Juego();
             }
         });

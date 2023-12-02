@@ -265,38 +265,21 @@ public class Ventana_Juego extends JFrame {
 
     private void mostrarGameOver() {
 
+    	   timerContador.stop();
 
-    	timerContador.stop();
-    	Ventana_GameOver ventGO = new Ventana_GameOver(this);
-    	ventGO.tfScore.setText(String.valueOf(puntos));
-    	ventGO.tfTimePlayed.setText(etiquetaTiempo.getText());
-        
-//    	Object[] options = {"New Game", "Exit","Exit to Main menu"};
-//        int choice = JOptionPane.showOptionDialog(
-//                this,
-//                "Game Over! Your final score is: " + puntos+ "\n"+ "The total time played was: "+etiquetaTiempo.getText() ,
-//                "Game Over",
-//                JOptionPane.YES_NO_OPTION,
-//                JOptionPane.INFORMATION_MESSAGE,
-//                null,
-//                options,
-//                options[0]);
-//
-//        if (choice == JOptionPane.YES_OPTION) {
-//        	vidas=3;
-//        	((CorazonPanel) PanelEspacio2).vidasMostradas = vidas;
-//        	etiquetaTiempo.setText("00:00"); 
-//        	minutos = 0;
-//        	 segundos = 0;
-//        	 timerContador.restart();
-//            reiniciarJuego();
-//        } else if (choice == JOptionPane.NO_OPTION) {
-//        	clip.stop();
-//            System.exit(0);
-//        } else if (choice == JOptionPane.CANCEL_OPTION) {
-//            volverAlMenu();
-//        }
+
+    	    Ventana_GameOver ventGO = new Ventana_GameOver(this);
+
+    	   
+    	    if (!ventGO.isVisible()) {
+    	    	
+    	        ventGO.tfScore.setText(String.valueOf(puntos));
+    	        ventGO.tfTimePlayed.setText(etiquetaTiempo.getText());
+    	        ventGO.setVisible(true);
+    	        
+    	    }
     }
+    
   private void mostrarMessageCorazon() {
         
     	vidas=vidas-1;

@@ -12,7 +12,7 @@ import javax.swing.*;
 
 import ventanas.Ventana_Juego.CorazonPanel;
 
-public class Ventana_GameOver{
+public class Ventana_GameOver extends JFrame{
 	private JFrame ventana;
 	protected JTextField tfScore;
 	protected JTextField tfTimePlayed;

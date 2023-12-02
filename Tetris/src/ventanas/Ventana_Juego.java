@@ -125,7 +125,41 @@ public class Ventana_Juego extends JFrame {
         panelDerecho.add(Box.createVerticalGlue());
         panelDerecho.add(btnPausa);
         
+        btnPausa.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	timer.stop();
+            	timerContador.stop();
+                Object[] options = { "Resume", "New Game", "Exit" };
 
+                int choice = JOptionPane.showOptionDialog(
+                        Ventana_Juego.this,
+                        "Pause Menu",
+                        "Paused",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[0]);
+
+                if (choice == JOptionPane.YES_OPTION) {
+                    
+                    
+                } else if (choice == JOptionPane.NO_OPTION) {
+                	vidas=3;
+                	((CorazonPanel) PanelEspacio2).vidasMostradas = vidas;
+                	etiquetaTiempo.setText("00:00"); 
+                	minutos = 0;
+                	segundos = 0;
+               	 timerContador.restart();
+                    reiniciarJuego();
+                } else if (choice == JOptionPane.CANCEL_OPTION || choice == JOptionPane.CLOSED_OPTION) {
+                    System.exit(0);
+                }
+            }
+        });
+
+        
         panelPrincipal.add(panelJuego, BorderLayout.CENTER);
         panelPrincipal.add(Box.createHorizontalStrut(10), BorderLayout.EAST);
         panelPrincipal.add(panelDerecho, BorderLayout.EAST);

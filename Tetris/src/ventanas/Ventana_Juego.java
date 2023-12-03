@@ -37,6 +37,7 @@ public class Ventana_Juego extends JFrame {
     private Pieza piezaActual;
     private Timer timer;
 
+    private boolean musica = true;
     protected JLabel etiquetaTiempo;
     protected Clip clip;
     protected int vidas=3;
@@ -132,7 +133,7 @@ public class Ventana_Juego extends JFrame {
             	clip.stop();
             	timer.stop();
             	timerContador.stop();
-                Object[] options = { "Resume", "New Game", "Exit" };
+                Object[] options = { "Resume", "New Game","Sound","Exit"};
 
                 int choice = JOptionPane.showOptionDialog(
                         Ventana_Juego.this,
@@ -145,7 +146,9 @@ public class Ventana_Juego extends JFrame {
                         options[0]);
 
                 if (choice == JOptionPane.YES_OPTION) {
-                	clip.start();
+                	
+                    clip.start();
+                	
                     timer.start();
                     timerContador.start();
                     
@@ -157,6 +160,17 @@ public class Ventana_Juego extends JFrame {
                 	segundos = 0;
                	 timerContador.restart();
                     reiniciarJuego();
+                }else if(choice == 2) {
+                	if(musica) {
+                		musica = false;
+                		clip.stop();
+                	}else {
+                		musica = true;
+                		clip.start();
+                	}
+                	timer.start();
+                    timerContador.start();
+                	
                 } else if (choice == JOptionPane.CANCEL_OPTION || choice == JOptionPane.CLOSED_OPTION) {
                     System.exit(0);
                 }
@@ -199,6 +213,9 @@ public class Ventana_Juego extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
+    
+    
+    
     private void actualizarEtiquetaTiempo() {
         String tiempoFormateado = String.format("%02d:%02d", minutos, segundos);
         etiquetaTiempo.setText(tiempoFormateado);

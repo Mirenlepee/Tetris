@@ -133,8 +133,13 @@ public class Ventana_Juego extends JFrame {
             	clip.stop();
             	timer.stop();
             	timerContador.stop();
-                Object[] options = { "Resume", "New Game","Sound","Exit"};
-
+            	 Object[] options;
+            	if(musica) {
+                  options= new Object[]{ "Resume", "New Game","Mute Music","Exit"};
+            	}else {
+            		options = new Object[]{ "Resume", "New Game","Play Music","Exit"};
+            		
+            	}
                 int choice = JOptionPane.showOptionDialog(
                         Ventana_Juego.this,
                         "Pause Menu",
@@ -167,13 +172,14 @@ public class Ventana_Juego extends JFrame {
                 	}else {
                 		musica = true;
                 		clip.start();
-                	}
+                	} 	 
+
                 	timer.start();
                     timerContador.start();
-                	
                 } else if (choice == JOptionPane.CANCEL_OPTION || choice == JOptionPane.CLOSED_OPTION) {
                     System.exit(0);
                 }
+             
             }
         });
 

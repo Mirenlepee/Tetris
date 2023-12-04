@@ -13,26 +13,24 @@ import javax.swing.*;
 
 import ventanas.Ventana_Juego.CorazonPanel;
 
-public class Ventana_GameOver extends JFrame{
-	private JFrame ventana;
+public class Ventana_GameOver extends JDialog{
 	protected JTextField tfScore;
 	protected JTextField tfTimePlayed;
 	private Ventana_Juego ventJuego;
 	
 	public Ventana_GameOver(Ventana_Juego ventJuego) {
+		super(ventJuego, "Game Over", true);
 		this.ventJuego = ventJuego;
-		ventana = new JFrame("Game Over");
-		ventana.setSize(400, 200);
-		ventana.setTitle("Game Over");
-		ventana.setLocationRelativeTo(null);
-		ventana.setLayout(new BorderLayout());
+		setSize(400, 200);
+		setLocationRelativeTo(ventJuego);
+		setLayout(new BorderLayout());
     	
     	JLabel lblGameOver = new JLabel("Game Over");
     	lblGameOver.setFont(new Font("Cambria", Font.BOLD, 24));
     	
     	JPanel pnlLbl = new JPanel();
         pnlLbl.add(lblGameOver, BorderLayout.CENTER);
-        ventana.add(pnlLbl, BorderLayout.NORTH);
+        add(pnlLbl, BorderLayout.NORTH);
         
         JPanel pnlPrincipal = new JPanel();
         pnlPrincipal.setLayout(new GridLayout(3,3));
@@ -75,7 +73,8 @@ public class Ventana_GameOver extends JFrame{
 				ventJuego.volverAlMenu();
 				
 				//Cierra la Ventana_GameOver
-				ventana.dispose();
+				setVisible(false);
+				dispose();
 			}
 			
 		});
@@ -102,7 +101,8 @@ public class Ventana_GameOver extends JFrame{
 	        	ventJuego.reiniciarJuego();
 	        	
 	        	//Cierra la Ventana_GameOver
-	        	ventana.dispose();
+	        	setVisible(false);
+	        	dispose();
 			}
 			
 		});
@@ -122,9 +122,14 @@ public class Ventana_GameOver extends JFrame{
 		});
 		pnlBotonera.add(btnExit);
         
-		ventana.add(pnlPrincipal, BorderLayout.CENTER);
-		ventana.add(pnlBotonera, BorderLayout.SOUTH);
-		ventana.setVisible(true);
+		add(pnlPrincipal, BorderLayout.CENTER);
+		add(pnlBotonera, BorderLayout.SOUTH);
+		actualizarCampos();
+		setVisible(true);
 	}
+	public void actualizarCampos() {
+        tfScore.setText(String.valueOf(ventJuego.puntos));
+        tfTimePlayed.setText(ventJuego.etiquetaTiempo.getText());
+    }
 	
 }

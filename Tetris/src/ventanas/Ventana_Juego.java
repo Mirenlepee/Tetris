@@ -29,7 +29,7 @@ public class Ventana_Juego extends JFrame {
 
     private JPanel PanelEspacio1;
     protected JPanel PanelEspacio2;
-    private int puntos = 0;    
+    protected int puntos = 0;    
     private List<Pieza> piezasEnTablero = new ArrayList<>();
 
     private JLabel etiquetaPuntos;

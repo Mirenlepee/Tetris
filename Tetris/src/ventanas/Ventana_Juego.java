@@ -157,12 +157,15 @@ public class Ventana_Juego extends JFrame {
                      panelJuego.requestFocusInWindow();
                    
                 } else if (choice == JOptionPane.NO_OPTION) {
-                	vidas=3;
+                	if (musica == true) {
+                		 clip.start();
+                	}                	vidas=3;
                 	((CorazonPanel) PanelEspacio2).vidasMostradas = vidas;
                 	etiquetaTiempo.setText("00:00"); 
                 	minutos = 0;
                 	segundos = 0;
                	 timerContador.restart();
+               
                	panelJuego.requestFocusInWindow();
                     reiniciarJuego();
                 }else if(choice == 2) {
@@ -177,7 +180,7 @@ public class Ventana_Juego extends JFrame {
                 	timer.start();
                     timerContador.start();
                     panelJuego.requestFocusInWindow();
-                } else if (choice == JOptionPane.CANCEL_OPTION || choice == JOptionPane.CLOSED_OPTION) {
+                } else if (choice == 3) {
                     System.exit(0);
                 }
              

@@ -56,10 +56,6 @@ public class Ventana_Instrucciones extends JFrame{
         
         setVisible(true);
     }
-    public static void main(String[] args) {
-    	Ventana_Instrucciones i = new Ventana_Instrucciones();
-    	i.setVisible(true);
-    }
 }
 
 

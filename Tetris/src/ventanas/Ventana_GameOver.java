@@ -39,21 +39,21 @@ public class Ventana_GameOver extends JFrame{
         
         JLabel lblScore = new JLabel("Score:");
         tfScore = new JTextField(15);
-        tfScore.setEnabled(false);
+        tfScore.setEditable(false);
         tfScore.setForeground(Color.MAGENTA);
         pnlPrincipal.add(lblScore);
         pnlPrincipal.add(tfScore);
         
         JLabel lblBestScore = new JLabel("Best Score:");
         JTextField tfBestScore = new JTextField(15);
-        tfBestScore.setEnabled(false);
+        tfBestScore.setEditable(false);
         tfBestScore.setForeground(Color.MAGENTA);
         pnlPrincipal.add(lblBestScore);
         pnlPrincipal.add(tfBestScore);
         
         JLabel lblTimePlayed = new JLabel("Time played:");
         tfTimePlayed = new JTextField(15);
-        tfTimePlayed.setEnabled(false);
+        tfTimePlayed.setEditable(false);
         tfTimePlayed.setForeground(Color.MAGENTA);
         pnlPrincipal.add(lblTimePlayed);
         pnlPrincipal.add(tfTimePlayed);

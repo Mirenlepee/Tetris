@@ -160,15 +160,6 @@ public class Ventana_SignIn extends JFrame {
 
 					    
 					    
-					    
-					    
-					    
-					    
-					    
-					    
-					    
-					    
-					    
 					    //He pensado crear una contraseña random que reemplace la contraseña del usuario
 					    //Y que esta sea guardada en lugar de la que tenía.
 					}

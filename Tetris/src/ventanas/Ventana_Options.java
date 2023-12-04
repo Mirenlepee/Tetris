@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import javax.sound.sampled.*;
 import javax.swing.*;
+import ventanas.Ventana_Juego.CorazonPanel;
 
 
 public class Ventana_Options{

@@ -20,9 +20,11 @@ public class Ventana_Juego extends JFrame {
     private static final int TAMANO_CELDA = 30;
     private boolean gameOver = false;
     private Pieza siguientePieza;
+    private JButton btnPausa;
         
     protected int minutos = 0;
     protected int segundos = 0;
+    private boolean gameOverDisplayed = false;
     protected Timer timerContador;
 
     private JPanel PanelEspacio1;
@@ -35,6 +37,7 @@ public class Ventana_Juego extends JFrame {
     private Pieza piezaActual;
     private Timer timer;
 
+    private boolean musica = true;
     protected JLabel etiquetaTiempo;
     protected Clip clip;
     protected int vidas=3;
@@ -103,6 +106,18 @@ public class Ventana_Juego extends JFrame {
         PanelEspacio2.setPreferredSize(new Dimension(100, 50));
         PanelEspacio2.setBorder(new LineBorder(Color.WHITE));
 
+		ImageIcon imgSettings = new ImageIcon(getClass().getResource("pausa.png"));
+		btnPausa = new JButton();
+		btnPausa.setBackground(Color.WHITE);
+
+		int nuevoAncho = 30;
+		int nuevoAlto = 30;
+		Image imagenDef = imgSettings.getImage().getScaledInstance(nuevoAncho, nuevoAlto, Image.SCALE_SMOOTH);
+		ImageIcon iconoDef = new ImageIcon(imagenDef);
+
+		btnPausa.setIcon(iconoDef);
+        
+        
         panelDerecho.add(Box.createVerticalGlue());
         panelDerecho.add(etiquetaPuntos);
         panelDerecho.add(Box.createVerticalStrut(10)); 
@@ -110,7 +125,65 @@ public class Ventana_Juego extends JFrame {
         panelDerecho.add(Box.createVerticalStrut(10)); 
         panelDerecho.add(PanelEspacio2);
         panelDerecho.add(Box.createVerticalGlue());
+        panelDerecho.add(btnPausa);
+        
+        btnPausa.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	clip.stop();
+            	timer.stop();
+            	timerContador.stop();
+            	 Object[] options;
+            	if(musica) {
+                  options= new Object[]{ "Resume", "New Game","Mute Music","Exit"};
+            	}else {
+            		options = new Object[]{ "Resume", "New Game","Play Music","Exit"};
+            		
+            	}
+                int choice = JOptionPane.showOptionDialog(
+                        Ventana_Juego.this,
+                        "Pause Menu",
+                        "Paused",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[0]);
 
+                if (choice == JOptionPane.YES_OPTION) {
+                	
+                    clip.start();
+                	
+                    timer.start();
+                    timerContador.start();
+                    
+                } else if (choice == JOptionPane.NO_OPTION) {
+                	vidas=3;
+                	((CorazonPanel) PanelEspacio2).vidasMostradas = vidas;
+                	etiquetaTiempo.setText("00:00"); 
+                	minutos = 0;
+                	segundos = 0;
+               	 timerContador.restart();
+                    reiniciarJuego();
+                }else if(choice == 2) {
+                	if(musica) {
+                		musica = false;
+                		clip.stop();
+                	}else {
+                		musica = true;
+                		clip.start();
+                	} 	 
+
+                	timer.start();
+                    timerContador.start();
+                } else if (choice == JOptionPane.CANCEL_OPTION || choice == JOptionPane.CLOSED_OPTION) {
+                    System.exit(0);
+                }
+             
+            }
+        });
+
+        
         panelPrincipal.add(panelJuego, BorderLayout.CENTER);
         panelPrincipal.add(Box.createHorizontalStrut(10), BorderLayout.EAST);
         panelPrincipal.add(panelDerecho, BorderLayout.EAST);
@@ -146,6 +219,9 @@ public class Ventana_Juego extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
+    
+    
+    
     private void actualizarEtiquetaTiempo() {
         String tiempoFormateado = String.format("%02d:%02d", minutos, segundos);
         etiquetaTiempo.setText(tiempoFormateado);
@@ -212,39 +288,24 @@ public class Ventana_Juego extends JFrame {
     }
 
     private void mostrarGameOver() {
-
-
-    	timerContador.stop();
-    	Ventana_GameOver ventGO = new Ventana_GameOver();
-    	ventGO.tfScore.setText(String.valueOf(puntos));
-    	ventGO.tfTimePlayed.setText(etiquetaTiempo.getText());
         
-//    	Object[] options = {"New Game", "Exit","Exit to Main menu"};
-//        int choice = JOptionPane.showOptionDialog(
-//                this,
-//                "Game Over! Your final score is: " + puntos+ "\n"+ "The total time played was: "+etiquetaTiempo.getText() ,
-//                "Game Over",
-//                JOptionPane.YES_NO_OPTION,
-//                JOptionPane.INFORMATION_MESSAGE,
-//                null,
-//                options,
-//                options[0]);
-//
-//        if (choice == JOptionPane.YES_OPTION) {
-//        	vidas=3;
-//        	((CorazonPanel) PanelEspacio2).vidasMostradas = vidas;
-//        	etiquetaTiempo.setText("00:00"); 
-//        	minutos = 0;
-//        	 segundos = 0;
-//        	 timerContador.restart();
-//            reiniciarJuego();
-//        } else if (choice == JOptionPane.NO_OPTION) {
-//        	clip.stop();
-//            System.exit(0);
-//        } else if (choice == JOptionPane.CANCEL_OPTION) {
-//            volverAlMenu();
-//        }
+        if (!gameOverDisplayed) {
+            
+            gameOverDisplayed = true;
+
+            timerContador.stop();
+
+            Ventana_GameOver ventGO = new Ventana_GameOver(this);
+
+            if (!ventGO.isVisible()) {
+            	ventGO.setResizable(false);
+                ventGO.tfScore.setText(String.valueOf(puntos));
+                ventGO.tfTimePlayed.setText(etiquetaTiempo.getText());
+                ventGO.setVisible(true);
+            }
+        }
     }
+    
   private void mostrarMessageCorazon() {
         
     	vidas=vidas-1;
@@ -291,8 +352,37 @@ public class Ventana_Juego extends JFrame {
 
         repaint();
     }
+    
+    private void bajarPiezaRapidamente() {
+        int originalFila = piezaActual.obtenerFila();
+        int[][] originalForma = piezaActual.obtenerForma();
 
+        while (!verificarColision()) {
+            if (originalFila + originalForma.length < ALTO_TABLERO) {
+                piezaActual.moverAbajo();
+            } else {
+                break;
+            }
+        }
 
+        fijarPiezaEnTablero();
+        piezaActual = siguientePieza;
+        siguientePieza = new Pieza();
+        actualizarPanelEspacio1();
+
+        if (verificarGameOver() && vidas > 0) {
+            gameOver = true;
+            timer.stop();
+            mostrarMessageCorazon();
+        } else if (verificarGameOver() && vidas == 0) {
+            gameOver = true;
+            timer.stop();
+            mostrarGameOver();
+        }
+
+        repaint();
+    }
+    
     private void teclaPresionada(KeyEvent evt) {
         switch (evt.getKeyCode()) {
             case KeyEvent.VK_LEFT:
@@ -313,6 +403,9 @@ public class Ventana_Juego extends JFrame {
             case KeyEvent.VK_UP:
                 piezaActual.rotar();
                 repaint();
+                break;
+            case KeyEvent.VK_SPACE:
+                bajarPiezaRapidamente();
                 break;
         }
       

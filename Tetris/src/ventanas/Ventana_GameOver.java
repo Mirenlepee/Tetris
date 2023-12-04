@@ -1,6 +1,8 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -11,19 +13,21 @@ import javax.swing.*;
 
 import ventanas.Ventana_Juego.CorazonPanel;
 
-public class Ventana_GameOver{
+public class Ventana_GameOver extends JFrame{
 	private JFrame ventana;
 	protected JTextField tfScore;
 	protected JTextField tfTimePlayed;
 	private Ventana_Juego ventJuego;
 	
-	public Ventana_GameOver() {
+	public Ventana_GameOver(Ventana_Juego ventJuego) {
+		this.ventJuego = ventJuego;
 		ventana = new JFrame("Game Over");
 		ventana.setSize(400, 200);
 		ventana.setTitle("Game Over");
+		ventana.setLocationRelativeTo(null);
 		ventana.setLayout(new BorderLayout());
     	
-    	JLabel lblGameOver = new JLabel("Game Over :(");
+    	JLabel lblGameOver = new JLabel("Game Over");
     	lblGameOver.setFont(new Font("Cambria", Font.BOLD, 24));
     	
     	JPanel pnlLbl = new JPanel();
@@ -36,18 +40,21 @@ public class Ventana_GameOver{
         JLabel lblScore = new JLabel("Score:");
         tfScore = new JTextField(15);
         tfScore.setEnabled(false);
+        tfScore.setForeground(Color.MAGENTA);
         pnlPrincipal.add(lblScore);
         pnlPrincipal.add(tfScore);
         
         JLabel lblBestScore = new JLabel("Best Score:");
         JTextField tfBestScore = new JTextField(15);
         tfBestScore.setEnabled(false);
+        tfBestScore.setForeground(Color.MAGENTA);
         pnlPrincipal.add(lblBestScore);
         pnlPrincipal.add(tfBestScore);
         
         JLabel lblTimePlayed = new JLabel("Time played:");
         tfTimePlayed = new JTextField(15);
         tfTimePlayed.setEnabled(false);
+        tfTimePlayed.setForeground(Color.MAGENTA);
         pnlPrincipal.add(lblTimePlayed);
         pnlPrincipal.add(tfTimePlayed);
         
@@ -66,6 +73,9 @@ public class Ventana_GameOver{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				ventJuego.volverAlMenu();
+				
+				//Cierra la Ventana_GameOver
+				ventana.dispose();
 			}
 			
 		});
@@ -90,12 +100,16 @@ public class Ventana_GameOver{
 	        	ventJuego.segundos = 0;
 	        	ventJuego.timerContador.restart();
 	        	ventJuego.reiniciarJuego();
+	        	
+	        	//Cierra la Ventana_GameOver
+	        	ventana.dispose();
 			}
 			
 		});
 		pnlBotonera.add(btnRetry);
-		
+
 		JButton btnExit = new JButton("Exit");
+		btnExit.setPreferredSize(btnHome.getPreferredSize());
 		btnExit.addActionListener(new ActionListener() {
 
 			@Override

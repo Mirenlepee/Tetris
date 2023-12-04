@@ -158,8 +158,9 @@ public class Ventana_Juego extends JFrame {
                    
                 } else if (choice == JOptionPane.NO_OPTION) {
                 	if (musica == true) {
-                		 clip.start();
-                	}                	vidas=3;
+               		 clip.start();
+               	}                	
+                	vidas=3;
                 	((CorazonPanel) PanelEspacio2).vidasMostradas = vidas;
                 	etiquetaTiempo.setText("00:00"); 
                 	minutos = 0;

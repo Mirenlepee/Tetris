@@ -12,7 +12,7 @@ import javax.swing.*;
 public class Ventana_Instrucciones extends JFrame{
 	private JLabel lblTitle;
     private JTextArea TxtAreaInstructions;
-    private JButton btnClose;
+    private JButton closeBtn;
     
     public Ventana_Instrucciones () {
     	setTitle("Tetris - Instructions");
@@ -24,7 +24,7 @@ public class Ventana_Instrucciones extends JFrame{
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
         add(lblTitle, BorderLayout.NORTH);
        
-        TxtAreaInstructions = new JTextArea("");
+        TxtAreaInstructions = new JTextArea();
         TxtAreaInstructions.setText("The aim in Tetris is simple; you bring down blocks from the top of the screen. \n "
         		+ "You can move the blocks around, either left to right and/or you can rotate them. \n "
         		+ "The blocks fall at a certain rate, but you can make them fall faster if you're sure of your positioning.\n"
@@ -35,14 +35,12 @@ public class Ventana_Instrucciones extends JFrame{
         		    + "5. As the game progresses, the blocks fall faster, challenging your speed and agility.\n"
         		    + "6. The game ends if the blocks reach the top of the screen.\n\n"
         		    + "Challenge yourself and see how high you can score breaking your own records! Good luck!");
-        TxtAreaInstructions.setEnabled(false);
-        add(TxtAreaInstructions, BorderLayout.CENTER);    
-        
+        TxtAreaInstructions.setEditable(false);
+        TxtAreaInstructions.setForeground(Color.BLACK);
         JScrollPane scroll = new JScrollPane(TxtAreaInstructions);
-        add(scroll);
+        add(scroll, BorderLayout.CENTER);
         
-        //Boton
-        JButton closeBtn = new JButton("Continue");
+        closeBtn = new JButton("Continue");
         closeBtn.setFont(new Font("Cambria", Font.BOLD, 16));
         closeBtn.addActionListener(new ActionListener() {
             @Override
@@ -57,6 +55,7 @@ public class Ventana_Instrucciones extends JFrame{
     }
     public static void main(String[] args) {
     	Ventana_Instrucciones i = new Ventana_Instrucciones();
+    	i.setVisible(true);
     }
 }
 

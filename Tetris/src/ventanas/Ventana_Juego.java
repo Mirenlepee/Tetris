@@ -151,7 +151,10 @@ public class Ventana_Juego extends JFrame {
                         options[0]);
 
                 if (choice == JOptionPane.YES_OPTION) {
-                	 clip.start(); 
+                	if(musica) {
+                		clip.start(); 
+                	}
+                	
                      timer.start();
                      timerContador.start(); 
                      panelJuego.requestFocusInWindow();

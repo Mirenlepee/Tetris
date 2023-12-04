@@ -35,7 +35,8 @@ public class Ventana_Instrucciones extends JFrame{
         		    + "5. As the game progresses, the blocks fall faster, challenging your speed and agility.\n"
         		    + "6. The game ends if the blocks reach the top of the screen.\n\n"
         		    + "Challenge yourself and see how high you can score breaking your own records! Good luck!");
-        TxtAreaInstructions.setEnabled(false);
+        TxtAreaInstructions.setForeground(Color.BLACK);
+        TxtAreaInstructions.setEditable(false);
         add(TxtAreaInstructions, BorderLayout.CENTER);    
         
         JScrollPane scroll = new JScrollPane(TxtAreaInstructions);

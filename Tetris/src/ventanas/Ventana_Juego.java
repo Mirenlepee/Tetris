@@ -338,18 +338,14 @@ public class Ventana_Juego extends JFrame {
     }
 
     protected void reiniciarJuego() {
-    
-
         puntos = 0;
         piezasEnTablero.clear();
         tablero = new int[ALTO_TABLERO][ANCHO_TABLERO];
         piezaActual = new Pieza();
         gameOver = false;
-
        
         timer.start();
         
-
         repaint();
     }
     

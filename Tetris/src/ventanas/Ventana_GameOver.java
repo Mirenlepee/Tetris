@@ -18,6 +18,8 @@ public class Ventana_GameOver extends JDialog{
 	protected JTextField tfTimePlayed;
 	private Ventana_Juego ventJuego;
 	
+	private JFrame ventana;
+	
 	public Ventana_GameOver(Ventana_Juego ventJuego) {
 		super(ventJuego, "Game Over", true);
 		this.ventJuego = ventJuego;
@@ -103,6 +105,9 @@ public class Ventana_GameOver extends JDialog{
 	        	//Cierra la Ventana_GameOver
 	        	setVisible(false);
 	        	dispose();
+	        	//new Ventana_Juego();
+	        	
+	        	
 			}
 			
 		});

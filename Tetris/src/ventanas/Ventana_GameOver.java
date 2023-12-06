@@ -92,17 +92,8 @@ public class Ventana_GameOver extends JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				ventJuego.vidas = 3;
-				((CorazonPanel) ventJuego.PanelEspacio2).vidasMostradas = ventJuego.vidas;
-				ventJuego.etiquetaTiempo.setText("00:00");
-				ventJuego.minutos = 0;
-	        	ventJuego.segundos = 0;
-	        	ventJuego.timerContador.restart();
-	        	ventJuego.reiniciarJuego();
-	        	
-	        	//Cierra la Ventana_GameOver
-	        	setVisible(false);
-	        	dispose();
+				ventJuego.reiniciarJuego();
+		        dispose(); // Cierra la Ventana_GameOver
 			}
 			
 		});
@@ -128,8 +119,8 @@ public class Ventana_GameOver extends JDialog{
 		setVisible(true);
 	}
 	public void actualizarCampos() {
-        tfScore.setText(String.valueOf(ventJuego.puntos));
-        tfTimePlayed.setText(ventJuego.etiquetaTiempo.getText());
+		tfScore.setText(String.valueOf(ventJuego.getPuntuacion()));
+	    tfTimePlayed.setText(ventJuego.getTiempoJugado());
     }
 	
 }

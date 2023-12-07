@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -24,12 +25,14 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
+import BD.ConexionBD;
+
 public class Ventana_Estadistica{
 	private JFrame ventana;
 	private JTable tablaDatos;
 	private TableModel modeloDatos;
 	
-	public Ventana_Estadistica() {
+	public Ventana_Estadistica(int idJugador) {
 		ventana = new JFrame("Estadística__");
 		ventana.setSize(600, 250);
 		ventana.setTitle("Estadística");
@@ -57,6 +60,8 @@ public class Ventana_Estadistica{
 		 ventana.add(new JScrollPane(tablaDatos), BorderLayout.CENTER);
 		 setDatos();
     
+		 actualizarEstadisticas(idJugador);
+		 
 		 ventana.add(pnlBoton, BorderLayout.SOUTH);
 		 ventana.setVisible(true);
 	}
@@ -71,6 +76,31 @@ public class Ventana_Estadistica{
 	        ((MiTableModel) modeloDatos).addRow(d);
 	    }
 	}
+	
+	public void actualizarEstadisticas(int idJugador) {
+        try {
+            // Obtener puntos del jugador desde la base de datos
+            ArrayList<Integer> puntos = ConexionBD.obtenerPuntosPorJugador(idJugador);
+
+            // Calcular estadísticas (por ejemplo, calcular el total de puntos)
+            int totalPuntos = calcularTotalPuntos(puntos);
+
+            // Actualizar la tabla con los resultados
+            ((MiTableModel) modeloDatos).addRow(new Object[]{"Total points", totalPuntos});
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int calcularTotalPuntos(ArrayList<Integer> puntos) {
+        // Cálculo del total de puntos a partir de la lista de puntos
+        int total = 0;
+        for (int punto : puntos) {
+            total += punto;
+        }
+        return total;
+    }
+	
 	
 	private class MiTableModel implements TableModel{
 

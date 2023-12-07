@@ -282,7 +282,7 @@ public class Ventana_Juego extends JFrame {
        setVisible(true);
    }
    
-*/   
+*/  
    
    private void actualizarEtiquetaTiempo() {
        String tiempoFormateado = String.format("%02d:%02d", minutos, segundos);
@@ -443,6 +443,8 @@ public class Ventana_Juego extends JFrame {
        }
 
        repaint();
+       
+       setVisible(true);
    }
    
    private void teclaPresionada(KeyEvent evt) {

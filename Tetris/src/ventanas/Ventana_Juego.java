@@ -21,7 +21,7 @@ public class Ventana_Juego extends JFrame {
 	private boolean gameOver = false;
 	private Pieza siguientePieza;
 	private JButton btnPausa;
-    
+    private JLabel lblnivel;
 	protected int minutos = 0;
 	protected int segundos = 0;
 	private boolean gameOverDisplayed = false;
@@ -115,9 +115,12 @@ public class Ventana_Juego extends JFrame {
 		ImageIcon iconoDef = new ImageIcon(imagenDef);
 
 		btnPausa.setIcon(iconoDef);
-       
+		lblnivel = new JLabel("Nivel: 1");
+		
+		
 		panelDerecho.add(Box.createVerticalGlue());
 		panelDerecho.add(etiquetaPuntos);
+		panelDerecho.add(lblnivel);
 		panelDerecho.add(Box.createVerticalStrut(10)); 
 		panelDerecho.add(PanelEspacio1);
 		panelDerecho.add(Box.createVerticalStrut(10)); 
@@ -258,17 +261,28 @@ public class Ventana_Juego extends JFrame {
        iniciarJuego();
 
 
-     timer = new Timer(200, new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-               if (!gameOver) {
-                  moverPiezaAbajo();
-                   repaint();
-             }
-          }
-       });
-     timer.start();
-     
+           timer = new Timer(300, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!gameOver) {
+                    moverPiezaAbajo();
+                    repaint();
+
+               
+                    if (puntos >= 500) {
+                    	lblnivel.setText("Nivel: 2");
+                        timer.setDelay(200);  
+                    }
+                    if (puntos >= 1000) {
+                    	lblnivel.setText("Nivel: 3");
+                    	timer.setDelay(250);
+                    }
+                    
+                }
+            }
+        });
+
+      timer.start();
       
 
        panelJuego.addKeyListener(new KeyAdapter() {

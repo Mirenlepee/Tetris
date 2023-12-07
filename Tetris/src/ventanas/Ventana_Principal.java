@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 public class Ventana_Principal extends JFrame{
 	
 	private BufferedImage imgFondo;
+	private Ventana_Options ventanaOptions;
 	
 	public Ventana_Principal() {
 		setTitle("Ventana Principal");
@@ -36,9 +37,7 @@ public class Ventana_Principal extends JFrame{
 
         initUI();
 	}
-	
-	
-        
+    
 	private void initUI() {
 		addLogo();
 		addButtons();
@@ -71,7 +70,8 @@ public class Ventana_Principal extends JFrame{
 		});
 		btnPlay.setBounds(100, 200, 200, 30);
 		layeredPane.add(btnPlay, JLayeredPane.PALETTE_LAYER);
-				
+		
+		ventanaOptions = new Ventana_Options();		
 		ImageIcon imgSettings = new ImageIcon(getClass().getResource("Settings.png"));
 		JButton btnSettings = new JButton();
 		btnSettings.setBackground(Color.WHITE);
@@ -88,7 +88,8 @@ public class Ventana_Principal extends JFrame{
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
 		        // TODO Auto-generated method stub
-		        new Ventana_Options();
+		    	updateBtnSoundImage(ventanaOptions);
+		    	ventanaOptions.mostrarVentana(); 
 		    }
 		});
 		btnSettings.setBounds(100, 250, 200, 30);
@@ -107,6 +108,7 @@ public class Ventana_Principal extends JFrame{
 			}
 			
 		});
+		
 		btnStatistics.setBounds(100, 300, 200, 30);
 		layeredPane.add(btnStatistics, JLayeredPane.PALETTE_LAYER);
 		
@@ -125,6 +127,22 @@ public class Ventana_Principal extends JFrame{
 		btnCredits.setBounds(100, 350, 200, 30);
 		layeredPane.add(btnCredits, JLayeredPane.PALETTE_LAYER);
 
+	}
+	private void updateBtnSoundImage(Ventana_Options ventanaOptions) {
+		ImageIcon imgSettings;
+	    if (ventanaOptions.getImgSoundState()) {
+	        imgSettings = new ImageIcon(getClass().getResource("Sound.png"));
+	    } else {
+	        imgSettings = new ImageIcon(getClass().getResource("NoSound.png"));
+	    }
+
+	    int nuevoAncho = 30;
+	    int nuevoAlto = 30;
+	    Image imagenDef = imgSettings.getImage().getScaledInstance(nuevoAncho, nuevoAlto, Image.SCALE_SMOOTH);
+	    ImageIcon iconoDef = new ImageIcon(imagenDef);
+
+	    ventanaOptions.btnSound.setIcon(iconoDef);
+	    ventanaOptions.setImgSoundState(!ventanaOptions.getImgSoundState());
 	}
 	
 	public static void main(String[] args) {

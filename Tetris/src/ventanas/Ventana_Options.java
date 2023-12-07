@@ -11,7 +11,7 @@ import ventanas.Ventana_Juego.CorazonPanel;
 
 public class Ventana_Options{
 	private JFrame ventana;
-	private JButton btnSound;
+	public JButton btnSound;
 	private boolean imgSound = true;
 	private static Clip clip;	
 	
@@ -107,6 +107,7 @@ public class Ventana_Options{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				ventana.dispose();
+				setImgSoundState(imgSound);
 			}
         });
         
@@ -115,7 +116,6 @@ public class Ventana_Options{
         pnlPrincipal.add(fila3);
         pnlPrincipal.add(fila4);
         ventana.add(pnlPrincipal);
-        ventana.setVisible(true);
 	}
  
 	private void cambiarImgBtn() {
@@ -136,7 +136,15 @@ public class Ventana_Options{
 		}
 		imgSound = !imgSound;
 	}
-
+	
+	public boolean getImgSoundState() {
+        return imgSound;
+    }
+	
+	public void setImgSoundState(boolean imgSoundState) {
+        this.imgSound = imgSoundState;
+    }
+	
 	public static void reproducirMusica(String archivo) {
 		try {
             File file = new File(archivo);
@@ -156,5 +164,9 @@ public class Ventana_Options{
             clip.close();
         }
     }
-	 
+	public void mostrarVentana() {
+		cambiarImgBtn();
+	    ventana.setVisible(true);
+	}
+	
 }

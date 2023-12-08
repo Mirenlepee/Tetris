@@ -104,7 +104,7 @@ public class Ventana_Principal extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new Ventana_Estadistica();
+				//new Ventana_Estadistica();
 			}
 			
 		});

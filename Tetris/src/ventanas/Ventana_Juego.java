@@ -187,7 +187,7 @@ public class Ventana_Juego extends JFrame {
             
        	 		gameOverDisplayed = true;
        	 		timerContador.stop();
-       	 		ventGO = new Ventana_GameOver(this);
+       	 		//ventGO = new Ventana_GameOver(this);
 
        	 		if (!ventGO.isVisible()) {
        	 			ventGO.setResizable(false);

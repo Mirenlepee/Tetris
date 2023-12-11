@@ -184,7 +184,6 @@ public class Ventana_Juego extends JFrame {
        	 		} else if (choice == 3) {
        	 			System.exit(0);
        	 		}
-            
        	 		gameOverDisplayed = true;
        	 		timerContador.stop();
        	 		//ventGO = new Ventana_GameOver(this);

@@ -4,9 +4,19 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class ConexionBD {
+	
+	static {
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error loading SQLite JDBC driver", e);
+        }
+    }
+	
 	private static final String URL = "jdbc:sqlite:miBaseDeDatosUsuarios.db"; // Nombre de la base de datos en SQLite
 
-    public static Connection conectar() throws SQLException {
+	public static Connection conectar() throws SQLException {
         return DriverManager.getConnection(URL);
     }
     

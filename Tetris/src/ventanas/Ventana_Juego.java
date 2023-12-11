@@ -196,6 +196,7 @@ public class Ventana_Juego extends JFrame {
        	 		}
 			}
 		});
+		setVisible(true);
 	}
     
 /*  private void mostrarMessageCorazon() {
@@ -424,7 +425,7 @@ public class Ventana_Juego extends JFrame {
       
        timer.start();
        
-
+       setVisible(true);
        repaint();
    }
    

@@ -448,7 +448,6 @@ public class Ventana_Juego extends JFrame {
         return false;
     }
 
-
     private boolean verificarColision() {
         int[][] forma = piezaActual.obtenerForma();
         int fila = piezaActual.obtenerFila();
@@ -466,6 +465,15 @@ public class Ventana_Juego extends JFrame {
         }
         return false;
     }
+    
+    public int getPuntuacion() {
+		// TODO Auto-generated method stub
+		return puntos;
+	}   
+
+	public String getTiempoJugado() {
+	    return etiquetaTiempo.getText();
+	}
 
     private void fijarPiezaEnTablero() {
         int[][] forma = piezaActual.obtenerForma();
@@ -653,5 +661,5 @@ public class Ventana_Juego extends JFrame {
             g2d.setColor(Color.RED);
             g2d.fill(heart);
         }
-    }   
+    }
 }

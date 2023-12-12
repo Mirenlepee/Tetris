@@ -382,7 +382,7 @@ public class Ventana_Juego extends JFrame {
        }
    }
    
- private void mostrarMessageCorazon() {
+   private void mostrarMessageCorazon() {
        
    	vidas=vidas-1;
    	Object[] options = {"Continue"};

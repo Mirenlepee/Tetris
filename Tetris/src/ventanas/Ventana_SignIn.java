@@ -1,168 +1,162 @@
-	package ventanas;
+package ventanas;
 	
-	import javax.mail.Message;
-	import javax.mail.MessagingException;
-	import javax.mail.Session;
-	import javax.mail.Transport;
-	import javax.mail.internet.InternetAddress;
-	import javax.mail.internet.MimeMessage;
-	import javax.swing.*;
-	import javax.mail.PasswordAuthentication;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.*;
+import javax.mail.PasswordAuthentication;
 	
-	import java.util.Properties;
+import java.util.Properties;
 	
-	import java.awt.*;
+import java.awt.*;
 	
 	
-	import java.awt.event.ActionEvent;
-	import java.awt.event.ActionListener;
-	import java.awt.event.MouseAdapter;
-	import java.util.Random;
-	import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.util.Random;
+import java.awt.event.MouseEvent;
 	
-	public class Ventana_SignIn extends JFrame {
+public class Ventana_SignIn extends JFrame {
 		
-		 private String generateRandomPassword() {
-		        String lowercase = "abcdefghijklmnopqrstuvwxyz";
-		        String uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		        String numbers = "0123456789";
-		        String specialCharacters = "!@#$%^&*()-_=+[]{}|;:'\",.<>/?";
-	
-		        String allCharacters = lowercase + uppercase + numbers + specialCharacters;
-	
-		        Random random = new Random();
-		        StringBuilder password = new StringBuilder();
-	
-		        for (int i = 0; i < 12; i++) { 
-		            int randomIndex = random.nextInt(allCharacters.length());
-		            password.append(allCharacters.charAt(randomIndex));
-		        }
-	
-		        return password.toString();
-		    }
-		
-		
-	    private void enviarCorreo(String destinatario, String asunto, String cuerpo) {
-	        final String usuario = "tetristeamhelp@gmail.com"; 
-	        final String contraseña = "lhbu fanv qyiv fdvo"; 
-	
-	        
-	        Properties propiedades = new Properties();
-	        propiedades.put("mail.smtp.auth", "true");
-	        propiedades.put("mail.smtp.starttls.enable", "true");
-	        propiedades.put("mail.smtp.host", "smtp.gmail.com");
-	        propiedades.put("mail.smtp.port", "587");
-	
-	
-	        Session sesion = Session.getInstance(propiedades, new javax.mail.Authenticator() {
-	
-	        	@Override
-	            protected PasswordAuthentication getPasswordAuthentication() {
-	                return new PasswordAuthentication(usuario, contraseña);
-	            }
-	        });
-	     
-	        try {
-	            Message mensaje = new MimeMessage(sesion);
-	            mensaje.setFrom(new InternetAddress(usuario));
-	            mensaje.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
-	            mensaje.setSubject(asunto);
-	            mensaje.setText(cuerpo);
-	
-	            Transport.send(mensaje);
-	
-	            JOptionPane.showMessageDialog(null, "Email sent! Please check your inbox");
-	        } catch (MessagingException e) {
-	            e.printStackTrace();
-	            JOptionPane.showMessageDialog(null, "The email couldn't be sent. Try again");
+	 private String generateRandomPassword() {
+	        String lowercase = "abcdefghijklmnopqrstuvwxyz";
+	        String uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	        String numbers = "0123456789";
+	        String specialCharacters = "!@#$%^&*()-_=+[]{}|;:'\",.<>/?";
+
+	        String allCharacters = lowercase + uppercase + numbers + specialCharacters;
+
+	        Random random = new Random();
+	        StringBuilder password = new StringBuilder();
+
+	        for (int i = 0; i < 12; i++) { 
+	            int randomIndex = random.nextInt(allCharacters.length());
+	            password.append(allCharacters.charAt(randomIndex));
 	        }
+
+	        return password.toString();
 	    }
 	
-		
-		
-	    private JFrame ventana;
 	
-	    public Ventana_SignIn() {
-	        ventana = new JFrame("Sign In");
-	        ventana.setSize(400, 200);
-	        ventana.setLayout(new BorderLayout());
+    private void enviarCorreo(String destinatario, String asunto, String cuerpo) {
+        final String usuario = "tetristeamhelp@gmail.com"; 
+        final String contraseña = "lhbu fanv qyiv fdvo"; 
+
+	        
+        Properties propiedades = new Properties();
+        propiedades.put("mail.smtp.auth", "true");
+        propiedades.put("mail.smtp.starttls.enable", "true");
+        propiedades.put("mail.smtp.host", "smtp.gmail.com");
+        propiedades.put("mail.smtp.port", "587");
+
 	
-	        JLabel signInlbl = new JLabel("Sign In");
-	        signInlbl.setFont(new Font("Cambria", Font.BOLD, 24));
+        Session sesion = Session.getInstance(propiedades, new javax.mail.Authenticator() {
+
+        	@Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(usuario, contraseña);
+            }
+        });
+	     
+        try {
+            Message mensaje = new MimeMessage(sesion);
+            mensaje.setFrom(new InternetAddress(usuario));
+            mensaje.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
+            mensaje.setSubject(asunto);
+            mensaje.setText(cuerpo);
+
+            Transport.send(mensaje);
+
+            JOptionPane.showMessageDialog(null, "Email sent! Please check your inbox");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "The email couldn't be sent. Try again");
+        }
+    }
 	
-	        JPanel pnlLbl = new JPanel();
-	        pnlLbl.add(signInlbl, BorderLayout.CENTER);
-	        ventana.add(pnlLbl, BorderLayout.NORTH);
+    private JFrame ventana;
 	
-	        JPanel pnlPrincipal = new JPanel();
-	        pnlPrincipal.setLayout(new GridLayout(3, 2));
+    public Ventana_SignIn() {
+        ventana = new JFrame("Sign In");
+        ventana.setSize(400, 200);
+        ventana.setLayout(new BorderLayout());
 	
-	        JLabel usernamelbl = new JLabel("Username:");
-	        JTextField usernamefld = new JTextField(15);
-	        pnlPrincipal.add(usernamelbl);
-	        pnlPrincipal.add(usernamefld);
+        JLabel signInlbl = new JLabel("Sign In");
+        signInlbl.setFont(new Font("Cambria", Font.BOLD, 24));
 	
-	        JLabel passwordlbl = new JLabel("Password:");
-	        JPasswordField passwordfld = new JPasswordField(15);
-	        pnlPrincipal.add(passwordlbl);
-	        pnlPrincipal.add(passwordfld);
+        JPanel pnlLbl = new JPanel();
+        pnlLbl.add(signInlbl, BorderLayout.CENTER);
+        ventana.add(pnlLbl, BorderLayout.NORTH);
 	
-	        JLabel forgotPasswordlbl = new JLabel("<html><u>Forgot Password?</u></html>");
-	        forgotPasswordlbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-	        forgotPasswordlbl.setForeground(Color.BLUE);
-	        forgotPasswordlbl.addMouseListener( new MouseAdapter() {
+        JPanel pnlPrincipal = new JPanel();
+        pnlPrincipal.setLayout(new GridLayout(3, 2));
 	
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					// TODO Auto-generated method stub
-					JPanel dialogPanel = new JPanel();
-					
-			        dialogPanel.setLayout(new GridLayout(2,2));
+        JLabel usernamelbl = new JLabel("Username:");
+        JTextField usernamefld = new JTextField(15);
+        pnlPrincipal.add(usernamelbl);
+        pnlPrincipal.add(usernamefld);
 	
-			        JTextField emailRecuperaPass = new JTextField("@gmail.com");
-			        JTextField usernameField = new JTextField();
+        JLabel passwordlbl = new JLabel("Password:");
+        JPasswordField passwordfld = new JPasswordField(15);
+        pnlPrincipal.add(passwordlbl);
+        pnlPrincipal.add(passwordfld);
 	
-			        dialogPanel.add(new JLabel("Email:"));
-			        dialogPanel.add(emailRecuperaPass);
-			        dialogPanel.add(new JLabel("Username:"));
-			        dialogPanel.add(usernameField);
+        JLabel forgotPasswordlbl = new JLabel("<html><u>Forgot Password?</u></html>");
+        forgotPasswordlbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        forgotPasswordlbl.setForeground(Color.BLUE);
+        forgotPasswordlbl.addMouseListener( new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+				JPanel dialogPanel = new JPanel();
+				
+		        dialogPanel.setLayout(new GridLayout(2,2));
+
+		        JTextField emailRecuperaPass = new JTextField("@gmail.com");
+		        JTextField usernameField = new JTextField();
+
+		        dialogPanel.add(new JLabel("Email:"));
+		        dialogPanel.add(emailRecuperaPass);
+		        dialogPanel.add(new JLabel("Username:"));
+		        dialogPanel.add(usernameField);
+
+		        int option = JOptionPane.showOptionDialog(null, dialogPanel, "Type in your email and username",JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+		        if (option == JOptionPane.OK_OPTION) {
+				    String username = usernameField.getText();
+				    String textoIngresado = emailRecuperaPass.getText();
+				    StringBuilder tx = new StringBuilder();
+			        tx.append("Dear [Username],\r\n")
+			        .append("\r\n")
+			        .append("We recently received a request to recover the password for your Tetris account associated with this email address. To enhance the security of your account, we have generated a new temporary password for you.\r\n")
+			        .append("\r\n")
+			        .append("New Password: [GeneratedPassword]\r\n")
+			        .append("\r\n")
+			        .append("For security reasons, we recommend changing this temporary password to a personalized one as soon as you log in. You can update your password in the account settings section.\r\n")
+			        .append("\r\n")
+			        .append("If you did not initiate this password recovery request, please contact our support team immediately at tetristeamhelp@gmail.com.\r\n")
+			        .append("\r\n")
+					.append("Thank you for choosing Tetris!\r\n")
+					.append("\r\n")
+					.append("Best Regards,\r\n")
+					.append("The Tetris Team\r\n");
+					      
+					String rr=tx.toString();
 	
-			        int option = JOptionPane.showOptionDialog(null, dialogPanel, "Type in your email and username",
-			                JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+					String generatedPassword = generateRandomPassword();
+				    rr = rr.replace("[GeneratedPassword]", generatedPassword);
+				    rr=rr.replace("[Username]", username);
 	
-					 
-					 if (option == JOptionPane.OK_OPTION) {
-						    String username = usernameField.getText();
-						    String textoIngresado = emailRecuperaPass.getText();
-						    StringBuilder tx = new StringBuilder();
-					        tx.append("Dear [Username],\r\n")
-					          .append("\r\n")
-					          .append("We recently received a request to recover the password for your Tetris account associated with this email address. To enhance the security of your account, we have generated a new temporary password for you.\r\n")
-					          .append("\r\n")
-					          .append("New Password: [GeneratedPassword]\r\n")
-					          .append("\r\n")
-					          .append("For security reasons, we recommend changing this temporary password to a personalized one as soon as you log in. You can update your password in the account settings section.\r\n")
-					          .append("\r\n")
-					          .append("If you did not initiate this password recovery request, please contact our support team immediately at tetristeamhelp@gmail.com.\r\n")
-					          .append("\r\n")
-					          .append("Thank you for choosing Tetris!\r\n")
-					          .append("\r\n")
-					          .append("Best Regards,\r\n")
-					          .append("The Tetris Team\r\n");
-					        
-					        String rr=tx.toString();
-	
-					        String generatedPassword = generateRandomPassword();
-				            rr = rr.replace("[GeneratedPassword]", generatedPassword);
-				            rr=rr.replace("[Username]", username);
-	
-				            enviarCorreo(textoIngresado, "Password Recovery", rr);
-	
-						    
-						    
-						    //He pensado crear una contraseña random que reemplace la contraseña del usuario
-						    //Y que esta sea guardada en lugar de la que tenía.
-						}
+				    enviarCorreo(textoIngresado, "Password Recovery", rr);
+	    
+				    //He pensado crear una contraseña random que reemplace la contraseña del usuario
+				    //Y que esta sea guardada en lugar de la que tenía.
+					}
 	
 				}
 	        	

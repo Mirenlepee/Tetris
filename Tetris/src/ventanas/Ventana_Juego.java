@@ -476,7 +476,7 @@ public class Ventana_Juego extends JFrame {
 	}
 
     private void fijarPiezaEnTablero() {
-        int[][] forma = piezaActual.obtenerForma();
+    	int[][] forma = piezaActual.obtenerForma();
         int fila = piezaActual.obtenerFila();
         int columna = piezaActual.obtenerColumna();
 
@@ -502,7 +502,7 @@ public class Ventana_Juego extends JFrame {
                     System.arraycopy(tablero[k - 1], 0, tablero[k], 0, ANCHO_TABLERO);
                 }
                 Arrays.fill(tablero[0], 0);
-                puntos += 100; 
+                puntos += 100;
                 actualizarEtiquetaPuntos();
             }
         }
@@ -510,6 +510,7 @@ public class Ventana_Juego extends JFrame {
         piezasEnTablero.add(piezaActual);
         piezaActual = new Pieza();
     }
+    
     private void actualizarEtiquetaPuntos() {
         etiquetaPuntos.setText("Puntos: " + puntos);
     }
@@ -525,34 +526,41 @@ public class Ventana_Juego extends JFrame {
         }
     }
     private void dibujarPiezasFijas(Graphics g) {
-        for (int i = 0; i < tablero.length; i++) {
+    	for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
                 if (tablero[i][j] == 1) {
-                    Color colorPieza = obtenerColorPiezaEnTablero(i, j);
-                    dibujarCelda(g, j * TAMANO_CELDA, i * TAMANO_CELDA, colorPieza);
+                    Color colorCelda = obtenerColorPiezaEnTablero(i, j);
+                    dibujarCelda(g, j * TAMANO_CELDA, i * TAMANO_CELDA, colorCelda);
                 }
             }
         }
     }
 
     private Color obtenerColorPiezaEnTablero(int fila, int columna) {
+    	// Verificar si la celda pertenece a la pieza actual
+        if (fila >= piezaActual.obtenerFila() && fila < piezaActual.obtenerFila() + piezaActual.obtenerForma().length &&
+            columna >= piezaActual.obtenerColumna() && columna < piezaActual.obtenerColumna() + piezaActual.obtenerForma()[0].length) {
+            int filaRelativa = fila - piezaActual.obtenerFila();
+            int columnaRelativa = columna - piezaActual.obtenerColumna();
+            if (piezaActual.obtenerForma()[filaRelativa][columnaRelativa] == 1) {
+                return piezaActual.obtenerColor();
+            }
+        }
+
+        // Verificar si la celda pertenece a alguna pieza en piezasEnTablero
         for (Pieza pieza : piezasEnTablero) {
             int[][] forma = pieza.obtenerForma();
             int filaPieza = pieza.obtenerFila();
             int columnaPieza = pieza.obtenerColumna();
-            if (fila >= filaPieza && fila < filaPieza + forma.length && columna >= columnaPieza && columna < columnaPieza + forma[0].length) {
-                // Calcular las coordenadas relativas dentro de la forma de la pieza
-                int filaRelativa = fila - filaPieza;
-                int columnaRelativa = columna - columnaPieza;
-                // Verificar si la coordenada relativa está dentro de la forma y es una parte de la pieza
-                if (filaRelativa >= 0 && filaRelativa < forma.length &&
-                    columnaRelativa >= 0 && columnaRelativa < forma[0].length &&
-                    forma[filaRelativa][columnaRelativa] == 1) {
-                    return pieza.obtenerColor();
-                }
+            if (fila >= filaPieza && fila < filaPieza + forma.length &&
+                columna >= columnaPieza && columna < columnaPieza + forma[0].length &&
+                forma[fila - filaPieza][columna - columnaPieza] == 1) {
+                return pieza.obtenerColor();
             }
         }
-        return Color.BLUE; // Color predeterminado si no hay coincidencia
+
+        // Si no pertenece a ninguna pieza, devolver el color predeterminado
+        return Color.BLUE; // O el color que prefieras
     }
 
 

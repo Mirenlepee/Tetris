@@ -672,7 +672,6 @@ public class Ventana_Juego extends JFrame {
        }
    }
 
-
    public class CorazonPanel extends JPanel {
        protected int vidasMostradas;
 

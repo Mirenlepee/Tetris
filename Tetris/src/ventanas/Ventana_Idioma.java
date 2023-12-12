@@ -2,14 +2,8 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.awt.event.*;
+import javax.swing.*;
 
 public class Ventana_Idioma extends JFrame{
 	public Ventana_Idioma () {
@@ -50,8 +44,22 @@ public class Ventana_Idioma extends JFrame{
         setVisible(true);
 	}
 	
+	public static enum Idioma { ENG, DEU, ESP, EUS, FRA };  
+	
+	private static String[][] traducciones = {
+		{ "Play","", "Jugar", "Jolastu", "Jouer" }
+	};
+	
+	public static String getTrad( String original, Idioma idioma ) {
+		for (int i=0; i<traducciones.length; i++) {
+			if (traducciones[i][0].equalsIgnoreCase(original)) {
+				return traducciones[i][idioma.ordinal()];
+			}
+		}
+		return "NO-TRADUCIDO: " + original;
+	}
+	
 	public static void main(String[] args) {
 		Ventana_Idioma idiomas = new Ventana_Idioma();
-	}    
-		
+	}    	
 }

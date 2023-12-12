@@ -22,6 +22,8 @@ public class Ventana_Juego extends JFrame {
     private Pieza siguientePieza;
     private JButton btnPausa;
         
+    private JLabel lblNivel;
+    
     protected int minutos = 0;
     protected int segundos = 0;
     private boolean gameOverDisplayed = false;
@@ -41,6 +43,7 @@ public class Ventana_Juego extends JFrame {
     protected JLabel etiquetaTiempo;
     protected Clip clip;
     protected int vidas=3;
+    protected Ventana_GameOver ventGo;
 
     public Ventana_Juego() {
 
@@ -116,10 +119,12 @@ public class Ventana_Juego extends JFrame {
 		ImageIcon iconoDef = new ImageIcon(imagenDef);
 
 		btnPausa.setIcon(iconoDef);
+		lblNivel = new JLabel("Nivel: 1");
         
         
         panelDerecho.add(Box.createVerticalGlue());
         panelDerecho.add(etiquetaPuntos);
+        panelDerecho.add(lblNivel);
         panelDerecho.add(Box.createVerticalStrut(10)); 
         panelDerecho.add(PanelEspacio1);
         panelDerecho.add(Box.createVerticalStrut(10)); 
@@ -187,6 +192,16 @@ public class Ventana_Juego extends JFrame {
                 } else if (choice == 3) {
                     System.exit(0);
                 }
+                gameOverDisplayed = true;
+       	 		timerContador.stop();
+       	 		//ventGO = new Ventana_GameOver(this);
+
+       	 		if (!ventGo.isVisible()) {
+       	 			ventGo.setResizable(false);
+       	 			ventGo.tfScore.setText(String.valueOf(puntos));
+       	 			ventGo.tfTimePlayed.setText(etiquetaTiempo.getText());
+       	 			ventGo.setVisible(true);
+       	 		}
              
             }
         });
@@ -204,7 +219,7 @@ public class Ventana_Juego extends JFrame {
 
         iniciarJuego();
 
-      timer = new Timer(200, new ActionListener() {
+        timer = new Timer(200, new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
                 if (!gameOver) {
@@ -213,10 +228,8 @@ public class Ventana_Juego extends JFrame {
               }
            }
         });
-      timer.start();
+        timer.start();
       
-       
-
         panelJuego.addKeyListener(new KeyAdapter() {
         	public void keyPressed(KeyEvent evt) {
                 teclaPresionada(evt);
@@ -227,8 +240,7 @@ public class Ventana_Juego extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-    
-    
+     
     
     private void actualizarEtiquetaTiempo() {
         String tiempoFormateado = String.format("%02d:%02d", minutos, segundos);
@@ -420,8 +432,6 @@ public class Ventana_Juego extends JFrame {
         
     }
    
-
-    
     private boolean verificarColisionLateral(int k) {
         int[][] forma = piezaActual.obtenerForma();
         int columna = piezaActual.obtenerColumna();

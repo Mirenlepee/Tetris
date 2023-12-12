@@ -25,23 +25,51 @@ public class Pieza {
     }
 
     private Color asignarColorPorForma(int[][] forma) {
-       
-        if (forma == PiezaTetris.FORMAS[0]) { //Para I
-            return Color.CYAN;
-        } else if (forma == PiezaTetris.FORMAS[1]) { //J
-            return Color.BLUE;
-        } else if (forma == PiezaTetris.FORMAS[2]) { //L
-            return Color.ORANGE;
-        } else if (forma == PiezaTetris.FORMAS[3]) { //O
-            return Color.YELLOW;
-        } else if (forma == PiezaTetris.FORMAS[4]) { //S
-            return Color.GREEN;
-        } else if (forma == PiezaTetris.FORMAS[5]) { //T
-            return Color.MAGENTA;
-        } else { //Z
-            return Color.RED;
+        // Comparar la forma con las formas predefinidas para asignar el color
+        for (int i = 0; i < PiezaTetris.FORMAS.length; i++) {
+            if (sonMatricesIguales(forma, PiezaTetris.FORMAS[i])) {
+                return obtenerColorCorrespondiente(i);
+            }
+        }
+        // Si no se encuentra ninguna coincidencia, devolver un color predeterminado
+        return Color.GRAY; // Puedes cambiar esto al color que prefieras
+    }
+
+    private boolean sonMatricesIguales(int[][] matrizA, int[][] matrizB) {
+        if (matrizA.length != matrizB.length || matrizA[0].length != matrizB[0].length) {
+            return false;
+        }
+        for (int i = 0; i < matrizA.length; i++) {
+            for (int j = 0; j < matrizA[0].length; j++) {
+                if (matrizA[i][j] != matrizB[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private Color obtenerColorCorrespondiente(int indice) {
+        switch (indice) {
+            case 0:
+                return Color.CYAN;
+            case 1:
+                return Color.BLUE;
+            case 2:
+                return Color.ORANGE;
+            case 3:
+                return Color.YELLOW;
+            case 4:
+                return Color.GREEN;
+            case 5:
+                return Color.MAGENTA;
+            case 6:
+                return Color.RED;
+            default:
+                return Color.GRAY; // Color predeterminado si no se encuentra ninguna coincidencia
         }
     }
+
 
     //Obtener la forma de la pieza
     public int[][] obtenerForma() {//Matriz

@@ -1,6 +1,5 @@
 package juego;
 
-
 import java.awt.Color;
 
 public class PiezaTetris {
@@ -48,6 +47,4 @@ public class PiezaTetris {
     	return FORMAS[ale];
     }
 
-    
-    
 }

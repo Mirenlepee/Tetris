@@ -540,12 +540,19 @@ public class Ventana_Juego extends JFrame {
             int[][] forma = pieza.obtenerForma();
             int filaPieza = pieza.obtenerFila();
             int columnaPieza = pieza.obtenerColumna();
-            if (fila >= filaPieza && fila < filaPieza + forma.length
-                    && columna >= columnaPieza && columna < columnaPieza + forma[0].length) {
-                return pieza.obtenerColor();
+            if (fila >= filaPieza && fila < filaPieza + forma.length && columna >= columnaPieza && columna < columnaPieza + forma[0].length) {
+                // Calcular las coordenadas relativas dentro de la forma de la pieza
+                int filaRelativa = fila - filaPieza;
+                int columnaRelativa = columna - columnaPieza;
+                // Verificar si la coordenada relativa está dentro de la forma y es una parte de la pieza
+                if (filaRelativa >= 0 && filaRelativa < forma.length &&
+                    columnaRelativa >= 0 && columnaRelativa < forma[0].length &&
+                    forma[filaRelativa][columnaRelativa] == 1) {
+                    return pieza.obtenerColor();
+                }
             }
         }
-        return Color.BLUE; 
+        return Color.BLUE; // Color predeterminado si no hay coincidencia
     }
 
 

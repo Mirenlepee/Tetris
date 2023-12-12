@@ -476,7 +476,7 @@ public class Ventana_Juego extends JFrame {
 	}
 
     private void fijarPiezaEnTablero() {
-    	int[][] forma = piezaActual.obtenerForma();
+        int[][] forma = piezaActual.obtenerForma();
         int fila = piezaActual.obtenerFila();
         int columna = piezaActual.obtenerColumna();
 
@@ -502,7 +502,7 @@ public class Ventana_Juego extends JFrame {
                     System.arraycopy(tablero[k - 1], 0, tablero[k], 0, ANCHO_TABLERO);
                 }
                 Arrays.fill(tablero[0], 0);
-                puntos += 100;
+                puntos += 100; 
                 actualizarEtiquetaPuntos();
             }
         }
@@ -510,7 +510,6 @@ public class Ventana_Juego extends JFrame {
         piezasEnTablero.add(piezaActual);
         piezaActual = new Pieza();
     }
-    
     private void actualizarEtiquetaPuntos() {
         etiquetaPuntos.setText("Puntos: " + puntos);
     }
@@ -526,11 +525,11 @@ public class Ventana_Juego extends JFrame {
         }
     }
     private void dibujarPiezasFijas(Graphics g) {
-    	for (int i = 0; i < tablero.length; i++) {
+        for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
                 if (tablero[i][j] == 1) {
-                    Color colorCelda = obtenerColorPiezaEnTablero(i, j);
-                    dibujarCelda(g, j * TAMANO_CELDA, i * TAMANO_CELDA, colorCelda);
+                    Color colorPieza = obtenerColorPiezaEnTablero(i, j);
+                    dibujarCelda(g, j * TAMANO_CELDA, i * TAMANO_CELDA, colorPieza);
                 }
             }
         }

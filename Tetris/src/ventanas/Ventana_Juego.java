@@ -94,7 +94,6 @@ public class Ventana_Juego extends JFrame {
         panelDerecho.setLayout(new BoxLayout(panelDerecho, BoxLayout.Y_AXIS));
 
         etiquetaPuntos = new JLabel("Puntos: " + puntos);
-        etiquetaPuntos.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         etiquetaTiempo = new JLabel("00:00");
         panelDerecho.add(Box.createVerticalStrut(10)); 

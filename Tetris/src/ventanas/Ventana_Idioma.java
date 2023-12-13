@@ -47,19 +47,38 @@ public class Ventana_Idioma extends JFrame{
 	public static enum Idioma { ENG, DEU, ESP, EUS, FRA };  
 	
 	private static String[][] traducciones = {
-		{ "Play","", "Jugar", "Jolastu", "Jouer" }
+		{ "Play", "Spielen", "Jugar", "Jolastu", "Jouer" }
 	};
 	
-	public static String getTrad( String original, Idioma idioma ) {
-		for (int i=0; i<traducciones.length; i++) {
-			if (traducciones[i][0].equalsIgnoreCase(original)) {
-				return traducciones[i][idioma.ordinal()];
-			}
-		}
-		return "NO-TRADUCIDO: " + original;
-	}
-	
-	public static void main(String[] args) {
-		Ventana_Idioma idiomas = new Ventana_Idioma();
-	}    	
+	public static String[][] traducirTodasLasPalabras(Idioma idioma) {
+        int indiceIdioma = idioma.ordinal();
+        String[][] traduccionesIdioma = new String[traducciones.length][traducciones[0].length];
+        
+        for (int i = 0; i < traducciones.length; i++) {
+            for (int j = 0; j < traducciones[i].length; j++) {
+                if (j == 0) {
+                    traduccionesIdioma[i][j] = traducciones[i][j]; // Mantiene la palabra original
+                } else {
+                    traduccionesIdioma[i][j] = traducciones[i][indiceIdioma]; // Traduce al idioma seleccionado
+                }
+            }
+        }
+        return traduccionesIdioma;
+    }
+
+	 public static void main(String[] args) {
+		 // Aquí se realizaría la selección del idioma, por ejemplo:
+	        Idioma idiomaSeleccionado = Idioma.FRA;
+
+	        // Llamamos al método para traducir todas las palabras al idioma seleccionado
+	        String[][] palabrasTraducidas = traducirTodasLasPalabras(idiomaSeleccionado);
+
+	        // Imprimimos las palabras traducidas
+	        for (String[] fila : palabrasTraducidas) {
+	            for (String palabra : fila) {
+	                System.out.print(palabra + " ");
+	            }
+	            System.out.println();
+	        }
+	 }   	
 }

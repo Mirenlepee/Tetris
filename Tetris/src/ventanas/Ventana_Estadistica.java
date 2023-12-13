@@ -26,11 +26,14 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
 import BD.ConexionBD;
+import ventanas.Ventana_Idioma.Idioma;
 
-public class Ventana_Estadistica{
+public class Ventana_Estadistica extends JFrame{
 	private JFrame ventana;
 	private JTable tablaDatos;
 	private TableModel modeloDatos;
+	private JLabel signInlbl;
+	private JButton btnReturn;
 	
 	public Ventana_Estadistica(int idJugador) {
 		ventana = new JFrame("Estadística__");
@@ -38,7 +41,7 @@ public class Ventana_Estadistica{
 		ventana.setTitle("Estadística");
 		ventana.setLayout(new BorderLayout());
 		
-		JLabel signInlbl = new JLabel("Statistics");
+		signInlbl = new JLabel("Statistics");
 		signInlbl.setFont(new Font("Cambria", Font.BOLD, 24));
 		
 		JPanel pnlLbl = new JPanel();
@@ -47,23 +50,23 @@ public class Ventana_Estadistica{
 		
 		JPanel pnlBoton = new JPanel();
 		
-		JButton btnReturn = new JButton("Return");
-		 pnlBoton.add(btnReturn);
-		 btnReturn.addActionListener(new ActionListener() {
-			 @Override
-			 public void actionPerformed(ActionEvent e) {
-			 	ventana.dispose();
-			 }
+		btnReturn = new JButton("Return");
+		pnlBoton.add(btnReturn);
+		btnReturn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ventana.dispose();
+			}
 			         	
-		 });
-		 tablaDatos = new JTable();
-		 ventana.add(new JScrollPane(tablaDatos), BorderLayout.CENTER);
-		 setDatos();
+		});
+		tablaDatos = new JTable();
+		ventana.add(new JScrollPane(tablaDatos), BorderLayout.CENTER);
+		setDatos();
     
-		 actualizarEstadisticas(idJugador);
+		actualizarEstadisticas(idJugador);
 		 
-		 ventana.add(pnlBoton, BorderLayout.SOUTH);
-		 ventana.setVisible(true);
+		ventana.add(pnlBoton, BorderLayout.SOUTH);
+		ventana.setVisible(true);
 	}
 	
 	public void setDatos() {
@@ -186,4 +189,10 @@ public class Ventana_Estadistica{
 		}
 	}
 
+
+	public void actualizarIdioma(Idioma idiomaActual) {
+		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
+		signInlbl.setText(traducciones[0][0]);
+		btnReturn.setText(traducciones[0][0]);
+	}
 }

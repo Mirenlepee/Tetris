@@ -1,6 +1,9 @@
 package ventanas;
 
 import javax.swing.*;
+
+import ventanas.Ventana_Idioma.Idioma;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +12,8 @@ import java.io.File;
 public class Ventana_AvatarUsuario extends JFrame {
 
     private JButton btnAvatar;
+    private JButton btnSeleccionarFoto;
+    private JButton btnAceptar;
 
     public Ventana_AvatarUsuario() {
         this.setSize(200, 200);
@@ -36,7 +41,7 @@ public class Ventana_AvatarUsuario extends JFrame {
             }
         });
 
-        JButton btnAceptar = new JButton("Aceptar");
+        btnAceptar = new JButton("Aceptar");
         btnAceptar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -54,4 +59,11 @@ public class Ventana_AvatarUsuario extends JFrame {
     public void setAvatarButton(JButton btnAvatar) {
         this.btnAvatar = btnAvatar;
     }
+
+	public void actualizarIdioma(Idioma idiomaActual) {
+		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
+		btnAvatar.setText(traducciones[0][0]);
+		btnSeleccionarFoto.setText(traducciones[0][0]);
+		btnAceptar.setText(traducciones[0][0]);
+	}
 }

@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class Ventana_Pausa{
+public class Ventana_Pausa extends JFrame{
 	private JFrame ventana;
 	
 	public Ventana_Pausa() {

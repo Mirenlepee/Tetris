@@ -7,6 +7,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.*;
+
+import ventanas.Ventana_Idioma.Idioma;
+
 import javax.mail.PasswordAuthentication;
 	
 import java.util.Properties;
@@ -21,6 +24,15 @@ import java.util.Random;
 import java.awt.event.MouseEvent;
 	
 public class Ventana_SignIn extends JFrame {
+	
+	private JLabel signInlbl;
+	private JPanel pnlLbl;
+	private JLabel usernamelbl;
+	private JLabel passwordlbl;
+	private JLabel forgotPasswordlbl;
+	private JButton continuebtn;
+	private JLabel noAccountlbl ;
+	
 		
 	 private String generateRandomPassword() {
 	        String lowercase = "abcdefghijklmnopqrstuvwxyz";
@@ -85,27 +97,27 @@ public class Ventana_SignIn extends JFrame {
         ventana.setSize(400, 200);
         ventana.setLayout(new BorderLayout());
 	
-        JLabel signInlbl = new JLabel("Sign In");
+        signInlbl = new JLabel("Sign In");
         signInlbl.setFont(new Font("Cambria", Font.BOLD, 24));
 	
-        JPanel pnlLbl = new JPanel();
+        pnlLbl = new JPanel();
         pnlLbl.add(signInlbl, BorderLayout.CENTER);
         ventana.add(pnlLbl, BorderLayout.NORTH);
 	
         JPanel pnlPrincipal = new JPanel();
         pnlPrincipal.setLayout(new GridLayout(3, 2));
 	
-        JLabel usernamelbl = new JLabel("Username:");
+        usernamelbl = new JLabel("Username:");
         JTextField usernamefld = new JTextField(15);
         pnlPrincipal.add(usernamelbl);
         pnlPrincipal.add(usernamefld);
 	
-        JLabel passwordlbl = new JLabel("Password:");
+        passwordlbl = new JLabel("Password:");
         JPasswordField passwordfld = new JPasswordField(15);
         pnlPrincipal.add(passwordlbl);
         pnlPrincipal.add(passwordfld);
 	
-        JLabel forgotPasswordlbl = new JLabel("<html><u>Forgot Password?</u></html>");
+        forgotPasswordlbl = new JLabel("<html><u>Forgot Password?</u></html>");
         forgotPasswordlbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         forgotPasswordlbl.setForeground(Color.BLUE);
         forgotPasswordlbl.addMouseListener( new MouseAdapter() {
@@ -173,7 +185,7 @@ public class Ventana_SignIn extends JFrame {
 	        
 	        JPanel Botonpnl = new JPanel();
 	        Botonpnl.setLayout(new FlowLayout(FlowLayout.CENTER));
-	        JButton continuebtn = new JButton("Continue");
+	        continuebtn = new JButton("Continue");
 	        continuebtn.addActionListener(new ActionListener() {
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
@@ -197,7 +209,7 @@ public class Ventana_SignIn extends JFrame {
 	        
 	
 	        JPanel Mensagepnl = new JPanel();
-	        JLabel noAccountlbl = new JLabel("<html><u>Don't have an account? Create one</u></html>");
+	        noAccountlbl = new JLabel("<html><u>Don't have an account? Create one</u></html>");
 	        noAccountlbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	        noAccountlbl.setForeground(Color.BLUE);
 	        noAccountlbl.setHorizontalAlignment(JLabel.CENTER);
@@ -215,8 +227,6 @@ public class Ventana_SignIn extends JFrame {
 	        pnlSouth.add(Botonpnl);
 	        pnlSouth.add(noAccountlbl);
 	    
-	        
-	
 	        ventana.setVisible(true);
 	    }
 	    
@@ -224,4 +234,14 @@ public class Ventana_SignIn extends JFrame {
 	    public static void main(String[] args) {
 	        Ventana_SignIn v = new Ventana_SignIn();
 	    }
+
+		public void actualizarIdioma(Idioma idiomaActual) {
+			String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
+		    signInlbl.setText(traducciones[0][0]);
+		    usernamelbl.setText(traducciones[0][0]); 
+		    passwordlbl.setText(traducciones[0][0]); 
+		    forgotPasswordlbl.setText(traducciones[0][0]); 
+		    continuebtn.setText(traducciones[0][0]); 
+		    noAccountlbl.setText(traducciones[0][0]);
+		}
 	}

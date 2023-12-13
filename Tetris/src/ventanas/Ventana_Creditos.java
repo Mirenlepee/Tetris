@@ -3,6 +3,8 @@ package ventanas;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+import ventanas.Ventana_Idioma.Idioma;
 	
 public class Ventana_Creditos extends JFrame{
 	private JPanel pnlContenido;
@@ -89,4 +91,14 @@ public class Ventana_Creditos extends JFrame{
         add(pnlContenido);
     	setVisible(true);
     }
+
+	public void actualizarIdioma(Idioma idiomaActual) {
+		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
+		lblTitulo.setText(traducciones[0][0]);
+		lblCreadoras.setText(traducciones[0][0]);
+		txtCreadoras.setText(traducciones[0][0]);
+		lblDiseñadoras.setText(traducciones[0][0]);
+		txtDiseñadoras.setText(traducciones[0][0]);
+		btnVolver.setText(traducciones[0][0]);
+	}
 }

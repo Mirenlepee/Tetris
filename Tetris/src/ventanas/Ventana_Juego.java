@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.util.List;
 import javax.swing.border.LineBorder;
 import juego.Pieza;
+import ventanas.Ventana_Idioma.Idioma;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -679,4 +681,10 @@ public class Ventana_Juego extends JFrame {
             g2d.fill(heart);
         }
     }
+
+
+	public void actualizarIdioma(Idioma idiomaActual) {
+		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
+		signInlbl.setText(traducciones[0][0]);
+	}
 }

@@ -6,12 +6,19 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import javax.sound.sampled.*;
 import javax.swing.*;
+
+import ventanas.Ventana_Idioma.Idioma;
 import ventanas.Ventana_Juego.CorazonPanel;
 
 
-public class Ventana_Options{
+public class Ventana_Options extends JFrame{
 	private JFrame ventana;
+	private JLabel lblOptions;
 	public JButton btnSound;
+	private JLabel lblSound;
+	private JLabel lblLanguage;
+	private JLabel lblHTP;
+	private JButton btnReturn;
 	private boolean imgSound = true;
 	private static Clip clip;	
 	
@@ -22,7 +29,7 @@ public class Ventana_Options{
 		ventana.setTitle("Options");
 		ventana.setLayout(new BorderLayout());
     	
-    	JLabel lblOptions = new JLabel("Options");
+    	lblOptions = new JLabel("Options");
         lblOptions.setFont(new Font("Cambria", Font.BOLD, 24));
         
         JPanel pnlLbl = new JPanel();
@@ -50,8 +57,7 @@ public class Ventana_Options{
 	        }
 	    });
 
-        
-        JLabel lblSound = new JLabel("Sound");
+        lblSound = new JLabel("Sound");
         fila1.add(lblSound);
         
         ImageIcon imgLanguage = new ImageIcon(getClass().getResource("Language.png"));
@@ -73,7 +79,7 @@ public class Ventana_Options{
         	
         });
         
-        JLabel lblLanguage = new JLabel("Language");
+        lblLanguage = new JLabel("Language");
         fila2.add(lblLanguage);
        
         
@@ -95,10 +101,10 @@ public class Ventana_Options{
 			}
         });
         
-        JLabel lblHTP = new JLabel("How to play");
+        lblHTP = new JLabel("How to play");
         fila3.add(lblHTP);
         
-        JButton btnReturn = new JButton("Return");
+        btnReturn = new JButton("Return");
         fila4.add(btnReturn);
         
         btnReturn.addActionListener( new ActionListener() {
@@ -168,5 +174,14 @@ public class Ventana_Options{
 		cambiarImgBtn();
 	    ventana.setVisible(true);
 	}
-	
+
+	public void actualizarIdioma(Idioma idiomaActual) {
+		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
+		lblOptions.setText(traducciones[0][0]);
+		btnSound.setText(traducciones[0][0]);
+		lblSound.setText(traducciones[0][0]);
+		lblLanguage.setText(traducciones[0][0]);
+		lblHTP.setText(traducciones[0][0]);
+		btnReturn.setText(traducciones[0][0]);
+	}	
 }

@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import ventanas.Ventana_Idioma.Idioma;
+
 public class Ventana_Instrucciones extends JFrame{
 	private JLabel lblTitle;
     private JTextArea TxtAreaInstructions;
@@ -56,6 +58,11 @@ public class Ventana_Instrucciones extends JFrame{
         
         setVisible(true);
     }
+
+	public void actualizarIdioma(Idioma idiomaActual) {
+		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
+		lblTitle.setText(traducciones[0][0]);
+		TxtAreaInstructions.setText(traducciones[0][0]);
+		closeBtn.setText(traducciones[0][0]);
+	}
 }
-
-

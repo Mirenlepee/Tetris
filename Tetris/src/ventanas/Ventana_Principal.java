@@ -15,6 +15,11 @@ public class Ventana_Principal extends JFrame{
 	private BufferedImage imgFondo;
 	private Ventana_Options ventanaOptions;
 	
+	private JButton btnPlay;
+	private JButton btnSettings;
+	private JButton btnCredits;	
+	
+	
 	public Ventana_Principal() {
 		setTitle("Ventana Principal");
         setSize(600, 800);
@@ -55,7 +60,7 @@ public class Ventana_Principal extends JFrame{
 	private void addButtons() {
 		JLayeredPane layeredPane = (JLayeredPane) getContentPane();
 		
-		JButton btnPlay = new JButton("PLAY");
+		btnPlay = new JButton("PLAY");
 		btnPlay.setFont(new Font("Vendana", Font.BOLD, 16));
 		btnPlay.setBackground(Color.WHITE);
 		//btnPlay.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -73,7 +78,7 @@ public class Ventana_Principal extends JFrame{
 		
 		ventanaOptions = new Ventana_Options();		
 		ImageIcon imgSettings = new ImageIcon(getClass().getResource("Settings.png"));
-		JButton btnSettings = new JButton();
+		btnSettings = new JButton();
 		btnSettings.setBackground(Color.WHITE);
 		//btnSettings.setBorder(new EmptyBorder(0, 0, 0, 0));
 		//Editar el tamaño del logo
@@ -112,7 +117,7 @@ public class Ventana_Principal extends JFrame{
 		btnStatistics.setBounds(100, 300, 200, 30);
 		layeredPane.add(btnStatistics, JLayeredPane.PALETTE_LAYER);
 		
-		JButton btnCredits = new JButton("CREDITS");
+		btnCredits = new JButton("CREDITS");
 		btnCredits.setFont(new Font("Vendana", Font.BOLD, 16));
 		btnCredits.setBackground(Color.WHITE);
 		//btnCredits.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -145,10 +150,16 @@ public class Ventana_Principal extends JFrame{
 	    ventanaOptions.setImgSoundState(!ventanaOptions.getImgSoundState());
 	}
 	
+	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
+	    String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idioma);
+	    btnPlay.setText(traducciones[0][0]); 
+	    btnSettings.setText(traducciones[0][0]);
+	    btnCredits.setText(traducciones[0][0]);
+	}
+
+	
 	public static void main(String[] args) {
 		JFrame vent = new Ventana_Principal();
 		vent.setVisible(true);
-		
 	}
-	
 }

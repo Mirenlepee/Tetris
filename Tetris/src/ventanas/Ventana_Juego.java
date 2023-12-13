@@ -562,7 +562,6 @@ public class Ventana_Juego extends JFrame {
         return Color.BLUE;
     }
 
-
     private void dibujarPiezaActual(Graphics g) {
         int[][] forma = piezaActual.obtenerForma();
         int fila = piezaActual.obtenerFila();

@@ -315,18 +315,23 @@ public class Ventana_Juego extends JFrame {
 
             timerContador.stop();
 
-            Ventana_GameOver ventGO = new Ventana_GameOver(this);
+            Ventana_GameOver ventGo = new Ventana_GameOver(this);
 
-            if (!ventGO.isVisible()) {
-            	ventGO.setResizable(false);
-                ventGO.tfScore.setText(String.valueOf(puntos));
-                ventGO.tfTimePlayed.setText(etiquetaTiempo.getText());
-                ventGO.setVisible(true);
+            if (!ventGo.isVisible()) {
+            	ventGo.setResizable(false);
+                ventGo.tfScore.setText(String.valueOf(puntos));
+                ventGo.tfTimePlayed.setText(etiquetaTiempo.getText());
+                ventGo.setVisible(true);
             }
         }
     }
     
-  private void mostrarMessageCorazon() {
+    public void actualizarCampos(Ventana_GameOver vent) {
+		vent.tfScore.setText(String.valueOf(this.getPuntuacion()));
+	    vent.tfTimePlayed.setText(this.getTiempoJugado());
+    }
+    
+    private void mostrarMessageCorazon() {
         
     	vidas=vidas-1;
     	Object[] options = {"Continue"};

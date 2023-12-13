@@ -16,13 +16,9 @@ import ventanas.Ventana_Juego.CorazonPanel;
 public class Ventana_GameOver extends JDialog {
 	protected JTextField tfScore;
 	protected JTextField tfTimePlayed;
-	private Ventana_Juego ventJuego;
-	
-	private JFrame ventana;
 	
 	public Ventana_GameOver(Ventana_Juego ventJuego) {
 		super(ventJuego, "Game Over", true);
-		this.ventJuego = ventJuego;
 		setSize(400, 200);
 		setLocationRelativeTo(ventJuego);
 		setLayout(new BorderLayout());
@@ -107,11 +103,7 @@ public class Ventana_GameOver extends JDialog {
 	        	setVisible(false);
 	        	dispose();
 	        	//new Ventana_Juego();
-	        	
-	        	
-
-				ventJuego.reiniciarJuego();
-		        dispose(); // Cierra la Ventana_GameOver
+	       
 			}
 			
 		});
@@ -133,12 +125,9 @@ public class Ventana_GameOver extends JDialog {
         
 		add(pnlPrincipal, BorderLayout.CENTER);
 		add(pnlBotonera, BorderLayout.SOUTH);
-		actualizarCampos();
+		ventJuego.actualizarCampos(this);
 		setVisible(true);
 	}
-	public void actualizarCampos() {
-		tfScore.setText(String.valueOf(ventJuego.getPuntuacion()));
-	    tfTimePlayed.setText(ventJuego.getTiempoJugado());
-    }
+	
 	
 }

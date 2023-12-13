@@ -559,7 +559,7 @@ public class Ventana_Juego extends JFrame {
         }
 
         // Si no pertenece a ninguna pieza, devolver el color predeterminado
-        return Color.BLUE; // O el color que prefieras
+        return Color.BLUE;
     }
 
 

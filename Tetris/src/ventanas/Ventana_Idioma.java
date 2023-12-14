@@ -102,8 +102,23 @@ public class Ventana_Idioma extends JFrame{
 	public static enum Idioma { ENG, DEU, ESP, EUS, FRA };  
 	
 	private static String[][] traducciones = {
-		{ "Play", "Spielen", "Jugar", "Jolastu", "Jouer" }
-		
+		{ "Play", "Spielen", "Jugar", "Jolastu", "Jouer" },
+		{ "STATISTICS", "ESTADÍSTICA", "STATISTIKEN", "ESTADISTIKA", "STATISTIQUES"},
+		{ "CREDITS", "CRÉDITOS", "GUTHABEN", "KREDITUAK", "CRÉDITS"},
+		{ "Sign In", "Iniciar sesión", "Anmelden", "Saioa hasi", "Connexion"},
+		{ "Username:", "Nombre de usuario:", "Benutzername:", "Erabiltzaile izena:", "Nom d'utilisateur:"},
+		{ "Password:", "Contraseña:", "Passwort:", "Pasahitza:", "Mot de passe:"},
+		{ "<html><u>Forgot Password?</u></html>", "<html><u>¿Olvidaste la contraseña?</u></html>", "<html><u>Passwort vergessen?</u></html>", "<html><u>Pasahitzaren ahaztu duzu?</u></html>", "<html><u>Mot de passe oublié ?</u></html>"},
+		{ "Continue", "Continuar", "Fortfahren", "Jarraitu", "Continuer"},
+		{ "<html><u>Don't have an account? Create one</u></html>", "<html><u>¿No tienes una cuenta? Crea una</u></html>", "<html><u>Sie haben kein Konto? Erstellen Sie eins</u></html>", "<html><u>Ez duzu konturik? Sortu bat</u></html>", "<html><u>Vous n'avez pas de compte? Créez-en un</u></html>"},
+		{ "Sign Up", "Registrarse", "Registrieren", "Erregistratu", "S'inscrire"},
+		{ "Username:", "Nombre de usuario:", "Benutzername:", "Erabiltzaile izena:", "Nom d'utilisateur:"},
+		{ "Password:", "contraseña:", "passwort:", "pasahitza:", "mot de passe:" },
+		{ "Confirm Password:", "confirmar contraseña:", "passwort bestätigen:", "pasahitza berretsi:", "confirmer le mot de passe:"},
+		{ "Email:", "correo electrónico:", "e-mail:", "posta elektronikoa:", "e-mail:"},
+		{ "Back", "atrás", "zurück", "atzera", "retour"},
+		{ "Quit", "salir", "beenden", "irten", "quitter"},
+		{ "Continue", "continuar", "fortfahren", "jarraitu", "continuer"}		
 	};
 	
 	public static String[][] traducirTodasLasPalabras(Idioma idioma) {

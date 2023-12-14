@@ -16,7 +16,7 @@ public class Ventana_Principal extends JFrame{
 	private Ventana_Options ventanaOptions;
 	
 	private JButton btnPlay;
-	private JButton btnSettings;
+	private JButton btnStatistics;
 	private JButton btnCredits;	
 	
 	
@@ -78,7 +78,7 @@ public class Ventana_Principal extends JFrame{
 		
 		ventanaOptions = new Ventana_Options();		
 		ImageIcon imgSettings = new ImageIcon(getClass().getResource("Settings.png"));
-		btnSettings = new JButton();
+		JButton btnSettings = new JButton();
 		btnSettings.setBackground(Color.WHITE);
 		//btnSettings.setBorder(new EmptyBorder(0, 0, 0, 0));
 		//Editar el tamaño del logo
@@ -100,7 +100,7 @@ public class Ventana_Principal extends JFrame{
 		btnSettings.setBounds(100, 250, 200, 30);
 		layeredPane.add(btnSettings, JLayeredPane.PALETTE_LAYER);
 		
-		JButton btnStatistics = new JButton("STATISTICS");
+		btnStatistics = new JButton("STATISTICS");
 		btnStatistics.setFont(new Font("Vendana", Font.BOLD, 16));
 		btnStatistics.setBackground(Color.WHITE);
 		//btnStatistics.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -109,7 +109,7 @@ public class Ventana_Principal extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				//new Ventana_Estadistica();
+				// new Ventana_Estadistica();
 			}
 			
 		});
@@ -153,7 +153,7 @@ public class Ventana_Principal extends JFrame{
 	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
 	    String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idioma);
 	    btnPlay.setText(traducciones[0][0]); 
-	    btnSettings.setText(traducciones[0][0]);
+	    btnStatistics.setText(traducciones[0][0]);
 	    btnCredits.setText(traducciones[0][0]);
 	}
 

@@ -16,9 +16,11 @@ import ventanas.Ventana_Juego.CorazonPanel;
 public class Ventana_GameOver extends JDialog {
 	protected JTextField tfScore;
 	protected JTextField tfTimePlayed;
+	private Ventana_Juego ventanaJuego;
 	
 	public Ventana_GameOver(Ventana_Juego ventJuego) {
-		super(ventJuego, "Game Over", true);
+		this.ventanaJuego = ventJuego; 
+		//ventanaJuego.actualizarCampos(this); // Actualiza los campos usando la instancia existente
 		setSize(400, 200);
 		setLocationRelativeTo(ventJuego);
 		setLayout(new BorderLayout());
@@ -91,21 +93,18 @@ public class Ventana_GameOver extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 
-				ventJuego.vidas = 3;
-				((CorazonPanel) ventJuego.PanelEspacio2).vidasMostradas = ventJuego.vidas;
-				ventJuego.etiquetaTiempo.setText("00:00");
-				ventJuego.minutos = 0;
-	        	ventJuego.segundos = 0;
-	        	ventJuego.timerContador.restart();
-	        	ventJuego.reiniciarJuego();
-	        	
-	        	//Cierra la Ventana_GameOver
-	        	setVisible(false);
-	        	dispose();
-	        	//new Ventana_Juego();
-	       
-			}
-			
+				ventanaJuego.vidas = 3;
+		        ((CorazonPanel) ventanaJuego.PanelEspacio2).vidasMostradas = ventanaJuego.vidas;
+		        ventanaJuego.etiquetaTiempo.setText("00:00");
+		        ventanaJuego.minutos = 0;
+		        ventanaJuego.segundos = 0;
+		        ventanaJuego.timerContador.restart();
+		        ventanaJuego.reiniciarJuego();
+
+		        // Cierra la Ventana_GameOver
+		        setVisible(false);
+		        dispose();
+		    }
 		});
 		pnlBotonera.add(btnRetry);
 
@@ -125,9 +124,12 @@ public class Ventana_GameOver extends JDialog {
         
 		add(pnlPrincipal, BorderLayout.CENTER);
 		add(pnlBotonera, BorderLayout.SOUTH);
-		ventJuego.actualizarCampos(this);
-		setVisible(true);
+		realizarActualizacionCampos();
+        setVisible(true);
 	}
-	
+	// Método para realizar la actualización de campos
+    private void realizarActualizacionCampos() {
+        ventanaJuego.actualizarCampos(this);
+    }
 	
 }

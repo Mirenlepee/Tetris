@@ -87,7 +87,7 @@ public class Ventana_Juego extends JFrame {
      	
 
      	timerContador.start();
-       JPanel panelPrincipal = new JPanel(new BorderLayout());
+        JPanel panelPrincipal = new JPanel(new BorderLayout());
 
         PanelJuego panelJuego = new PanelJuego();
         panelJuego.setPreferredSize(new Dimension(ANCHO_TABLERO * TAMANO_CELDA, ALTO_TABLERO * TAMANO_CELDA));
@@ -195,15 +195,15 @@ public class Ventana_Juego extends JFrame {
                 }
                 gameOverDisplayed = true;
        	 		timerContador.stop();
-       	 		//ventGO = new Ventana_GameOver(this);
 
-       	 		if (!ventGo.isVisible()) {
-       	 			ventGo.setResizable(false);
-       	 			ventGo.tfScore.setText(String.valueOf(puntos));
-       	 			ventGo.tfTimePlayed.setText(etiquetaTiempo.getText());
-       	 			ventGo.setVisible(true);
+       	 		if (ventGo == null || !ventGo.isVisible()) {
+       	 			ventGo = new Ventana_GameOver(Ventana_Juego.this);
        	 		}
-             
+
+       	 		ventGo.setResizable(false);
+       	 		ventGo.tfScore.setText(String.valueOf(puntos));
+       	 		ventGo.tfTimePlayed.setText(etiquetaTiempo.getText());
+       	 		ventGo.setVisible(true);
             }
         });
 
@@ -225,7 +225,7 @@ public class Ventana_Juego extends JFrame {
            public void actionPerformed(ActionEvent e) {
                 if (!gameOver) {
                    moverPiezaAbajo();
-                    repaint();
+                   repaint();
               }
            }
         });
@@ -328,6 +328,8 @@ public class Ventana_Juego extends JFrame {
     }
     
     public void actualizarCampos(Ventana_GameOver vent) {
+//    	System.out.println("Debug: Ventana_Juego.actualizarCampos - vent.tfScore: " + vent.tfScore);
+//        System.out.println("Debug: Ventana_Juego.actualizarCampos - vent.tfTimePlayed: " + vent.tfTimePlayed);
 		vent.tfScore.setText(String.valueOf(this.getPuntuacion()));
 	    vent.tfTimePlayed.setText(this.getTiempoJugado());
     }

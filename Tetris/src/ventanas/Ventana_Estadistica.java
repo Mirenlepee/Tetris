@@ -194,5 +194,4 @@ public class Ventana_Estadistica extends JFrame{
 		signInlbl.setText(traducciones[0][0]);
 		btnReturn.setText(traducciones[0][0]);		
 	}
-
 }

@@ -98,12 +98,12 @@ public class Ventana_Idioma extends JFrame{
 	        System.out.println("La ventana no es una instancia de Ventana_Principal.");
 	    }
 	}
-
 	
 	public static enum Idioma { ENG, DEU, ESP, EUS, FRA };  
 	
 	private static String[][] traducciones = {
 		{ "Play", "Spielen", "Jugar", "Jolastu", "Jouer" }
+		
 	};
 	
 	public static String[][] traducirTodasLasPalabras(Idioma idioma) {

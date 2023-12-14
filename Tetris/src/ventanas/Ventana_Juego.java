@@ -314,7 +314,7 @@ public class Ventana_Juego extends JFrame {
 
             timerContador.stop();
 
-            Ventana_GameOver ventGo = new Ventana_GameOver(this);
+            ventGo = new Ventana_GameOver(this);
 
             if (!ventGo.isVisible()) {
             	ventGo.setResizable(false);
@@ -371,11 +371,9 @@ public class Ventana_Juego extends JFrame {
         tablero = new int[ALTO_TABLERO][ANCHO_TABLERO];
         piezaActual = new Pieza();
         gameOver = false;
-
+        gameOverDisplayed = false;
        
         timer.start();
-        
-
         repaint();
     }
     

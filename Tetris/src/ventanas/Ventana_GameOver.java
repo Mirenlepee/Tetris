@@ -11,12 +11,18 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import ventanas.Ventana_Idioma.Idioma;
 import ventanas.Ventana_Juego.CorazonPanel;
 
-public class Ventana_GameOver extends JDialog {
+public class Ventana_GameOver extends JFrame {
 	protected JTextField tfScore;
 	protected JTextField tfTimePlayed;
 	private Ventana_Juego ventanaJuego;
+	
+	private JLabel lblScore;
+	private JLabel lblBestScore;
+	private JLabel lblTimePlayed;
+	private JButton btnExit;
 	
 	public Ventana_GameOver(Ventana_Juego ventJuego) {
 		this.ventanaJuego = ventJuego; 
@@ -35,21 +41,21 @@ public class Ventana_GameOver extends JDialog {
         JPanel pnlPrincipal = new JPanel();
         pnlPrincipal.setLayout(new GridLayout(3,3));
         
-        JLabel lblScore = new JLabel("Score:");
+        lblScore = new JLabel("Score:");
         tfScore = new JTextField(15);
         tfScore.setEditable(false);
         tfScore.setForeground(Color.MAGENTA);
         pnlPrincipal.add(lblScore);
         pnlPrincipal.add(tfScore);
         
-        JLabel lblBestScore = new JLabel("Best Score:");
+        lblBestScore = new JLabel("Best Score:");
         JTextField tfBestScore = new JTextField(15);
         tfBestScore.setEditable(false);
         tfBestScore.setForeground(Color.MAGENTA);
         pnlPrincipal.add(lblBestScore);
         pnlPrincipal.add(tfBestScore);
         
-        JLabel lblTimePlayed = new JLabel("Time played:");
+        lblTimePlayed = new JLabel("Time played:");
         tfTimePlayed = new JTextField(15);
         tfTimePlayed.setEditable(false);
         tfTimePlayed.setForeground(Color.MAGENTA);
@@ -75,8 +81,7 @@ public class Ventana_GameOver extends JDialog {
 				//Cierra la Ventana_GameOver
 				setVisible(false);
 				dispose();
-			}
-			
+			}			
 		});
 		pnlBotonera.add(btnHome);
 		
@@ -108,7 +113,7 @@ public class Ventana_GameOver extends JDialog {
 		});
 		pnlBotonera.add(btnRetry);
 
-		JButton btnExit = new JButton("Exit");
+		btnExit = new JButton("Exit");
 		btnExit.setPreferredSize(btnHome.getPreferredSize());
 		btnExit.addActionListener(new ActionListener() {
 
@@ -131,5 +136,12 @@ public class Ventana_GameOver extends JDialog {
     private void realizarActualizacionCampos() {
         ventanaJuego.actualizarCampos(this);
     }
-	
+    
+	public void actualizarIdioma(Idioma idiomaActual) {
+		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
+		lblScore.setText(traducciones[0][0]);
+		lblBestScore.setText(traducciones[0][0]);
+		lblTimePlayed.setText(traducciones[0][0]);
+		btnExit.setText(traducciones[0][0]);
+	}	
 }

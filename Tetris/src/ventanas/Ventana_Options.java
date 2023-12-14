@@ -183,5 +183,5 @@ public class Ventana_Options extends JFrame{
 		lblLanguage.setText(traducciones[0][0]);
 		lblHTP.setText(traducciones[0][0]);
 		btnReturn.setText(traducciones[0][0]);
-	}	
+	}
 }

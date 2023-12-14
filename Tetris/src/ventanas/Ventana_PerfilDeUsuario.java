@@ -3,11 +3,17 @@ package ventanas;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import ventanas.Ventana_Idioma.Idioma;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Ventana_PerfilDeUsuario extends JFrame { 
+	
+	private JLabel lblNombre;
+	private JLabel lblBiografia;
+	private JButton btnGuardar;
 	
 	public Ventana_PerfilDeUsuario() {
         this.setSize(400, 400);
@@ -28,15 +34,12 @@ public class Ventana_PerfilDeUsuario extends JFrame {
         Image imagenDef = imgAvatar.getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
         ImageIcon iconoDef = new ImageIcon(imagenDef);
         
-        
-
         btnAvatar.setContentAreaFilled(false); 
         
         btnAvatar.setIcon(iconoDef);
         btnAvatar.setBackground(Color.WHITE);
         btnAvatar.setBorder(new EmptyBorder(0, 0, 0, 0));
-     
-        
+             
         btnAvatar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -45,22 +48,21 @@ public class Ventana_PerfilDeUsuario extends JFrame {
             }
         });
         
-        
         this.add(btnAvatar, BorderLayout.NORTH);
        
-        JLabel lblNombre = new JLabel("User Name:");
+        lblNombre = new JLabel("User Name:");
         pnlPerfilDeUsuario.add(lblNombre);
         
         JTextField txtNombre = new JTextField(20);
         pnlPerfilDeUsuario.add(txtNombre);
         
-        JLabel lblBiografia = new JLabel("Biografy:");
+        lblBiografia = new JLabel("Biografy:");
         pnlPerfilDeUsuario.add(lblBiografia);
         
         JTextArea txtBiografia = new JTextArea(5, 20);
         pnlPerfilDeUsuario.add(txtBiografia);
         
-        JButton btnGuardar = new JButton("Continue");
+        btnGuardar = new JButton("Continue");
         pnlBoton.add(btnGuardar);
 
         btnGuardar.addActionListener(new ActionListener() {
@@ -75,8 +77,15 @@ public class Ventana_PerfilDeUsuario extends JFrame {
         pnlCentro.add(pnlPerfilDeUsuario);
         this.add(pnlCentro, BorderLayout.CENTER);
         this.setVisible(true);
-        
     }
+	
+	public void actualizarIdioma(Idioma idiomaActual) {
+		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
+		lblNombre.setText(traducciones[0][0]);
+		lblBiografia.setText(traducciones[0][0]);
+		btnGuardar.setText(traducciones[0][0]);
+	}
+	
 	public static void main(String[] args) {
 		Ventana_PerfilDeUsuario vent = new Ventana_PerfilDeUsuario();
 		

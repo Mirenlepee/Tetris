@@ -14,8 +14,15 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import ventanas.Ventana_Idioma.Idioma;
+
 public class Ventana_Pausa extends JFrame{
 	private JFrame ventana;
+	private JLabel lblPausa;
+	private JButton btnResume;
+	private JButton btnRestart;
+	private JButton btnOptions;
+	private JButton btnQuit;
 	
 	public Ventana_Pausa() {
 		ventana = new JFrame("Pausa");
@@ -23,7 +30,7 @@ public class Ventana_Pausa extends JFrame{
 		ventana.setSize(400, 400);
 		ventana.setLayout(new BorderLayout());
 	
-		JLabel lblPausa = new JLabel("Paused");
+		lblPausa = new JLabel("Paused");
         lblPausa.setFont(new Font("Cambria", Font.BOLD, 24));
         
         JPanel pnlLbl = new JPanel();
@@ -35,15 +42,15 @@ public class Ventana_Pausa extends JFrame{
 		
 		JPanel pnlCentro = new JPanel();
 		
-        JButton btnResume = new JButton("Resume");
+        btnResume = new JButton("Resume");
         pnlBotones.add(btnResume);
         pnlBotones.add(Box.createVerticalStrut(10));
         
-        JButton btnRestart = new JButton("Restart");
+        btnRestart = new JButton("Restart");
         pnlBotones.add(btnRestart);
         pnlBotones.add(Box.createVerticalStrut(10));
         
-        JButton btnOptions = new JButton("Options");
+        btnOptions = new JButton("Options");
         pnlBotones.add(btnOptions);
         pnlBotones.add(Box.createVerticalStrut(10));
         btnOptions.addActionListener( new ActionListener() {
@@ -56,7 +63,7 @@ public class Ventana_Pausa extends JFrame{
         	
         });
         
-        JButton btnQuit = new JButton("Quit");
+        btnQuit = new JButton("Quit");
         pnlBotones.add(btnQuit);
         btnQuit.addActionListener(new ActionListener() {
 
@@ -78,8 +85,16 @@ public class Ventana_Pausa extends JFrame{
         ventana.setVisible(true); 
 	}
 	
+	public void actualizarIdioma(Idioma idiomaActual) {
+		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
+		lblPausa.setText(traducciones[0][0]);
+		btnResume.setText(traducciones[0][0]);
+		btnRestart.setText(traducciones[0][0]);
+		btnOptions.setText(traducciones[0][0]);
+		btnQuit.setText(traducciones[0][0]);
+	}
+	
 	public static void main(String[] args) {
         Ventana_Pausa v = new Ventana_Pausa();
     }
-
 }

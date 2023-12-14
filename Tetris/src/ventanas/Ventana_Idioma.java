@@ -8,16 +8,21 @@ import java.util.List;
 
 import javax.swing.*;
 
+import ventanas.Ventana_Idioma.Idioma;
+
 public class Ventana_Idioma extends JFrame{
 	
 	private static List<JFrame> ventanasDelJuego = new ArrayList<>();
 	private static Idioma idiomaActual = Idioma.ESP;
 	
+	private JLabel lblLanguage;
+	private JButton btnReturn;
+	
 	public Ventana_Idioma () {
 		setTitle("Language");
         setSize(300, 200);
         
-        JLabel lblLanguage = new JLabel("Language");
+        lblLanguage = new JLabel("Language");
         lblLanguage.setFont(new Font("Cambria", Font.BOLD, 24));
     	
     	JPanel pnlLbl = new JPanel();
@@ -26,7 +31,7 @@ public class Ventana_Idioma extends JFrame{
 
         JPanel panel = new JPanel();
 
-        String[] idiomas = {"English","Deutsch", "Español", "Euskara", "Français"};
+        String[] idiomas = {"English", "Deutsch", "Español", "Euskara", "Français"};
         JComboBox<String> comboBox = new JComboBox<>(idiomas);
         
         comboBox.addActionListener(new ActionListener() {
@@ -42,7 +47,7 @@ public class Ventana_Idioma extends JFrame{
         
         JPanel panel2 = new JPanel();
         
-        JButton btnReturn = new JButton("Return");
+        btnReturn = new JButton("Return");
         btnReturn.addActionListener( new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -116,6 +121,12 @@ public class Ventana_Idioma extends JFrame{
         }
         return traduccionesIdioma;
     }
+	
+	public void actualizarIdioma(Idioma idiomaActual) {
+		String[][] traducciones = traducirTodasLasPalabras(idiomaActual);
+		lblLanguage.setText(traducciones[0][0]);
+		btnReturn.setText(traducciones[0][0]);
+	}
 
 	 public static void main(String[] args) {
 	        Idioma idiomaSeleccionado = Idioma.FRA;

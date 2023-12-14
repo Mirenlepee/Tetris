@@ -188,11 +188,11 @@ public class Ventana_Estadistica extends JFrame{
 			}
 		}
 	}
-
-
+	
 	public void actualizarIdioma(Idioma idiomaActual) {
 		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
 		signInlbl.setText(traducciones[0][0]);
-		btnReturn.setText(traducciones[0][0]);
+		btnReturn.setText(traducciones[0][0]);		
 	}
+
 }

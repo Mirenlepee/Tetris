@@ -141,7 +141,7 @@ public class Ventana_Juego extends JFrame {
             	timerContador.stop();
             	 Object[] options;
             	if(musica) {
-                  options= new Object[]{ "Resume", "New Game","Mute Music","Exit"};
+            		options= new Object[]{ "Resume", "New Game","Mute Music","Exit"};
             	}else {
             		options = new Object[]{ "Resume", "New Game","Play Music","Exit"};
             		
@@ -241,13 +241,11 @@ public class Ventana_Juego extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-     
     
     private void actualizarEtiquetaTiempo() {
         String tiempoFormateado = String.format("%02d:%02d", minutos, segundos);
         etiquetaTiempo.setText(tiempoFormateado);
     }
-
 
     private void iniciarJuego() {
         piezaActual = new Pieza();
@@ -684,9 +682,10 @@ public class Ventana_Juego extends JFrame {
         }
     }
 
-
 	public void actualizarIdioma(Idioma idiomaActual) {
 		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
-		signInlbl.setText(traducciones[0][0]);
+		btnPausa.setText(traducciones[0][0]);
+		lblNivel.setText(traducciones[0][0]);
+		etiquetaPuntos.setText(traducciones[0][0]);
 	}
 }

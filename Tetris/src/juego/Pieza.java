@@ -119,5 +119,11 @@ public class Pieza {
       //Actualiza la forma de la pieza con la nueva forma rotada
         forma = nuevaForma;
     }
-	
+	public void cambiarTipoDePieza() {
+	    forma = PiezaTetris.obtenerFormaAleatoria();
+
+	    fila = 0;
+	    columna = (10 - forma[0].length) / 2;
+	    color = asignarColorPorForma(forma);
+	}
 }

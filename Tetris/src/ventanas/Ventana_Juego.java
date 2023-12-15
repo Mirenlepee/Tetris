@@ -25,7 +25,7 @@ public class Ventana_Juego extends JFrame {
     private JButton btnPausa;
         
     private JLabel lblNivel;
-    
+
     protected int minutos = 0;
     protected int segundos = 0;
     private boolean gameOverDisplayed = false;
@@ -273,8 +273,10 @@ public class Ventana_Juego extends JFrame {
     private void moverPiezaAbajo() {
         piezaActual.moverAbajo();
         if (verificarColision()) {
+        	 
             fijarPiezaEnTablero();
-            piezaActual = siguientePieza;  
+            piezaActual = siguientePieza; 
+           
             siguientePieza = new Pieza();  
             actualizarPanelEspacio1();      
             if (verificarGameOver() && vidas > 0) {
@@ -431,6 +433,12 @@ public class Ventana_Juego extends JFrame {
             case KeyEvent.VK_SPACE:
                 bajarPiezaRapidamente();
                 break;
+            case KeyEvent.VK_ENTER:
+        
+                piezaActual.cambiarTipoDePieza();
+                
+                break;
+                
         }
       
         

@@ -48,7 +48,6 @@ public class Ventana_Options extends JFrame{
         btnSound = new JButton();
         cambiarImgBtn();
 		fila1.add(btnSound);
-		
 
 	    btnSound.addActionListener(new ActionListener() {
 	        @Override
@@ -76,7 +75,6 @@ public class Ventana_Options extends JFrame{
 				// TODO Auto-generated method stub
 				new Ventana_Idioma();
 			}
-        	
         });
         
         lblLanguage = new JLabel("Language");

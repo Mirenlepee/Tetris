@@ -19,6 +19,7 @@ public class Ventana_GameOver extends JFrame {
 	protected JTextField tfTimePlayed;
 	private Ventana_Juego ventanaJuego;
 	
+	private JLabel lblGameOver;
 	private JLabel lblScore;
 	private JLabel lblBestScore;
 	private JLabel lblTimePlayed;
@@ -31,7 +32,7 @@ public class Ventana_GameOver extends JFrame {
 		setLocationRelativeTo(ventJuego);
 		setLayout(new BorderLayout());
     	
-    	JLabel lblGameOver = new JLabel("Game Over");
+    	lblGameOver = new JLabel("Game Over");
     	lblGameOver.setFont(new Font("Cambria", Font.BOLD, 24));
     	
     	JPanel pnlLbl = new JPanel();
@@ -123,7 +124,6 @@ public class Ventana_GameOver extends JFrame {
 				ventJuego.clip.stop();
 	            System.exit(0);
 			}
-			
 		});
 		pnlBotonera.add(btnExit);
         
@@ -139,6 +139,7 @@ public class Ventana_GameOver extends JFrame {
     
 	public void actualizarIdioma(Idioma idiomaActual) {
 		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
+		lblGameOver.setText(traducciones[0][0]);
 		lblScore.setText(traducciones[0][0]);
 		lblBestScore.setText(traducciones[0][0]);
 		lblTimePlayed.setText(traducciones[0][0]);

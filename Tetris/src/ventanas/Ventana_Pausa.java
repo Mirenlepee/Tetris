@@ -76,8 +76,7 @@ public class Ventana_Pausa extends JFrame{
 					Ventana_Principal ventPrincipal = new Ventana_Principal();
 					ventPrincipal.setVisible(true);
 				}
-			}
-        	
+			}        	
         });
        
         pnlCentro.add(pnlBotones);

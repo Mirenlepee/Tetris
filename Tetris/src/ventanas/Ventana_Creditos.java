@@ -72,7 +72,6 @@ public class Ventana_Creditos extends JFrame{
     	//BOTON
     	btnVolver = new JButton("Return");
     	btnVolver.setFont(new Font("Cambria", Font.PLAIN, 16));
-    	
     	btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

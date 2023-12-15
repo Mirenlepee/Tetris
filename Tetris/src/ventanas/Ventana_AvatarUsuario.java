@@ -22,7 +22,7 @@ public class Ventana_AvatarUsuario extends JFrame {
 
         JPanel panel = new JPanel();
         
-        JButton btnSeleccionarFoto = new JButton("Seleccionar Foto");
+        btnSeleccionarFoto = new JButton("Seleccionar Foto");
         btnSeleccionarFoto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -62,7 +62,6 @@ public class Ventana_AvatarUsuario extends JFrame {
 
 	public void actualizarIdioma(Idioma idiomaActual) {
 		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
-		btnAvatar.setText(traducciones[0][0]);
 		btnSeleccionarFoto.setText(traducciones[0][0]);
 		btnAceptar.setText(traducciones[0][0]);
 	}

@@ -540,7 +540,7 @@ public class Ventana_Juego extends JFrame {
     }
 
     private Color obtenerColorPiezaEnTablero(int fila, int columna) {
-    	// Verificar si la celda pertenece a la pieza actual
+    	 // Verificar si la celda pertenece a la pieza actual
         if (fila >= piezaActual.obtenerFila() && fila < piezaActual.obtenerFila() + piezaActual.obtenerForma().length &&
             columna >= piezaActual.obtenerColumna() && columna < piezaActual.obtenerColumna() + piezaActual.obtenerForma()[0].length) {
             int filaRelativa = fila - piezaActual.obtenerFila();

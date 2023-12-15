@@ -99,7 +99,7 @@ public class Ventana_Idioma extends JFrame{
 	    }
 	}
 	
-	public static enum Idioma { ENG, DEU, ESP, EUS, FRA };  
+	public static enum Idioma { ENG, ESP, DEU, EUS, FRA };  
 	
 	private static String[][] traducciones = {
 		{ "Play", "Spielen", "Jugar", "Jolastu", "Jouer" },

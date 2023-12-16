@@ -93,11 +93,11 @@ public class Ventana_Creditos extends JFrame{
 
 	public void actualizarIdioma(Idioma idiomaActual) {
 		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
-		lblTitulo.setText(traducciones[0][0]);
-		lblCreadoras.setText(traducciones[0][0]);
-		txtCreadoras.setText(traducciones[0][0]);
-		lblDiseñadoras.setText(traducciones[0][0]);
-		txtDiseñadoras.setText(traducciones[0][0]);
-		btnVolver.setText(traducciones[0][0]);
+		lblTitulo.setText(traducciones[19][0]);
+		lblCreadoras.setText(traducciones[20][0]);
+		txtCreadoras.setText(traducciones[21][0]);
+		lblDiseñadoras.setText(traducciones[22][0]);
+		txtDiseñadoras.setText(traducciones[23][0]);
+		btnVolver.setText(traducciones[24][0]);
 	}
 }

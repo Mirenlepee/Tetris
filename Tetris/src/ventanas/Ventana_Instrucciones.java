@@ -61,8 +61,8 @@ public class Ventana_Instrucciones extends JFrame{
 
 	public void actualizarIdioma(Idioma idiomaActual) {
 		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
-		lblTitle.setText(traducciones[0][0]);
-		TxtAreaInstructions.setText(traducciones[0][0]);
-		closeBtn.setText(traducciones[0][0]);
+		lblTitle.setText(traducciones[34][0]);
+		TxtAreaInstructions.setText(traducciones[35][0]);
+		closeBtn.setText(traducciones[36][0]);
 	}
 }

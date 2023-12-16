@@ -152,10 +152,9 @@ public class Ventana_Principal extends JFrame{
 	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
 	    String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idioma);
 	    btnPlay.setText(traducciones[0][0]); 
-	    btnStatistics.setText(traducciones[0][0]);
-	    btnCredits.setText(traducciones[0][0]);
+	    btnStatistics.setText(traducciones[1][0]);
+	    btnCredits.setText(traducciones[2][0]);
 	}
-
 	
 	public static void main(String[] args) {
 		JFrame vent = new Ventana_Principal();

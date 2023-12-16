@@ -132,7 +132,8 @@ public class Ventana_Idioma extends JFrame{
 		{ "Best Score", "Mejor Puntuación", "Beste Punktzahl", "Hurrengo Puntuazioa", "Meilleur score"},
 		{ "Time played", "Tiempo jugado", "Spielzeit", "Jolastutako denbora", "Temps écoulé"},
 		{ "Exit", "Salir", "Beenden", "Irten", "Quitter"},
-		{ }, // Ventana_idioma
+		{ "Language", "Idioma", "Sprache", "Hizkuntza", "Langue"},
+		{ "Return", "Volver", "Zurück", "Itzuli", "Retour"},
 		{ "Instructions", "Instrucciones", "Anleitung", "Argibideak", "Instructions"},
 		{"The aim in Tetris is simple; you bring down blocks from the top of the screen. \n " + "You can move the blocks around, either left to right and/or you can rotate them. \n " + "The blocks fall at a certain rate, but you can make them fall faster if you're sure of your positioning.\n" + "1. Use the left and right arrow keys to move the falling blocks horizontally.\n" + "2. Press the down arrow key to make the blocks fall faster.\n" + "3. Rotate the blocks using the up arrow key to fit them into empty spaces.\n" + "4. Complete a horizontal line with no gaps to make it disappear and earn points.\n" + "5. As the game progresses, the blocks fall faster, challenging your speed and agility.\n" + "6. The game ends if the blocks reach the top of the screen.\n\n" + "Challenge yourself and see how high you can score breaking your own records! Good luck!",
         		    "El objetivo en Tetris es simple; hacer caer bloques desde la parte superior de la pantalla.\n" + "Puedes mover los bloques, ya sea de izquierda a derecha y/o rotarlos.\n" + "Los bloques caen a cierta velocidad, pero puedes hacer que caigan más rápido si estás seguro de tu posición.\n" + "1. Usa las teclas de flecha izquierda y derecha para mover los bloques horizontalmente.\n" + "2. Presiona la tecla de flecha hacia abajo para hacer caer los bloques más rápido.\n" + "3. Rota los bloques usando la tecla de flecha hacia arriba para encajarlos en espacios vacíos.\n" + "4. Completa una línea horizontal sin espacios para hacerla desaparecer y ganar puntos.\n" + "5. A medida que avanza el juego, los bloques caen más rápido, desafiando tu velocidad y agilidad.\n" + "6. El juego termina si los bloques alcanzan la parte superior de la pantalla.\n\n" + "¡Desafíate a ti mismo y ve cuán alto puedes puntuar rompiendo tus propios récords! ¡Buena suerte!",
@@ -175,8 +176,8 @@ public class Ventana_Idioma extends JFrame{
 	
 	public void actualizarIdioma(Idioma idiomaActual) {
 		String[][] traducciones = traducirTodasLasPalabras(idiomaActual);
-		lblLanguage.setText(traducciones[0][0]);
-		btnReturn.setText(traducciones[0][0]);
+		lblLanguage.setText(traducciones[32][0]);
+		btnReturn.setText(traducciones[33][0]);
 	}
 
 	 public static void main(String[] args) {

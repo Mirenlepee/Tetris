@@ -81,9 +81,9 @@ public class Ventana_PerfilDeUsuario extends JFrame {
 	
 	public void actualizarIdioma(Idioma idiomaActual) {
 		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
-		lblNombre.setText(traducciones[0][0]);
-		lblBiografia.setText(traducciones[0][0]);
-		btnGuardar.setText(traducciones[0][0]);
+		lblNombre.setText(traducciones[51][0]);
+		lblBiografia.setText(traducciones[52][0]);
+		btnGuardar.setText(traducciones[53][0]);
 	}
 	
 	public static void main(String[] args) {

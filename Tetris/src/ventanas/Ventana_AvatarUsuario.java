@@ -62,7 +62,7 @@ public class Ventana_AvatarUsuario extends JFrame {
 
 	public void actualizarIdioma(Idioma idiomaActual) {
 		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
-		btnSeleccionarFoto.setText(traducciones[0][0]);
-		btnAceptar.setText(traducciones[0][0]);
+		btnSeleccionarFoto.setText(traducciones[17][0]);
+		btnAceptar.setText(traducciones[18][0]);
 	}
 }

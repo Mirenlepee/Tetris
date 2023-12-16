@@ -230,11 +230,11 @@ public class Ventana_SignIn extends JFrame {
 
     public void actualizarIdioma(Idioma idiomaActual) {
 		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
-	    signInlbl.setText(traducciones[0][0]);
-	    usernamelbl.setText(traducciones[0][0]); 
-	    passwordlbl.setText(traducciones[0][0]); 
-	    forgotPasswordlbl.setText(traducciones[0][0]); 
-	    continuebtn.setText(traducciones[0][0]); 
-	    noAccountlbl.setText(traducciones[0][0]);
+	    signInlbl.setText(traducciones[3][0]);
+	    usernamelbl.setText(traducciones[4][0]); 
+	    passwordlbl.setText(traducciones[5][0]); 
+	    forgotPasswordlbl.setText(traducciones[6][0]); 
+	    continuebtn.setText(traducciones[7][0]); 
+	    noAccountlbl.setText(traducciones[8][0]);
 	}
 }

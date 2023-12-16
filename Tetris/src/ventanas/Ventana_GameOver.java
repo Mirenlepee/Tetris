@@ -139,10 +139,10 @@ public class Ventana_GameOver extends JFrame {
     
 	public void actualizarIdioma(Idioma idiomaActual) {
 		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
-		lblGameOver.setText(traducciones[0][0]);
-		lblScore.setText(traducciones[0][0]);
-		lblBestScore.setText(traducciones[0][0]);
-		lblTimePlayed.setText(traducciones[0][0]);
-		btnExit.setText(traducciones[0][0]);
+		lblGameOver.setText(traducciones[27][0]);
+		lblScore.setText(traducciones[28][0]);
+		lblBestScore.setText(traducciones[29][0]);
+		lblTimePlayed.setText(traducciones[30][0]);
+		btnExit.setText(traducciones[31][0]);
 	}	
 }

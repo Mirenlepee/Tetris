@@ -175,11 +175,11 @@ public class Ventana_Options extends JFrame{
 
 	public void actualizarIdioma(Idioma idiomaActual) {
 		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
-		lblOptions.setText(traducciones[0][0]);
-		btnSound.setText(traducciones[0][0]);
-		lblSound.setText(traducciones[0][0]);
-		lblLanguage.setText(traducciones[0][0]);
-		lblHTP.setText(traducciones[0][0]);
-		btnReturn.setText(traducciones[0][0]);
+		lblOptions.setText(traducciones[40][0]);
+		btnSound.setText(traducciones[41][0]);
+		lblSound.setText(traducciones[42][0]);
+		lblLanguage.setText(traducciones[43][0]);
+		lblHTP.setText(traducciones[44][0]);
+		btnReturn.setText(traducciones[45][0]);
 	}
 }

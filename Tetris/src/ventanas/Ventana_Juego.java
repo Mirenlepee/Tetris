@@ -677,8 +677,8 @@ public class Ventana_Juego extends JFrame {
 
 	public void actualizarIdioma(Idioma idiomaActual) {
 		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
-		btnPausa.setText(traducciones[0][0]);
-		lblNivel.setText(traducciones[0][0]);
-		etiquetaPuntos.setText(traducciones[0][0]);
+		btnPausa.setText(traducciones[37][0]);
+		lblNivel.setText(traducciones[38][0]);
+		etiquetaPuntos.setText(traducciones[39][0]);
 	}
 }

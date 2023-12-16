@@ -86,11 +86,11 @@ public class Ventana_Pausa extends JFrame{
 	
 	public void actualizarIdioma(Idioma idiomaActual) {
 		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
-		lblPausa.setText(traducciones[0][0]);
-		btnResume.setText(traducciones[0][0]);
-		btnRestart.setText(traducciones[0][0]);
-		btnOptions.setText(traducciones[0][0]);
-		btnQuit.setText(traducciones[0][0]);
+		lblPausa.setText(traducciones[46][0]);
+		btnResume.setText(traducciones[47][0]);
+		btnRestart.setText(traducciones[48][0]);
+		btnOptions.setText(traducciones[49][0]);
+		btnQuit.setText(traducciones[50][0]);
 	}
 	
 	public static void main(String[] args) {

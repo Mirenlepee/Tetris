@@ -139,7 +139,8 @@ public class Ventana_Juego extends JFrame {
             	clip.stop();
             	timer.stop();
             	timerContador.stop();
-            	 Object[] options;
+            	//Ventana_Pausa ventP = new Ventana_Pausa();
+            	Object[] options;
             	if(musica) {
             		options= new Object[]{ "Resume", "New Game","Mute Music","Exit"};
             	}else {
@@ -193,17 +194,7 @@ public class Ventana_Juego extends JFrame {
                 } else if (choice == 3) {
                     System.exit(0);
                 }
-                gameOverDisplayed = true;
-       	 		timerContador.stop();
-
-       	 		if (ventGo == null || !ventGo.isVisible()) {
-       	 			ventGo = new Ventana_GameOver(Ventana_Juego.this);
-       	 		}
-
-       	 		ventGo.setResizable(false);
-       	 		ventGo.tfScore.setText(String.valueOf(puntos));
-       	 		ventGo.tfTimePlayed.setText(etiquetaTiempo.getText());
-       	 		ventGo.setVisible(true);
+             
             }
         });
 

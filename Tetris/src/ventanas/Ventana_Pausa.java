@@ -23,8 +23,10 @@ public class Ventana_Pausa extends JFrame{
 	private JButton btnRestart;
 	private JButton btnOptions;
 	private JButton btnQuit;
+	private Ventana_Juego ventanaJuego;
 	
-	public Ventana_Pausa() {
+	public Ventana_Pausa(Ventana_Juego ventJuego) {
+		this.ventanaJuego = ventJuego; 
 		ventana = new JFrame("Pausa");
 		ventana.setTitle("Pausa");
 		ventana.setSize(400, 400);
@@ -45,6 +47,14 @@ public class Ventana_Pausa extends JFrame{
         btnResume = new JButton("Resume");
         pnlBotones.add(btnResume);
         pnlBotones.add(Box.createVerticalStrut(10));
+        btnResume.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+			}
+        	
+        });;
         
         btnRestart = new JButton("Restart");
         pnlBotones.add(btnRestart);
@@ -92,8 +102,4 @@ public class Ventana_Pausa extends JFrame{
 		btnOptions.setText(traducciones[49][0]);
 		btnQuit.setText(traducciones[50][0]);
 	}
-	
-	public static void main(String[] args) {
-        Ventana_Pausa v = new Ventana_Pausa();
-    }
 }

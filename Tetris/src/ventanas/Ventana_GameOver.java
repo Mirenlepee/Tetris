@@ -27,7 +27,6 @@ public class Ventana_GameOver extends JFrame {
 	
 	public Ventana_GameOver(Ventana_Juego ventJuego) {
 		this.ventanaJuego = ventJuego; 
-		//ventanaJuego.actualizarCampos(this); // Actualiza los campos usando la instancia existente
 		setSize(400, 200);
 		setLocationRelativeTo(ventJuego);
 		setLayout(new BorderLayout());

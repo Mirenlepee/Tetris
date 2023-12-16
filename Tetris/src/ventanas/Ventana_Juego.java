@@ -292,7 +292,6 @@ public class Ventana_Juego extends JFrame {
     }
     
 
-
     private boolean verificarGameOver() {
       
         int[][] forma = piezaActual.obtenerForma();
@@ -311,13 +310,9 @@ public class Ventana_Juego extends JFrame {
     private void mostrarGameOver() {
         
         if (!gameOverDisplayed) {
-            
             gameOverDisplayed = true;
-
             timerContador.stop();
-
             ventGo = new Ventana_GameOver(this);
-
             if (!ventGo.isVisible()) {
             	ventGo.setResizable(false);
                 ventGo.tfScore.setText(String.valueOf(puntos));
@@ -370,8 +365,6 @@ public class Ventana_Juego extends JFrame {
     }
 
     protected void reiniciarJuego() {
-    
-
         puntos = 0;
         piezasEnTablero.clear();
         tablero = new int[ALTO_TABLERO][ANCHO_TABLERO];
@@ -409,7 +402,6 @@ public class Ventana_Juego extends JFrame {
             timer.stop();
             mostrarGameOver();
         }
-
         repaint();
     }
     
@@ -441,11 +433,8 @@ public class Ventana_Juego extends JFrame {
         
                 piezaActual.cambiarTipoDePieza();
                 
-                break;
-                
+                break;       
         }
-      
-        
     }
    
     private boolean verificarColisionLateral(int k) {
@@ -530,8 +519,6 @@ public class Ventana_Juego extends JFrame {
         etiquetaPuntos.setText("Puntos: " + puntos);
     }
 
-
-
     private void dibujarFondo(Graphics g) {
         for (int i = 0; i < getHeight() / TAMANO_CELDA; i++) {
             for (int j = 0; j < getWidth() / TAMANO_CELDA; j++) {
@@ -561,8 +548,6 @@ public class Ventana_Juego extends JFrame {
                 return piezaActual.obtenerColor();
             }
         }
-
-        // Verificar si la celda pertenece a alguna pieza en piezasEnTablero
         for (Pieza pieza : piezasEnTablero) {
             int[][] forma = pieza.obtenerForma();
             int filaPieza = pieza.obtenerFila();
@@ -573,8 +558,6 @@ public class Ventana_Juego extends JFrame {
                 return pieza.obtenerColor();
             }
         }
-
-        // Si no pertenece a ninguna pieza, devolver el color predeterminado
         return Color.BLUE;
     }
 

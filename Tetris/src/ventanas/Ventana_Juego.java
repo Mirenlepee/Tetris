@@ -335,28 +335,32 @@ public class Ventana_Juego extends JFrame {
     }
     
     private void mostrarMessageCorazon() {
-        
-    	vidas=vidas-1;
-    	Object[] options = {"Continue"};
+        vidas--;
 
+        if (vidas > 0) {
+            Object[] options = {"Continue"};
 
-        int choice = JOptionPane.showOptionDialog(
-                this,
-                "You lost a life!",
-                "Oh No!",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.INFORMATION_MESSAGE,
-                null,
-                options,
-                options[0]);
-        
-        if (choice == JOptionPane.OK_OPTION) {
-           reiniciarJuego();
-           ((CorazonPanel) PanelEspacio2).restarVida();
+            int choice = JOptionPane.showOptionDialog(
+                    this,
+                    "You lost a life! Lives remaining: " + vidas,
+                    "Oh No!",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
+
+            if (choice == JOptionPane.OK_OPTION) {
+                reiniciarJuego();
+                ((CorazonPanel) PanelEspacio2).restarVida();
+            }
+        } else {
+            gameOver = true;
+            timer.stop();
+            mostrarGameOver();
         }
-      
     }
-   
+
 
     protected void volverAlMenu() {
         dispose();

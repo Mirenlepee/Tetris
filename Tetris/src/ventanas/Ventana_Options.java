@@ -10,7 +10,6 @@ import javax.swing.*;
 import ventanas.Ventana_Idioma.Idioma;
 import ventanas.Ventana_Juego.CorazonPanel;
 
-
 public class Ventana_Options extends JFrame{
 	private JFrame ventana;
 	private JLabel lblOptions;
@@ -23,7 +22,6 @@ public class Ventana_Options extends JFrame{
 	private static Clip clip;	
 	
 	public Ventana_Options() {
-	
 		ventana = new JFrame("Options");
 		ventana.setSize(400, 400);
 		ventana.setTitle("Options");

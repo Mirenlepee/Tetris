@@ -80,7 +80,7 @@ public class Ventana_Principal extends JFrame{
 		ImageIcon imgSettings = new ImageIcon(getClass().getResource("Settings.png"));
 		JButton btnSettings = new JButton();
 		btnSettings.setBackground(Color.WHITE);
-		//btnSettings.setBorder(new EmptyBorder(0, 0, 0, 0));
+		
 		//Editar el tamaño del logo
 		int nuevoAncho = 30;
 		int nuevoAlto = 30;
@@ -103,7 +103,6 @@ public class Ventana_Principal extends JFrame{
 		btnStatistics = new JButton("STATISTICS");
 		btnStatistics.setFont(new Font("Vendana", Font.BOLD, 16));
 		btnStatistics.setBackground(Color.WHITE);
-		//btnStatistics.setBorder(new EmptyBorder(0, 0, 0, 0));
 		btnStatistics.addActionListener(new ActionListener() {
 
 			@Override
@@ -119,7 +118,6 @@ public class Ventana_Principal extends JFrame{
 		btnCredits = new JButton("CREDITS");
 		btnCredits.setFont(new Font("Vendana", Font.BOLD, 16));
 		btnCredits.setBackground(Color.WHITE);
-		//btnCredits.setBorder(new EmptyBorder(0, 0, 0, 0));
 		btnCredits.addActionListener(new ActionListener() {
 
 			@Override
@@ -132,6 +130,7 @@ public class Ventana_Principal extends JFrame{
 		layeredPane.add(btnCredits, JLayeredPane.PALETTE_LAYER);
 
 	}
+	
 	private void updateBtnSoundImage(Ventana_Options ventanaOptions) {
 		ImageIcon imgSettings;
 	    if (ventanaOptions.getImgSoundState()) {

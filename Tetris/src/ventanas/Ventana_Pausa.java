@@ -2,12 +2,14 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,6 +26,7 @@ public class Ventana_Pausa extends JFrame{
 	private JButton btnRestart;
 	private JButton btnOptions;
 	private JButton btnQuit;
+	private JButton btnExit;
 	private Ventana_Juego ventanaJuego;
 	
 	public Ventana_Pausa(Ventana_Juego ventJuego) {
@@ -98,13 +101,15 @@ public class Ventana_Pausa extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new Ventana_Options();
+				Ventana_Options ventOpt = new Ventana_Options();
+				ventOpt.mostrarVentana();
 			}
         	
         });
         
         btnQuit = new JButton("Quit");
         pnlBotones.add(btnQuit);
+        pnlBotones.add(Box.createVerticalStrut(10));
         btnQuit.addActionListener(new ActionListener() {
 
 			@Override
@@ -119,6 +124,17 @@ public class Ventana_Pausa extends JFrame{
 			}        	
         });
        
+        btnExit = new JButton("Exit");
+        pnlBotones.add(btnExit);
+        btnExit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.exit(0);
+			}
+        	
+        });
         pnlCentro.add(pnlBotones);
         ventana.add(pnlCentro, BorderLayout.CENTER);
         ventana.setVisible(true); 

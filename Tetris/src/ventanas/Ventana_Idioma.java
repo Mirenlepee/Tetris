@@ -181,11 +181,8 @@ public class Ventana_Idioma extends JFrame{
 	}
 
 	 public static void main(String[] args) {
-	        Idioma idiomaSeleccionado = Idioma.FRA;
 
-	        String[][] palabrasTraducidas = traducirTodasLasPalabras(idiomaSeleccionado);
-
-	        for (String[] fila : palabrasTraducidas) {
+	        for (String[] fila : traducciones) {
 	            for (String palabra : fila) {
 	                System.out.print(palabra + " ");
 	            }

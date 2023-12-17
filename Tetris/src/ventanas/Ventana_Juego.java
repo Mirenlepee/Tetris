@@ -39,13 +39,14 @@ public class Ventana_Juego extends JFrame {
     private JLabel etiquetaPuntos;
     private int[][] tablero;
     private Pieza piezaActual;
-    private Timer timer;
+    protected Timer timer;
 
-    private boolean musica = true;
+    protected boolean musica = true;
     protected JLabel etiquetaTiempo;
     protected Clip clip;
     protected int vidas=3;
     protected Ventana_GameOver ventGo;
+    protected PanelJuego panelJuego;
 
     public Ventana_Juego() {
 
@@ -89,7 +90,7 @@ public class Ventana_Juego extends JFrame {
      	timerContador.start();
         JPanel panelPrincipal = new JPanel(new BorderLayout());
 
-        PanelJuego panelJuego = new PanelJuego();
+        panelJuego = new PanelJuego();
         panelJuego.setPreferredSize(new Dimension(ANCHO_TABLERO * TAMANO_CELDA, ALTO_TABLERO * TAMANO_CELDA));
 
         JPanel panelDerecho = new JPanel();
@@ -139,7 +140,7 @@ public class Ventana_Juego extends JFrame {
             	clip.stop();
             	timer.stop();
             	timerContador.stop();
-            	//Ventana_Pausa ventP = new Ventana_Pausa();
+            	Ventana_Pausa ventP = new Ventana_Pausa(Ventana_Juego.this);
             	Object[] options;
             	if(musica) {
             		options= new Object[]{ "Resume", "New Game","Mute Music","Exit"};

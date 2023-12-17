@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import ventanas.Ventana_Idioma.Idioma;
+import ventanas.Ventana_Juego.CorazonPanel;
 
 public class Ventana_Pausa extends JFrame{
 	private JFrame ventana;
@@ -30,6 +31,7 @@ public class Ventana_Pausa extends JFrame{
 		ventana = new JFrame("Pausa");
 		ventana.setTitle("Pausa");
 		ventana.setSize(400, 400);
+		ventana.setLocationRelativeTo(ventanaJuego);
 		ventana.setLayout(new BorderLayout());
 	
 		lblPausa = new JLabel("Paused");
@@ -52,6 +54,14 @@ public class Ventana_Pausa extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				if(ventanaJuego.musica) {
+					ventanaJuego.clip.start(); 
+            	}
+            	
+				ventanaJuego.timer.start();
+				ventanaJuego.timerContador.start(); 
+				ventanaJuego.panelJuego.requestFocusInWindow();
+				ventana.dispose();
 			}
         	
         });;
@@ -59,6 +69,26 @@ public class Ventana_Pausa extends JFrame{
         btnRestart = new JButton("Restart");
         pnlBotones.add(btnRestart);
         pnlBotones.add(Box.createVerticalStrut(10));
+        btnRestart.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if (ventanaJuego.musica == true) {
+					ventanaJuego.clip.start();
+              	}                	
+				ventanaJuego.vidas=3;
+               	((CorazonPanel) ventanaJuego.PanelEspacio2).vidasMostradas = ventanaJuego.vidas;
+               	ventanaJuego.etiquetaTiempo.setText("00:00"); 
+               	ventanaJuego.minutos = 0;
+               	ventanaJuego.segundos = 0;
+               	ventanaJuego.timerContador.restart();
+               	ventanaJuego.panelJuego.requestFocusInWindow();
+               	ventanaJuego.reiniciarJuego();
+               	ventana.dispose();
+			}
+        	
+        });
         
         btnOptions = new JButton("Options");
         pnlBotones.add(btnOptions);

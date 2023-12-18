@@ -39,6 +39,8 @@ public class Ventana_Options extends JFrame{
         
         ImageIcon imgLanguage = new ImageIcon(getClass().getResource("Language.png"));
         JButton btnLanguage = new JButton();
+        
+
         int ancho2 = 30;
 		int alto2 = 30;
 		Image imagenDef2 = imgLanguage.getImage().getScaledInstance(ancho2, alto2, Image.SCALE_SMOOTH);
@@ -47,6 +49,8 @@ public class Ventana_Options extends JFrame{
         
         lblSound = new JLabel("Sound");
         btnReturn = new JButton("Return");
+        btnReturn.setMaximumSize(new Dimension(Integer.MAX_VALUE, btnReturn.getPreferredSize().height));
+
         btnSound = new JButton();
         cambiarImgBtn();
         lblLanguage = new JLabel("Language");
@@ -54,6 +58,8 @@ public class Ventana_Options extends JFrame{
 
         ImageIcon imgHTP = new ImageIcon(getClass().getResource("HTP.png"));
         JButton btnHTP = new JButton();
+      
+
         int ancho3 = 30;
 		int alto3 = 30;
 		Image imagenDef3 = imgHTP.getImage().getScaledInstance(ancho3, alto3, Image.SCALE_SMOOTH);

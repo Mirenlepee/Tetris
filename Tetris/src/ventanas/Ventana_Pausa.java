@@ -31,8 +31,8 @@ public class Ventana_Pausa extends JFrame{
 	
 	public Ventana_Pausa(Ventana_Juego ventJuego) {
 		this.ventanaJuego = ventJuego; 
-		ventana = new JFrame("Pausa");
-		ventana.setTitle("Pausa");
+		ventana = new JFrame("Pause");
+		ventana.setTitle("Pause");
 		ventana.setSize(400, 400);
 		ventana.setLocationRelativeTo(ventanaJuego);
 		ventana.setLayout(new BorderLayout());

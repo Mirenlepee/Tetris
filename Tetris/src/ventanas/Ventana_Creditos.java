@@ -18,7 +18,7 @@ public class Ventana_Creditos extends JFrame{
 	
     public Ventana_Creditos () {
     	setTitle("Tetris - Credits");
-        setSize(600, 400);
+        setSize(600, 250);
 
         pnlContenido = new JPanel(new BorderLayout());
         pnlContenido.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -36,7 +36,8 @@ public class Ventana_Creditos extends JFrame{
     	lblCreadoras = new JLabel ("Creators: ");
     	lblCreadoras.setFont(new Font("Cambria", Font.BOLD, 18));
     	lblCreadoras.setForeground(Color.BLACK);
-        //lblCreadoras.setHorizontalAlignment(SwingConstants.CENTER);
+    	lblCreadoras.setAlignmentX(Component.CENTER_ALIGNMENT);
+
     	
     	txtCreadoras = new JTextArea(
                 "Oihane Camacho\n" +
@@ -55,6 +56,8 @@ public class Ventana_Creditos extends JFrame{
     	lblDiseñadoras.setFont(new Font("Cambria", Font.BOLD, 18));
     	lblDiseñadoras.setForeground(Color.BLACK);
     	lblDiseñadoras.setHorizontalAlignment(SwingConstants.CENTER);
+
+    	lblDiseñadoras.setAlignmentX(Component.CENTER_ALIGNMENT);
     	
     	txtDiseñadoras = new JTextArea(
                 "Oihane Camacho\n" +

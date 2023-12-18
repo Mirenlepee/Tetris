@@ -20,12 +20,12 @@ public class Ventana_Options extends JFrame{
 	private JButton btnReturn;
 	private boolean imgSound = true;
 	private static Clip clip;	
+	private JPanel pnlPrincipal;
 	
 	public Ventana_Options() {
 		ventana = new JFrame("Options");
 		ventana.setSize(400, 400);
 		ventana.setTitle("Options");
-		ventana.setLayout(new BorderLayout());
     	
     	lblOptions = new JLabel("Options");
         lblOptions.setFont(new Font("Cambria", Font.BOLD, 24));
@@ -33,29 +33,9 @@ public class Ventana_Options extends JFrame{
         JPanel pnlLbl = new JPanel();
         pnlLbl.add(lblOptions, BorderLayout.CENTER);
         ventana.add(pnlLbl, BorderLayout.NORTH);
+       
         
-        JPanel pnlPrincipal = new JPanel();
-        pnlPrincipal.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 10));
-        pnlPrincipal.setLayout(new javax.swing.BoxLayout(pnlPrincipal, javax.swing.BoxLayout.Y_AXIS));
         
-        JPanel fila1 = new JPanel();
-        JPanel fila2 = new JPanel();
-        JPanel fila3 = new JPanel();
-        JPanel fila4 = new JPanel();
-        
-        btnSound = new JButton();
-        cambiarImgBtn();
-		fila1.add(btnSound);
-
-	    btnSound.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	            cambiarImgBtn();
-	        }
-	    });
-
-        lblSound = new JLabel("Sound");
-        fila1.add(lblSound);
         
         ImageIcon imgLanguage = new ImageIcon(getClass().getResource("Language.png"));
         JButton btnLanguage = new JButton();
@@ -64,7 +44,68 @@ public class Ventana_Options extends JFrame{
 		Image imagenDef2 = imgLanguage.getImage().getScaledInstance(ancho2, alto2, Image.SCALE_SMOOTH);
 		ImageIcon iconoDef2 = new ImageIcon(imagenDef2);
 		btnLanguage.setIcon(iconoDef2);
-        fila2.add(btnLanguage);
+        
+        lblSound = new JLabel("Sound");
+        btnReturn = new JButton("Return");
+        btnSound = new JButton();
+        cambiarImgBtn();
+        lblLanguage = new JLabel("Language");
+        lblHTP = new JLabel("How to play");
+
+        ImageIcon imgHTP = new ImageIcon(getClass().getResource("HTP.png"));
+        JButton btnHTP = new JButton();
+        int ancho3 = 30;
+		int alto3 = 30;
+		Image imagenDef3 = imgHTP.getImage().getScaledInstance(ancho3, alto3, Image.SCALE_SMOOTH);
+		ImageIcon iconoDef3 = new ImageIcon(imagenDef3);
+		btnHTP.setIcon(iconoDef3);
+        
+        
+        
+		pnlPrincipal = new JPanel();
+		pnlPrincipal.setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.insets = new Insets(10, 10, 10, 10); 
+		gbc.anchor = GridBagConstraints.WEST;
+		pnlPrincipal.add(btnSound, gbc);
+		gbc.gridx = 1; 
+		pnlPrincipal.add(createButtonLabelPanel(btnSound, lblSound), gbc);
+
+		gbc.gridy++;
+		gbc.gridx = 0; 
+		pnlPrincipal.add(btnLanguage, gbc);
+		gbc.gridx = 1;
+		pnlPrincipal.add(createButtonLabelPanel(btnLanguage, lblLanguage), gbc);
+
+		gbc.gridy++;
+		gbc.gridx = 0;
+		pnlPrincipal.add(btnHTP, gbc);
+		gbc.gridx = 1; 
+		pnlPrincipal.add(createButtonLabelPanel(btnHTP, lblHTP), gbc);
+
+		gbc.gridy++;
+		gbc.gridx = 0;
+		pnlPrincipal.add(btnReturn, gbc);
+		gbc.gridx = 1; 
+		pnlPrincipal.add(createButtonLabelPanel(btnReturn, new JLabel("")), gbc); 
+
+		ventana.add(pnlPrincipal, BorderLayout.CENTER);
+        
+     
+
+	    btnSound.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            cambiarImgBtn();
+	        }
+	    });
+
+       
+        
+   
+        
         
         btnLanguage.addActionListener(new ActionListener() {
 
@@ -75,18 +116,11 @@ public class Ventana_Options extends JFrame{
 			}
         });
         
-        lblLanguage = new JLabel("Language");
-        fila2.add(lblLanguage);
+        
        
         
-        ImageIcon imgHTP = new ImageIcon(getClass().getResource("HTP.png"));
-        JButton btnHTP = new JButton();
-        int ancho3 = 30;
-		int alto3 = 30;
-		Image imagenDef3 = imgHTP.getImage().getScaledInstance(ancho3, alto3, Image.SCALE_SMOOTH);
-		ImageIcon iconoDef3 = new ImageIcon(imagenDef3);
-		btnHTP.setIcon(iconoDef3);
-        fila3.add(btnHTP);
+   
+    
         
         btnHTP.addActionListener(new ActionListener() {
 
@@ -97,11 +131,10 @@ public class Ventana_Options extends JFrame{
 			}
         });
         
-        lblHTP = new JLabel("How to play");
-        fila3.add(lblHTP);
+    
         
-        btnReturn = new JButton("Return");
-        fila4.add(btnReturn);
+      
+    
         
         btnReturn.addActionListener( new ActionListener() {
 
@@ -113,11 +146,17 @@ public class Ventana_Options extends JFrame{
 			}
         });
         
-        pnlPrincipal.add(fila1);
-        pnlPrincipal.add(fila2);
-        pnlPrincipal.add(fila3);
-        pnlPrincipal.add(fila4);
-        ventana.add(pnlPrincipal);
+     
+        ventana.add(pnlPrincipal,BorderLayout.CENTER);
+       
+	}
+	private JPanel createButtonLabelPanel(JButton button, JLabel label) {
+	    JPanel panel = new JPanel();
+	    panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+	    panel.add(button);
+	    panel.add(Box.createRigidArea(new Dimension(10, 0))); 
+	    panel.add(label);
+	    return panel;
 	}
  
 	private void cambiarImgBtn() {
@@ -153,7 +192,7 @@ public class Ventana_Options extends JFrame{
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
-            clip.loop(Clip.LOOP_CONTINUOUSLY); // Reproduce la música en bucle
+            clip.loop(Clip.LOOP_CONTINUOUSLY); 
             clip.start();
         } catch (Exception e) {
             System.out.println("Error al reproducir el archivo de audio: " + e.getMessage());

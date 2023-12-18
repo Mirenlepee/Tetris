@@ -1,6 +1,7 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.LayoutManager;
@@ -33,7 +34,7 @@ public class Ventana_Pausa extends JFrame{
 		this.ventanaJuego = ventJuego; 
 		ventana = new JFrame("Pause");
 		ventana.setTitle("Pause");
-		ventana.setSize(400, 400);
+		ventana.setSize(300, 300);
 		ventana.setLocationRelativeTo(ventanaJuego);
 		ventana.setLayout(new BorderLayout());
 	
@@ -50,6 +51,8 @@ public class Ventana_Pausa extends JFrame{
 		JPanel pnlCentro = new JPanel();
 		
         btnResume = new JButton("Resume");
+        btnResume.setMaximumSize(new Dimension(Integer.MAX_VALUE, btnResume.getPreferredSize().height));
+
         pnlBotones.add(btnResume);
         pnlBotones.add(Box.createVerticalStrut(10));
         btnResume.addActionListener(new ActionListener() {
@@ -70,6 +73,8 @@ public class Ventana_Pausa extends JFrame{
         });;
         
         btnRestart = new JButton("Restart");
+        btnRestart.setMaximumSize(new Dimension(Integer.MAX_VALUE, btnRestart.getPreferredSize().height));
+
         pnlBotones.add(btnRestart);
         pnlBotones.add(Box.createVerticalStrut(10));
         btnRestart.addActionListener(new ActionListener() {
@@ -94,6 +99,8 @@ public class Ventana_Pausa extends JFrame{
         });
         
         btnOptions = new JButton("Options");
+        btnOptions.setMaximumSize(new Dimension(Integer.MAX_VALUE, btnOptions.getPreferredSize().height));
+
         pnlBotones.add(btnOptions);
         pnlBotones.add(Box.createVerticalStrut(10));
         btnOptions.addActionListener( new ActionListener() {
@@ -108,6 +115,8 @@ public class Ventana_Pausa extends JFrame{
         });
         
         btnQuit = new JButton("Quit");
+        btnQuit.setMaximumSize(new Dimension(Integer.MAX_VALUE, btnQuit.getPreferredSize().height));
+
         pnlBotones.add(btnQuit);
         pnlBotones.add(Box.createVerticalStrut(10));
         btnQuit.addActionListener(new ActionListener() {
@@ -125,6 +134,8 @@ public class Ventana_Pausa extends JFrame{
         });
        
         btnExit = new JButton("Exit");
+        btnExit.setMaximumSize(new Dimension(Integer.MAX_VALUE, btnExit.getPreferredSize().height));
+
         pnlBotones.add(btnExit);
         btnExit.addActionListener(new ActionListener() {
 

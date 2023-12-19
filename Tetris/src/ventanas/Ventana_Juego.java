@@ -3,6 +3,8 @@ package ventanas;
 import javax.swing.*;
 import java.util.List;
 import javax.swing.border.LineBorder;
+
+import juego.DibujodeEstrella;
 import juego.Pieza;
 import ventanas.Ventana_Idioma.Idioma;
 
@@ -516,8 +518,14 @@ public class Ventana_Juego extends JFrame {
             for (int j = 0; j < getWidth() / TAMANO_CELDA; j++) {
                 g.setColor((i + j) % 2 == 0 ? Color.GRAY : Color.DARK_GRAY);
                 g.fillRect(j * TAMANO_CELDA, i * TAMANO_CELDA, TAMANO_CELDA, TAMANO_CELDA);
+                
+            
             }
         }
+    }
+    
+    private void dibujarEstrella(Graphics g, int x, int y, int size, int spikes) {
+        DibujodeEstrella.drawStar(g, x, y, size, spikes);
     }
     private void dibujarPiezasFijas(Graphics g) {
         for (int i = 0; i < tablero.length; i++) {

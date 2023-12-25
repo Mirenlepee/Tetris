@@ -13,7 +13,8 @@ import javax.swing.text.JTextComponent;
 import ventanas.Ventana_Idioma.Idioma;
 
 import javax.mail.PasswordAuthentication;
-	
+
+import java.util.Arrays;
 import java.util.Properties;
 	
 import java.awt.*;
@@ -25,6 +26,8 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.awt.event.MouseEvent;
 	
 public class Ventana_SignIn extends JFrame {
@@ -202,19 +205,63 @@ public class Ventana_SignIn extends JFrame {
         continuebtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	char[] passwordChar = txtPassword.getPassword();
-                String password = new String(passwordChar);
-                String email = usernamefld.getText();
-//                if(autentificarUsuario(email, password)) {
-//                	JOptionPane.showMessageDialog(null, "Welcome!");
-//                	log.log(Level.INFO, "Successful login - Email: " + email);
-//                	dispose();
-//                }else {
-//                	JOptionPane.showMessageDialog(null, "Incorrect email or password.");
-//                	log.log(Level.WARNING, "Alert - Failled login for the email: " + email);
+//            	Pattern patronPassword = Pattern.compile("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{6,}$");
+//                char[] password = txtPassword.getPassword();
+//                char[] confirmada = txtConfirm.getPassword();
+//                String username = usernamefld.getText();
+//                String email = txtCorreo.getText();
+//                String imagenP = "Sell_it/src/imagenes/perfil.png";
+//                String descripcion = "Descripción vacía";
+//                if (username.equals("Nombre") || email.equals("Correo") || password.length == 0 || confirmada.length == 0) {
+//                    JOptionPane.showMessageDialog(null, "Para registrarse, debe introducir datos en todas las casillas.");
+//                    return;
 //                }
-              
-                ventana.dispose();
+//                char[] confirmarContrasenia = txtConfirm.getPassword();
+//                if (!Arrays.equals(password, confirmarContrasenia)) {
+//                    JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.", "Error", JOptionPane.ERROR_MESSAGE);
+//                    return;
+//                }
+//                String cont = new String(password);
+//                Matcher matcher = patronPassword.matcher(cont);
+//                if (!matcher.matches()) {
+//                    StringBuilder mensajeError = new StringBuilder("La contraseña no cumple con los requisitos:\n");
+//                    if (!matcher.matches()) {
+//                        if (!contraseniaCumpleRequisito("[A-Z]", cont)) {
+//                            mensajeError.append("- Debe contener al menos una letra mayúscula.\n");
+//                        }
+//                        if (!contraseniaCumpleRequisito("[a-z]", cont)) {
+//                            mensajeError.append("- Debe contener al menos una letra minúscula.\n");
+//                        }
+//                        if (!contraseniaCumpleRequisito("\\d", cont)) {
+//                            mensajeError.append("- Debe contener al menos un dígito.\n");
+//                        }
+//                        if (!contraseniaCumpleRequisito("[@$!%*?&]", cont)) {
+//                            mensajeError.append("- Debe contener al menos un carácter especial (@$!%*?&).\n");
+//                        }
+//                        mensajeError.append("- Debe tener al menos 6 caracteres.\n");
+//
+//                        JOptionPane.showMessageDialog(null, mensajeError.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+//                        return;
+//                    }
+//                } else {
+//                	// Hash de la contraseña
+//                    String hashContrasenia = BCrypt.hashpw(cont, BCrypt.gensalt());
+//
+//                    // Crear un nuevo usuario
+//                    Usuario u = new Usuario(username, email, hashContrasenia, imagenP, descripcion);
+//
+//                    // Establecer la fecha actual como último cambio de contraseña
+//                    u.cambiarContrasena(cont);
+//
+//                    BaseDeDatos.anadirUsuarioNuevo(u);
+//                    JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente");
+//                    limpiarCampos();
+//                    VentanaInicio ventanaInicio = new VentanaInicio();
+//                    dispose();  // Cierra la ventana actual
+//                    ventanaInicio.setVisible(true);
+//                    Main.setVentanaInicio(ventanaInicio);
+//                }
+            	ventana.dispose();
             	new Ventana_Juego();
             }
         });
@@ -242,6 +289,10 @@ public class Ventana_SignIn extends JFrame {
         ventana.setVisible(true);
     }
     
+    private boolean contraseniaCumpleRequisito(String regex, String contrasenia) {
+        return Pattern.compile(regex).matcher(contrasenia).find();
+    }
+
     public void mostrarOcultarContraseña() {
         // Obtener la contraseña actual
         char[] contraseña = txtPassword.getPassword();

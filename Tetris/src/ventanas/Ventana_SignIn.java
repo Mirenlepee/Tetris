@@ -7,6 +7,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.*;
+import javax.swing.border.AbstractBorder;
+import javax.swing.text.JTextComponent;
 
 import ventanas.Ventana_Idioma.Idioma;
 
@@ -19,6 +21,8 @@ import java.awt.*;
 	
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.util.Random;
 import java.awt.event.MouseEvent;
@@ -28,10 +32,14 @@ public class Ventana_SignIn extends JFrame {
 	private JLabel signInlbl;
 	private JPanel pnlLbl;
 	private JLabel usernamelbl;
+	private JTextField usernamefld;
+	private JTextField txtCorreo;
 	private JLabel passwordlbl;
 	private JLabel forgotPasswordlbl;
 	private JButton continuebtn;
 	private JLabel noAccountlbl ;
+	private static CustomPasswordField txtPassword;
+	private static CustomPasswordField txtConfirm;
 		
 	private String generateRandomPassword() {
 		String lowercase = "abcdefghijklmnopqrstuvwxyz";
@@ -90,7 +98,7 @@ public class Ventana_SignIn extends JFrame {
 	
     public Ventana_SignIn() {
         ventana = new JFrame("Sign In");
-        ventana.setSize(400, 200);
+        ventana.setSize(400, 250);
         ventana.setLayout(new BorderLayout());
 	
         signInlbl = new JLabel("Sign In");
@@ -101,17 +109,27 @@ public class Ventana_SignIn extends JFrame {
         ventana.add(pnlLbl, BorderLayout.NORTH);
 	
         JPanel pnlPrincipal = new JPanel();
-        pnlPrincipal.setLayout(new GridLayout(3, 2));
+        pnlPrincipal.setLayout(new GridLayout(5, 2));
 	
         usernamelbl = new JLabel("Username:");
-        JTextField usernamefld = new JTextField(15);
+        usernamefld = new JTextField(15);
         pnlPrincipal.add(usernamelbl);
         pnlPrincipal.add(usernamefld);
+        
+        JLabel lblCorreo = new JLabel("Email:");
+        txtCorreo = new JTextField(15);
+        pnlPrincipal.add(lblCorreo);
+        pnlPrincipal.add(txtCorreo);
 	
         passwordlbl = new JLabel("Password:");
-        JPasswordField passwordfld = new JPasswordField(15);
+        txtPassword = new CustomPasswordField();
         pnlPrincipal.add(passwordlbl);
-        pnlPrincipal.add(passwordfld);
+        pnlPrincipal.add(txtPassword);
+        
+        JLabel lblConfirm = new JLabel("Confirm password:");
+        txtConfirm = new CustomPasswordField();
+        pnlPrincipal.add(lblConfirm);
+        pnlPrincipal.add(txtConfirm);
 	
         forgotPasswordlbl = new JLabel("<html><u>Forgot Password?</u></html>");
         forgotPasswordlbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -184,7 +202,7 @@ public class Ventana_SignIn extends JFrame {
         continuebtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	char[] passwordChar = passwordfld.getPassword();
+            	char[] passwordChar = txtPassword.getPassword();
                 String password = new String(passwordChar);
                 String email = usernamefld.getText();
 //                if(autentificarUsuario(email, password)) {
@@ -224,6 +242,125 @@ public class Ventana_SignIn extends JFrame {
         ventana.setVisible(true);
     }
     
+    public void mostrarOcultarContraseña() {
+        // Obtener la contraseña actual
+        char[] contraseña = txtPassword.getPassword();
+
+        // Cambiar el estado de visualización de la contraseña
+        if (txtPassword.getEchoChar() == 0) {
+        	txtPassword.setEchoChar('\u2022');
+        } else {
+        	txtPassword.setEchoChar((char) 0);
+        }
+        txtPassword.setText(new String(contraseña));
+    }
+	private void limpiarCampos() {
+		usernamefld.setText("");
+		txtCorreo.setText("");		
+		txtPassword.setText("");
+		txtConfirm.setText("");
+	}
+	
+	private void aplicarEstiloCampo(JTextComponent textField, String texto) {
+        textField.setForeground(new Color(169, 169, 169));
+        textField.setPreferredSize(new Dimension(350, 30));
+        textField.setText(texto);
+        textField.addFocusListener(new FocusAdapter() {
+        	
+        	@Override
+        	public void focusGained(FocusEvent e) {
+                if (textField.getText().equals(texto)) {
+                    textField.setText("");
+                    if(textField instanceof JPasswordField) {
+                    	 ((JPasswordField) textField).setEchoChar('\u2022');
+                    }
+                    textField.setForeground(Color.BLACK);
+                }
+            }
+        	
+        	@Override
+            public void focusLost(FocusEvent e) {
+                if (textField.getText().isEmpty()) {
+                    textField.setText(texto);
+                    if(textField instanceof JPasswordField) {
+                    	((JPasswordField) textField).setEchoChar((char) 0); 
+                    }
+                    textField.setForeground(new Color(169, 169, 169));
+                }
+            }
+        });
+        textField.setBorder(new RoundBorder(new Color(51, 255, 233), 20));
+    }
+    private static ImageIcon ajustarIcon(ImageIcon icon) {
+        int maxWidth = 20; // Tamaño máximo de ancho
+        int maxHeight = 20; // Tamaño máximo de alto
+        int newWidth, newHeight;
+        Image img = icon.getImage();
+        if (icon.getIconWidth() > icon.getIconHeight()) {
+            newWidth = maxWidth;
+            newHeight = (maxWidth * icon.getIconHeight()) / icon.getIconWidth();
+        } else {
+            newHeight = maxHeight;
+            newWidth = (maxHeight * icon.getIconWidth()) / icon.getIconHeight();
+        }
+        // Redimensiona la imagen
+        Image newImg = img.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+        icon = new ImageIcon(newImg);
+        return icon;
+    }
+
+    private static class RoundBorder extends AbstractBorder {
+        private final Color borderColor;
+        private final int roundRadius;
+
+        public RoundBorder(Color borderColor, int roundRadius) {
+            this.borderColor = borderColor;
+            this.roundRadius = roundRadius;
+        }
+
+        @Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setColor(borderColor);
+            g2.drawRoundRect(x, y, width - 1, height - 1, roundRadius, roundRadius);
+            g2.dispose();
+        }
+    }
+    
+    private static class CustomPasswordField extends JPasswordField {
+        private JButton button;
+
+        public CustomPasswordField() {
+            super();
+            button = new JButton();
+            setLayout(new BorderLayout());
+            add(button, BorderLayout.EAST);
+            button.setPreferredSize(new Dimension(30, 10));
+            ImageIcon imgOjo = new ImageIcon(getClass().getResource("eyeClosed.png"));
+    		button.setIcon((ajustarIcon(imgOjo)));
+    		button.setBackground(Color.WHITE);
+    		
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    char echoChar = getEchoChar();
+                    if (echoChar == 0) {
+                        setEchoChar('\u2022'); // Ocultar contraseña (punto negro)
+                		ImageIcon imgOjo = new ImageIcon(getClass().getResource("eyeClosed.png"));
+                		button.setIcon((ajustarIcon(imgOjo)));
+                    } else {
+                		ImageIcon imgOjo = new ImageIcon(getClass().getResource("eyeOpened.png"));
+                		button.setIcon((ajustarIcon(imgOjo)));
+                        setEchoChar((char) 0); // Mostrar contraseña
+                    }
+                }
+            });
+        }
+        public JButton getButton() {
+            return button;
+        }
+    }
+    
     public static void main(String[] args) {
         Ventana_SignIn v = new Ventana_SignIn();
     }
@@ -237,4 +374,5 @@ public class Ventana_SignIn extends JFrame {
 	    continuebtn.setText(traducciones[7][0]); 
 	    noAccountlbl.setText(traducciones[8][0]);
 	}
+
 }

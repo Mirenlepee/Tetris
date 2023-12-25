@@ -14,7 +14,6 @@ public class Ventana_Principal extends JFrame{
 	
 	private BufferedImage imgFondo;
 	private Ventana_Options ventanaOptions;
-	
 	private JButton btnPlay;
 	private JButton btnStatistics;
 	private JButton btnCredits;	

@@ -10,6 +10,8 @@ import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 import javax.swing.text.JTextComponent;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import ventanas.Ventana_Idioma.Idioma;
 
 import javax.mail.PasswordAuthentication;
@@ -248,7 +250,7 @@ public class Ventana_SignIn extends JFrame {
 //                    String hashContrasenia = BCrypt.hashpw(cont, BCrypt.gensalt());
 //
 //                    // Crear un nuevo usuario
-//                    Usuario u = new Usuario(username, email, hashContrasenia, imagenP, descripcion);
+//                    Usuario u = new Usuario(username, hashContrasenia, email, imagenP, descripcion);
 //
 //                    // Establecer la fecha actual como último cambio de contraseña
 //                    u.cambiarContrasena(cont);
@@ -287,10 +289,6 @@ public class Ventana_SignIn extends JFrame {
         pnlSouth.add(noAccountlbl);
     
         ventana.setVisible(true);
-    }
-    
-    private boolean contraseniaCumpleRequisito(String regex, String contrasenia) {
-        return Pattern.compile(regex).matcher(contrasenia).find();
     }
 
     public void mostrarOcultarContraseña() {

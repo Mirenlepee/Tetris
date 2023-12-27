@@ -12,7 +12,7 @@ public class Usuario {
 	private String descripcion;
 	
 	//Constructor
-	public Usuario(int id, String userName, String password, String email, String avatarURL, String descripcion) {
+	public Usuario(String userName, String password, String email, String avatarURL, String descripcion) {
 		super();
 		this.id = cont;
 		cont++;

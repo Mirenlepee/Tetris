@@ -34,7 +34,7 @@ public class DataSetUsuarios {
 				String email = partes[3];
 				String AvatarURL = partes[4];
 				String descripcion = partes[5];
-				Usuario u = new Usuario( id, userName, password, email, AvatarURL, descripcion );
+				Usuario u = new Usuario(userName, password, email, AvatarURL, descripcion );
 				mapaUsuarios.put(email, u);
 			} catch (IndexOutOfBoundsException | NumberFormatException e) {
 				System.err.println( "Error en lectura de línea " + numLinea );

@@ -11,7 +11,7 @@ public class GestionBDUsuario {
 	public static void main(String[] args) {
 		
 		// Usuario de ejemplo
-        Usuario usuario = new Usuario(1, "usuario1", "contraseña123", "usuario1@example.com", "url_avatar", "Descripción del usuario");
+        Usuario usuario = new Usuario("usuario1", "contraseña123", "usuario1@example.com", "url_avatar", "Descripción del usuario");
 
         // Insertar el usuario en la base de datos
         try (Connection conexion = ConexionBD.conectar()) {

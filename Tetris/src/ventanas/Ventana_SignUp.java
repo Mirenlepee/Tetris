@@ -11,6 +11,9 @@ import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 import javax.swing.text.JTextComponent;
 
+import org.mindrot.jbcrypt.BCrypt;
+
+import gestionUsuarios.Usuario;
 import ventanas.Ventana_Idioma.Idioma;
 
 import javax.mail.PasswordAuthentication;
@@ -77,6 +80,7 @@ public class Ventana_SignUp extends JFrame{
       
         emaillbl = new JLabel("Email:");
         emailfld = new JTextField("@gmail.com");
+        aplicarEstiloCampo(emailfld, "Correo");
         pnlPrincipal.add(emaillbl);
         pnlPrincipal.add(emailfld);
 
@@ -138,42 +142,62 @@ public class Ventana_SignUp extends JFrame{
 		            rr=rr.replace("[Username]", username);
 
 		            enviarCorreo(textoIngresado, " Welcome to Tetris - Let the Fun Begin!", rr);
-		            Pattern patternPassword = Pattern.compile("");
+		            
+		            Pattern patronPassword = Pattern.compile("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{6,}$");
 	                char[] password = passwordfld.getPassword();
-	                char[] confirmed = confirmPasswordfld.getPassword();
+	                char[] confirmada = confirmPasswordfld.getPassword();
 	                String email = emailfld.getText();
-	                if(username.equals("") || email.equals("") || password.length == 0 || confirmed.length == 0) {
-	                	JOptionPane.showMessageDialog(null, "To register, you must fill all the information requested.");
-	                	return;
+	                String imagenP = "";
+	                String descripcion = "Descripción vacía";
+	                if (username.equals("Nombre") || email.equals("Correo") || password.length == 0 || confirmada.length == 0) {
+	                    JOptionPane.showMessageDialog(null, "Para registrarse, debe introducir datos en todas las casillas.");
+	                    return;
 	                }
-	                if(!Arrays.equals(password, confirmed)) {
-	                	JOptionPane.showMessageDialog(null, "The passwords do not match.", "Error", JOptionPane.ERROR_MESSAGE);
-	                	return;
+	                char[] confirmarContrasenia = confirmPasswordfld.getPassword();
+	                if (!Arrays.equals(password, confirmarContrasenia)) {
+	                    JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.", "Error", JOptionPane.ERROR_MESSAGE);
+	                    return;
 	                }
-	                String pass = new String(password);
-	                Matcher matcher = patternPassword.matcher(pass);
-//	                if(!matcher.matches()) {
-//	                	StringBuilder errorMessage = new StringBuilder("The password does not meet the requirements:\n");
-//	                	if(!matcher.matches()) {
-//	                		if(!passwordMeetsRequirements("[A-Z]", pass)) {
-//	                			errorMessage.append("- It must contain at least one uppercase letter.\n");
-//	                		}
-//	                		errorMessage.append("- It must have at least 6 characters.\n");
-//	                		
-//	                		JOptionPane.showMessageDialog(null, errorMessage.toString(), "Error", JOptionPane.ERROR_MESSAGE);
-//	                		return;
-//	                	}
-//	                }else {
-//	                	String hashPassword = BCrypt.hashpw(pass, BCrypt.gensalt());
-//	                	Usuario u = new Usuario(username, hashPassword, email, "", "");
-//	                	if(!usuariosRegistrados.containsKey(email)) {
-//	                		registrarUsuario(u);
-//	                		JOptionPane.showMessageDialog(null, "You have successfully been registered");
-//	                		ventana.log.log(Level.INFO, "New user registerd - Username: " + username + ", email: " + email);
-//	                	}else {
-//	                		JOptionPane.showMessageDialog(null, "The email is already in use. Please choose a different one.");
-//	                	}
-//	                }
+	                String cont = new String(password);
+	                Matcher matcher = patronPassword.matcher(cont);
+	                if (!matcher.matches()) {
+	                    StringBuilder mensajeError = new StringBuilder("La contraseña no cumple con los requisitos:\n");
+	                    if (!matcher.matches()) {
+	                        if (!contraseniaCumpleRequisito("[A-Z]", cont)) {
+	                            mensajeError.append("- Debe contener al menos una letra mayúscula.\n");
+	                        }
+	                        if (!contraseniaCumpleRequisito("[a-z]", cont)) {
+	                            mensajeError.append("- Debe contener al menos una letra minúscula.\n");
+	                        }
+	                        if (!contraseniaCumpleRequisito("\\d", cont)) {
+	                            mensajeError.append("- Debe contener al menos un dígito.\n");
+	                        }
+	                        if (!contraseniaCumpleRequisito("[@$!%*?&]", cont)) {
+	                            mensajeError.append("- Debe contener al menos un carácter especial (@$!%*?&).\n");
+	                        }
+	                        mensajeError.append("- Debe tener al menos 6 caracteres.\n");
+
+	                        JOptionPane.showMessageDialog(null, mensajeError.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+	                        return;
+	                    }
+	                } else {
+	                	// Hash de la contraseña
+	                    String hashContrasenia = BCrypt.hashpw(cont, BCrypt.gensalt());
+
+	                    // Crear un nuevo usuario
+	                    Usuario u = new Usuario(username, hashContrasenia, email, imagenP, descripcion);
+
+	                    // Establecer la fecha actual como último cambio de contraseña
+	                    u.cambiarContrasena(cont);
+
+//	                    BaseDeDatos.anadirUsuarioNuevo(u);
+//	                    JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente");
+//	                    limpiarCampos();
+//	                    VentanaInicio ventanaInicio = new VentanaInicio();
+//	                    dispose();  // Cierra la ventana actual
+//	                    ventanaInicio.setVisible(true);
+//	                    Main.setVentanaInicio(ventanaInicio);
+	                }
                 new Ventana_PerfilDeUsuario();
                 ventana.dispose();     
                 

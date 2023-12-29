@@ -187,6 +187,7 @@ public class Ventana_Options extends JFrame{
 	   
 	   
 	   
+	   
 	private JPanel createButtonLabelPanel(JButton button, JLabel label) {
 	    JPanel panel = new JPanel();
 	    panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
@@ -196,7 +197,7 @@ public class Ventana_Options extends JFrame{
 	    return panel;
 	}
  
-	private void cambiarImgBtn() {
+	public void cambiarImgBtn() {
 		if(imgSound) {
 			ImageIcon imgSound = new ImageIcon(getClass().getResource("Sound.png"));
 	        int ancho1 = 30;

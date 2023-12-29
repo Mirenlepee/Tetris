@@ -165,6 +165,16 @@ public class Ventana_Juego extends JFrame {
             	timer.stop();
             	timerContador.stop();
             	Ventana_Pausa ventP = new Ventana_Pausa(Ventana_Juego.this);
+            	
+            	if(ventP.isPresionado()==true) {
+            		clip.stop();
+            		
+            		System.out.println("para el clip");
+            	}else {
+            		           
+            		
+            	}
+            	
 //            	Object[] options;
 //            	if(musica) {
 //            		options= new Object[]{ "Resume", "New Game","Mute Music","Exit"};
@@ -408,7 +418,7 @@ public class Ventana_Juego extends JFrame {
         gameOver = false;
         gameOverDisplayed = false;
        
-        clip.start();
+       // clip.start();
         timer.start();
         repaint();
     }

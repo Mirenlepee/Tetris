@@ -30,6 +30,9 @@ public class Ventana_Pausa extends JFrame{
 	private JButton btnExit;
 	private Ventana_Juego ventanaJuego;
 	
+	public boolean presionado;
+	public boolean ParaLaVentana;
+	
 	public Ventana_Pausa(Ventana_Juego ventJuego) {
 		this.ventanaJuego = ventJuego; 
 		ventana = new JFrame("Pause");
@@ -60,7 +63,7 @@ public class Ventana_Pausa extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(ventanaJuego.musica) {
+				if(isParaLaVentana()) {
 					ventanaJuego.clip.start(); 
             	}
             	
@@ -82,9 +85,9 @@ public class Ventana_Pausa extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if (ventanaJuego.musica == true) {
-					ventanaJuego.clip.start();
-              	}                	
+				if(isParaLaVentana()) {
+					ventanaJuego.clip.start(); 
+            	}
 				ventanaJuego.vidas=3;
                	((CorazonPanel) ventanaJuego.PanelEspacio2).vidasMostradas = ventanaJuego.vidas;
                	ventanaJuego.etiquetaTiempo.setText("00:00"); 
@@ -109,6 +112,15 @@ public class Ventana_Pausa extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				Ventana_Options ventOpt = new Ventana_Options();
+				ventOpt.cambiarImgBtn();
+				if(ventOpt.isPresionado()) {
+					setPresionado(true);
+					setParaLaVentana(true);
+				}else {
+                    setPresionado(false);
+                    setParaLaVentana(false);
+				}
+
 				ventOpt.mostrarVentana();
 			}
         	
@@ -151,6 +163,22 @@ public class Ventana_Pausa extends JFrame{
         ventana.setVisible(true); 
 	}
 	
+	public boolean isParaLaVentana() {
+		return ParaLaVentana;
+	}
+
+	public void setParaLaVentana(boolean paraLaVentana) {
+		ParaLaVentana = paraLaVentana;
+	}
+
+	public boolean isPresionado() {
+		return presionado;
+	}
+
+	public void setPresionado(boolean presionado) {
+		this.presionado = presionado;
+	}
+
 	public void actualizarIdioma(Idioma idiomaActual) {
 		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
 		lblPausa.setText(traducciones[46][0]);

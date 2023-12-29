@@ -22,7 +22,7 @@ public class Ventana_Options extends JFrame{
 	private static Clip clip;	
 	private JPanel pnlPrincipal;
 	
-	private boolean presionado=false;
+	public static boolean presionado;
 	
 	public Ventana_Options() {
 		ventana = new JFrame("Options");
@@ -112,7 +112,15 @@ public class Ventana_Options extends JFrame{
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
 	            cambiarImgBtn();
-	            presionado=true;
+	            
+	            if(presionado) {
+		            setPresionado(false);
+
+	            }else {
+		           setPresionado(true);
+
+	            }
+	            System.out.println(obtenerPresionado());
 	        }
 	    });
 
@@ -164,6 +172,21 @@ public class Ventana_Options extends JFrame{
         ventana.add(pnlPrincipal,BorderLayout.CENTER);
        
 	}
+	public static boolean isPresionado() {
+		return presionado;
+	}
+	public void setPresionado(boolean presionado) {
+		this.presionado = presionado;
+	}
+	
+	
+	   public static boolean obtenerPresionado() {
+	        return isPresionado();
+	    }
+	   
+	   
+	   
+	   
 	private JPanel createButtonLabelPanel(JButton button, JLabel label) {
 	    JPanel panel = new JPanel();
 	    panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));

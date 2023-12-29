@@ -50,9 +50,16 @@ public class Ventana_Juego extends JFrame {
     protected int vidas=3;
     protected Ventana_GameOver ventGo;
     protected PanelJuego panelJuego;
+    
+    protected boolean pres;
 
     public Ventana_Juego() {
 
+
+      //pres = Ventana_Options.obtenerPresionado();
+    	
+
+    	
     	setTitle("Tetris");
     	try {
              File audioFile = new File("Tetris/src/tetris.wav");
@@ -69,7 +76,18 @@ public class Ventana_Juego extends JFrame {
              e.printStackTrace();
          }
 
-     	clip.start();
+    	
+       
+    	
+    	pres = Ventana_Options.obtenerPresionado();
+        System.out.println(pres);
+        if(!pres) {
+         	clip.start();
+
+        }
+    	
+    	
+    	
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -137,6 +155,9 @@ public class Ventana_Juego extends JFrame {
         panelDerecho.add(Box.createVerticalGlue());
         panelDerecho.add(btnPausa);
         
+        
+      
+        
         btnPausa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -203,6 +224,9 @@ public class Ventana_Juego extends JFrame {
         });
 
         
+        
+  
+        
         panelPrincipal.add(panelJuego, BorderLayout.CENTER);
         panelPrincipal.add(Box.createHorizontalStrut(10), BorderLayout.EAST);
         panelPrincipal.add(panelDerecho, BorderLayout.EAST);
@@ -235,9 +259,12 @@ public class Ventana_Juego extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
+
     }
     
-    private void actualizarEtiquetaTiempo() {
+  
+
+	private void actualizarEtiquetaTiempo() {
         String tiempoFormateado = String.format("%02d:%02d", minutos, segundos);
         etiquetaTiempo.setText(tiempoFormateado);
     }
@@ -246,6 +273,7 @@ public class Ventana_Juego extends JFrame {
         piezaActual = new Pieza();
         siguientePieza = new Pieza();
         actualizarPanelEspacio1();
+       
         tablero = new int[getHeight() / TAMANO_CELDA][getWidth() / TAMANO_CELDA];
         timer = new Timer(1000, new ActionListener() {
             @Override

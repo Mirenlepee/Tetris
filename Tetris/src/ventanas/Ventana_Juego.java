@@ -320,7 +320,7 @@ public class Ventana_Juego extends JFrame {
             
             ventGo.tfScore.setText(numerosComoTexto);
 
-
+           clip.stop();
             if (!ventGo.isVisible()) {
             	ventGo.setResizable(false);
                 ventGo.tfScore.setText(String.valueOf(puntos));
@@ -380,6 +380,7 @@ public class Ventana_Juego extends JFrame {
         gameOver = false;
         gameOverDisplayed = false;
        
+        clip.start();
         timer.start();
         repaint();
     }

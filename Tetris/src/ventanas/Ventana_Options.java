@@ -22,6 +22,8 @@ public class Ventana_Options extends JFrame{
 	private static Clip clip;	
 	private JPanel pnlPrincipal;
 	
+	private boolean presionado=false;
+	
 	public Ventana_Options() {
 		ventana = new JFrame("Options");
 		ventana.setSize(400, 400);
@@ -52,8 +54,13 @@ public class Ventana_Options extends JFrame{
         btnReturn.setMaximumSize(new Dimension(Integer.MAX_VALUE, btnReturn.getPreferredSize().height));
 
         btnSound = new JButton();
-        cambiarImgBtn();
         lblLanguage = new JLabel("Language");
+        
+        if (!presionado) {
+        cambiarImgBtn();
+        
+        }
+
         lblHTP = new JLabel("How to play");
 
         ImageIcon imgHTP = new ImageIcon(getClass().getResource("HTP.png"));
@@ -105,6 +112,7 @@ public class Ventana_Options extends JFrame{
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
 	            cambiarImgBtn();
+	            presionado=true;
 	        }
 	    });
 

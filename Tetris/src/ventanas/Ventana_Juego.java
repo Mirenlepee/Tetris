@@ -1,6 +1,7 @@
 package ventanas;
 
 import javax.swing.*;
+import java.util.StringTokenizer;
 import java.util.List;
 import javax.swing.border.LineBorder;
 
@@ -306,7 +307,20 @@ public class Ventana_Juego extends JFrame {
         if (!gameOverDisplayed) {
             gameOverDisplayed = true;
             timerContador.stop();
+
+
             ventGo = new Ventana_GameOver(this);
+            
+            
+            StringTokenizer tokenizer = new StringTokenizer(etiquetaPuntos.getText(), ":");
+            tokenizer.nextToken();
+            String numerosComoTexto = tokenizer.nextToken().trim();
+
+            
+            
+            ventGo.tfScore.setText(numerosComoTexto);
+
+
             if (!ventGo.isVisible()) {
             	ventGo.setResizable(false);
                 ventGo.tfScore.setText(String.valueOf(puntos));

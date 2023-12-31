@@ -2,6 +2,8 @@ package ventanas;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import ventanas.Ventana_Idioma.Idioma;
 
@@ -21,6 +23,7 @@ public class Ventana_PerfilDeUsuario extends JFrame {
 	private JLabel lblBiografia;
 	private JButton btnGuardar;
 	protected JTextArea txtBiografia;
+	private JLabel lblContadorCaracteres;
 	
 	public Ventana_PerfilDeUsuario() {
         this.setSize(400, 400);
@@ -66,6 +69,29 @@ public class Ventana_PerfilDeUsuario extends JFrame {
         txtBiografia.setWrapStyleWord(true); // Ajusta las líneas en palabras completas
         pnlPerfilDeUsuario.add(txtBiografia);
         
+        lblContadorCaracteres = new JLabel("0/200");
+        lblContadorCaracteres.setFont(new Font("Arial", Font.PLAIN, 10)); // Cambia la fuente a letra pequeña si es necesario
+        pnlPerfilDeUsuario.add(lblContadorCaracteres);
+
+        DocumentListener documentListener = new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                actualizarContadorCaracteres();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                actualizarContadorCaracteres();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                actualizarContadorCaracteres();
+            }
+        };
+
+        txtBiografia.getDocument().addDocumentListener(documentListener);
+        
         btnGuardar = new JButton("Continue");
         pnlBoton.add(btnGuardar);
 
@@ -108,6 +134,11 @@ public class Ventana_PerfilDeUsuario extends JFrame {
 	            }
 	        });
 	    }
+	}
+	
+	private void actualizarContadorCaracteres() {
+	    int caracteresUtilizados = txtBiografia.getText().length();
+	    lblContadorCaracteres.setText(caracteresUtilizados + "/200");
 	}
 	
 	public void actualizarIdioma(Idioma idiomaActual) {

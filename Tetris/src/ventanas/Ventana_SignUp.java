@@ -67,12 +67,12 @@ public class Ventana_SignUp extends JFrame{
         aplicarEstiloCampo(usernamefld, "Username");
         pnlPrincipal.add(usernamelbl);
         pnlPrincipal.add(usernamefld);
-        
+
         emaillbl = new JLabel("Email:");
         emailfld = new JTextField("@gmail.com");
         pnlPrincipal.add(emaillbl);
         pnlPrincipal.add(emailfld);
-
+        
         passwordlbl = new JLabel("Password:");
         passwordfld = new CustomPasswordField();
         aplicarEstiloCampo(passwordfld, "Password");
@@ -372,6 +372,7 @@ public class Ventana_SignUp extends JFrame{
             return button;
         }
     }
+    
     public static void main(String[] args) {
 		Ventana_SignUp vent = new Ventana_SignUp();
 		
@@ -386,5 +387,5 @@ public class Ventana_SignUp extends JFrame{
 		backbtn.setText(traducciones[14][0]);
 		exitbtn.setText(traducciones[15][0]);
 		continuebtn.setText(traducciones[16][0]);	    
-	}   
+	}
 }

@@ -10,6 +10,9 @@ import ventanas.Ventana_Idioma.Idioma;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
@@ -17,6 +20,10 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.JTextComponent;
+
+import org.mindrot.jbcrypt.BCrypt;
+
+import gestionUsuarios.Usuario;
 
 public class Ventana_PerfilDeUsuario extends JFrame { 
 	

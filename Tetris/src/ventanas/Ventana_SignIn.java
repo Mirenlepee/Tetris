@@ -117,22 +117,27 @@ public class Ventana_SignIn extends JFrame {
         pnlPrincipal.setLayout(new GridLayout(5, 2));
 	
         usernamelbl = new JLabel("Username:");
-        usernamefld = new JTextField("@gmail.com");
+        usernamefld = new JTextField();
+        aplicarEstiloCampo(usernamefld, "Username");
         pnlPrincipal.add(usernamelbl);
         pnlPrincipal.add(usernamefld);
         
         JLabel lblCorreo = new JLabel("Email:");
-        txtCorreo = new JTextField(15);
+        txtCorreo = new JTextField("@gmail.com");
         pnlPrincipal.add(lblCorreo);
         pnlPrincipal.add(txtCorreo);
 	
         passwordlbl = new JLabel("Password:");
         txtPassword = new CustomPasswordField();
+        aplicarEstiloCampo(txtPassword, "Password");
+        txtPassword.setEchoChar((char) 0);
         pnlPrincipal.add(passwordlbl);
         pnlPrincipal.add(txtPassword);
         
         JLabel lblConfirm = new JLabel("Confirm password:");
         txtConfirm = new CustomPasswordField();
+        aplicarEstiloCampo(txtConfirm, "Confirm password");
+        txtConfirm.setEchoChar((char) 0);
         pnlPrincipal.add(lblConfirm);
         pnlPrincipal.add(txtConfirm);
 	

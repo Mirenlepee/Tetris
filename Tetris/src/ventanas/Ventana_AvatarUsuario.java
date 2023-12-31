@@ -14,6 +14,7 @@ public class Ventana_AvatarUsuario extends JFrame {
     private JButton btnAvatar;
     private JButton btnSeleccionarFoto;
     private JButton btnAceptar;
+    private String directorioSeleccionado;
 
     public Ventana_AvatarUsuario() {
         this.setSize(200, 200);
@@ -31,6 +32,7 @@ public class Ventana_AvatarUsuario extends JFrame {
 
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
+                    directorioSeleccionado = selectedFile.getPath();
                     ImageIcon selectedImage = new ImageIcon(selectedFile.getPath());
                     int ancho = 150;
                     int alto = 150;
@@ -45,6 +47,7 @@ public class Ventana_AvatarUsuario extends JFrame {
         btnAceptar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	setVisible(false);
                 dispose();
             }
         });
@@ -58,6 +61,10 @@ public class Ventana_AvatarUsuario extends JFrame {
 
     public void setAvatarButton(JButton btnAvatar) {
         this.btnAvatar = btnAvatar;
+    }
+    
+    public String obtenerDirectorioSeleccionado() {
+        return directorioSeleccionado;
     }
 
 	public void actualizarIdioma(Idioma idiomaActual) {

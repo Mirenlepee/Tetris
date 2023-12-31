@@ -24,6 +24,7 @@ public class Ventana_PerfilDeUsuario extends JFrame {
 	private JButton btnGuardar;
 	protected JTextArea txtBiografia;
 	private JLabel lblContadorCaracteres;
+	private String directorioFotoSeleccionada;
 	
 	public Ventana_PerfilDeUsuario() {
         this.setSize(400, 400);
@@ -54,7 +55,10 @@ public class Ventana_PerfilDeUsuario extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Ventana_AvatarUsuario ventanaAvatar = new Ventana_AvatarUsuario();
-                ventanaAvatar.setAvatarButton(btnAvatar); 
+                ventanaAvatar.setAvatarButton(btnAvatar);
+                if (!ventanaAvatar.isVisible()) {
+                    directorioFotoSeleccionada = ventanaAvatar.obtenerDirectorioSeleccionado();
+                } 
             }
         });
         

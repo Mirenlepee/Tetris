@@ -23,7 +23,7 @@ public class Ventana_PerfilDeUsuario extends JFrame {
 	protected JTextArea txtBiografia;
 	
 	public Ventana_PerfilDeUsuario() {
-        this.setSize(350, 350);
+        this.setSize(400, 400);
         this.setTitle("Perfil");
 		this.setLayout(new BorderLayout());
 		
@@ -60,8 +60,10 @@ public class Ventana_PerfilDeUsuario extends JFrame {
         lblBiografia = new JLabel("Biografy:");
         pnlPerfilDeUsuario.add(lblBiografia);
         
-        txtBiografia = new JTextArea(5, 20);
+        txtBiografia = new JTextArea(8, 23);
         limitarCaracteres(txtBiografia, 200); // Limita la JTextArea a 200 caracteres
+        txtBiografia.setLineWrap(true); // Activa el ajuste de línea automático
+        txtBiografia.setWrapStyleWord(true); // Ajusta las líneas en palabras completas
         pnlPerfilDeUsuario.add(txtBiografia);
         
         btnGuardar = new JButton("Continue");

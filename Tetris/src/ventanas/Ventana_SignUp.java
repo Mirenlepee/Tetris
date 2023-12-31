@@ -63,26 +63,29 @@ public class Ventana_SignUp extends JFrame{
         pnlPrincipal.setLayout(new GridLayout(4, 2));
 
         usernamelbl = new JLabel("Username:");
-        usernamefld = new JTextField(20);
+        usernamefld = new JTextField();
+        aplicarEstiloCampo(usernamefld, "Username");
         pnlPrincipal.add(usernamelbl);
         pnlPrincipal.add(usernamefld);
+        
+        emaillbl = new JLabel("Email:");
+        emailfld = new JTextField("@gmail.com");
+        pnlPrincipal.add(emaillbl);
+        pnlPrincipal.add(emailfld);
 
         passwordlbl = new JLabel("Password:");
         passwordfld = new CustomPasswordField();
+        aplicarEstiloCampo(passwordfld, "Password");
+        passwordfld.setEchoChar((char) 0);
         pnlPrincipal.add(passwordlbl);
         pnlPrincipal.add(passwordfld);
 
         confirmPasswordlbl = new JLabel("Confirm Password:");
         confirmPasswordfld = new CustomPasswordField();
+        aplicarEstiloCampo(confirmPasswordfld, "Confirm password");
+        confirmPasswordfld.setEchoChar((char) 0);
         pnlPrincipal.add(confirmPasswordlbl);
         pnlPrincipal.add(confirmPasswordfld);
-
-      
-        emaillbl = new JLabel("Email:");
-        emailfld = new JTextField("@gmail.com");
-        aplicarEstiloCampo(emailfld, "Correo");
-        pnlPrincipal.add(emaillbl);
-        pnlPrincipal.add(emailfld);
 
         ventana.add(pnlPrincipal, BorderLayout.CENTER);
     

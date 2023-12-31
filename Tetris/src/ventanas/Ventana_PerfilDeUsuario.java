@@ -9,14 +9,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.JTextComponent;
+
 public class Ventana_PerfilDeUsuario extends JFrame { 
 	
-	private JLabel lblNombre;
 	private JLabel lblBiografia;
 	private JButton btnGuardar;
+	protected JTextArea txtBiografia;
 	
 	public Ventana_PerfilDeUsuario() {
-        this.setSize(400, 400);
+        this.setSize(350, 350);
         this.setTitle("Perfil");
 		this.setLayout(new BorderLayout());
 		
@@ -49,17 +56,12 @@ public class Ventana_PerfilDeUsuario extends JFrame {
         });
         
         this.add(btnAvatar, BorderLayout.NORTH);
-       
-        lblNombre = new JLabel("User Name:");
-        pnlPerfilDeUsuario.add(lblNombre);
-        
-        JTextField txtNombre = new JTextField(20);
-        pnlPerfilDeUsuario.add(txtNombre);
         
         lblBiografia = new JLabel("Biografy:");
         pnlPerfilDeUsuario.add(lblBiografia);
         
-        JTextArea txtBiografia = new JTextArea(5, 20);
+        txtBiografia = new JTextArea(5, 20);
+        limitarCaracteres(txtBiografia, 200); // Limita la JTextArea a 200 caracteres
         pnlPerfilDeUsuario.add(txtBiografia);
         
         btnGuardar = new JButton("Continue");
@@ -79,9 +81,35 @@ public class Ventana_PerfilDeUsuario extends JFrame {
         this.setVisible(true);
     }
 	
+	private void limitarCaracteres(JTextComponent textComponent, int maxLength) {
+	    Document document = textComponent.getDocument();
+	    if (document instanceof AbstractDocument) {
+	        AbstractDocument abstractDocument = (AbstractDocument) document;
+	        abstractDocument.setDocumentFilter(new DocumentFilter() {
+	            @Override
+	            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr)
+	                    throws BadLocationException {
+	                if ((fb.getDocument().getLength() + string.length()) <= maxLength) {
+	                    super.insertString(fb, offset, string, attr);
+	                }
+	            }
+
+	            @Override
+	            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
+	                    throws BadLocationException {
+	                int currentLength = fb.getDocument().getLength();
+	                int overLimit = (currentLength + text.length()) - maxLength;
+	                if (overLimit > 0) {
+	                    text = text.substring(0, text.length() - overLimit);
+	                }
+	                super.replace(fb, offset, length, text, attrs);
+	            }
+	        });
+	    }
+	}
+	
 	public void actualizarIdioma(Idioma idiomaActual) {
 		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
-		lblNombre.setText(traducciones[51][0]);
 		lblBiografia.setText(traducciones[52][0]);
 		btnGuardar.setText(traducciones[53][0]);
 	}

@@ -369,6 +369,10 @@ public class Ventana_SignUp extends JFrame{
             return button;
         }
     }
+    public static void main(String[] args) {
+		Ventana_SignUp vent = new Ventana_SignUp();
+		
+	}
 	public void actualizarIdioma(Idioma idiomaActual) {
 		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
 		signUplbl.setText(traducciones[9][0]);

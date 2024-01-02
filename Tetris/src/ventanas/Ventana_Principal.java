@@ -6,9 +6,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.logging.Logger;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import gestionUsuarios.Usuario;
 
 public class Ventana_Principal extends JFrame{
 	
@@ -18,7 +23,6 @@ public class Ventana_Principal extends JFrame{
 	private JButton btnStatistics;
 	private JButton btnCredits;	
 	private int idJugador;
-	
 	
 	public Ventana_Principal() {
 		setTitle("Ventana Principal");

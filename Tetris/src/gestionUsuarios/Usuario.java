@@ -1,6 +1,7 @@
 package gestionUsuarios;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -14,7 +15,7 @@ public class Usuario {
 	private String email;
 	private String AvatarURL;
 	private String descripcion;
-	private LocalDate ultimaCambioContrasena;
+	private LocalDate ultimoCambioContrasena;
 	
 	//Constructor
 	public Usuario(String userName, String password, String email, String avatarURL, String descripcion) {
@@ -76,6 +77,14 @@ public class Usuario {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	
+	public LocalDate getUltimoCambioContrasena() {
+		return ultimoCambioContrasena;
+	}
+
+	public void setUltimoCambioContrasena(LocalDate ultimoCambioContrasena) {
+		this.ultimoCambioContrasena = ultimoCambioContrasena;
+	}
 
 	//toString
 	@Override
@@ -86,25 +95,12 @@ public class Usuario {
 	
 	public void cambiarContrasena(String nuevaContrasena) {
         // Código para cambiar la contraseña
-        ultimaCambioContrasena = LocalDate.now();
+        ultimoCambioContrasena = LocalDate.now();
         // Hash de la nueva contraseña
         String hashNuevaContrasena = BCrypt.hashpw(nuevaContrasena, BCrypt.gensalt());
         // Almacenar la contraseña encriptada
 		this.password = hashNuevaContrasena;
     }
-	
-//	public void establecerContraseña(String contraseña) {
-//        // Genera un salt aleatorio con un costo de trabajo de 12
-//        String salt = BCrypt.gensalt(12);
-//
-//        // Genera el hash de la contraseña con el salt
-//        this.password = BCrypt.hashpw(contraseña, salt);
-//    }
-//
-//    public boolean validarContraseña(String contraseña) {
-//        // Compara el hash almacenado con el hash de la contraseña proporcionada
-//        return BCrypt.checkpw(contraseña, this.password);
-//    }
 	
 	
 }

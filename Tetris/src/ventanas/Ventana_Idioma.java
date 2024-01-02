@@ -61,9 +61,11 @@ public class Ventana_Idioma extends JFrame{
         setVisible(true);
 	}
 	
-	private static void cambiarIdiomaEnTodasLasVentanas() {
+	private void cambiarIdiomaEnTodasLasVentanas() {
         for (JFrame ventana : ventanasDelJuego) {
-            actualizarIdiomaEnVentana(ventana);
+            if (ventana instanceof VentanaIdiomaActualizable) {
+                ((VentanaIdiomaActualizable) ventana).actualizarIdioma(idiomaActual);
+            }
         }
     }
 

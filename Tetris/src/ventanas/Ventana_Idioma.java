@@ -61,14 +61,13 @@ public class Ventana_Idioma extends JFrame{
         setVisible(true);
 	}
 	
-	private void cambiarIdiomaEnTodasLasVentanas() {
+	private static void cambiarIdiomaEnTodasLasVentanas() {
         for (JFrame ventana : ventanasDelJuego) {
-            if (ventana instanceof VentanaIdiomaActualizable) {
-                ((VentanaIdiomaActualizable) ventana).actualizarIdioma(idiomaActual);
-            }
+            actualizarIdiomaEnVentana(ventana);
         }
     }
 
+	
 	private static void actualizarIdiomaEnVentana(JFrame ventana) {
 	    if (ventana instanceof Ventana_Principal) {
 	        ((Ventana_Principal) ventana).actualizarIdioma(idiomaActual);
@@ -160,29 +159,22 @@ public class Ventana_Idioma extends JFrame{
 		{ "Continue", "Continuar", "Fortfahren", "Jarraitu", "Continuer"}
 	};
 	
-	public static String[][] traducirTodasLasPalabras(Idioma idioma) {
-        int indiceIdioma = idioma.ordinal();
-        String[][] traduccionesIdioma = new String[traducciones.length][traducciones[0].length];
-        
-        for (int i = 0; i < traducciones.length; i++) {
-            for (int j = 0; j < traducciones[i].length; j++) {
-                if (j == 0) {
-                    traduccionesIdioma[i][j] = traducciones[i][j];
-                } else {
-                    traduccionesIdioma[i][j] = traducciones[i][indiceIdioma];
-                }
-            }
-        }
-        return traduccionesIdioma;
-    }
-	
-	public void actualizarIdioma(Idioma idiomaActual) {
-		String[][] traducciones = traducirTodasLasPalabras(idiomaActual);
-		lblLanguage.setText(traducciones[32][0]);
-		btnReturn.setText(traducciones[33][0]);
+	public static String getTrad( String original, Idioma idioma ) {
+		for (int i=0; i<traducciones.length; i++) {
+			if (traducciones[i][0].equalsIgnoreCase(original)) {
+				return traducciones[i][idioma.ordinal()];
+			}
+		}
+		return "NO-TRADUCIDO: " + original;
 	}
 
-	 public static void main(String[] args) {
+	public void actualizarIdioma(Idioma idiomaActual) {
+	    lblLanguage.setText(getTrad("Language", idiomaActual));
+	    btnReturn.setText(getTrad("Return", idiomaActual));
+	}
+
+
+/*	 public static void main(String[] args) {
 
 	        for (String[] fila : traducciones) {
 	            for (String palabra : fila) {
@@ -191,4 +183,5 @@ public class Ventana_Idioma extends JFrame{
 	            System.out.println();
 	        }
 	 }   	
+*/
 }

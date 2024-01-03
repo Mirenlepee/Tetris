@@ -45,7 +45,6 @@ public class Ventana_Principal extends JFrame{
         layeredPane.add(fondoLabel, JLayeredPane.DEFAULT_LAYER);
 
         initUI();
-        Ventana_ManejoIdioma.registrarVentana(this);
 	}
     
 	private void initUI() {
@@ -154,14 +153,11 @@ public class Ventana_Principal extends JFrame{
 	}
 	
 	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
-	    String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idioma);
-	    //btnPlay.setText(traducciones[0][0]); 
-	    //btnStatistics.setText(traducciones[1][0]);
-	    //btnCredits.setText(traducciones[2][0]);
-	    btnPlay.setText(Ventana_Traductor.traducir(idioma, 0));
-	    btnStatistics.setText(Ventana_Traductor.traducir(idioma, 1));
-	    btnCredits.setText(Ventana_Traductor.traducir(idioma, 2));
+	    btnPlay.setText(Ventana_Idioma.getTrad("Play", idioma));
+	    btnStatistics.setText(Ventana_Idioma.getTrad("STATISTICS", idioma));
+	    btnCredits.setText(Ventana_Idioma.getTrad("CREDITS", idioma));
 	}
+
 	
 	public static void main(String[] args) {
 		JFrame vent = new Ventana_Principal();

@@ -12,11 +12,14 @@ import javax.swing.text.JTextComponent;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import BD.GestionBDUsuario;
+import gestionUsuarios.Usuario;
 import ventanas.Ventana_Idioma.Idioma;
 
 import javax.mail.PasswordAuthentication;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Properties;
 	
 import java.awt.*;
@@ -28,12 +31,16 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 	
 public class Ventana_SignIn extends JFrame {
 	
+	private static final long serialVersionUID = 1L;
 	private JLabel signInlbl;
 	private JPanel pnlLbl;
 	private JLabel usernamelbl;
@@ -45,6 +52,10 @@ public class Ventana_SignIn extends JFrame {
 	private JLabel noAccountlbl ;
 	private static CustomPasswordField txtPassword;
 	private static CustomPasswordField txtConfirm;
+	private Usuario usuarioActual;
+	static GestionBDUsuario base;
+	public static HashMap<String, Usuario> mapaUsu;
+	private static Logger logger = Logger.getLogger(Ventana_SignIn.class.getName());
 		
 	private String generateRandomPassword() {
 		String lowercase = "abcdefghijklmnopqrstuvwxyz";
@@ -212,10 +223,43 @@ public class Ventana_SignIn extends JFrame {
         continuebtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	ventana.dispose();
-            	new Ventana_Juego();
+            	char[] passwordChar = txtPassword.getPassword();
+    	        String contrasenia = new String(passwordChar);
+    			String correo = txtCorreo.getText();
+
+                if (!validarCorreo(correo)) {
+                    // El correo es válido, puedes realizar acciones adicionales aquí
+                    JOptionPane.showMessageDialog(null, "Correo con formato invalido válido");
+                    return;
+                }
+                
+    			if (verificarCredenciales(correo, contrasenia)) {
+    				if (mostrarCondicionesDeUso()) {
+    					usuarioActual = mapaUsu.get(correo);
+    					JOptionPane.showMessageDialog(null, "Bienvenido de nuevo " + obtenerNombreUsuario(correo));
+    					Ventana_Juego v = new Ventana_Juego();
+    					dispose();
+    					v.setVisible(true);
+    			        // Realiza acciones adicionales cuando el inicio de sesión sea exitoso
+    				 }
+    			}  else if (correo.isEmpty() || contrasenia.isEmpty()){
+    				JOptionPane.showMessageDialog(null, "Alguno de los campos está vacío "); 
+    			} else {
+    				JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+    			}
             }
-        });
+    		});
+    		
+    		try {
+    			GestionBDUsuario.main(null);
+    		} catch (SQLException e1) {
+    			// TODO Auto-generated catch block
+    			e1.printStackTrace();
+    		}
+    		base = new GestionBDUsuario();
+    		base.verUsuarios();
+    		mapaUsu = base.crearMapa();
+   
         Botonpnl.add(continuebtn);
         
         JPanel Mensagepnl = new JPanel();
@@ -242,15 +286,15 @@ public class Ventana_SignIn extends JFrame {
 
     public void mostrarOcultarContraseña() {
         // Obtener la contraseña actual
-        char[] contraseña = txtPassword.getPassword();
+        char[] password = txtPassword.getPassword();
 
         // Cambiar el estado de visualización de la contraseña
         if (txtPassword.getEchoChar() == 0) {
-        	txtPassword.setEchoChar('\u2022');
+        	txtPassword.setEchoChar('*');
         } else {
         	txtPassword.setEchoChar((char) 0);
         }
-        txtPassword.setText(new String(contraseña));
+        txtPassword.setText(new String(password));
     }
 	
 	private void aplicarEstiloCampo(JTextComponent textField, String texto) {
@@ -353,6 +397,123 @@ public class Ventana_SignIn extends JFrame {
         }
     }
     
+    private boolean mostrarCondicionesDeUso() {
+        JTextArea txtArea = new JTextArea(
+                "¡Bienvenido a Tetris!\n\n" +
+                        "Por favor, lea y acepte los siguientes términos y condiciones antes de continuar:\n\n" +
+                        "1. Al utilizar esta aplicación, usted acepta cumplir con los términos y condiciones establecidos.\n" +
+                        "2. Tetris no se hace responsable de las pérdidas o daños derivados del uso de la aplicación.\n" +
+                        "3. Los usuarios deben proporcionar información precisa y actualizada durante el registro.\n" +
+                        "4. En Tetris asumimos la responsabilidad de proteger toda la información personal proporcionada.\n" +
+                        "5. La información del usuario se utilizará de acuerdo con nuestra política de privacidad.\n\n" +
+                        "Al hacer clic en Aceptar, confirma que ha leído y acepta estos términos y condiciones."
+        );
+        txtArea.setEditable(false);
+
+        JScrollPane scrollPane = new JScrollPane(txtArea);
+        scrollPane.setPreferredSize(new Dimension(600, 400));
+
+        JPanel messagePanel = new JPanel(new BorderLayout());
+        messagePanel.add(scrollPane, BorderLayout.CENTER);
+
+        int option = JOptionPane.showOptionDialog(
+                this,
+                messagePanel,
+                "Condiciones de Uso",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                new Object[]{"Aceptar", "Cancelar"},
+                "Aceptar"
+        );
+
+        return option == 0; // Devuelve true si el usuario hizo clic en "Aceptar"
+    }
+    
+    private void mostrarPoliticaPrivacidad() {
+        try {
+        	JTextArea txtArea = new JTextArea(
+
+                    "Nuestra Política de Privacidad!\n\n"+
+                    	"Fecha de entrada en vigencia: [Fecha]\n\n"+
+                    	"¡Bienvenido a Tetris! Agradecemos tu interés y confianza en nuestra aplicación. Esta Política de Privacidad tiene como objetivo explicar cómo recopilamos, utilizamos y protegemos la información personal que puedas proporcionar durante el uso de nuestra aplicación.\n\n"+
+                    		
+                    		"1. Información que Recopilamos:\n\n"+
+                    		"Al utilizar nuestra aplicación, podemos recopilar la siguiente información:\n"+
+                    		"1.1 Información del Usuario:\n"+
+
+                            "\n\nAl hacer clic en Aceptar, confirmas que has leído y aceptas estos términos."
+            );
+        	txtArea.setEditable(false);
+
+            JScrollPane scrollPane = new JScrollPane(txtArea);
+            scrollPane.setPreferredSize(new Dimension(600, 400));
+
+            JPanel messagePanel = new JPanel(new BorderLayout());
+            messagePanel.add(scrollPane, BorderLayout.CENTER);
+
+            int option = JOptionPane.showOptionDialog(
+                    this,
+                    messagePanel,
+                    "Política de Privacidad",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null,
+                    new Object[]{"Aceptar"},
+                    "Aceptar"
+            );
+        }catch (Exception e) {
+            logger.log(Level.SEVERE, "Error al mostrar la política de privacidad", e);
+        }
+		
+    }
+    
+    public static boolean validarCorreo(String correo) {
+        if (correo == null || correo.isEmpty()) {
+            return false; // Correo nulo o vacío es inválido
+        }
+
+        // Expresión regular para validar un correo electrónico
+        String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+
+        return correo.matches(regex);
+    }
+	
+	public Usuario getUsuarioActual() {
+		return usuarioActual;
+	}
+	
+	private boolean  verificarCredenciales (String correo, String contrasenia) {
+		 if (mapaUsu.containsKey(correo)) {
+           Usuario u = base.getUsuarioPorCorreo(correo);
+	        String hashAlmacenado = u.getPassword();
+	        if(hashAlmacenado.startsWith("$2a$")) {
+		        if (BCrypt.checkpw(contrasenia, hashAlmacenado)) {
+		            return true; // La contraseña es correcta
+		        } else {
+		            return false; // La contraseña es incorrecta
+		        }
+	        }else {			//Esta parte es paara comprobar con los usuarios de prueba
+	        	if (contrasenia.equals(hashAlmacenado)) {
+	                return true; // La contraseña sin encriptar es correcta
+	            } else {
+	                return false; // La contraseña sin encriptar es incorrecta
+	            }
+	        }
+		 } else {
+			 return false;// El correo no está registrado, la autenticación falla
+		 }
+	}
+	
+	public String obtenerNombreUsuario(String correo) {
+		if (mapaUsu.containsKey(correo)) {
+	        Usuario usuario = mapaUsu.get(correo);
+	        return usuario.getUserName();
+	    } else {
+	        return "Nombre de usuario no encontrado";
+	    }
+	}
+	
     public static void main(String[] args) {
         Ventana_SignIn v = new Ventana_SignIn();
     }

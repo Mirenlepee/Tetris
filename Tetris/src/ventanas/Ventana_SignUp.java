@@ -377,15 +377,14 @@ public class Ventana_SignUp extends JFrame{
 		Ventana_SignUp vent = new Ventana_SignUp();
 		
 	}
-	public void actualizarIdioma(Idioma idiomaActual) {
-		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
-		signUplbl.setText(traducciones[9][0]);
-		usernamelbl.setText(traducciones[10][0]);
-		passwordlbl.setText(traducciones[11][0]);
-		confirmPasswordlbl.setText(traducciones[12][0]);
-		emaillbl.setText(traducciones[13][0]);
-		backbtn.setText(traducciones[14][0]);
-		exitbtn.setText(traducciones[15][0]);
-		continuebtn.setText(traducciones[16][0]);	    
+	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
+		signUplbl.setText(Ventana_Idioma.getTrad("Sign Up", idioma));
+		usernamelbl.setText(Ventana_Idioma.getTrad("Username:", idioma));
+		passwordlbl.setText(Ventana_Idioma.getTrad("Password:", idioma));
+		confirmPasswordlbl.setText(Ventana_Idioma.getTrad("Confirm Password:", idioma));
+		emaillbl.setText(Ventana_Idioma.getTrad("Email:", idioma));
+		backbtn.setText(Ventana_Idioma.getTrad("Back", idioma));
+		exitbtn.setText(Ventana_Idioma.getTrad("Quit", idioma));
+		continuebtn.setText(Ventana_Idioma.getTrad("Continue", idioma));	    
 	}
 }

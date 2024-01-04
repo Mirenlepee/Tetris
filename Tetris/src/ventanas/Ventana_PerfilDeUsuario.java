@@ -152,10 +152,9 @@ public class Ventana_PerfilDeUsuario extends JFrame {
 	    lblContadorCaracteres.setText(caracteresUtilizados + "/200");
 	}
 	
-	public void actualizarIdioma(Idioma idiomaActual) {
-		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
-		lblBiografia.setText(traducciones[52][0]);
-		btnGuardar.setText(traducciones[53][0]);
+	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
+		lblBiografia.setText(Ventana_Idioma.getTrad("Biografy:", idioma));
+		btnGuardar.setText(Ventana_Idioma.getTrad("Continue", idioma));
 	}
 	
 	public static void main(String[] args) {

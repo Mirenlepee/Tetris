@@ -179,12 +179,11 @@ public class Ventana_Pausa extends JFrame{
 		this.presionado = presionado;
 	}
 
-	public void actualizarIdioma(Idioma idiomaActual) {
-		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
-		lblPausa.setText(traducciones[46][0]);
-		btnResume.setText(traducciones[47][0]);
-		btnRestart.setText(traducciones[48][0]);
-		btnOptions.setText(traducciones[49][0]);
-		btnQuit.setText(traducciones[50][0]);
+	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
+		lblPausa.setText(Ventana_Idioma.getTrad("Paused", idioma));
+		btnResume.setText(Ventana_Idioma.getTrad("Resume", idioma));
+		btnRestart.setText(Ventana_Idioma.getTrad("Restart", idioma));
+		btnOptions.setText(Ventana_Idioma.getTrad("Options", idioma));
+		btnQuit.setText(Ventana_Idioma.getTrad("Quit", idioma));
 	}
 }

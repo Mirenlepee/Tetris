@@ -728,10 +728,8 @@ public class Ventana_Juego extends JFrame {
         }
     }
 
-	public void actualizarIdioma(Idioma idiomaActual) {
-		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
-		btnPausa.setText(traducciones[37][0]);
-		lblNivel.setText(traducciones[38][0]);
-		etiquetaPuntos.setText(traducciones[39][0]);
+	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
+		lblNivel.setText(Ventana_Idioma.getTrad("Nivel: 1", idioma));
+		etiquetaPuntos.setText(Ventana_Idioma.getTrad("\"Puntos: \" + puntos", idioma));
 	}
 }

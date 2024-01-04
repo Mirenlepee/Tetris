@@ -189,9 +189,8 @@ public class Ventana_Estadistica extends JFrame{
 		}
 	}
 	
-	public void actualizarIdioma(Idioma idiomaActual) {
-		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
-		signInlbl.setText(traducciones[25][0]);
-		btnReturn.setText(traducciones[26][0]);		
+	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
+		signInlbl.setText(Ventana_Idioma.getTrad("Statistics",idioma));
+		btnReturn.setText(Ventana_Idioma.getTrad("Return",idioma));		
 	}
 }

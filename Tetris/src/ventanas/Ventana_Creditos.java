@@ -129,14 +129,10 @@ public class Ventana_Creditos extends JFrame {
         setVisible(true);
     }
 
-
-	public void actualizarIdioma(Idioma idiomaActual) {
-		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
-		lblTitulo.setText(traducciones[19][0]);
-		lblCreadoras.setText(traducciones[20][0]);
-		txtCreadoras.setText(traducciones[21][0]);
-		lblDiseñadoras.setText(traducciones[22][0]);
-		txtDiseñadoras.setText(traducciones[23][0]);
-		btnVolver.setText(traducciones[24][0]);
+	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
+		lblTitulo.setText(Ventana_Idioma.getTrad("Credits", idioma));
+		lblCreadoras.setText(Ventana_Idioma.getTrad("Creators: ", idioma));
+		lblDiseñadoras.setText(Ventana_Idioma.getTrad("Designers: ", idioma));
+		btnVolver.setText(Ventana_Idioma.getTrad("Return", idioma));
 	}
 }

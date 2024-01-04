@@ -357,14 +357,13 @@ public class Ventana_SignIn extends JFrame {
         Ventana_SignIn v = new Ventana_SignIn();
     }
 
-    public void actualizarIdioma(Idioma idiomaActual) {
-		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
-	    signInlbl.setText(traducciones[3][0]);
-	    usernamelbl.setText(traducciones[4][0]); 
-	    passwordlbl.setText(traducciones[5][0]); 
-	    forgotPasswordlbl.setText(traducciones[6][0]); 
-	    continuebtn.setText(traducciones[7][0]); 
-	    noAccountlbl.setText(traducciones[8][0]);
+    public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
+		signInlbl.setText(Ventana_Idioma.getTrad("Sign In", idioma));
+	    usernamelbl.setText(Ventana_Idioma.getTrad("Username:", idioma)); 
+	    passwordlbl.setText(Ventana_Idioma.getTrad("Password:", idioma)); 
+	    forgotPasswordlbl.setText(Ventana_Idioma.getTrad("<html><u>Forgot Password?</u></html>", idioma)); 
+	    continuebtn.setText(Ventana_Idioma.getTrad("Continue", idioma)); 
+	    noAccountlbl.setText(Ventana_Idioma.getTrad("<html><u>Don't have an account? Create one</u></html>", idioma));
 	}
 
 }

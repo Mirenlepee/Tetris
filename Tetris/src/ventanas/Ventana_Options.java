@@ -248,13 +248,11 @@ public class Ventana_Options extends JFrame{
 	    ventana.setVisible(true);
 	}
 
-	public void actualizarIdioma(Idioma idiomaActual) {
-		String[][] traducciones = Ventana_Idioma.traducirTodasLasPalabras(idiomaActual);
-		lblOptions.setText(traducciones[40][0]);
-		btnSound.setText(traducciones[41][0]);
-		lblSound.setText(traducciones[42][0]);
-		lblLanguage.setText(traducciones[43][0]);
-		lblHTP.setText(traducciones[44][0]);
-		btnReturn.setText(traducciones[45][0]);
+	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
+		lblOptions.setText(Ventana_Idioma.getTrad("Options",idioma));
+		lblSound.setText(Ventana_Idioma.getTrad("Sound",idioma));
+		lblLanguage.setText(Ventana_Idioma.getTrad("Language",idioma));
+		lblHTP.setText(Ventana_Idioma.getTrad("How to play",idioma));
+		btnReturn.setText(Ventana_Idioma.getTrad("Return",idioma));
 	}
 }

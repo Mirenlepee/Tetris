@@ -10,10 +10,10 @@ import java.io.File;
 
 public class Ventana_AvatarUsuario extends JFrame {
 
-    private JButton btnAvatar;
-    private JButton btnSeleccionarFoto;
-    private JButton btnAceptar;
-    private String directorioSeleccionado;
+    private static JButton btnAvatar;
+    private static JButton btnSeleccionarFoto;
+    private static JButton btnAceptar;
+    private static String directorioSeleccionado;
 
     public Ventana_AvatarUsuario() {
         this.setSize(200, 200);
@@ -56,6 +56,13 @@ public class Ventana_AvatarUsuario extends JFrame {
 
         this.add(panel, BorderLayout.CENTER);
         this.setVisible(true);
+        
+        if(Ventana_Idioma.getIdiomaSeleccionado()!=null) {
+            if(Ventana_Idioma.getIdiomaSeleccionado()=="Español") {
+            	
+            cambiarTextosEspañol();	
+            }
+        }
     }
 
     public void setAvatarButton(JButton btnAvatar) {
@@ -65,6 +72,10 @@ public class Ventana_AvatarUsuario extends JFrame {
     public String obtenerDirectorioSeleccionado() {
         return directorioSeleccionado;
     }
-
-
+	 public static void cambiarTextosEspañol() {
+	     
+		 btnSeleccionarFoto.setText("Selecciona una foto");
+		 btnAceptar.setText("Aceptar");
+	    }
+	
 }

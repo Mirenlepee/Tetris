@@ -19,7 +19,12 @@ public class Ventana_Idioma extends JFrame {
             if(idiomaSeleccionado=="Español") {
             	Ventana_Options.cambiarTextosEspañol();
             	Ventana_Principal.cambiarTextosEspañol();
+	}else if(idiomaSeleccionado=="Français"){
+		Ventana_Options.cambiarTextosFrances();
+		Ventana_Principal.cambiarTextosFrances();
+		
 	}else {
+		idiomaSeleccionado=null;
 	}
             dispose(); 
         });

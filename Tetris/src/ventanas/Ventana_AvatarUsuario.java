@@ -18,12 +18,12 @@ public class Ventana_AvatarUsuario extends JFrame {
 
     public Ventana_AvatarUsuario() {
         this.setSize(200, 200);
-        this.setTitle("Seleccionar Avatar");
+        this.setTitle("Choose Avatar");
         this.setLayout(new BorderLayout());
 
         JPanel panel = new JPanel();
         
-        btnSeleccionarFoto = new JButton("Seleccionar Foto");
+        btnSeleccionarFoto = new JButton("Select a Photo");
         btnSeleccionarFoto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -43,7 +43,7 @@ public class Ventana_AvatarUsuario extends JFrame {
             }
         });
 
-        btnAceptar = new JButton("Aceptar");
+        btnAceptar = new JButton("Continue");
         btnAceptar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

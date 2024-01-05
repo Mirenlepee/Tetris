@@ -77,10 +77,15 @@ public class Ventana_Estadistica extends JFrame{
             	
             	cambiarTextosFrances();
             	
+            }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Deutsch") {
+            	cambiarTextosAleman();
+            	
             }
         }
     }
 	
+
+
 	public void setDatos() {
 		modeloDatos = new MiTableModel();
 		tablaDatos.setModel(modeloDatos);
@@ -215,5 +220,11 @@ public class Ventana_Estadistica extends JFrame{
 		 
 		 
 	 }
+		private void cambiarTextosAleman() {
+			// TODO Auto-generated method stub
+			signInlbl.setText("Statistik");
+			btnReturn.setText("Zurück");
+
+		}
 	
 }

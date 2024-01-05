@@ -154,12 +154,18 @@ public class Ventana_Creditos extends JFrame {
          }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Français") {
         	cambiarTextosFrances();
         	
+        }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Deutsch") {
+        	cambiarTextosAleman();
+        	
         }
     }}
     
     
     
-    public static void cambiarTextosEspañol() {
+
+
+
+	public static void cambiarTextosEspañol() {
     	
     	lblTitulo.setText("Créditos");
     	lblCreadoras.setText("Creadoras: ");
@@ -203,7 +209,27 @@ public class Ventana_Creditos extends JFrame {
     	
     	
     }
-    
+
+    private void cambiarTextosAleman() {
+		// TODO Auto-generated method stub
+    	lblTitulo.setText("Credits");
+    	lblCreadoras.setText("Schöpferinnen: ");
+    	lblDiseñadoras.setText("Designerinnen: ");
+    	btnVolver.setText("Zurück");
+    	txtInformacion.setText("Tetris ist ein Projekt, das von einem Team von Studenten im Rahmen eines Programmierkurses entwickelt wurde.\n"
+    	        + "Wir danken allen, die zur Entwicklung dieses Spiels beigetragen haben.\n"
+    	        + "Version: 1.0\n");
+
+    	txtInformacionRelevante.setText("Relevante Informationen zum Projekt:\n"
+    	        + "- Tetris wurde unter Verwendung von Java und der Swing-Bibliothek für die grafische Benutzeroberfläche entwickelt.\n"
+    	        + "- Das Team arbeitete sechs Wochen lang an dem Projekt als Teil eines Abschlussprojekts.\n"
+    	        + "- Wir danken den Lehrern für ihre Anleitung und Unterstützung während der Entwicklung.\n"
+    	        + "- Fortgeschrittene Funktionen wie Teilerotation und dynamische Punkte wurden implementiert.\n"
+    	        + "- Das Spiel wurde von einer Gruppe von Benutzern getestet, um die Spielerfahrung zu verbessern.\n"
+    	        + "- Der Quellcode ist auf GitHub verfügbar zur Überprüfung und Beteiligung.\n");
+
+		
+	}
     
 
 

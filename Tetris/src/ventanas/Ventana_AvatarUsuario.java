@@ -65,11 +65,16 @@ public class Ventana_AvatarUsuario extends JFrame {
             	
             	cambiarTextosFrances();
             	
+            }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Deutsch") {
+            	cambiarTextosAleman();
+            	
             }
         }
     }
 
-    public void setAvatarButton(JButton btnAvatar) {
+    
+
+	public void setAvatarButton(JButton btnAvatar) {
         this.btnAvatar = btnAvatar;
     }
     
@@ -89,5 +94,11 @@ public static void cambiarTextosFrances() {
 	btnAceptar.setText("Accepter");
 
 	    }
+private void cambiarTextosAleman() {
+	// TODO Auto-generated method stub
+	btnSeleccionarFoto.setText("Foto auswählen");
+	btnAceptar.setText("Akzeptieren");
+
+}
 	
 }

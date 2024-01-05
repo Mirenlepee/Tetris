@@ -11,12 +11,12 @@ import ventanas.Ventana_Juego.CorazonPanel;
 
 public class Ventana_Options extends JFrame{
 	private JFrame ventana;
-	private JLabel lblOptions;
+	private static JLabel lblOptions;
 	public JButton btnSound;
-	private JLabel lblSound;
-	private JLabel lblLanguage;
-	private JLabel lblHTP;
-	private JButton btnReturn;
+	private static JLabel lblSound;
+	private static JLabel lblLanguage;
+	private static JLabel lblHTP;
+	private static JButton btnReturn;
 	private boolean imgSound = true;
 	private static Clip clip;	
 	private JPanel pnlPrincipal;
@@ -133,7 +133,14 @@ public class Ventana_Options extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				  Ventana_Idioma ventanaIdioma = new Ventana_Idioma();
+			        ventanaIdioma.setVisible(true);
+			        
+			       
+			        
+			        
+			        
+			        
 			}
         });
         
@@ -169,6 +176,10 @@ public class Ventana_Options extends JFrame{
         
      
         ventana.add(pnlPrincipal,BorderLayout.CENTER);
+        
+        
+        
+           
        
 	}
 	public static boolean isPresionado() {
@@ -246,6 +257,14 @@ public class Ventana_Options extends JFrame{
 		cambiarImgBtn();
 	    ventana.setVisible(true);
 	}
+	 public static void cambiarTextosEspañol() {
+	     
+			lblOptions.setText("Opciones");
+			
+	        lblSound.setText("Sonido");
+	        lblLanguage.setText("Idioma");
+	        lblHTP.setText("Cómo jugar");
+	        btnReturn.setText("Volver");
+	    }
 
-	
 }

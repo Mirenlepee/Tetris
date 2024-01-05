@@ -26,8 +26,8 @@ import gestionUsuarios.Usuario;
 
 public class Ventana_PerfilDeUsuario extends JFrame { 
 	
-	private JLabel lblBiografia;
-	private JButton btnGuardar;
+	private static JLabel lblBiografia;
+	private static JButton btnGuardar;
 	protected JTextArea txtBiografia;
 	private JLabel lblContadorCaracteres;
 	private String directorioFotoSeleccionada;
@@ -70,7 +70,7 @@ public class Ventana_PerfilDeUsuario extends JFrame {
         
         this.add(btnAvatar, BorderLayout.NORTH);
         
-        lblBiografia = new JLabel("Biografy:");
+        lblBiografia = new JLabel("Biography:");
         pnlPerfilDeUsuario.add(lblBiografia);
         
         txtBiografia = new JTextArea(8, 23);
@@ -117,6 +117,14 @@ public class Ventana_PerfilDeUsuario extends JFrame {
         pnlCentro.add(pnlPerfilDeUsuario);
         this.add(pnlCentro, BorderLayout.CENTER);
         this.setVisible(true);
+        
+        
+        if(Ventana_Idioma.getIdiomaSeleccionado()!=null) {
+            if(Ventana_Idioma.getIdiomaSeleccionado()=="Español") {
+            	
+            cambiarTextosEspañol();	
+            }
+        }
     }
 	
 	private void limitarCaracteres(JTextComponent textComponent, int maxLength) {
@@ -150,6 +158,16 @@ public class Ventana_PerfilDeUsuario extends JFrame {
 	    int caracteresUtilizados = txtBiografia.getText().length();
 	    lblContadorCaracteres.setText(caracteresUtilizados + "/200");
 	}
+	
+	 public static void cambiarTextosEspañol() {
+		 
+		 lblBiografia.setText("Biografía:");
+		 btnGuardar.setText("Continuar");
+		 
+		 
+	 }
+	
+	
 	
 	public static void main(String[] args) {
 		Ventana_PerfilDeUsuario vent = new Ventana_PerfilDeUsuario();

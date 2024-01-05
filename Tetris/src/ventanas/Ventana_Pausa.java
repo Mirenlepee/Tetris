@@ -1,7 +1,5 @@
 package ventanas;
 
-
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -23,12 +21,12 @@ import ventanas.Ventana_Juego.CorazonPanel;
 
 public class Ventana_Pausa extends JFrame{
 	private JFrame ventana;
-	private JLabel lblPausa;
-	private JButton btnResume;
-	private JButton btnRestart;
-	private JButton btnOptions;
-	private JButton btnQuit;
-	private JButton btnExit;
+	private static JLabel lblPausa;
+	private static JButton btnResume;
+	private static JButton btnRestart;
+	private static  JButton btnOptions;
+	private static JButton btnQuit;
+	private static JButton btnExit;
 	private Ventana_Juego ventanaJuego;
 	
 	public boolean presionado;
@@ -162,6 +160,14 @@ public class Ventana_Pausa extends JFrame{
         pnlCentro.add(pnlBotones);
         ventana.add(pnlCentro, BorderLayout.CENTER);
         ventana.setVisible(true); 
+        
+        
+        if(Ventana_Idioma.getIdiomaSeleccionado()!=null) {
+            if(Ventana_Idioma.getIdiomaSeleccionado()=="Español") {
+            	
+            cambiarTextosEspañol();	
+            }
+        }
 	}
 	
 	public boolean isParaLaVentana() {
@@ -180,4 +186,15 @@ public class Ventana_Pausa extends JFrame{
 		this.presionado = presionado;
 	}
 
+	 public static void cambiarTextosEspañol() {
+		 
+		 lblPausa.setText("Pausa");
+		 btnResume.setText("Continuar");
+		 btnRestart.setText("Volver a Intentar");
+		 btnOptions.setText("Opciones");
+		 btnQuit.setText("Menú principal");
+		 btnExit.setText("Salir");
+		 
+	 }
+	
 }

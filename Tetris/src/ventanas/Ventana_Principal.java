@@ -19,9 +19,9 @@ public class Ventana_Principal extends JFrame{
 	
 	private BufferedImage imgFondo;
 	private Ventana_Options ventanaOptions;
-	private JButton btnPlay;
-	private JButton btnStatistics;
-	private JButton btnCredits;	
+	private static JButton btnPlay;
+	private static JButton btnStatistics;
+	private static JButton btnCredits;	
 	private int idJugador;
 	
 	public Ventana_Principal() {
@@ -45,8 +45,12 @@ public class Ventana_Principal extends JFrame{
         layeredPane.add(fondoLabel, JLayeredPane.DEFAULT_LAYER);
 
         initUI();
+        
+      
 	}
     
+
+
 	private void initUI() {
 		addLogo();
 		addButtons();
@@ -65,7 +69,7 @@ public class Ventana_Principal extends JFrame{
 		JLayeredPane layeredPane = (JLayeredPane) getContentPane();
 		
 		btnPlay = new JButton("PLAY");
-		btnPlay.setFont(new Font("Vendana", Font.BOLD, 16));
+		btnPlay.setFont(new Font("Ventana", Font.BOLD, 16));
 		btnPlay.setBackground(Color.WHITE);
 		//btnPlay.setBorder(new EmptyBorder(0, 0, 0, 0));
 		btnPlay.addActionListener(new ActionListener() {
@@ -151,7 +155,14 @@ public class Ventana_Principal extends JFrame{
 	    ventanaOptions.btnSound.setIcon(iconoDef);
 	    ventanaOptions.setImgSoundState(!ventanaOptions.getImgSoundState());
 	}
-
+	public static void cambiarTextosEspañol() {
+		// TODO Auto-generated method stub
+		
+		btnPlay.setText("JUGAR");
+		btnStatistics.setText("ESTADÍSTICAS");
+		btnCredits.setText("CRÉDITOS");
+		
+	}
 	
 	public static void main(String[] args) {
 		JFrame vent = new Ventana_Principal();

@@ -257,14 +257,45 @@ public class Ventana_Options extends JFrame{
 		cambiarImgBtn();
 	    ventana.setVisible(true);
 	}
-	 public static void cambiarTextosEspañol() {
+	
+	public static void cambiarTextosEspañol() {
 	     
 			lblOptions.setText("Opciones");
-			
 	        lblSound.setText("Sonido");
 	        lblLanguage.setText("Idioma");
 	        lblHTP.setText("Cómo jugar");
 	        btnReturn.setText("Volver");
-	    }
-
+    }
+	public static void cambiarTextosIngles() {
+	     
+		lblOptions.setText("Options");
+        lblSound.setText("Sound");
+        lblLanguage.setText("Language");
+        lblHTP.setText("How to play");
+        btnReturn.setText("Return");
+	}
+	public static void cambiarTextosFrances() {
+	     
+		lblOptions.setText("Options");
+        lblSound.setText("Son");
+        lblLanguage.setText("Langage");
+        lblHTP.setText("Comment jouer");
+        btnReturn.setText("Retourner");
+	}
+	public static void cambiarTextosEuskara() {
+	     
+		lblOptions.setText("Aukerak");
+        lblSound.setText("Soinua");
+        lblLanguage.setText("Hizkuntza");
+        lblHTP.setText("Nola jokatu");
+        btnReturn.setText("Itzuli");
+	}
+	public static void cambiarTextosAleman() {
+	     
+		lblOptions.setText("Optionen");
+        lblSound.setText("Klang");
+        lblLanguage.setText("Sprache");
+        lblHTP.setText("Spielanleitung");
+        btnReturn.setText("Zurückkehren");
+	}
 }

@@ -72,10 +72,30 @@ public class Ventana_AvatarUsuario extends JFrame {
     public String obtenerDirectorioSeleccionado() {
         return directorioSeleccionado;
     }
-	 public static void cambiarTextosEspañol() {
-	     
+    
+	public static void cambiarTextosEspañol() {
 		 btnSeleccionarFoto.setText("Selecciona una foto");
 		 btnAceptar.setText("Aceptar");
-	    }
+	}
+	
+	public static void cambiarTextosIngles() {
+		 btnSeleccionarFoto.setText("Select a photo");
+		 btnAceptar.setText("Accept");
+	}
+	
+	public static void cambiarTextosFrances() {
+		 btnSeleccionarFoto.setText("Sélectionnez une photo");
+		 btnAceptar.setText("Accepter");
+	}
+	
+	public static void cambiarTextosEuskara() {
+		 btnSeleccionarFoto.setText("Aukeratu argazki bat");
+		 btnAceptar.setText("Onartu");
+	}
+	
+	public static void cambiarTextosAleman() {
+		 btnSeleccionarFoto.setText("Wählen Sie ein Foto aus");
+		 btnAceptar.setText("Akzeptieren");
+	}
 	
 }

@@ -156,11 +156,38 @@ public class Ventana_Principal extends JFrame{
 	    ventanaOptions.setImgSoundState(!ventanaOptions.getImgSoundState());
 	}
 	public static void cambiarTextosEspañol() {
-		// TODO Auto-generated method stub
 		
 		btnPlay.setText("JUGAR");
 		btnStatistics.setText("ESTADÍSTICAS");
 		btnCredits.setText("CRÉDITOS");
+		
+	}
+	public static void cambiarTextosIngles() {
+		
+		btnPlay.setText("PLAY");
+		btnStatistics.setText("STATISTICS");
+		btnCredits.setText("CREDITS");
+		
+	}
+	public static void cambiarTextosFrances() {
+		
+		btnPlay.setText("JOUER");
+		btnStatistics.setText("STATISTIQUES");
+		btnCredits.setText("CRÉDITS");
+		
+	}
+	public static void cambiarTextosEuskara() {
+		
+		btnPlay.setText("JOLASTU");
+		btnStatistics.setText("ESTADÍSTIKAK");
+		btnCredits.setText("KREDITUAK");
+		
+	}
+	public static void cambiarTextosAleman() {
+		
+		btnPlay.setText("PLAY");
+		btnStatistics.setText("STATISTIKEN");
+		btnCredits.setText("CREDITS");
 		
 	}
 	

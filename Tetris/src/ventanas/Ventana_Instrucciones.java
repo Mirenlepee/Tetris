@@ -59,10 +59,61 @@ public class Ventana_Instrucciones extends JFrame{
             if(Ventana_Idioma.getIdiomaSeleccionado()=="Español") {
             	
             cambiarTextosEspañol();	
+            }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Français") {
+            	
+            	cambiarTextosFrances();
+            	
+            }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Deutsch") {
+            	cambiarTextosAleman();
+            	
             }
         }
     }
-    public static void cambiarTextosEspañol() {
+    private void cambiarTextosAleman() {
+		// TODO Auto-generated method stub
+    	lblTitle.setText("Anleitung");
+    	TxtAreaInstructions.setText("Das Ziel bei Tetris ist einfach: Du lässt Blöcke von oben auf den Bildschirm fallen.\n"+
+    	    "Du kannst die Blöcke bewegen, entweder von links nach rechts und/oder sie drehen.\n"+
+    	    "Die Blöcke fallen mit einer bestimmten Geschwindigkeit, aber du kannst sie schneller fallen lassen, wenn du sicher in deiner Position bist.\n\n"+
+    	    "1. Benutze die Pfeiltasten links und rechts, um die fallenden Blöcke horizontal zu bewegen.\n"+
+    	    "2. Drücke die Pfeiltaste nach unten, um die Blöcke schneller fallen zu lassen.\n"+
+    	    "3. Drehe die Blöcke mit der Pfeiltaste nach oben, um sie in leere Räume zu passen.\n"+
+    	    "4. Schließe eine horizontale Linie ohne Lücken ab, um sie verschwinden zu lassen und Punkte zu verdienen.\n"+
+    	    "5. Mit fortschreitendem Spiel fallen die Blöcke schneller und fordern deine Geschwindigkeit und Geschicklichkeit heraus.\n"+
+    	    "6. Das Spiel endet, wenn die Blöcke den oberen Bildschirmrand erreichen.\n\n"+
+    	    "Fordere dich selbst heraus und sieh, wie hoch du punkten kannst, indem du deine eigenen Rekorde brichst! Viel Erfolg!");
+
+    	closeBtn.setText("Fortfahren");
+
+    	
+    	
+    	
+    	
+		
+	}
+	private void cambiarTextosFrances() {
+		// TODO Auto-generated method stub
+    	
+    	 lblTitle.setText("Instructions");
+    	    TxtAreaInstructions.setText("L'objectif dans Tetris est simple : vous faites descendre des blocs depuis le haut de l'écran.\n"+
+    	        "Vous pouvez déplacer les blocs, soit de gauche à droite et/ou les faire pivoter.\n"+
+    	        "Les blocs tombent à une vitesse déterminée, mais vous pouvez les faire tomber plus rapidement si vous êtes sûr de votre position.\n\n"+
+    	        "1. Utilisez les touches de flèche gauche et droite pour déplacer les blocs qui tombent horizontalement.\n"+
+    	        "2. Appuyez sur la touche de flèche vers le bas pour faire tomber les blocs plus rapidement.\n"+
+    	        "3. Faites pivoter les blocs en utilisant la touche de flèche vers le haut pour les ajuster dans les espaces vides.\n"+
+    	        "4. Complétez une ligne horizontale sans lacunes pour la faire disparaître et gagnez des points.\n"+
+    	        "5. Au fur et à mesure que le jeu progresse, les blocs tombent plus rapidement, mettant votre vitesse et votre agilité à l'épreuve.\n"+
+    	        "6. Le jeu se termine si les blocs atteignent le haut de l'écran.\n\n"+
+    	        "Défiez-vous et voyez jusqu'où vous pouvez marquer en battant vos propres records ! Bonne chance !");
+    	    
+    	    closeBtn.setText("Continuer");
+    	
+    	
+    	
+    	
+		
+	}
+	public static void cambiarTextosEspañol() {
 		
     	
 		lblTitle.setText("Instrucciones");

@@ -166,10 +166,21 @@ public class Ventana_Pausa extends JFrame{
             if(Ventana_Idioma.getIdiomaSeleccionado()=="Español") {
             	
             cambiarTextosEspañol();	
+            }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Français") {
+            	cambiarTextosFrances();
+            	
+            }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Deutsch") {
+            	cambiarTextosAleman();
+            	
             }
         }
 	}
 	
+	
+
+
+
+
 	public boolean isParaLaVentana() {
 		return ParaLaVentana;
 	}
@@ -196,5 +207,29 @@ public class Ventana_Pausa extends JFrame{
 		 btnExit.setText("Salir");
 		 
 	 }
+	 
+	 private void cambiarTextosFrances() {
+			// TODO Auto-generated method stub
+		  lblPausa.setText("Pause");
+		    btnResume.setText("Reprendre");
+		    btnRestart.setText("Recommencer");
+		    btnOptions.setText("Options");
+		    btnQuit.setText("Menu principal");
+		    btnExit.setText("Quitter");
+			
+		}
+	 
+
+		private void cambiarTextosAleman() {
+			// TODO Auto-generated method stub
+			lblPausa.setText("Pause");
+			btnResume.setText("Fortsetzen");
+			btnRestart.setText("Neustarten");
+			btnOptions.setText("Optionen");
+			btnQuit.setText("Hauptmenü");
+			btnExit.setText("Beenden");
+
+			
+		}
 	
 }

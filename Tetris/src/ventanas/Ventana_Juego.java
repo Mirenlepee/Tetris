@@ -273,12 +273,29 @@ public class Ventana_Juego extends JFrame {
             if(Ventana_Idioma.getIdiomaSeleccionado()=="Español") {
             	
             cambiarTextosEspañol();	
+            }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Français") {
+            	System.out.println("si");
+            	cambiarTextosFrances();
+            	
+            }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Deutsch") {
+            	cambiarTextosAleman();
+            	
             }
         }
 
     }
     
   
+
+	
+
+
+
+
+
+
+
+
 
 	private void actualizarEtiquetaTiempo() {
         String tiempoFormateado = String.format("%02d:%02d", minutos, segundos);
@@ -745,6 +762,23 @@ public class Ventana_Juego extends JFrame {
     	
     }
     
+    
+    private void cambiarTextosFrances() {
+		// TODO Auto-generated method stub
+    	etiquetaPuntos.setText("Points : " + puntos);
+        lblNivel.setText("Niveau : 1");
+		
+	}
+    
+
+	private void cambiarTextosAleman() {
+		// TODO Auto-generated method stub
+		etiquetaPuntos.setText("Punkte : " + puntos);
+		lblNivel.setText("Niveau : 1");
+
+		
+	}
+
     
   
 public static void main(String[] args ) {

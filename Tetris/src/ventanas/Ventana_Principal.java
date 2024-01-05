@@ -191,6 +191,24 @@ public class Ventana_Principal extends JFrame{
 		
 	}
 	
+	public static void cambiarTextosFrances() {
+	btnPlay.setText("JOUER");
+    btnStatistics.setText("STATISTIQUES");
+    btnCredits.setText("CRÉDITS");
+    
+    
+	}
+	
+	
+	public static void cambiarTextosAleman() {
+		
+		btnPlay.setText("SPIELEN");
+		btnStatistics.setText("STATISTIKEN");
+		btnCredits.setText("CREDITS");
+
+		
+		
+	}
 	public static void main(String[] args) {
 		JFrame vent = new Ventana_Principal();
 		vent.setVisible(true);

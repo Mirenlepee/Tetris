@@ -61,11 +61,20 @@ public class Ventana_AvatarUsuario extends JFrame {
             if(Ventana_Idioma.getIdiomaSeleccionado()=="Español") {
             	
             cambiarTextosEspañol();	
+            }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Français") {
+            	
+            	cambiarTextosFrances();
+            	
+            }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Deutsch") {
+            	cambiarTextosAleman();
+            	
             }
         }
     }
 
-    public void setAvatarButton(JButton btnAvatar) {
+    
+
+	public void setAvatarButton(JButton btnAvatar) {
         this.btnAvatar = btnAvatar;
     }
     
@@ -97,5 +106,6 @@ public class Ventana_AvatarUsuario extends JFrame {
 		 btnSeleccionarFoto.setText("Wählen Sie ein Foto aus");
 		 btnAceptar.setText("Akzeptieren");
 	}
+
 	
 }

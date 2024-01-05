@@ -298,4 +298,5 @@ public class Ventana_Options extends JFrame{
         lblHTP.setText("Spielanleitung");
         btnReturn.setText("Zurückkehren");
 	}
+
 }

@@ -73,10 +73,19 @@ public class Ventana_Estadistica extends JFrame{
             if(Ventana_Idioma.getIdiomaSeleccionado()=="Español") {
             	
             cambiarTextosEspañol();	
+            }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Français") {
+            	
+            	cambiarTextosFrances();
+            	
+            }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Deutsch") {
+            	cambiarTextosAleman();
+            	
             }
         }
     }
 	
+
+
 	public void setDatos() {
 		modeloDatos = new MiTableModel();
 		tablaDatos.setModel(modeloDatos);
@@ -201,7 +210,14 @@ public class Ventana_Estadistica extends JFrame{
 	public static void cambiarTextosEspañol() {
 	     signInlbl.setText("Estadística");
 	     btnReturn.setText("Volver");
-	    }
-	
+	}
+	public static void cambiarTextosFrances() {
+	    signInlbl.setText("Statistique");
+	    btnReturn.setText("Retour");
+	}
+	private void cambiarTextosAleman() {
+		signInlbl.setText("Statistik");
+		btnReturn.setText("Zurück");
+	}
 	
 }

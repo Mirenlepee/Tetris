@@ -277,6 +277,15 @@ public class Ventana_Options extends JFrame{
 		    lblHTP.setText("Comment jouer");
 		    btnReturn.setText("Retour");
 		}
+	 
+	 public static void cambiarTextosAleman() {
+		 lblOptions.setText("Optionen");
+		 lblSound.setText("Ton");
+		 lblLanguage.setText("Sprache");
+		 lblHTP.setText("Wie spielt man");
+		 btnReturn.setText("Zurück");
+		 
+	 }
 
 	 
 

@@ -10,7 +10,7 @@ public class Ventana_Idioma extends JFrame {
         setTitle("Select a Language");
         setSize(300, 150);
 
-        comboBoxIdioma = new JComboBox<>(new String[]{"Español", "English","Français"});
+        comboBoxIdioma = new JComboBox<>(new String[]{"Español", "English","Français","Deutsch"});
         comboBoxIdioma.setSelectedIndex(1); 
 
         JButton btnAceptar = new JButton("Accept  ");
@@ -23,7 +23,11 @@ public class Ventana_Idioma extends JFrame {
 		Ventana_Options.cambiarTextosFrances();
 		Ventana_Principal.cambiarTextosFrances();
 		
-	}else {
+	}else if(idiomaSeleccionado=="Deutsch") {
+		Ventana_Options.cambiarTextosAleman();
+		Ventana_Principal.cambiarTextosAleman();
+	
+        }else {
 		idiomaSeleccionado=null;
 	}
             dispose(); 

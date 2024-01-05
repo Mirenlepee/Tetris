@@ -115,18 +115,18 @@ public class Ventana_SignIn extends JFrame {
 	
     public Ventana_SignIn() {
     	
-    	super();
-		
-		try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-        	// logger de prueba
-        	logger.log(Level.SEVERE, "Error al configurar el look and feel", e);
-        	JOptionPane.showMessageDialog(null, "Error al cargar la ventana: contacta con los informaticos.", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-
-		// logger de prueba
-        logger.log(Level.INFO, "Inicializando la ventana de inicio");
+//    	super();
+//		
+//		try {
+//            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+//        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+//        	// logger de prueba
+//        	logger.log(Level.SEVERE, "Error al configurar el look and feel", e);
+//        	JOptionPane.showMessageDialog(null, "Error al cargar la ventana: contacta con los informaticos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+//        }
+//
+//		// logger de prueba
+//        logger.log(Level.INFO, "Inicializando la ventana de inicio");
 		
         ventana = new JFrame("Sign In");
         ventana.setSize(400, 250);

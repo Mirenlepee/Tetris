@@ -31,13 +31,13 @@ public class Ventana_Estadistica extends JFrame{
 	private JFrame ventana;
 	private JTable tablaDatos;
 	private TableModel modeloDatos;
-	private JLabel signInlbl;
-	private JButton btnReturn;
+	private static JLabel signInlbl;
+	private static JButton btnReturn;
 	
 	public Ventana_Estadistica(int idJugador) {
 		ventana = new JFrame("Estadística__");
 		ventana.setSize(600, 250);
-		ventana.setTitle("Estadística");
+		ventana.setTitle("Statistics");
 		ventana.setLayout(new BorderLayout());
 		
 		signInlbl = new JLabel("Statistics");
@@ -66,7 +66,16 @@ public class Ventana_Estadistica extends JFrame{
 		 
 		ventana.add(pnlBoton, BorderLayout.SOUTH);
 		ventana.setVisible(true);
-	}
+		
+		
+		
+		if(Ventana_Idioma.getIdiomaSeleccionado()!=null) {
+            if(Ventana_Idioma.getIdiomaSeleccionado()=="Español") {
+            	
+            cambiarTextosEspañol();	
+            }
+        }
+    }
 	
 	public void setDatos() {
 		modeloDatos = new MiTableModel();
@@ -187,6 +196,12 @@ public class Ventana_Estadistica extends JFrame{
 			}
 		}
 	}
+	
+	
+	public static void cambiarTextosEspañol() {
+	     signInlbl.setText("Estadística");
+	     btnReturn.setText("Volver");
+	    }
 	
 	
 }

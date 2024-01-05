@@ -18,11 +18,11 @@ public class Ventana_GameOver extends JFrame {
 	protected JTextField tfTimePlayed;
 	private Ventana_Juego ventanaJuego;
 	
-	private JLabel lblGameOver;
-	private JLabel lblScore;
-	private JLabel lblBestScore;
-	private JLabel lblTimePlayed;
-	private JButton btnExit;
+	private static JLabel lblGameOver;
+	private static JLabel lblScore;
+	private static JLabel lblBestScore;
+	private static  JLabel lblTimePlayed;
+	private static JButton btnExit;
 	
 	public Ventana_GameOver(Ventana_Juego ventJuego) {
 		this.ventanaJuego = ventJuego; 
@@ -129,11 +129,28 @@ public class Ventana_GameOver extends JFrame {
 		add(pnlBotonera, BorderLayout.SOUTH);
 		realizarActualizacionCampos();
         setVisible(true);
+        
+        if(Ventana_Idioma.getIdiomaSeleccionado()!=null) {
+            if(Ventana_Idioma.getIdiomaSeleccionado()=="Español") {
+            	
+            cambiarTextosEspañol();	
+            }
+        }
 	}
 	// Método para realizar la actualización de campos
     private void realizarActualizacionCampos() {
         ventanaJuego.actualizarCampos(this);
     }
     
-
+	public static void cambiarTextosEspañol() {
+		lblGameOver.setText("Fin del juego");
+		lblScore.setText("Puntuación:");
+		lblBestScore.setText("Mejor Puntuación:");
+		lblTimePlayed.setText("Tiempo Jugado:");
+		btnExit.setText("Salir");
+		
+		
+		
+	    }
+    
 }

@@ -15,7 +15,7 @@ public class Ventana_Creditos extends JFrame {
     private static JLabel lblDiseñadoras;
     private JTextArea txtDiseñadoras;
     private static JTextArea txtInformacion;
-    private JButton btnVolver;
+    private static JButton btnVolver;
     private static JTextArea txtInformacionRelevante;
     
 
@@ -161,6 +161,7 @@ public class Ventana_Creditos extends JFrame {
     	lblTitulo.setText("Créditos");
     	lblCreadoras.setText("Creadoras: ");
     	lblDiseñadoras.setText("Diseñadoras: ");
+    	btnVolver.setText("Volver");
     	txtInformacion.setText("Tetris es un proyecto desarrollado por un equipo de estudiantes como parte de un curso de programación.\n"
                 + "Agradecemos a todos los que contribuyeron al desarrollo de este juego.\n"
                 + "Versión: 1.0\n");
@@ -175,6 +176,7 @@ public class Ventana_Creditos extends JFrame {
     	
     	
     }
+    
     
 
 

@@ -156,29 +156,38 @@ public class Ventana_GameOver extends JFrame {
 		lblBestScore.setText("Mejor Puntuación:");
 		lblTimePlayed.setText("Tiempo Jugado:");
 		btnExit.setText("Salir");
-		
-		
-		
-	    }
-	
-	private void cambiarTextosFrances() {
-		// TODO Auto-generated method stub
-		 lblGameOver.setText("Fin du jeu");
-		    lblScore.setText("Score :");
-		    lblBestScore.setText("Meilleur score :");
-		    lblTimePlayed.setText("Temps de jeu :");
-		    btnExit.setText("Quitter");
-		
 	}
 	
-	private void cambiarTextosAleman() {
-		// TODO Auto-generated method stub
+	public static void cambiarTextosIngles() {
+		lblGameOver.setText("Game Over");
+		lblScore.setText("Score:");
+		lblBestScore.setText("Best Score:");
+		lblTimePlayed.setText("Played Time:");
+		btnExit.setText("Exit");
+	}
+	
+	public static void cambiarTextosFrances() {
+		lblGameOver.setText("Fin du jeu");
+		lblScore.setText("Score :");
+		lblBestScore.setText("Meilleur score :");
+		lblTimePlayed.setText("Temps de jeu :");
+		btnExit.setText("Quitter");
+	}
+	
+	public static void cambiarTextosEuskara() {
+		lblGameOver.setText("Jokoa amaitu");
+		lblScore.setText("Puntuazioa:");
+		lblBestScore.setText("Puntuaziorik onena:");
+		lblTimePlayed.setText("Jokatutako denbora:");
+		btnExit.setText("Irten");
+	}
+	
+	public static void cambiarTextosAleman() {
 		lblGameOver.setText("Spielende");
 		lblScore.setText("Punktzahl :");
 		lblBestScore.setText("Beste Punktzahl :");
 		lblTimePlayed.setText("Spielzeit :");
 		btnExit.setText("Beenden");
-
 	}
 
     

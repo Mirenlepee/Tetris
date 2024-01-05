@@ -749,34 +749,31 @@ public class Ventana_Juego extends JFrame {
             g2d.setColor(Color.RED);
             g2d.fill(heart);
         }
-        
-        
-        
     }
+    
     public static void cambiarTextosEspañol() {
-    	
     	etiquetaPuntos.setText("Puntos: " + puntos);
     	lblNivel.setText("Nivel: 1");
-
-    	
-    	
     }
     
+    public static void cambiarTextosIngles() {
+    	etiquetaPuntos.setText("Points: " + puntos);
+    	lblNivel.setText("Level: 1");
+    }
     
-    private void cambiarTextosFrances() {
-		// TODO Auto-generated method stub
+    public static void cambiarTextosFrances() {
     	etiquetaPuntos.setText("Points : " + puntos);
         lblNivel.setText("Niveau : 1");
-		
 	}
     
+    public static void cambiarTextosEuskara() {
+    	etiquetaPuntos.setText("Puntuak: " + puntos);
+    	lblNivel.setText("Maila: 1");
+    }
 
-	private void cambiarTextosAleman() {
-		// TODO Auto-generated method stub
+    public static void cambiarTextosAleman() {
 		etiquetaPuntos.setText("Punkte : " + puntos);
 		lblNivel.setText("Niveau : 1");
-
-		
 	}
 
     

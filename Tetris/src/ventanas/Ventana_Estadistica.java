@@ -211,11 +211,19 @@ public class Ventana_Estadistica extends JFrame{
 	     signInlbl.setText("Estadística");
 	     btnReturn.setText("Volver");
 	}
+	public static void cambiarTextosIngles() {
+	     signInlbl.setText("Statistics");
+	     btnReturn.setText("Return");
+	}
 	public static void cambiarTextosFrances() {
 	    signInlbl.setText("Statistique");
 	    btnReturn.setText("Retour");
 	}
-	private void cambiarTextosAleman() {
+	public static void cambiarTextosEuskara() {
+	     signInlbl.setText("Estatistikak");
+	     btnReturn.setText("Itzuli");
+	}
+	public static void cambiarTextosAleman() {
 		signInlbl.setText("Statistik");
 		btnReturn.setText("Zurück");
 	}

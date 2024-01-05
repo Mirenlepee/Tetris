@@ -167,30 +167,30 @@ public class Ventana_PerfilDeUsuario extends JFrame {
 	    lblContadorCaracteres.setText(caracteresUtilizados + "/200");
 	}
 	
-	 public static void cambiarTextosEspañol() {
-		 
+	public static void cambiarTextosEspañol() {
 		 lblBiografia.setText("Biografía:");
 		 btnGuardar.setText("Continuar");
-		 
-		 
-	 }
+	}
 	
-	
-	 private void cambiarTextosFrances() {
-			// TODO Auto-generated method stub
-		 lblBiografia.setText("Biographie :");
-		    btnGuardar.setText("Continuer");
-			
-		}
-
+	public static void cambiarTextosIngles() {
+		 lblBiografia.setText("Biography:");
+		 btnGuardar.setText("Continue");
+	}
 		
-
-		private void cambiarTextosAleman() {
-			// TODO Auto-generated method stub
-			lblBiografia.setText("Biografie :");
-			btnGuardar.setText("Fortfahren");
+	public static void cambiarTextosFrances() {
+		lblBiografia.setText("Biographie :");
+	    btnGuardar.setText("Continuer");
+	}
 	
-		}
+	public static void cambiarTextosEuskara() {
+		 lblBiografia.setText("Biografia:");
+		 btnGuardar.setText("Jarraitu");
+	}
+
+	public static void cambiarTextosAleman() {
+		lblBiografia.setText("Biografie :");
+		btnGuardar.setText("Fortfahren");
+	}
 
 	public static void main(String[] args) {
 		Ventana_PerfilDeUsuario vent = new Ventana_PerfilDeUsuario();

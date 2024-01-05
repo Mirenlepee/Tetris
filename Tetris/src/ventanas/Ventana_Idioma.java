@@ -23,34 +23,55 @@ public class Ventana_Idioma extends JFrame {
             	Ventana_AvatarUsuario.cambiarTextosEspañol();
             	Ventana_Creditos.cambiarTextosEspañol();
             	Ventana_SignIn.cambiarTextosEspañol();
-            }
-            if(idiomaSeleccionado=="English") {
+            	Ventana_Estadistica.cambiarTextosEspañol();
+            	Ventana_GameOver.cambiarTextosEspañol();
+            	Ventana_Juego.cambiarTextosEspañol();
+            	Ventana_Pausa.cambiarTextosEspañol();
+            	Ventana_PerfilDeUsuario.cambiarTextosEspañol();
+            } else if(idiomaSeleccionado=="English") {
             	Ventana_Options.cambiarTextosIngles();
             	Ventana_Principal.cambiarTextosIngles();
             	Ventana_AvatarUsuario.cambiarTextosIngles();
             	Ventana_Creditos.cambiarTextosIngles();    
             	Ventana_SignIn.cambiarTextosIngles();
-            }
-            if(idiomaSeleccionado=="Français") {
+            	Ventana_Estadistica.cambiarTextosIngles();
+            	Ventana_GameOver.cambiarTextosIngles();
+            	Ventana_Juego.cambiarTextosIngles();
+            	Ventana_Pausa.cambiarTextosIngles();
+            	Ventana_PerfilDeUsuario.cambiarTextosIngles();
+            } else if(idiomaSeleccionado=="Français") {
             	Ventana_Options.cambiarTextosFrances();
             	Ventana_Principal.cambiarTextosFrances();
             	Ventana_AvatarUsuario.cambiarTextosFrances();
             	Ventana_Creditos.cambiarTextosFrances();
             	Ventana_SignIn.cambiarTextosFrances();
-            }
-            if(idiomaSeleccionado=="Euskara") {
+            	Ventana_Estadistica.cambiarTextosFrances();
+            	Ventana_GameOver.cambiarTextosFrances();
+            	Ventana_Juego.cambiarTextosFrances();
+            	Ventana_Pausa.cambiarTextosFrances();
+            	Ventana_PerfilDeUsuario.cambiarTextosFrances();
+            } else if(idiomaSeleccionado=="Euskara") {
             	Ventana_Options.cambiarTextosEuskara();
             	Ventana_Principal.cambiarTextosEuskara();
             	Ventana_AvatarUsuario.cambiarTextosEuskara();
             	Ventana_Creditos.cambiarTextosEuskara();
             	Ventana_SignIn.cambiarTextosEuskara();
-            }
-            if(idiomaSeleccionado=="Deutsch") {
+            	Ventana_Estadistica.cambiarTextosEuskara();
+            	Ventana_GameOver.cambiarTextosEuskara();
+            	Ventana_Juego.cambiarTextosEuskara();
+            	Ventana_Pausa.cambiarTextosEuskara();
+            	Ventana_PerfilDeUsuario.cambiarTextosEuskara();
+            } else if(idiomaSeleccionado=="Deutsch") {
             	Ventana_Options.cambiarTextosAleman();
             	Ventana_Principal.cambiarTextosAleman();
             	Ventana_AvatarUsuario.cambiarTextosAleman();
             	Ventana_Creditos.cambiarTextosAleman();
             	Ventana_SignIn.cambiarTextosAleman();
+            	Ventana_Estadistica.cambiarTextosAleman();
+            	Ventana_GameOver.cambiarTextosAleman();
+            	Ventana_Juego.cambiarTextosAleman();
+            	Ventana_Pausa.cambiarTextosAleman();
+            	Ventana_PerfilDeUsuario.cambiarTextosAleman();
             }
 
             dispose(); 

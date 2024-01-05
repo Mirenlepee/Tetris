@@ -197,39 +197,49 @@ public class Ventana_Pausa extends JFrame{
 		this.presionado = presionado;
 	}
 
-	 public static void cambiarTextosEspañol() {
-		 
+	public static void cambiarTextosEspañol() {
+		lblPausa.setText("Pausa");
+		btnResume.setText("Continuar");
+		btnRestart.setText("Volver a Intentar");
+		btnOptions.setText("Opciones");
+		btnQuit.setText("Menú principal");
+		btnExit.setText("Salir"); 
+	}
+	
+	public static void cambiarTextosIngles() {
+		lblPausa.setText("Pause");
+		btnResume.setText("Continue");
+		btnRestart.setText("Try again");
+		btnOptions.setText("Options");
+		btnQuit.setText("Main menu");
+		btnExit.setText("Exit"); 
+	}
+	 
+	 public static void cambiarTextosFrances() {
+		lblPausa.setText("Pause");
+		btnResume.setText("Reprendre");
+		btnRestart.setText("Recommencer");
+		btnOptions.setText("Options");
+		btnQuit.setText("Menu principal");
+		btnExit.setText("Quitter");
+	}
+	 
+	 public static void cambiarTextosEuskara() {
 		 lblPausa.setText("Pausa");
-		 btnResume.setText("Continuar");
-		 btnRestart.setText("Volver a Intentar");
-		 btnOptions.setText("Opciones");
-		 btnQuit.setText("Menú principal");
-		 btnExit.setText("Salir");
-		 
+		 btnResume.setText("Jarraitu");
+		 btnRestart.setText("Saiatu berriro");
+		 btnOptions.setText("Aukerak");
+		 btnQuit.setText("Menu nagusia");
+		 btnExit.setText("Atera"); 
 	 }
 	 
-	 private void cambiarTextosFrances() {
-			// TODO Auto-generated method stub
-		  lblPausa.setText("Pause");
-		    btnResume.setText("Reprendre");
-		    btnRestart.setText("Recommencer");
-		    btnOptions.setText("Options");
-		    btnQuit.setText("Menu principal");
-		    btnExit.setText("Quitter");
-			
-		}
-	 
-
-		private void cambiarTextosAleman() {
-			// TODO Auto-generated method stub
-			lblPausa.setText("Pause");
-			btnResume.setText("Fortsetzen");
-			btnRestart.setText("Neustarten");
-			btnOptions.setText("Optionen");
-			btnQuit.setText("Hauptmenü");
-			btnExit.setText("Beenden");
-
-			
-		}
+	 public static void cambiarTextosAleman() {
+		 lblPausa.setText("Pause");
+		 btnResume.setText("Fortsetzen");
+		 btnRestart.setText("Neustarten");
+		 btnOptions.setText("Optionen");
+		 btnQuit.setText("Hauptmenü");
+		 btnExit.setText("Beenden");	
+	 }
 	
 }

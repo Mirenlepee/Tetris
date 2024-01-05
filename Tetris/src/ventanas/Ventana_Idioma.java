@@ -22,30 +22,35 @@ public class Ventana_Idioma extends JFrame {
             	Ventana_Principal.cambiarTextosEspañol();
             	Ventana_AvatarUsuario.cambiarTextosEspañol();
             	Ventana_Creditos.cambiarTextosEspañol();
+            	Ventana_SignIn.cambiarTextosEspañol();
             }
             if(idiomaSeleccionado=="English") {
             	Ventana_Options.cambiarTextosIngles();
             	Ventana_Principal.cambiarTextosIngles();
             	Ventana_AvatarUsuario.cambiarTextosIngles();
-            	Ventana_Creditos.cambiarTextosIngles();            	
+            	Ventana_Creditos.cambiarTextosIngles();    
+            	Ventana_SignIn.cambiarTextosIngles();
             }
             if(idiomaSeleccionado=="Français") {
             	Ventana_Options.cambiarTextosFrances();
             	Ventana_Principal.cambiarTextosFrances();
             	Ventana_AvatarUsuario.cambiarTextosFrances();
             	Ventana_Creditos.cambiarTextosFrances();
+            	Ventana_SignIn.cambiarTextosFrances();
             }
             if(idiomaSeleccionado=="Euskara") {
             	Ventana_Options.cambiarTextosEuskara();
             	Ventana_Principal.cambiarTextosEuskara();
             	Ventana_AvatarUsuario.cambiarTextosEuskara();
             	Ventana_Creditos.cambiarTextosEuskara();
+            	Ventana_SignIn.cambiarTextosEuskara();
             }
             if(idiomaSeleccionado=="Deutsch") {
             	Ventana_Options.cambiarTextosAleman();
             	Ventana_Principal.cambiarTextosAleman();
             	Ventana_AvatarUsuario.cambiarTextosAleman();
             	Ventana_Creditos.cambiarTextosAleman();
+            	Ventana_SignIn.cambiarTextosAleman();
             }
 
             dispose(); 

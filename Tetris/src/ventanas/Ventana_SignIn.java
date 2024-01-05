@@ -557,18 +557,22 @@ public class Ventana_SignIn extends JFrame {
 		 noAccountlbl.setText("<html><u>¿No tienes cuenta? Crea una</u></html>");
 		 txtPassword.setText("Contraseña");
 		 txtConfirm.setText("Confirmar Contraseña");
-		 
-		 
-		 
-
-		 
-		 
-
-		 
 	 }
 	
+	 public static void cambiarTextosIngles() {
+		 
+		 usernamelbl.setText("Username:");
+		 lblCorreo.setText("Mail:");
+		 passwordlbl.setText("Password:");
+		 lblConfirm.setText("Confirm Password:");
+		 forgotPasswordlbl.setText("<html><u>Have you forgotten your password?</u></html>");
+		 continuebtn.setText("Continue");
+		 noAccountlbl.setText("<html><u>Don't have an account? Create one</u></html>");
+		 txtPassword.setText("Password");
+		 txtConfirm.setText("Confirm Password:");
+	 }
 	
-	  private void cambiarTextosFrances() {
+	 private void cambiarTextosFrances() {
 			// TODO Auto-generated method stub
 		  usernamelbl.setText("Nom d'utilisateur :");
 		    lblCorreo.setText("Courriel :");
@@ -579,7 +583,21 @@ public class Ventana_SignIn extends JFrame {
 		    noAccountlbl.setText("<html><u>Vous n'avez pas de compte ? Créez-en un</u></html>");
 		    txtPassword.setText("Mot de passe");
 		    txtConfirm.setText("Confirmer le Mot de passe");	
-		}
+	  }
+
+	  public static void cambiarTextosEuskara() {
+			 
+			 usernamelbl.setText("Erabiltzaile izena:");
+			 lblCorreo.setText("Posta:");
+			 passwordlbl.setText("Pasahitza:");
+			 lblConfirm.setText("Pasahitza baieztatu:");
+			 forgotPasswordlbl.setText("<html><u>Ahaztu al duzu pasahitza?</u></html>");
+			 continuebtn.setText("Continuar");
+			 noAccountlbl.setText("<html><u>Ez duzu konturik? Sortu bat</u></html>");
+			 txtPassword.setText("Pasahitza");
+			 txtConfirm.setText("Pasahitza baieztatu");
+		 }
+	  
 	
 	  private void cambiarTextosAleman() {
 			// TODO Auto-generated method stub

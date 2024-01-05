@@ -73,6 +73,10 @@ public class Ventana_Estadistica extends JFrame{
             if(Ventana_Idioma.getIdiomaSeleccionado()=="Español") {
             	
             cambiarTextosEspañol();	
+            }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Français") {
+            	
+            	cambiarTextosFrances();
+            	
             }
         }
     }
@@ -202,6 +206,14 @@ public class Ventana_Estadistica extends JFrame{
 	     signInlbl.setText("Estadística");
 	     btnReturn.setText("Volver");
 	    }
-	
+	 public static void cambiarTextosFrances() {
+		 
+			    signInlbl.setText("Statistique");
+			    btnReturn.setText("Retour");
+			
+
+		 
+		 
+	 }
 	
 }

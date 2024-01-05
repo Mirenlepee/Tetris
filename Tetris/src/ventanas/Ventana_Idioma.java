@@ -10,18 +10,16 @@ public class Ventana_Idioma extends JFrame {
         setTitle("Select a Language");
         setSize(300, 150);
 
-        comboBoxIdioma = new JComboBox<>(new String[]{"Español", "English"});
+        comboBoxIdioma = new JComboBox<>(new String[]{"Español", "English","Français"});
         comboBoxIdioma.setSelectedIndex(1); 
 
         JButton btnAceptar = new JButton("Accept  ");
         btnAceptar.addActionListener(e -> {
             idiomaSeleccionado = (String) comboBoxIdioma.getSelectedItem();
-            
             if(idiomaSeleccionado=="Español") {
             	Ventana_Options.cambiarTextosEspañol();
             	Ventana_Principal.cambiarTextosEspañol();
 	}else {
-		idiomaSeleccionado=null;
 	}
             dispose(); 
         });

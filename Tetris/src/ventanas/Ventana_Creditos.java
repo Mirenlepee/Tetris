@@ -151,6 +151,10 @@ public class Ventana_Creditos extends JFrame {
         if(Ventana_Idioma.getIdiomaSeleccionado()=="Español") {
         	
         cambiarTextosEspañol();	
+         }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Français") {
+        	System.out.println("si");
+        	cambiarTextosFrances();
+        	
         }
     }}
     
@@ -173,6 +177,30 @@ public class Ventana_Creditos extends JFrame {
                 + "- Se implementaron características avanzadas como rotación de piezas y puntuación dinámica.\n"
                 + "- El juego fue probado por un grupo de usuarios para mejorar la experiencia del jugador.\n"
                 + "- El código fuente está disponible en GitHub para su revisión y contribuciones.\n");
+    	
+    	
+    }
+    
+    
+    public static void cambiarTextosFrances() {
+    	lblTitulo.setText("Crédits");
+    	lblCreadoras.setText("Créatrices : ");
+    	lblDiseñadoras.setText("Designeuses : ");
+    	btnVolver.setText("Retour");
+    	txtInformacion.setText("Tetris est un projet développé par une équipe d'étudiants dans le cadre d'un cours de programmation.\n"
+    	        + "Nous remercions tous ceux qui ont contribué au développement de ce jeu.\n"
+    	        + "Version : 1.0\n");
+
+    	txtInformacionRelevante.setText(  "Informations pertinentes sur le projet :\n"
+    	        + "- Tetris a été développé en utilisant Java et la bibliothèque Swing pour l'interface graphique.\n"
+    	        + "- L'équipe a travaillé sur le projet pendant six semaines dans le cadre d'un projet final.\n"
+    	        + "- Nous remercions les enseignants pour leur orientation et leur soutien tout au long du développement.\n"
+    	        + "- Des fonctionnalités avancées telles que la rotation des pièces et le score dynamique ont été implémentées.\n"
+    	        + "- Le jeu a été testé par un groupe d'utilisateurs pour améliorer l'expérience du joueur.\n"
+    	        + "- Le code source est disponible sur GitHub pour examen et contributions.\n");
+
+    	
+    	
     	
     	
     }

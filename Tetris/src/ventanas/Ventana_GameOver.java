@@ -134,9 +134,14 @@ public class Ventana_GameOver extends JFrame {
             if(Ventana_Idioma.getIdiomaSeleccionado()=="Español") {
             	
             cambiarTextosEspañol();	
+            }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Français") {
+            	
+            	cambiarTextosFrances();
+            	
             }
         }
 	}
+	
 	// Método para realizar la actualización de campos
     private void realizarActualizacionCampos() {
         ventanaJuego.actualizarCampos(this);
@@ -152,5 +157,15 @@ public class Ventana_GameOver extends JFrame {
 		
 		
 	    }
+	
+	private void cambiarTextosFrances() {
+		// TODO Auto-generated method stub
+		 lblGameOver.setText("Fin du jeu");
+		    lblScore.setText("Score :");
+		    lblBestScore.setText("Meilleur score :");
+		    lblTimePlayed.setText("Temps de jeu :");
+		    btnExit.setText("Quitter");
+		
+	}
     
 }

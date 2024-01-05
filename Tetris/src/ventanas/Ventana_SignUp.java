@@ -33,15 +33,15 @@ public class Ventana_SignUp extends JFrame{
 	
 	private JFrame ventana;
 	private JLabel signUplbl;
-	private JLabel usernamelbl;
+	private static JLabel usernamelbl;
 	private JTextField usernamefld;
-	private JLabel passwordlbl;
-	private JLabel confirmPasswordlbl;
-	private JLabel emaillbl;
+	private static JLabel passwordlbl;
+	private static JLabel confirmPasswordlbl;
+	private static JLabel emaillbl;
 	private JTextField emailfld;
-	private JButton backbtn;
-	private JButton exitbtn;
-	private JButton continuebtn;
+	private static JButton backbtn;
+	private static JButton exitbtn;
+	private static JButton continuebtn;
 	private static CustomPasswordField passwordfld;
 	private static CustomPasswordField confirmPasswordfld;
 	
@@ -210,6 +210,12 @@ public class Ventana_SignUp extends JFrame{
         ventana.add(buttonPanel, BorderLayout.SOUTH);
 
         ventana.setVisible(true);
+        if(Ventana_Idioma.getIdiomaSeleccionado()!=null) {
+            if(Ventana_Idioma.getIdiomaSeleccionado()=="Español") {
+            	
+            cambiarTextosEspañol();	
+            }
+        }
     }
     
     
@@ -371,6 +377,23 @@ public class Ventana_SignUp extends JFrame{
             return button;
         }
     }
+    
+    
+    public static void cambiarTextosEspañol() {
+    	usernamelbl.setText("Nombre de Usuario:");
+    	emaillbl.setText("Correo:");
+    	passwordlbl.setText("Contraseña:");
+    	passwordfld.setText("Contraseña");
+    	confirmPasswordfld.setText("Confirmar contraseña");
+    	confirmPasswordlbl.setText("Confrimar contraseña:");
+    	
+    	backbtn.setText("Atrás");
+    	continuebtn.setText("Continuar");
+    	exitbtn.setText("Salir");
+    	
+    	
+    }
+    
     
     public static void main(String[] args) {
 		Ventana_SignUp vent = new Ventana_SignUp();

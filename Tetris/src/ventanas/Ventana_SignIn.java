@@ -36,25 +36,27 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-	
+
 public class Ventana_SignIn extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JLabel signInlbl;
 	private JPanel pnlLbl;
-	private JLabel usernamelbl;
+	private static JLabel usernamelbl;
 	private JTextField usernamefld;
+	private static JLabel lblCorreo;
 	private JTextField txtCorreo;
-	private JLabel passwordlbl;
-	private JLabel forgotPasswordlbl;
-	private JButton continuebtn;
-	private JLabel noAccountlbl ;
+	private static JLabel passwordlbl;
+	private static JLabel forgotPasswordlbl;
+	private static JButton continuebtn;
+	private static JLabel noAccountlbl ;
 	private static CustomPasswordField txtPassword;
 	private static CustomPasswordField txtConfirm;
 	private Usuario usuarioActual;
 	static GestionBDUsuario base;
 	public static HashMap<String, Usuario> mapaUsu;
 	private static Logger logger = Logger.getLogger(Ventana_SignIn.class.getName());
+	public static JLabel lblConfirm;
 		
 	private String generateRandomPassword() {
 		String lowercase = "abcdefghijklmnopqrstuvwxyz";
@@ -146,7 +148,7 @@ public class Ventana_SignIn extends JFrame {
         pnlPrincipal.add(usernamelbl);
         pnlPrincipal.add(usernamefld);
         
-        JLabel lblCorreo = new JLabel("Email:");
+         lblCorreo = new JLabel("Email:");
         txtCorreo = new JTextField("@gmail.com");
         pnlPrincipal.add(lblCorreo);
         pnlPrincipal.add(txtCorreo);
@@ -158,7 +160,7 @@ public class Ventana_SignIn extends JFrame {
         pnlPrincipal.add(passwordlbl);
         pnlPrincipal.add(txtPassword);
         
-        JLabel lblConfirm = new JLabel("Confirm password:");
+       lblConfirm = new JLabel("Confirm password:");
         txtConfirm = new CustomPasswordField();
         aplicarEstiloCampo(txtConfirm, "Confirm password");
         txtConfirm.setEchoChar((char) 0);
@@ -253,6 +255,7 @@ public class Ventana_SignIn extends JFrame {
     					Ventana_Juego v = new Ventana_Juego();
     					dispose();
     					v.setVisible(true);
+    					
     			        // Realiza acciones adicionales cuando el inicio de sesión sea exitoso
     				 }
     			}  else if (correo.isEmpty() || contrasenia.isEmpty()){
@@ -295,6 +298,12 @@ public class Ventana_SignIn extends JFrame {
         pnlSouth.add(noAccountlbl);
     
         ventana.setVisible(true);
+        if(Ventana_Idioma.getIdiomaSeleccionado()!=null) {
+            if(Ventana_Idioma.getIdiomaSeleccionado()=="Español") {
+            	
+            cambiarTextosEspañol();	
+            }
+        }
     }
 
     public void mostrarOcultarContraseña() {
@@ -527,10 +536,35 @@ public class Ventana_SignIn extends JFrame {
 	    }
 	}
 	
+	 public static void cambiarTextosEspañol() {
+		 
+		 usernamelbl.setText("Nombre de Usuario:");
+		 lblCorreo.setText("Correo:");
+		 passwordlbl.setText("Contraseña:");
+		 lblConfirm.setText("Confirmar contraseña:");
+		 forgotPasswordlbl.setText("<html><u>¿Has olvidado la contraseña?</u></html>");
+		 continuebtn.setText("Continuar");
+		 noAccountlbl.setText("<html><u>¿No tienes cuenta? Crea una</u></html>");
+		 txtPassword.setText("Contraseña");
+		 txtConfirm.setText("Confirmar Contraseña");
+		 
+		 
+		 
+
+		 
+		 
+
+		 
+	 }
+	
+	
+	
+	
+	
     public static void main(String[] args) {
         Ventana_SignIn v = new Ventana_SignIn();
     }
 
-    
+   
 
 }

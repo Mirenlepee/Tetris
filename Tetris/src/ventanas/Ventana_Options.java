@@ -266,5 +266,18 @@ public class Ventana_Options extends JFrame{
 	        lblHTP.setText("Cómo jugar");
 	        btnReturn.setText("Volver");
 	    }
+	 
+	 
+	 
+	 public static void cambiarTextosFrances() {
+		    lblOptions.setText("Options");
+		    
+		    lblSound.setText("Son");
+		    lblLanguage.setText("Langue");
+		    lblHTP.setText("Comment jouer");
+		    btnReturn.setText("Retour");
+		}
+
+	 
 
 }

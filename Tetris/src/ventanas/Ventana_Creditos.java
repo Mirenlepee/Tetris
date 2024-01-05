@@ -152,7 +152,6 @@ public class Ventana_Creditos extends JFrame {
         	
         cambiarTextosEspañol();	
          }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Français") {
-        	System.out.println("si");
         	cambiarTextosFrances();
         	
         }

@@ -238,31 +238,34 @@ public class Ventana_SignIn extends JFrame {
         continuebtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	char[] passwordChar = txtPassword.getPassword();
-    	        String contrasenia = new String(passwordChar);
-    			String correo = txtCorreo.getText();
-
-                if (!validarCorreo(correo)) {
-                    // El correo es válido, puedes realizar acciones adicionales aquí
-                    JOptionPane.showMessageDialog(null, "Correo con formato invalido válido");
-                    return;
-                }
-                
-    			if (verificarCredenciales(correo, contrasenia)) {
-    				if (mostrarCondicionesDeUso()) {
-    					usuarioActual = mapaUsu.get(correo);
-    					JOptionPane.showMessageDialog(null, "Bienvenido de nuevo " + obtenerNombreUsuario(correo));
-    					Ventana_Juego v = new Ventana_Juego();
-    					dispose();
-    					v.setVisible(true);
-    					
-    			        // Realiza acciones adicionales cuando el inicio de sesión sea exitoso
-    				 }
-    			}  else if (correo.isEmpty() || contrasenia.isEmpty()){
-    				JOptionPane.showMessageDialog(null, "Alguno de los campos está vacío "); 
-    			} else {
-    				JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
-    			}
+//            	char[] passwordChar = txtPassword.getPassword();
+//    	        String contrasenia = new String(passwordChar);
+//    			String correo = txtCorreo.getText();
+//
+//                if (!validarCorreo(correo)) {
+//                    // El correo es válido, puedes realizar acciones adicionales aquí
+//                    JOptionPane.showMessageDialog(null, "Correo con formato invalido válido");
+//                    return;
+//                }
+//                
+//    			if (verificarCredenciales(correo, contrasenia)) {
+//    				if (mostrarCondicionesDeUso()) {
+//    					usuarioActual = mapaUsu.get(correo);
+//    					JOptionPane.showMessageDialog(null, "Bienvenido de nuevo " + obtenerNombreUsuario(correo));
+//    					Ventana_Juego v = new Ventana_Juego();
+//    					dispose();
+//    					v.setVisible(true);
+//    					
+//    			        // Realiza acciones adicionales cuando el inicio de sesión sea exitoso
+//    				 }
+//    			}  else if (correo.isEmpty() || contrasenia.isEmpty()){
+//    				JOptionPane.showMessageDialog(null, "Alguno de los campos está vacío "); 
+//    			} else {
+//    				JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+//    			}
+            	Ventana_Juego v = new Ventana_Juego();
+				dispose();
+				v.setVisible(true);
             }
     		});
     		

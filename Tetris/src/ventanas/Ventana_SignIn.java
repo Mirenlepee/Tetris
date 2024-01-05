@@ -525,7 +525,7 @@ public class Ventana_SignIn extends JFrame {
 		        } else {
 		            return false; // La contraseña es incorrecta
 		        }
-	        }else {			//Esta parte es paara comprobar con los usuarios de prueba
+	        }else {			//Esta parte es para comprobar con los usuarios de prueba
 	        	if (contrasenia.equals(hashAlmacenado)) {
 	                return true; // La contraseña sin encriptar es correcta
 	            } else {

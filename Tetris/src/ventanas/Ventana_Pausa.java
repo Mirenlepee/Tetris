@@ -1,5 +1,7 @@
 package ventanas;
 
+
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -17,7 +19,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import ventanas.Ventana_Idioma.Idioma;
 import ventanas.Ventana_Juego.CorazonPanel;
 
 public class Ventana_Pausa extends JFrame{
@@ -179,11 +180,4 @@ public class Ventana_Pausa extends JFrame{
 		this.presionado = presionado;
 	}
 
-	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
-		lblPausa.setText(Ventana_Idioma.getTrad("Paused", idioma));
-		btnResume.setText(Ventana_Idioma.getTrad("Resume", idioma));
-		btnRestart.setText(Ventana_Idioma.getTrad("Restart", idioma));
-		btnOptions.setText(Ventana_Idioma.getTrad("Options", idioma));
-		btnQuit.setText(Ventana_Idioma.getTrad("Quit", idioma));
-	}
 }

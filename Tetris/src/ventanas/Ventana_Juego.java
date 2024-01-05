@@ -7,7 +7,6 @@ import javax.swing.border.LineBorder;
 
 import juego.DibujodeEstrella;
 import juego.Pieza;
-import ventanas.Ventana_Idioma.Idioma;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -728,8 +727,4 @@ public class Ventana_Juego extends JFrame {
         }
     }
 
-	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
-		lblNivel.setText(Ventana_Idioma.getTrad("Nivel: 1", idioma));
-		etiquetaPuntos.setText(Ventana_Idioma.getTrad("\"Puntos: \" + puntos", idioma));
-	}
 }

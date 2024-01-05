@@ -5,7 +5,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import ventanas.Ventana_Idioma.Idioma;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -150,11 +149,6 @@ public class Ventana_PerfilDeUsuario extends JFrame {
 	private void actualizarContadorCaracteres() {
 	    int caracteresUtilizados = txtBiografia.getText().length();
 	    lblContadorCaracteres.setText(caracteresUtilizados + "/200");
-	}
-	
-	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
-		lblBiografia.setText(Ventana_Idioma.getTrad("Biografy:", idioma));
-		btnGuardar.setText(Ventana_Idioma.getTrad("Continue", idioma));
 	}
 	
 	public static void main(String[] args) {

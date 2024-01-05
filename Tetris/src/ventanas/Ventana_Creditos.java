@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import ventanas.Ventana_Idioma.Idioma;
 	
 
 public class Ventana_Creditos extends JFrame {
@@ -129,10 +128,5 @@ public class Ventana_Creditos extends JFrame {
         setVisible(true);
     }
 
-	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
-		lblTitulo.setText(Ventana_Idioma.getTrad("Credits", idioma));
-		lblCreadoras.setText(Ventana_Idioma.getTrad("Creators: ", idioma));
-		lblDiseñadoras.setText(Ventana_Idioma.getTrad("Designers: ", idioma));
-		btnVolver.setText(Ventana_Idioma.getTrad("Return", idioma));
-	}
+
 }

@@ -14,7 +14,6 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import BD.GestionBDUsuario;
 import gestionUsuarios.Usuario;
-import ventanas.Ventana_Idioma.Idioma;
 
 import javax.mail.PasswordAuthentication;
 
@@ -532,13 +531,6 @@ public class Ventana_SignIn extends JFrame {
         Ventana_SignIn v = new Ventana_SignIn();
     }
 
-    public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
-		signInlbl.setText(Ventana_Idioma.getTrad("Sign In", idioma));
-	    usernamelbl.setText(Ventana_Idioma.getTrad("Username:", idioma)); 
-	    passwordlbl.setText(Ventana_Idioma.getTrad("Password:", idioma)); 
-	    forgotPasswordlbl.setText(Ventana_Idioma.getTrad("<html><u>Forgot Password?</u></html>", idioma)); 
-	    continuebtn.setText(Ventana_Idioma.getTrad("Continue", idioma)); 
-	    noAccountlbl.setText(Ventana_Idioma.getTrad("<html><u>Don't have an account? Create one</u></html>", idioma));
-	}
+    
 
 }

@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import ventanas.Ventana_Idioma.Idioma;
 import ventanas.Ventana_Juego.CorazonPanel;
 
 public class Ventana_GameOver extends JFrame {
@@ -136,11 +135,5 @@ public class Ventana_GameOver extends JFrame {
         ventanaJuego.actualizarCampos(this);
     }
     
-	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
-		lblGameOver.setText(Ventana_Idioma.getTrad("Game Over",idioma));
-		lblScore.setText(Ventana_Idioma.getTrad("Score:",idioma));
-		lblBestScore.setText(Ventana_Idioma.getTrad("Best Score:",idioma));
-		lblTimePlayed.setText(Ventana_Idioma.getTrad("Time played:",idioma));
-		btnExit.setText(Ventana_Idioma.getTrad("Exit",idioma));
-	}	
+
 }

@@ -2,7 +2,6 @@ package ventanas;
 
 import javax.swing.*;
 
-import ventanas.Ventana_Idioma.Idioma;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -67,8 +66,5 @@ public class Ventana_AvatarUsuario extends JFrame {
         return directorioSeleccionado;
     }
 
-	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
-		btnSeleccionarFoto.setText(Ventana_Idioma.getTrad("Seleccionar Foto",idioma));
-		btnAceptar.setText(Ventana_Idioma.getTrad("Aceptar",idioma));
-	}
+
 }

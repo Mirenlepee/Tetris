@@ -26,7 +26,6 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
 import BD.ConexionBD;
-import ventanas.Ventana_Idioma.Idioma;
 
 public class Ventana_Estadistica extends JFrame{
 	private JFrame ventana;
@@ -189,8 +188,5 @@ public class Ventana_Estadistica extends JFrame{
 		}
 	}
 	
-	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
-		signInlbl.setText(Ventana_Idioma.getTrad("Statistics",idioma));
-		btnReturn.setText(Ventana_Idioma.getTrad("Return",idioma));		
-	}
+	
 }

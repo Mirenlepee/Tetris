@@ -7,7 +7,6 @@ import java.io.File;
 import javax.sound.sampled.*;
 import javax.swing.*;
 
-import ventanas.Ventana_Idioma.Idioma;
 import ventanas.Ventana_Juego.CorazonPanel;
 
 public class Ventana_Options extends JFrame{
@@ -134,7 +133,7 @@ public class Ventana_Options extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new Ventana_Idioma();
+				
 			}
         });
         
@@ -248,11 +247,5 @@ public class Ventana_Options extends JFrame{
 	    ventana.setVisible(true);
 	}
 
-	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
-		lblOptions.setText(Ventana_Idioma.getTrad("Options",idioma));
-		lblSound.setText(Ventana_Idioma.getTrad("Sound",idioma));
-		lblLanguage.setText(Ventana_Idioma.getTrad("Language",idioma));
-		lblHTP.setText(Ventana_Idioma.getTrad("How to play",idioma));
-		btnReturn.setText(Ventana_Idioma.getTrad("Return",idioma));
-	}
+	
 }

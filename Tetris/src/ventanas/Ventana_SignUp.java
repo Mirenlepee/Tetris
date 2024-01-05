@@ -14,7 +14,6 @@ import javax.swing.text.JTextComponent;
 import org.mindrot.jbcrypt.BCrypt;
 
 import gestionUsuarios.Usuario;
-import ventanas.Ventana_Idioma.Idioma;
 
 import javax.mail.PasswordAuthentication;
 
@@ -377,14 +376,5 @@ public class Ventana_SignUp extends JFrame{
 		Ventana_SignUp vent = new Ventana_SignUp();
 		
 	}
-	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
-		signUplbl.setText(Ventana_Idioma.getTrad("Sign Up", idioma));
-		usernamelbl.setText(Ventana_Idioma.getTrad("Username:", idioma));
-		passwordlbl.setText(Ventana_Idioma.getTrad("Password:", idioma));
-		confirmPasswordlbl.setText(Ventana_Idioma.getTrad("Confirm Password:", idioma));
-		emaillbl.setText(Ventana_Idioma.getTrad("Email:", idioma));
-		backbtn.setText(Ventana_Idioma.getTrad("Back", idioma));
-		exitbtn.setText(Ventana_Idioma.getTrad("Quit", idioma));
-		continuebtn.setText(Ventana_Idioma.getTrad("Continue", idioma));	    
-	}
+	
 }

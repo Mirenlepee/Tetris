@@ -151,12 +151,6 @@ public class Ventana_Principal extends JFrame{
 	    ventanaOptions.btnSound.setIcon(iconoDef);
 	    ventanaOptions.setImgSoundState(!ventanaOptions.getImgSoundState());
 	}
-	
-	public void actualizarIdioma(Ventana_Idioma.Idioma idioma) {
-	    btnPlay.setText(Ventana_Idioma.getTrad("Play", idioma));
-	    btnStatistics.setText(Ventana_Idioma.getTrad("STATISTICS", idioma));
-	    btnCredits.setText(Ventana_Idioma.getTrad("CREDITS", idioma));
-	}
 
 	
 	public static void main(String[] args) {

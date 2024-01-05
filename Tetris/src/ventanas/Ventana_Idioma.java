@@ -28,6 +28,7 @@ public class Ventana_Idioma extends JFrame {
             	Ventana_Juego.cambiarTextosEspañol();
             	Ventana_Pausa.cambiarTextosEspañol();
             	Ventana_PerfilDeUsuario.cambiarTextosEspañol();
+            	Ventana_SignUp.cambiarTextosEspañol();
             } else if(idiomaSeleccionado=="English") {
             	Ventana_Options.cambiarTextosIngles();
             	Ventana_Principal.cambiarTextosIngles();
@@ -39,6 +40,7 @@ public class Ventana_Idioma extends JFrame {
             	Ventana_Juego.cambiarTextosIngles();
             	Ventana_Pausa.cambiarTextosIngles();
             	Ventana_PerfilDeUsuario.cambiarTextosIngles();
+            	Ventana_SignUp.cambiarTextosIngles();
             } else if(idiomaSeleccionado=="Français") {
             	Ventana_Options.cambiarTextosFrances();
             	Ventana_Principal.cambiarTextosFrances();
@@ -50,6 +52,7 @@ public class Ventana_Idioma extends JFrame {
             	Ventana_Juego.cambiarTextosFrances();
             	Ventana_Pausa.cambiarTextosFrances();
             	Ventana_PerfilDeUsuario.cambiarTextosFrances();
+            	Ventana_SignUp.cambiarTextosFrances();
             } else if(idiomaSeleccionado=="Euskara") {
             	Ventana_Options.cambiarTextosEuskara();
             	Ventana_Principal.cambiarTextosEuskara();
@@ -61,6 +64,7 @@ public class Ventana_Idioma extends JFrame {
             	Ventana_Juego.cambiarTextosEuskara();
             	Ventana_Pausa.cambiarTextosEuskara();
             	Ventana_PerfilDeUsuario.cambiarTextosEuskara();
+            	Ventana_SignUp.cambiarTextosEuskara();
             } else if(idiomaSeleccionado=="Deutsch") {
             	Ventana_Options.cambiarTextosAleman();
             	Ventana_Principal.cambiarTextosAleman();
@@ -72,6 +76,7 @@ public class Ventana_Idioma extends JFrame {
             	Ventana_Juego.cambiarTextosAleman();
             	Ventana_Pausa.cambiarTextosAleman();
             	Ventana_PerfilDeUsuario.cambiarTextosAleman();
+            	Ventana_SignUp.cambiarTextosAleman();
             }
 
             dispose(); 

@@ -399,12 +399,23 @@ public class Ventana_SignUp extends JFrame{
     	
     	backbtn.setText("Atrás");
     	continuebtn.setText("Continuar");
-    	exitbtn.setText("Salir");
-    	
-    	
+    	exitbtn.setText("Salir");    	
     }
-    private void cambiarTextosFrances() {
-		// TODO Auto-generated method stub
+    
+    public static void cambiarTextosIngles() {
+    	usernamelbl.setText("Username:");
+    	emaillbl.setText("Mail:");
+    	passwordlbl.setText("Password:");
+    	passwordfld.setText("Password");
+    	confirmPasswordfld.setText("Confirm Password");
+    	confirmPasswordlbl.setText("Confirm Password:");
+    	
+    	backbtn.setText("Back");
+    	continuebtn.setText("Continue");
+    	exitbtn.setText("Exit");    	
+    }
+    
+    public static void cambiarTextosFrances() {
     	usernamelbl.setText("Nom d'utilisateur :");
         emaillbl.setText("Courriel :");
         passwordlbl.setText("Mot de passe :");
@@ -415,12 +426,22 @@ public class Ventana_SignUp extends JFrame{
         backbtn.setText("Retour");
         continuebtn.setText("Continuer");
         exitbtn.setText("Quitter");
-		
 	}
-    
-
-	private void cambiarTextosAleman() {
-		// TODO Auto-generated method stub
+   
+    public static void cambiarTextosEuskara() {
+    	usernamelbl.setText("Erabiltzaile izena:");
+    	emaillbl.setText("Posta:");
+    	passwordlbl.setText("Pasahitza:");
+    	passwordfld.setText("Pasahitza");
+    	confirmPasswordfld.setText("Pasahitza baieztatu");
+    	confirmPasswordlbl.setText("Pasahitza baieztatu:");
+    	
+    	backbtn.setText("Itzuli");
+    	continuebtn.setText("Jarraitu");
+    	exitbtn.setText("Atera");    	
+    }
+	
+    public static void cambiarTextosAleman() {
 		usernamelbl.setText("Benutzername :");
 		emaillbl.setText("E-Mail :");
 		passwordlbl.setText("Passwort :");

@@ -214,12 +214,16 @@ public class Ventana_SignUp extends JFrame{
             if(Ventana_Idioma.getIdiomaSeleccionado()=="Español") {
             	
             cambiarTextosEspañol();	
+            }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Français") {
+            	cambiarTextosFrances();
+            	
             }
         }
     }
     
     
-    private void enviarCorreo(String destinatario, String asunto, String cuerpo) {
+
+	private void enviarCorreo(String destinatario, String asunto, String cuerpo) {
         final String usuario = "tetristeamhelp@gmail.com"; 
         final String contraseña = "lhbu fanv qyiv fdvo"; 
 
@@ -393,6 +397,21 @@ public class Ventana_SignUp extends JFrame{
     	
     	
     }
+    private void cambiarTextosFrances() {
+		// TODO Auto-generated method stub
+    	usernamelbl.setText("Nom d'utilisateur :");
+        emaillbl.setText("Courriel :");
+        passwordlbl.setText("Mot de passe :");
+        passwordfld.setText("Mot de passe");
+        confirmPasswordfld.setText("Confirmer le mot de passe");
+        confirmPasswordlbl.setText("Confirmer le mot de passe :");
+
+        backbtn.setText("Retour");
+        continuebtn.setText("Continuer");
+        exitbtn.setText("Quitter");
+		
+	}
+
     
     
     public static void main(String[] args) {

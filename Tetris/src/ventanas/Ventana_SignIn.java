@@ -302,11 +302,16 @@ public class Ventana_SignIn extends JFrame {
             if(Ventana_Idioma.getIdiomaSeleccionado()=="Español") {
             	
             cambiarTextosEspañol();	
+            }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Français") {
+            	cambiarTextosFrances();
+            	
             }
         }
     }
 
-    public void mostrarOcultarContraseña() {
+  
+
+	public void mostrarOcultarContraseña() {
         // Obtener la contraseña actual
         char[] password = txtPassword.getPassword();
 
@@ -558,7 +563,18 @@ public class Ventana_SignIn extends JFrame {
 	 }
 	
 	
-	
+	  private void cambiarTextosFrances() {
+			// TODO Auto-generated method stub
+		  usernamelbl.setText("Nom d'utilisateur :");
+		    lblCorreo.setText("Courriel :");
+		    passwordlbl.setText("Mot de passe :");
+		    lblConfirm.setText("Confirmer le mot de passe :");
+		    forgotPasswordlbl.setText("<html><u>Vous avez oublié le mot de passe ?</u></html>");
+		    continuebtn.setText("Continuer");
+		    noAccountlbl.setText("<html><u>Vous n'avez pas de compte ? Créez-en un</u></html>");
+		    txtPassword.setText("Mot de passe");
+		    txtConfirm.setText("Confirmer le Mot de passe");	
+		}
 	
 	
     public static void main(String[] args) {

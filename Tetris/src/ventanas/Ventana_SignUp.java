@@ -217,11 +217,17 @@ public class Ventana_SignUp extends JFrame{
             }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Français") {
             	cambiarTextosFrances();
             	
+            }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Deutsch") {
+            	cambiarTextosAleman();
+            	
             }
         }
     }
     
     
+
+
+
 
 	private void enviarCorreo(String destinatario, String asunto, String cuerpo) {
         final String usuario = "tetristeamhelp@gmail.com"; 
@@ -410,6 +416,22 @@ public class Ventana_SignUp extends JFrame{
         continuebtn.setText("Continuer");
         exitbtn.setText("Quitter");
 		
+	}
+    
+
+	private void cambiarTextosAleman() {
+		// TODO Auto-generated method stub
+		usernamelbl.setText("Benutzername :");
+		emaillbl.setText("E-Mail :");
+		passwordlbl.setText("Passwort :");
+		passwordfld.setText("Passwort");
+		confirmPasswordfld.setText("Passwort bestätigen");
+		confirmPasswordlbl.setText("Passwort bestätigen :");
+
+		backbtn.setText("Zurück");
+		continuebtn.setText("Fortfahren");
+		exitbtn.setText("Beenden");
+	
 	}
 
     

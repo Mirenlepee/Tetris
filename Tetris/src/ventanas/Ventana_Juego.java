@@ -277,6 +277,9 @@ public class Ventana_Juego extends JFrame {
             	System.out.println("si");
             	cambiarTextosFrances();
             	
+            }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Deutsch") {
+            	cambiarTextosAleman();
+            	
             }
         }
 
@@ -285,6 +288,12 @@ public class Ventana_Juego extends JFrame {
   
 
 	
+
+
+
+
+
+
 
 
 
@@ -761,6 +770,15 @@ public class Ventana_Juego extends JFrame {
 		
 	}
     
+
+	private void cambiarTextosAleman() {
+		// TODO Auto-generated method stub
+		etiquetaPuntos.setText("Punkte : " + puntos);
+		lblNivel.setText("Niveau : 1");
+
+		
+	}
+
     
   
 public static void main(String[] args ) {

@@ -126,11 +126,14 @@ public class Ventana_PerfilDeUsuario extends JFrame {
             }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Français") {
             	cambiarTextosFrances();
             	
+            }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Deutsch") {
+            	cambiarTextosAleman();
+            	
             }
         }
     }
 	
-	
+
 
 	private void limitarCaracteres(JTextComponent textComponent, int maxLength) {
 	    Document document = textComponent.getDocument();
@@ -179,6 +182,16 @@ public class Ventana_PerfilDeUsuario extends JFrame {
 		    btnGuardar.setText("Continuer");
 			
 		}
+
+		
+
+		private void cambiarTextosAleman() {
+			// TODO Auto-generated method stub
+			lblBiografia.setText("Biografie :");
+			btnGuardar.setText("Fortfahren");
+	
+		}
+
 	public static void main(String[] args) {
 		Ventana_PerfilDeUsuario vent = new Ventana_PerfilDeUsuario();
 		

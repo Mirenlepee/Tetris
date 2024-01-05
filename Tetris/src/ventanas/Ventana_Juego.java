@@ -26,7 +26,7 @@ public class Ventana_Juego extends JFrame {
     private Pieza siguientePieza;
     private JButton btnPausa;
         
-    private JLabel lblNivel;
+    public static JLabel lblNivel;
 
     protected int minutos = 0;
     protected int segundos = 0;
@@ -35,16 +35,16 @@ public class Ventana_Juego extends JFrame {
 
     private JPanel PanelEspacio1;
     protected JPanel PanelEspacio2;
-    protected int puntos = 0;    
+    protected static int puntos = 0;    
     private List<Pieza> piezasEnTablero = new ArrayList<>();
 
-    private JLabel etiquetaPuntos;
+    public static JLabel etiquetaPuntos;
     private int[][] tablero;
     private Pieza piezaActual;
     protected Timer timer;
 
     protected boolean musica = true;
-    protected JLabel etiquetaTiempo;
+    protected  JLabel etiquetaTiempo;
     protected Clip clip;
     protected int vidas=3;
     protected Ventana_GameOver ventGo;
@@ -116,7 +116,7 @@ public class Ventana_Juego extends JFrame {
         JPanel panelDerecho = new JPanel();
         panelDerecho.setLayout(new BoxLayout(panelDerecho, BoxLayout.Y_AXIS));
 
-        etiquetaPuntos = new JLabel("Puntos: " + puntos);
+        etiquetaPuntos = new JLabel("Score: " + puntos);
         
         etiquetaTiempo = new JLabel("00:00");
         panelDerecho.add(Box.createVerticalStrut(10)); 
@@ -141,7 +141,7 @@ public class Ventana_Juego extends JFrame {
 		ImageIcon iconoDef = new ImageIcon(imagenDef);
 
 		btnPausa.setIcon(iconoDef);
-		lblNivel = new JLabel("Nivel: 1");
+		lblNivel = new JLabel("Level: 1");
         
         
         panelDerecho.add(Box.createVerticalGlue());
@@ -268,6 +268,13 @@ public class Ventana_Juego extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
+        
+        if(Ventana_Idioma.getIdiomaSeleccionado()!=null) {
+            if(Ventana_Idioma.getIdiomaSeleccionado()=="Español") {
+            	
+            cambiarTextosEspañol();	
+            }
+        }
 
     }
     
@@ -725,6 +732,25 @@ public class Ventana_Juego extends JFrame {
             g2d.setColor(Color.RED);
             g2d.fill(heart);
         }
+        
+        
+        
     }
+    public static void cambiarTextosEspañol() {
+    	
+    	etiquetaPuntos.setText("Puntos: " + puntos);
+    	lblNivel.setText("Nivel: 1");
+
+    	
+    	
+    }
+    
+    
+  
+public static void main(String[] args ) {
+	Ventana_Juego v=new Ventana_Juego();
+	
+	
+}
 
 }

@@ -145,8 +145,6 @@ public class Ventana_Juego extends JFrame {
         panelDerecho.add(btnPausa);
         
         
-      
-        
         btnPausa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -271,7 +269,7 @@ public class Ventana_Juego extends JFrame {
 
     }
     
-    
+
 	private void actualizarEtiquetaTiempo() {
         String tiempoFormateado = String.format("%02d:%02d", minutos, segundos);
         etiquetaTiempo.setText(tiempoFormateado);
@@ -322,7 +320,6 @@ public class Ventana_Juego extends JFrame {
         }
     }
     
-
     private boolean verificarGameOver() {
       
         int[][] forma = piezaActual.obtenerForma();
@@ -749,7 +746,11 @@ public class Ventana_Juego extends JFrame {
 		lblNivel.setText("Niveau : 1");
 	}
 
+
+
     public static void main(String[] args ) {
     	Ventana_Juego v=new Ventana_Juego();
+	
+	
     }
 }

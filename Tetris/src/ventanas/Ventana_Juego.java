@@ -53,11 +53,7 @@ public class Ventana_Juego extends JFrame {
     protected boolean pres;
 
     public Ventana_Juego() {
-
-
       //pres = Ventana_Options.obtenerPresionado();
-    	
-
     	
     	setTitle("Tetris");
     	try {
@@ -75,17 +71,11 @@ public class Ventana_Juego extends JFrame {
              e.printStackTrace();
          }
 
-    	
-       
-    	
     	pres = Ventana_Options.obtenerPresionado();
         System.out.println(pres);
         if(!pres) {
          	clip.start();
-
-        }
-    	
-    	
+        }    	   	
     	
         addWindowListener(new WindowAdapter() {
             @Override
@@ -231,10 +221,6 @@ public class Ventana_Juego extends JFrame {
              
             }
         });
-
-        
-        
-  
         
         panelPrincipal.add(panelJuego, BorderLayout.CENTER);
         panelPrincipal.add(Box.createHorizontalStrut(10), BorderLayout.EAST);
@@ -285,18 +271,7 @@ public class Ventana_Juego extends JFrame {
 
     }
     
-  
-
-	
-
-
-
-
-
-
-
-
-
+    
 	private void actualizarEtiquetaTiempo() {
         String tiempoFormateado = String.format("%02d:%02d", minutos, segundos);
         etiquetaTiempo.setText(tiempoFormateado);
@@ -376,7 +351,6 @@ public class Ventana_Juego extends JFrame {
             StringTokenizer tokenizer = new StringTokenizer(etiquetaPuntos.getText(), ":");
             tokenizer.nextToken();
             String numerosComoTexto = tokenizer.nextToken().trim();
-
             
             
             ventGo.tfScore.setText(numerosComoTexto);
@@ -542,7 +516,6 @@ public class Ventana_Juego extends JFrame {
     }
     
     public int getPuntuacion() {
-		// TODO Auto-generated method stub
 		return puntos;
 	}   
 
@@ -776,12 +749,7 @@ public class Ventana_Juego extends JFrame {
 		lblNivel.setText("Niveau : 1");
 	}
 
-    
-  
-public static void main(String[] args ) {
-	Ventana_Juego v=new Ventana_Juego();
-	
-	
-}
-
+    public static void main(String[] args ) {
+    	Ventana_Juego v=new Ventana_Juego();
+    }
 }

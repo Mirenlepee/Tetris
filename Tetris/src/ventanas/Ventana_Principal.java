@@ -45,12 +45,8 @@ public class Ventana_Principal extends JFrame{
         layeredPane.add(fondoLabel, JLayeredPane.DEFAULT_LAYER);
 
         initUI();
-        
-      
 	}
-    
-
-
+	
 	private void initUI() {
 		addLogo();
 		addButtons();
@@ -136,7 +132,6 @@ public class Ventana_Principal extends JFrame{
 		});
 		btnCredits.setBounds(100, 350, 200, 30);
 		layeredPane.add(btnCredits, JLayeredPane.PALETTE_LAYER);
-
 	}
 	
 	private void updateBtnSoundImage(Ventana_Options ventanaOptions) {

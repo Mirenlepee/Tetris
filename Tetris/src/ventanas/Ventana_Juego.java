@@ -75,17 +75,12 @@ public class Ventana_Juego extends JFrame {
              e.printStackTrace();
          }
 
-    	
-       
-    	
     	pres = Ventana_Options.obtenerPresionado();
         System.out.println(pres);
         if(!pres) {
          	clip.start();
 
         }
-    	
-    	
     	
         addWindowListener(new WindowAdapter() {
             @Override
@@ -154,8 +149,6 @@ public class Ventana_Juego extends JFrame {
         panelDerecho.add(Box.createVerticalGlue());
         panelDerecho.add(btnPausa);
         
-        
-      
         
         btnPausa.addActionListener(new ActionListener() {
             @Override
@@ -231,10 +224,6 @@ public class Ventana_Juego extends JFrame {
              
             }
         });
-
-        
-        
-  
         
         panelPrincipal.add(panelJuego, BorderLayout.CENTER);
         panelPrincipal.add(Box.createHorizontalStrut(10), BorderLayout.EAST);
@@ -285,17 +274,6 @@ public class Ventana_Juego extends JFrame {
 
     }
     
-  
-
-	
-
-
-
-
-
-
-
-
 
 	private void actualizarEtiquetaTiempo() {
         String tiempoFormateado = String.format("%02d:%02d", minutos, segundos);
@@ -347,7 +325,6 @@ public class Ventana_Juego extends JFrame {
         }
     }
     
-
     private boolean verificarGameOver() {
       
         int[][] forma = piezaActual.obtenerForma();
@@ -777,11 +754,11 @@ public class Ventana_Juego extends JFrame {
 	}
 
     
-  
-public static void main(String[] args ) {
-	Ventana_Juego v=new Ventana_Juego();
+
+    public static void main(String[] args ) {
+    	Ventana_Juego v=new Ventana_Juego();
 	
 	
-}
+    }
 
 }

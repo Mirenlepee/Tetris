@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -7,7 +8,7 @@ import ventanas.Ventana_SignIn;
 
 class Test_EmailUsuario {
 
-	 @Test
+	 	@Test
 	    public void testValidarCorreo() {
 	        // Casos de correos válidos
 	        assertTrue(Ventana_SignIn.validarCorreo("usuario@dominio.com"));

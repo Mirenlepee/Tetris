@@ -29,158 +29,277 @@ public class GestionBDUsuario {
 	
 	public static void main(String[] args) throws SQLException{
 		
-		try {
-			logger = Logger.getLogger("BaseDeDatos");
-			logger.addHandler(new FileHandler("BasesDeDatos.xml"));
-		}catch (Exception e){}
-		
-		String comentarioSQL = "";
-		try {
-			Class.forName("org.sqlite.JDBC");
-			con = DriverManager.getConnection("jdbc:sqlite:usuarios.db");
-			s = con.createStatement();
-			
-			//crear tabla Usuario
-			try {				
-				comentarioSQL = "create table usuario (userName string, password string, email string, avatarURL string, descripcion string)";
-				logger.log(Level.INFO, "BD: " + comentarioSQL);
-				s.executeUpdate(comentarioSQL);
-			} catch (SQLException e) {
-				// se lanza si la tabla ya existe - no hay problema
-				logger.log(Level.INFO, "La tabla ya está creada");
-			}
-			// Añadir columna ultimocambiodecontraseña a la tabla Usuario
-		    try {
-		        comentarioSQL = "ALTER TABLE Usuario ADD COLUMN ultimoCambioContrasena string";
-		        logger.log(Level.INFO, "BD: " + comentarioSQL);
-		        s.executeUpdate(comentarioSQL);
-		    } catch (SQLException e) {
-		        logger.log(Level.INFO, "La columna ya esta creada");
-		    }
-			
-			try {
-		        comentarioSQL = "UPDATE Usuario SET ultimoCambioContrasena = '2023-12-01' WHERE ultimoCambioContrasena = 'null'";
-		        logger.log(Level.INFO, "BD: " + comentarioSQL);
-		        s.executeUpdate(comentarioSQL);
-		    } catch (SQLException e) {
-		        logger.log(Level.WARNING, "Error al actualizar usuarios con diasdesdeultimocambio a null", e);
-		        e.printStackTrace();
-		    }
-			
-			// Ver si existe admin
-			comentarioSQL = "select * from Usuario where email = 'admin'";
-			logger.log(Level.INFO, "BD: " + comentarioSQL);
-			rs = s.executeQuery(comentarioSQL);
-			if (!rs.next()) {
-				// Añadirlo si no existe
-				comentarioSQL = "insert into Usuario ( userName, password, email, avatarURL, descripcion ) values ('admin', 'admin', 'admin', 'admin', 'admin')";
-				logger.log(Level.INFO, "BD: " + comentarioSQL);
-				s.executeUpdate(comentarioSQL);
-				Usuario moma = new Usuario("OihaneCam", "GK842aeiou", "oihanecam@gmail.com", "Tetris/src/imagenes/avatar.png", "null");
-				anadirUsuarioNuevo(moma);
-				Usuario kepa = new Usuario("MirenLe", "mMiaz45#g", "mirenle@gmail.com", "Tetris/src/imagenes/avatar.png", "null");
-				anadirUsuarioNuevo(kepa);
-				Usuario miguel = new Usuario("NaiaLo", "mNaia68n", "mirenle@gmail.com", "Tetris/src/imagenes/avatar.png", "null");
-				anadirUsuarioNuevo(miguel);
-				Usuario laura = new Usuario("AlbaDe", "#FAK8539mjsa", "albade@gmail.com", "Tetris/src/imagenes/avatar.png", "null");
-				anadirUsuarioNuevo(laura);
-			}			
+		try {		
+            // Inicializar el logger y establecer la conexión con la base de datos.
+            inicializarLogger();
+            establecerConexion();
+            
+            // Crear la tabla 'Usuario' si no existe.
+            crearTablaUsuario();
+
+            // Añadir columna 'ultimoCambioContrasena' a la tabla 'Usuario' si no existe.
+            agregarColumnaUltimoCambioContrasena();
+            
+			// Actualizar 'ultimoCambioContrasena' para usuarios con valor 'null'.
+            actualizarUltimoCambioContrasena();		
+            
+            // Verificar y agregar el usuario administrador si no existe.
+            verificarYAgregarAdmin();
+            
 		} catch (SQLException | ClassNotFoundException e) {
-			System.out.println("Último comando: " + comentarioSQL);
-			e.printStackTrace();
-			}
-		}
-	
+            // Manejar excepciones e imprimir traza de error.
+			manejarExcepcion(e);
+		} finally {
+//            // Cerrar la conexión con la base de datos.
+			//NO ES EL SITIO ADECUADO 
+//			cerrarConexiones();
+        }
+	}
+		
+	/**
+     * Inicializa el logger para registrar eventos y errores en un archivo XML.
+     */
+	private static void inicializarLogger() {
+        try {
+            logger = Logger.getLogger("BaseDeDatos");
+            logger.addHandler(new FileHandler("BasesDeDatos.xml"));
+        } catch (Exception e) {
+            manejarExcepcion(e);
+        }
+    }
+	/**
+     * Establece la conexión con la base de datos SQLite.
+     * @throws SQLException Si hay un error al intentar establecer la conexión.
+     * @throws ClassNotFoundException Si no se encuentra la clase del controlador JDBC.
+     */
+	private static void establecerConexion() throws SQLException, ClassNotFoundException {
+        Class.forName("org.sqlite.JDBC");
+        con = DriverManager.getConnection("jdbc:sqlite:usuarios.db");
+        s = con.createStatement();
+    }
+	/**
+     * Maneja una excepción imprimiendo el mensaje de error y la traza de la excepción.
+     * @param e La excepción que se debe manejar.
+     */
+	private static void manejarExcepcion(Exception e) {
+        System.out.println("Error: " + e.getMessage());
+        e.printStackTrace();
+    }
+	/**
+     * Crea la tabla 'usuario' en la base de datos si no existe.
+     */
+    private static void crearTablaUsuario() {
+        String comentarioSQL = "CREATE TABLE IF NOT EXISTS usuario (userName string, password string, email string, avatarURL string, descripcion string)";
+        ejecutarSQL(comentarioSQL, Level.INFO);
+    }
+    
+    /**
+     * Agrega la columna 'ultimoCambioContrasena' a la tabla 'Usuario' si no existe.
+     */
+    private static void agregarColumnaUltimoCambioContrasena() {
+        String comentarioSQL = "ALTER TABLE Usuario ADD COLUMN ultimoCambioContrasena string";
+        ejecutarSQL(comentarioSQL, Level.INFO);
+    }
+    /**
+     * Actualiza la columna 'ultimoCambioContrasena' para usuarios con valor 'null'.
+     */
+    private static void actualizarUltimoCambioContrasena() {
+        String comentarioSQL = "UPDATE Usuario SET ultimoCambioContrasena = '2023-12-01' WHERE ultimoCambioContrasena = 'null'";
+        ejecutarSQL(comentarioSQL, Level.INFO);
+    }
+    /**
+     * Ejecuta la sentencia SQL proporcionada y registra eventos en el logger.
+     * @param sql La sentencia SQL a ejecutar.
+     * @param logLevel El nivel de log para el evento.
+     */
+    private static void ejecutarSQL(String sql, Level logLevel) {
+        try {
+            logger.log(logLevel, "BD: " + sql);
+            s.executeUpdate(sql);
+        } catch (SQLException e) {
+            if (logLevel == Level.INFO) {
+                logger.log(Level.INFO, "La operación ya se realizó anteriormente");
+            } else {
+                manejarExcepcion(e);
+            }
+        }
+    }
+    
+    /**
+     * Verifica y agrega el usuario administrador si no existe.
+     */
+    private static void verificarYAgregarAdmin() {
+        String comentarioSQL = "SELECT * FROM Usuario WHERE email = 'admin'";
+        logger.log(Level.INFO, "BD: " + comentarioSQL);
+
+        try {
+            rs = s.executeQuery(comentarioSQL);
+            if (!rs.next()) {
+                // Añadir el usuario administrador si no existe.
+				comentarioSQL = "insert into Usuario ( userName, password, email, avatarURL, descripcion ) values ('admin', 'admin', 'admin', 'admin', 'admin')";
+                ejecutarSQL(comentarioSQL, Level.INFO);
+
+                // Añadir otros usuarios y eventos iniciales...
+                agregarUsuariosIniciales();
+            }
+        } catch (SQLException e) {
+            manejarExcepcion(e);
+        }
+    }
+    /**
+     * Añade usuarios y eventos iniciales a la base de datos.
+     */
+    private static void agregarUsuariosIniciales() {
+    	Usuario oihane = new Usuario("OihaneCam", "GK842aeiou", "oihanecam@gmail.com", "Tetris/src/imagenes/avatar.png", "null");
+		anadirUsuarioNuevo(oihane);
+		Usuario miren = new Usuario("MirenLe", "mMiaz45#g", "mirenle@gmail.com", "Tetris/src/imagenes/avatar.png", "null");
+		anadirUsuarioNuevo(miren);
+		Usuario naia = new Usuario("NaiaLo", "mNaia68n", "mirenle@gmail.com", "Tetris/src/imagenes/avatar.png", "null");
+		anadirUsuarioNuevo(naia);
+		Usuario alba = new Usuario("AlbaDe", "#FAK8539mjsa", "albade@gmail.com", "Tetris/src/imagenes/avatar.png", "null");
+		anadirUsuarioNuevo(alba);
+		
+    }
+    
+    /**
+     * Obtiene la conexión actual a la base de datos.
+     * @return Objeto Connection que representa la conexión a la base de datos.
+     */
 	public Connection getConnection() {
 		return con;
 	}
+	
+	/**
+	 * Añade un nuevo usuario a la base de datos.
+	 * @param usu Objeto Usuario que se va a añadir.
+	 */
 	public static void anadirUsuarioNuevo(Usuario usu) {
 		String com = "";
-		try {
-			// Ver si existe usuario
-			// Si queremos asegurar el string habría que hacer algo así...
-			// String nick = tfUsuario.getText().replaceAll( "'", "''" );
-			// ...si no, cuidado con lo que venga en el campo de entrada.
-			// "select * from Usuario where nick = 'admin'";
-			com = "select * from Usuario where correoUsuario = '" + usu.getEmail() + "'";
+		try {			
+	        // Verificar si el usuario ya existe en la base de datos.
+			com = "select * from Usuario where email = '" + usu.getEmail() + "'";
 			logger.log( Level.INFO, "BD: " + com );
 			rs = s.executeQuery( com );
 			if (!rs.next()) {
-				// "insert into Usuario ( nick, pass ) values ('admin', 'admin')";
-				com = "insert into Usuario (userName, password, email, avatarURL, ultimoCambioContrasena) values ('"+ 
+				com = "insert into Usuario (userName, password, email, avatarURL, ultimoCambioContrasena ) values ('"+ 
 						usu.getUserName() +"', '" + usu.getPassword() +"', '" + usu.getEmail()+"', '" + usu.getAvatarURL()+ "', '" + usu.getUltimoCambioContrasena() +"')";
 				logger.log( Level.INFO, "BD: " + com );
+				
 				int val = s.executeUpdate( com );
+				
 				if (val!=1) {
-					JOptionPane.showMessageDialog( null, "Error en inserción" );
+					// Mostrar mensaje de error si la inserción falla.
+                    showError("Error en inserción");				
 				}
 			} else {
-				JOptionPane.showMessageDialog( null, "Usuario " + usu.getEmail() + " ya existe" );
+				// Mostrar mensaje si el usuario ya existe.
+                showError("Usuario " + usu.getEmail() + " ya existe");
 			}
 		} catch (SQLException e2) {
-			System.out.println( "Último comando: " + com );
-			e2.printStackTrace();
+			// Manejar excepciones e imprimir información de error.
+	        handleException(e2, com);
 		}
 	}
 	
+	/**
+	 * Maneja una excepción, imprime la información de error y muestra un mensaje de error.
+	 * @param e Excepción que se debe manejar.
+	 * @param lastCommand Último comando SQL ejecutado.
+	 */
+	private static void handleException(SQLException e, String lastCommand) {
+	    System.out.println("Último comando: " + lastCommand);
+	    e.printStackTrace();
+	    // Mostrar mensaje de error.
+	    showError("Error en la base de datos: " + e.getMessage());
+	}
+	/**
+	 * Muestra un mensaje de error en una ventana de diálogo.
+	 * @param message Mensaje de error a mostrar.
+	 */
+	private static void showError(String message) {
+	    JOptionPane.showMessageDialog(null, message);
+	}
+	
+	/**
+	 * Modifica la contraseña de un usuario registrado.
+	 * @param usu Objeto Usuario con la nueva contraseña.
+	 */
 	public void modificarUsuarioYaRegistradoContrasena(Usuario usu) {
-		//update Usuario set contrasena = 'valor1' where correoUsuario = 'valor2'
-	    String sent = "update Usuario set contrasena = '" + secu(usu.getPassword()) + "', ultimoCambioContrasena = '" + usu.getUltimoCambioContrasena() + "' where correoUsuario = '" + secu(usu.getEmail()) + "'";
+		 String sent = "update Usuario set contrasena = '" + secu(usu.getPassword()) + "', ultimoCambioContrasena = '" + usu.getUltimoCambioContrasena() + "' where email = '" + secu(usu.getEmail()) + "'";
 		logger.log(Level.INFO, "BD: " + sent);
 		try {
 			s.executeUpdate(sent);
 		} catch (SQLException e1) {
 			logger.log(Level.WARNING, sent, e1);
-			e1.printStackTrace();
+	        handleException(e1, "Error al modificar la contraseña del usuario " + usu.getEmail());
 		}
 	}
+	
+	/**
+	 * Modifica el nombre de usuario de un usuario registrado.
+	 * @param usu Objeto Usuario con el nuevo nombre.
+	 */
 	public void modificarUsuarioYaRegistrado(Usuario usu) {		
-		String sent = "update Usuario set nombreUsuario= '"+ secu(usu.getUserName())+  "' where correoUsuario = '"+ secu(usu.getEmail()) + "'";
+		String sent = "update Usuario set userName= '"+ secu(usu.getUserName())+  "' where email = '"+ secu(usu.getEmail()) + "'";
 		logger.log(Level.INFO, "BD: " + sent);
 	
 		try {
 			s.executeUpdate(sent);
 		} catch (SQLException e1) {
 			logger.log(Level.WARNING, sent, e1);	
-			e1.printStackTrace();
+			// Manejar la excepción y mostrar mensaje de error
+	        handleException(e1, "Error al modificar el nombre del usuario " + usu.getEmail());
 		}
 	}
+
+	/**
+	 * Modifica la imagen de perfil de un usuario registrado.
+	 * @param usu Objeto Usuario con la nueva imagen de perfil.
+	 */
 	public void modificarUsuarioImagenPerfil(Usuario usu) {
-		String sent = "update Usuario set imagenPerfil= '" +
-	            secu(usu.getAvatarURL()) + "' where correoUsuario = '"+ secu(usu.getEmail()) + "'";
+		String sent = "update Usuario set avatarURL= '" +
+	            secu(usu.getAvatarURL()) + "' where email = '"+ secu(usu.getEmail()) + "'";
 		logger.log(Level.INFO, "BD: " + sent);
 	
 		try {
 			s.executeUpdate(sent);
 		} catch (SQLException e1) {
 			logger.log(Level.WARNING, sent, e1);
-			e1.printStackTrace();
+			// Manejar la excepción y mostrar mensaje de error
+	        handleException(e1, "Error al modificar la imagen de perfil del usuario " + usu.getEmail());
 		}
 	}
-
+	
+	/**
+	 * Modifica la descripción de un usuario registrado.
+	 * @param usu Objeto Usuario con la nueva descripción.
+	 */
 	public void modificarDescripcionUsuario(Usuario usu) {
-	    String sent = "update Usuario set descripcion= '" + usu.getDescripcion() + "' where correoUsuario= '" + secu(usu.getEmail())+"'";
+	    String sent = "update Usuario set descripcion= '" + usu.getDescripcion() + "' where email= '" + secu(usu.getEmail())+"'";
 	    logger.log(Level.INFO, "BD: " + sent);
 	    try {
 	    	s.executeUpdate(sent);
 	    } catch (SQLException e) {
-	        System.out.println("Último comando: " + sent);
-	        e.printStackTrace();
+	    	// Manejar la excepción y mostrar mensaje de error
+	        handleException(e, "Error al modificar la descripción del usuario " + usu.getEmail());
 	    }
 	}
-
 	
+	/**
+	 * Borra un usuario registrado.
+	 * @param usu Objeto Usuario que se va a borrar.
+	 */
 	public void borrarUsuarioRegistrado(Usuario usu) {
 		if (!usu.getEmail().isEmpty() && !usu.getPassword().isEmpty()) {
 			String com = "";
 			try {
 				// Borrar usuario
-				com = "delete from Usuario where correoUsuario = '"+ secu(usu.getEmail()) +"'";
+				com = "delete from Usuario where email = '"+ secu(usu.getEmail()) +"'";
 				logger.log( Level.INFO, "BD: " + com );
 				s.executeUpdate( com );
 			} catch (SQLException e2) {
-				System.out.println( "Último comando: " + com );
-				e2.printStackTrace();
+				// Manejar la excepción y mostrar mensaje de error
+	            handleException(e2, "Error al borrar el usuario " + usu.getEmail());
 			}
 		} else {
 			JOptionPane.showMessageDialog( null, "Debes rellenar los dos campos" );
@@ -188,16 +307,19 @@ public class GestionBDUsuario {
 	}
 
 	
-	public void cerrarConexiones() {
+	/**
+     * Cierra la conexión, el statement y el resultado si están abiertos.
+     */
+	public static void cerrarConexiones() {
 		try {
-			rs.close();
-			s.close();
-			con.close();
-		} catch (SQLException e2) {
-			e2.printStackTrace();
-		}
+            if (rs != null) rs.close();
+            if (s != null) s.close();
+            if (con != null) con.close();
+        } catch (SQLException e) {
+            manejarExcepcion(e);
+        }
 	}
-
+	
 // Posible función de "securización" para evitar errores o ataques
 	private static String secu( String sqlInicial ) {
 		return sqlInicial;
@@ -205,6 +327,7 @@ public class GestionBDUsuario {
 		// return sqlInicial.replaceAll( "'", "''" );
 	}
 
+	
 	
 //visualizar por consola los usuarios registrados	
 	public void verUsuarios() {
@@ -231,11 +354,14 @@ public class GestionBDUsuario {
         }
 
     } catch (SQLException e) {
-        System.out.println("Último comando: " + com);
-        e.printStackTrace();
+    	 handleException(e, "Error al visualizar usuarios");
     }
 }
 
+	/**
+	 * Mapa de usuarios a partir de la información en la base de datos.
+	 * @return HashMap donde la clave es el correo del usuario y el valor es el objeto Usuario correspondiente.
+	 */
 	public HashMap<String, Usuario> crearMapa() {
         mapaUsuarios = new HashMap<>();
 
@@ -263,6 +389,11 @@ public class GestionBDUsuario {
         return mapaUsuarios;
     }
 	
+	/**
+	 * Obtiene un usuario por su correo electrónico desde el mapa de usuarios.
+	 * @param correo Correo electrónico del usuario a buscar.
+	 * @return Objeto Usuario correspondiente al correo o null si no se encuentra.
+	 */
 	public static Usuario getUsuarioPorCorreo(String correo) {
 		if(mapaUsuarios.containsKey(correo)) {
 			return mapaUsuarios.get(correo);
@@ -271,9 +402,13 @@ public class GestionBDUsuario {
 			return null;
 		}
 	}
-	
+	/**
+	 * Obtiene la fecha del último cambio de contraseña para un usuario.
+	 * @param usuario Usuario del cual se quiere obtener la fecha del último cambio de contraseña.
+	 * @return LocalDate que representa la fecha del último cambio de contraseña.
+	 */
 	public LocalDate obtenerUltimoCambioContrasena(Usuario usuario) {
-	    String com = "SELECT ultimoCambioContrasena FROM Usuario WHERE correoUsuario = ?";
+	    String com = "SELECT ultimoCambioContrasena FROM Usuario WHERE email = ?";
 	    logger.log(Level.INFO, "BD: " + com);
 
 	    try (PreparedStatement preparedStatement = con.prepareStatement(com)) {
@@ -282,10 +417,10 @@ public class GestionBDUsuario {
 
 	        if (rs.next()) {
 	            String fechaUltimoCambio = rs.getString("ultimoCambioContrasena");
-	         // Ajusta el formato de parseo según el formato real de tu fecha
+	            // Ajusta el formato de parseo según el formato real de tu fecha
 	            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	            
-	         // Verificar si la cadena no es nula
+	            // Verificar si la cadena no es nula
 	    	    if (fechaUltimoCambio != null) {
 	    	        try {
 	    	            // Intentar parsear la cadena a LocalDate
@@ -296,7 +431,8 @@ public class GestionBDUsuario {
 	    	        }
 	    	    }
 	            
-	            return LocalDate.parse(fechaUltimoCambio, formatter);	        }
+	            return LocalDate.parse(fechaUltimoCambio, formatter);	       
+	        }
 	    } catch (SQLException e) {
 	        System.out.println("Último comando: " + com);
 	        e.printStackTrace();
@@ -305,5 +441,8 @@ public class GestionBDUsuario {
 	    // Si la cadena es nula o no se puede parsear, devolver un valor por defecto
 	    return LocalDate.now();
 	}
+
+	
+	
 
 }

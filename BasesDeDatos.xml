@@ -2,10 +2,10 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2024-01-16T20:24:04.956914800Z</date>
-  <millis>1705436644956</millis>
-  <nanos>914800</nanos>
-  <sequence>0</sequence>
+  <date>2024-01-16T20:43:23.236485900Z</date>
+  <millis>1705437803236</millis>
+  <nanos>485900</nanos>
+  <sequence>1</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
@@ -14,10 +14,10 @@
   <message>BD: CREATE TABLE IF NOT EXISTS usuario (userName string, password string, email string, avatarURL string, descripcion string)</message>
 </record>
 <record>
-  <date>2024-01-16T20:24:04.982913800Z</date>
-  <millis>1705436644982</millis>
-  <nanos>913800</nanos>
-  <sequence>1</sequence>
+  <date>2024-01-16T20:43:23.245491300Z</date>
+  <millis>1705437803245</millis>
+  <nanos>491300</nanos>
+  <sequence>2</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
@@ -26,10 +26,10 @@
   <message>BD: ALTER TABLE Usuario ADD COLUMN ultimoCambioContrasena string</message>
 </record>
 <record>
-  <date>2024-01-16T20:24:04.987916Z</date>
-  <millis>1705436644987</millis>
-  <nanos>916000</nanos>
-  <sequence>2</sequence>
+  <date>2024-01-16T20:43:23.248487400Z</date>
+  <millis>1705437803248</millis>
+  <nanos>487400</nanos>
+  <sequence>3</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
@@ -38,10 +38,10 @@
   <message>La operación ya se realizó anteriormente</message>
 </record>
 <record>
-  <date>2024-01-16T20:24:04.987916Z</date>
-  <millis>1705436644987</millis>
-  <nanos>916000</nanos>
-  <sequence>3</sequence>
+  <date>2024-01-16T20:43:23.249489600Z</date>
+  <millis>1705437803249</millis>
+  <nanos>489600</nanos>
+  <sequence>4</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
@@ -50,10 +50,10 @@
   <message>BD: UPDATE Usuario SET ultimoCambioContrasena = '2023-12-01' WHERE ultimoCambioContrasena = 'null'</message>
 </record>
 <record>
-  <date>2024-01-16T20:24:04.989425Z</date>
-  <millis>1705436644989</millis>
-  <nanos>425000</nanos>
-  <sequence>4</sequence>
+  <date>2024-01-16T20:43:23.250480500Z</date>
+  <millis>1705437803250</millis>
+  <nanos>480500</nanos>
+  <sequence>5</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
@@ -62,10 +62,10 @@
   <message>BD: SELECT * FROM Usuario WHERE email = 'admin'</message>
 </record>
 <record>
-  <date>2024-01-16T20:24:04.991436400Z</date>
-  <millis>1705436644991</millis>
-  <nanos>436400</nanos>
-  <sequence>5</sequence>
+  <date>2024-01-16T20:43:23.253490200Z</date>
+  <millis>1705437803253</millis>
+  <nanos>490200</nanos>
+  <sequence>6</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
@@ -74,10 +74,10 @@
   <message>BD: select * from Usuario</message>
 </record>
 <record>
-  <date>2024-01-16T20:24:04.995436900Z</date>
-  <millis>1705436644995</millis>
-  <nanos>436900</nanos>
-  <sequence>6</sequence>
+  <date>2024-01-16T20:43:23.257490100Z</date>
+  <millis>1705437803257</millis>
+  <nanos>490100</nanos>
+  <sequence>7</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
@@ -85,4 +85,3 @@
   <thread>29</thread>
   <message>BD: select * from Usuario</message>
 </record>
-</log>

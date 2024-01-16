@@ -49,6 +49,7 @@ public class Ventana_SignIn extends JFrame {
 	private static JLabel passwordlbl;
 	private static JLabel forgotPasswordlbl;
 	private static JButton continuebtn;
+	private JButton btnPrivacidad;
 	private static JLabel noAccountlbl ;
 	private static CustomPasswordField txtPassword;
 	private static CustomPasswordField txtConfirm;
@@ -115,18 +116,18 @@ public class Ventana_SignIn extends JFrame {
 	
     public Ventana_SignIn() {
     	
-//    	super();
-//		
-//		try {
-//            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-//        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-//        	// logger de prueba
-//        	logger.log(Level.SEVERE, "Error al configurar el look and feel", e);
-//        	JOptionPane.showMessageDialog(null, "Error al cargar la ventana: contacta con los informaticos.", "ERROR", JOptionPane.ERROR_MESSAGE);
-//        }
-//
-//		// logger de prueba
-//        logger.log(Level.INFO, "Inicializando la ventana de inicio");
+    	super();
+		
+		try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+        	// logger de prueba
+        	logger.log(Level.SEVERE, "Error al configurar el look and feel", e);
+        	JOptionPane.showMessageDialog(null, "Error al cargar la ventana: contacta con los informaticos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+
+		// logger de prueba
+        logger.log(Level.INFO, "Inicializando la ventana de inicio");
 		
         ventana = new JFrame("Sign In");
         ventana.setSize(400, 250);
@@ -234,6 +235,18 @@ public class Ventana_SignIn extends JFrame {
 	        
         JPanel Botonpnl = new JPanel();
         Botonpnl.setLayout(new FlowLayout(FlowLayout.CENTER));
+        btnPrivacidad = new JButton("Política de privacidad");
+        btnPrivacidad.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				mostrarPoliticaPrivacidad();
+			}
+        	
+        });
+        Botonpnl.add(btnPrivacidad);
+        
         continuebtn = new JButton("Continue");
         continuebtn.addActionListener(new ActionListener() {
             @Override
@@ -244,7 +257,7 @@ public class Ventana_SignIn extends JFrame {
 
                 if (!validarCorreo(correo)) {
                     // El correo es válido, puedes realizar acciones adicionales aquí
-                    JOptionPane.showMessageDialog(null, "Correo con formato invalido válido");
+                    JOptionPane.showMessageDialog(null, "Correo con formato inválido");
                     return;
                 }
                 
@@ -314,10 +327,6 @@ public class Ventana_SignIn extends JFrame {
             }
         }
     }
-
-  
-
-	
 
 	public void mostrarOcultarContraseña() {
         // Obtener la contraseña actual
@@ -469,14 +478,26 @@ public class Ventana_SignIn extends JFrame {
         try {
         	JTextArea txtArea = new JTextArea(
 
-                    "Nuestra Política de Privacidad!\n\n"+
-                    	"Fecha de entrada en vigencia: [Fecha]\n\n"+
+                    "Nuestra Política de Privacidad :)\n\n"+
+                    	"Fecha de entrada en vigencia: 1 de enero de 2024\n\n"+
                     	"¡Bienvenido a Tetris! Agradecemos tu interés y confianza en nuestra aplicación. Esta Política de Privacidad tiene como objetivo explicar cómo recopilamos, utilizamos y protegemos la información personal que puedas proporcionar durante el uso de nuestra aplicación.\n\n"+
                     		
                     		"1. Información que Recopilamos:\n\n"+
                     		"Al utilizar nuestra aplicación, podemos recopilar la siguiente información:\n"+
                     		"1.1 Información del Usuario:\n"+
-
+                    		"Nombres, direcciones de correo electrónico y otros datos proporcionados voluntariamente por los usuarios.\n\n"+
+                    		"2. Propósito de la Recopilación:\n"+ 
+                 			"La información del usuario se recopila con fines específicos, tales como procesar transacciones, personalizar la experiencia del usuario y enviar notificaciones relevantes.\n\n"+
+                 			"3. Seguridad:\n"+
+                 			"Implementamos medidas de seguridad, incluido el cifrado de datos, para proteger la información del usuario contra accesos no autorizados y garantizar su confidencialidad.\n\n"+
+                 			"4. Derechos del Usuario:\n"+
+                 			"Los usuarios tienen derechos sobre sus datos personales, incluido el acceso, corrección, eliminación y portabilidad de los mismos. Para ejercer estos derechos, por favor, contáctanos.\n\n"+
+                 			"5. Contacto:\n"+
+                 			"Para consultas relacionadas con la privacidad, puedes comunicarte con nosotros a través de tetristeamhelp@gmail.es .\n\n"+
+                 			"6. Políticas Futuras:\n"+
+                 			"Esta política puede actualizarse. Te notificaremos sobre cambios importantes. Al continuar usando la aplicación después de dichas modificaciones, aceptas los términos actualizados.\n\n"+
+                 		
+                 			"Gracias por confiar en Tetris! Si tienes alguna pregunta o inquietud sobre nuestra política de privacidad, no dudes en contactarnos."+
                             "\n\nAl hacer clic en Aceptar, confirmas que has leído y aceptas estos términos."
             );
         	txtArea.setEditable(false);

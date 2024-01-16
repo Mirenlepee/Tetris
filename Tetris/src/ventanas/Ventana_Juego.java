@@ -412,7 +412,10 @@ public class Ventana_Juego extends JFrame {
         gameOver = false;
         gameOverDisplayed = false;
        
-       // clip.start();
+     // Reiniciar la música
+        clip.setFramePosition(0);
+        clip.start();
+        
         timer.start();
         repaint();
     }

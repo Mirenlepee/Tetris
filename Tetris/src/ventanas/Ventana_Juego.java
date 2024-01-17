@@ -12,7 +12,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.awt.geom.GeneralPath;
 
 import javax.sound.sampled.*;
@@ -614,23 +613,6 @@ public class Ventana_Juego extends JFrame {
             }
         }
     }
-
-
-    private Color obtenerColorPiezaEnTablero(int fila, int columna) {
-        // Elimina la comprobación de la pieza actual
-        for (Pieza pieza : piezasEnTablero) {
-            int[][] forma = pieza.obtenerForma();
-            int filaPieza = pieza.obtenerFila();
-            int columnaPieza = pieza.obtenerColumna();
-            if (fila >= filaPieza && fila < filaPieza + forma.length &&
-                columna >= columnaPieza && columna < columnaPieza + forma[0].length &&
-                forma[fila - filaPieza][columna - columnaPieza] == 1) {
-                return pieza.obtenerColor();
-            }
-        }
-        return Color.BLUE; // O cualquier color por defecto en caso de que no haya ninguna pieza en esa posición
-    }
-
 
     private void dibujarPiezaActual(Graphics g) {
         int[][] forma = piezaActual.obtenerForma();

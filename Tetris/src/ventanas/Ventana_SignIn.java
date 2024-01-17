@@ -130,7 +130,7 @@ public class Ventana_SignIn extends JFrame {
         logger.log(Level.INFO, "Inicializando la ventana de inicio");
 		
         ventana = new JFrame("Sign In");
-        ventana.setSize(400, 250);
+        ventana.setSize(400, 290);
         ventana.setLayout(new BorderLayout());
 	
         signInlbl = new JLabel("Sign In");
@@ -149,7 +149,7 @@ public class Ventana_SignIn extends JFrame {
         pnlPrincipal.add(usernamelbl);
         pnlPrincipal.add(usernamefld);
         
-         lblCorreo = new JLabel("Email:");
+        lblCorreo = new JLabel("Email:");
         txtCorreo = new JTextField("@gmail.com");
         pnlPrincipal.add(lblCorreo);
         pnlPrincipal.add(txtCorreo);

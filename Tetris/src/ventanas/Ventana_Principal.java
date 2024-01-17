@@ -186,8 +186,8 @@ public class Ventana_Principal extends JFrame{
 		btnCredits.setText("CREDITS");
 	}
 	
-	public static void main(String[] args) {
-		JFrame vent = new Ventana_Principal();
-		vent.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		JFrame vent = new Ventana_Principal();
+//		vent.setVisible(true);
+//	}
 }

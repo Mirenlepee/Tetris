@@ -5,6 +5,7 @@ import java.util.StringTokenizer;
 import java.util.List;
 import javax.swing.border.LineBorder;
 
+import juego.Celda;
 import juego.Pieza;
 
 import java.awt.*;
@@ -38,7 +39,8 @@ public class Ventana_Juego extends JFrame {
     private List<Pieza> piezasEnTablero = new ArrayList<>();
 
     public static JLabel etiquetaPuntos;
-    private int[][] tablero;
+    private Celda[][] tablero;
+
     private Pieza piezaActual;
     protected Timer timer;
 
@@ -226,7 +228,13 @@ public class Ventana_Juego extends JFrame {
         add(panelPrincipal);
 	    pack();
         
-	    tablero = new int[ALTO_TABLERO][ANCHO_TABLERO];
+	    tablero = new Celda[ALTO_TABLERO][ANCHO_TABLERO];
+	    for (int i = 0; i < ALTO_TABLERO; i++) {
+	        for (int j = 0; j < ANCHO_TABLERO; j++) {
+	            tablero[i][j] = new Celda();
+	        }
+	    }
+
         piezaActual = new Pieza();
 
         iniciarJuego();
@@ -279,7 +287,13 @@ public class Ventana_Juego extends JFrame {
         siguientePieza = new Pieza();
         actualizarPanelEspacio1();
        
-        tablero = new int[getHeight() / TAMANO_CELDA][getWidth() / TAMANO_CELDA];
+         tablero = new Celda[ALTO_TABLERO][ANCHO_TABLERO];
+        for (int i = 0; i < ALTO_TABLERO; i++) {
+            for (int j = 0; j < ANCHO_TABLERO; j++) {
+                tablero[i][j] = new Celda();
+            }
+        }
+
         timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -320,14 +334,16 @@ public class Ventana_Juego extends JFrame {
     }
     
     private boolean verificarGameOver() {
-      
         int[][] forma = piezaActual.obtenerForma();
         int fila = piezaActual.obtenerFila();
         int columna = piezaActual.obtenerColumna();
+
         for (int i = 0; i < forma.length; i++) {
             for (int j = 0; j < forma[i].length; j++) {
-                if (forma[i][j] == 1 && tablero[fila + i][columna + j] == 1) {
-                    return true; 
+                // Check if the cell in the piezaActual's shape is occupied
+                // and also if the corresponding cell in tablero is occupied.
+                if (forma[i][j] == 1 && tablero[fila + i][columna + j].isOcupada()) {
+                    return true;
                 }
             }
         }
@@ -406,7 +422,12 @@ public class Ventana_Juego extends JFrame {
     protected void reiniciarJuego() {
         puntos = 0;
         piezasEnTablero.clear();
-        tablero = new int[ALTO_TABLERO][ANCHO_TABLERO];
+        tablero  = new Celda[ALTO_TABLERO][ANCHO_TABLERO];
+	    for (int i = 0; i < ALTO_TABLERO; i++) {
+	        for (int j = 0; j < ANCHO_TABLERO; j++) {
+	            tablero[i][j] = new Celda();
+	        }
+	    }
         piezaActual = new Pieza();
         gameOver = false;
         gameOverDisplayed = false;
@@ -500,12 +521,13 @@ public class Ventana_Juego extends JFrame {
         int[][] forma = piezaActual.obtenerForma();
         int fila = piezaActual.obtenerFila();
         int columna = piezaActual.obtenerColumna();
+
         for (int i = 0; i < forma.length; i++) {
             for (int j = 0; j < forma[i].length; j++) {
                 if (forma[i][j] == 1) {
                     int filaTablero = fila + i + 1;
                     int columnaTablero = columna + j;
-                    if (filaTablero >= ALTO_TABLERO || tablero[filaTablero][columnaTablero] == 1) {
+                    if (filaTablero >= ALTO_TABLERO || tablero[filaTablero][columnaTablero].isOcupada()) {
                         return true;
                     }
                 }
@@ -513,6 +535,7 @@ public class Ventana_Juego extends JFrame {
         }
         return false;
     }
+
     
     public int getPuntuacion() {
 		return puntos;
@@ -522,41 +545,49 @@ public class Ventana_Juego extends JFrame {
 	    return etiquetaTiempo.getText();
 	}
 
-    private void fijarPiezaEnTablero() {
-        int[][] forma = piezaActual.obtenerForma();
-        int fila = piezaActual.obtenerFila();
-        int columna = piezaActual.obtenerColumna();
+	private void fijarPiezaEnTablero() {
+	    int[][] forma = piezaActual.obtenerForma();
+	    int fila = piezaActual.obtenerFila();
+	    int columna = piezaActual.obtenerColumna();
 
-        for (int i = 0; i < forma.length; i++) {
-            for (int j = 0; j < forma[i].length; j++) {
-                if (forma[i][j] == 1) {
-                    tablero[fila + i][columna + j] = 1;
-                }
-            }
-        }
+	    for (int i = 0; i < forma.length; i++) {
+	        for (int j = 0; j < forma[i].length; j++) {
+	            if (forma[i][j] == 1) {
+	                tablero[fila + i][columna + j].setOcupada(true);
+	                tablero[fila + i][columna + j].setColor(piezaActual.obtenerColor());
+	            }
+	        }
+	    }
 
-        for (int i = ALTO_TABLERO - 1; i >= 0; i--) {
-            boolean filaCompleta = true;
-            for (int j = 0; j < ANCHO_TABLERO; j++) {
-                if (tablero[i][j] != 1) {
-                    filaCompleta = false;
-                    break;
-                }
-            }
+	    for (int i = ALTO_TABLERO - 1; i >= 0; i--) {
+	        boolean filaCompleta = true;
+	        for (int j = 0; j < ANCHO_TABLERO; j++) {
+	            if (!tablero[i][j].isOcupada()) {
+	                filaCompleta = false;
+	                break;
+	            }
+	        }
 
-            if (filaCompleta) {
-                for (int k = i; k > 0; k--) {
-                    System.arraycopy(tablero[k - 1], 0, tablero[k], 0, ANCHO_TABLERO);
-                }
-                Arrays.fill(tablero[0], 0);
-                puntos += 100; 
-                actualizarEtiquetaPuntos();
-            }
-        }
+	        if (filaCompleta) {
+	            for (int k = i; k > 0; k--) {
+	                for (int l = 0; l < ANCHO_TABLERO; l++) {
+	                    tablero[k][l].setOcupada(tablero[k - 1][l].isOcupada());
+	                    tablero[k][l].setColor(tablero[k - 1][l].getColor());
+	                }
+	            }
+	            for (int l = 0; l < ANCHO_TABLERO; l++) {
+	                tablero[0][l].setOcupada(false);
+	                tablero[0][l].setColor(null); // Set color to null or default value
+	            }
+	            puntos += 100;
+	            actualizarEtiquetaPuntos();
+	        }
+	    }
 
-        piezasEnTablero.add(piezaActual);
-        piezaActual = new Pieza();
-    }
+	    piezasEnTablero.add(piezaActual);
+	    piezaActual = new Pieza();
+	}
+
     private void actualizarEtiquetaPuntos() {
         etiquetaPuntos.setText("Puntos: " + puntos);
     }
@@ -576,24 +607,17 @@ public class Ventana_Juego extends JFrame {
     private void dibujarPiezasFijas(Graphics g) {
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
-                if (tablero[i][j] == 1) {
-                    Color colorPieza = obtenerColorPiezaEnTablero(i, j);
+                if (tablero[i][j].isOcupada()) {
+                    Color colorPieza = tablero[i][j].getColor(); // Assuming Celda has a getColor() method
                     dibujarCelda(g, j * TAMANO_CELDA, i * TAMANO_CELDA, colorPieza);
                 }
             }
         }
     }
 
+
     private Color obtenerColorPiezaEnTablero(int fila, int columna) {
-    	 // Verificar si la celda pertenece a la pieza actual
-        if (fila >= piezaActual.obtenerFila() && fila < piezaActual.obtenerFila() + piezaActual.obtenerForma().length &&
-            columna >= piezaActual.obtenerColumna() && columna < piezaActual.obtenerColumna() + piezaActual.obtenerForma()[0].length) {
-            int filaRelativa = fila - piezaActual.obtenerFila();
-            int columnaRelativa = columna - piezaActual.obtenerColumna();
-            if (piezaActual.obtenerForma()[filaRelativa][columnaRelativa] == 1) {
-                return piezaActual.obtenerColor();
-            }
-        }
+        // Elimina la comprobación de la pieza actual
         for (Pieza pieza : piezasEnTablero) {
             int[][] forma = pieza.obtenerForma();
             int filaPieza = pieza.obtenerFila();
@@ -604,8 +628,9 @@ public class Ventana_Juego extends JFrame {
                 return pieza.obtenerColor();
             }
         }
-        return Color.BLUE;
+        return Color.BLUE; // O cualquier color por defecto en caso de que no haya ninguna pieza en esa posición
     }
+
 
     private void dibujarPiezaActual(Graphics g) {
         int[][] forma = piezaActual.obtenerForma();

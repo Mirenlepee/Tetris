@@ -420,6 +420,7 @@ public class Ventana_Juego extends JFrame {
 
     protected void reiniciarJuego() {
         puntos = 0;
+        actualizarEtiquetaPuntos();
         piezasEnTablero.clear();
         tablero  = new Celda[ALTO_TABLERO][ANCHO_TABLERO];
 	    for (int i = 0; i < ALTO_TABLERO; i++) {

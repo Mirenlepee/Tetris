@@ -45,6 +45,7 @@ public class GestionBDUsuario {
             
             // Verificar y agregar el usuario administrador si no existe.
             verificarYAgregarAdmin();
+            //agregarUsuariosIniciales();
             
 		} catch (SQLException | ClassNotFoundException e) {
             // Manejar excepciones e imprimir traza de error.
@@ -154,7 +155,7 @@ public class GestionBDUsuario {
 		anadirUsuarioNuevo(oihane);
 		Usuario miren = new Usuario("MirenLe", "mMiaz45#g", "mirenle@gmail.com", "Tetris/src/imagenes/avatar.png", "null");
 		anadirUsuarioNuevo(miren);
-		Usuario naia = new Usuario("NaiaLo", "mNaia68n", "mirenle@gmail.com", "Tetris/src/imagenes/avatar.png", "null");
+		Usuario naia = new Usuario("NaiaLo", "mNaia68n", "naialo@gmail.com", "Tetris/src/imagenes/avatar.png", "null");
 		anadirUsuarioNuevo(naia);
 		Usuario alba = new Usuario("AlbaDe", "#FAK8539mjsa", "albade@gmail.com", "Tetris/src/imagenes/avatar.png", "null");
 		anadirUsuarioNuevo(alba);

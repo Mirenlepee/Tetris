@@ -161,7 +161,7 @@ public class Ventana_SignIn extends JFrame {
         pnlPrincipal.add(passwordlbl);
         pnlPrincipal.add(txtPassword);
         
-       lblConfirm = new JLabel("Confirm password:");
+        lblConfirm = new JLabel("Confirm password:");
         txtConfirm = new CustomPasswordField();
         aplicarEstiloCampo(txtConfirm, "Confirm password");
         txtConfirm.setEchoChar((char) 0);
@@ -266,7 +266,7 @@ public class Ventana_SignIn extends JFrame {
     					usuarioActual = mapaUsu.get(correo);
     					JOptionPane.showMessageDialog(null, "Bienvenido de nuevo " + obtenerNombreUsuario(correo));
     					Ventana_Juego v = new Ventana_Juego();
-    					dispose();
+    					ventana.dispose();
     					v.setVisible(true);
     					
     			        // Realiza acciones adicionales cuando el inicio de sesión sea exitoso
@@ -276,9 +276,6 @@ public class Ventana_SignIn extends JFrame {
     			} else {
     				JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
     			}
-            	Ventana_Juego v = new Ventana_Juego();
-				dispose();
-				v.setVisible(true);
             }
     		});
     		
@@ -570,6 +567,7 @@ public class Ventana_SignIn extends JFrame {
 	    }
 	}
 	
+	
 	 public static void cambiarTextosEspañol() {
 		 
 		 usernamelbl.setText("Nombre de Usuario:");
@@ -634,11 +632,4 @@ public class Ventana_SignIn extends JFrame {
 		  txtConfirm.setText("Passwort bestätigen");
 	
 		}
-	
-    public static void main(String[] args) {
-        Ventana_SignIn v = new Ventana_SignIn();
-    }
-
-   
-
 }

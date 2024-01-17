@@ -5,7 +5,6 @@ import java.util.StringTokenizer;
 import java.util.List;
 import javax.swing.border.LineBorder;
 
-import juego.DibujodeEstrella;
 import juego.Pieza;
 
 import java.awt.*;
@@ -573,9 +572,7 @@ public class Ventana_Juego extends JFrame {
         }
     }
     
-    private void dibujarEstrella(Graphics g, int x, int y, int size, int spikes) {
-        DibujodeEstrella.drawStar(g, x, y, size, spikes);
-    }
+  
     private void dibujarPiezasFijas(Graphics g) {
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {

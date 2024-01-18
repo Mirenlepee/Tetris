@@ -106,6 +106,10 @@ public class Ventana_AvatarUsuario extends JFrame {
 		 btnSeleccionarFoto.setText("Wählen Sie ein Foto aus");
 		 btnAceptar.setText("Akzeptieren");
 	}
-
+	
+	public static void main(String[] args) {
+		Ventana_AvatarUsuario vent = new Ventana_AvatarUsuario();
+		
+	}
 	
 }

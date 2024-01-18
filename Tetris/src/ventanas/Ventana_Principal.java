@@ -28,6 +28,7 @@ public class Ventana_Principal extends JFrame{
 		setTitle("Ventana Principal");
         setSize(600, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setResizable(false);
         setLocationRelativeTo(null);
 
         try {

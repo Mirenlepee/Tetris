@@ -26,6 +26,7 @@ public class Ventana_Options extends JFrame{
 	public Ventana_Options() {
 		ventana = new JFrame("Options");
 		ventana.setSize(400, 400);
+		setResizable(false);
 		ventana.setTitle("Options");
     	
     	lblOptions = new JLabel("Options");

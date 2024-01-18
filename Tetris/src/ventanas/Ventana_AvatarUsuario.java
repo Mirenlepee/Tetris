@@ -18,6 +18,7 @@ public class Ventana_AvatarUsuario extends JFrame {
     public Ventana_AvatarUsuario() {
         this.setSize(200, 200);
         this.setTitle("Choose Avatar");
+        setResizable(false);
         this.setLayout(new BorderLayout());
 
         JPanel panel = new JPanel();

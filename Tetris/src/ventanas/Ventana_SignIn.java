@@ -131,6 +131,7 @@ public class Ventana_SignIn extends JFrame {
 		
         ventana = new JFrame("Sign In");
         ventana.setSize(400, 290);
+        setResizable(false);
         ventana.setLayout(new BorderLayout());
 	
         signInlbl = new JLabel("Sign In");

@@ -48,6 +48,7 @@ public class Ventana_SignUp extends JFrame{
     public Ventana_SignUp() {
         ventana = new JFrame("Sign Up");
         ventana.setSize(400, 220);
+        setResizable(false);
         ventana.setLayout(new BorderLayout());
 
         signUplbl = new JLabel("Sign Up");
@@ -460,9 +461,9 @@ public class Ventana_SignUp extends JFrame{
 	
 	}
 
-    public static void main(String[] args) {
-		Ventana_SignUp vent = new Ventana_SignUp();
-		
-	}
+//    public static void main(String[] args) {
+//		Ventana_SignUp vent = new Ventana_SignUp();
+//		
+//	}
 	
 }

@@ -38,6 +38,7 @@ public class Ventana_Estadistica extends JFrame{
 		ventana = new JFrame("Estadística__");
 		ventana.setSize(600, 250);
 		ventana.setTitle("Statistics");
+		setResizable(false);
 		ventana.setLayout(new BorderLayout());
 		
 		signInlbl = new JLabel("Statistics");

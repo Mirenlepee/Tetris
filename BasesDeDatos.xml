@@ -2,86 +2,86 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2024-01-17T14:56:23.488356900Z</date>
-  <millis>1705503383488</millis>
-  <nanos>356900</nanos>
+  <date>2024-01-18T11:27:48.821441Z</date>
+  <millis>1705577268821</millis>
+  <nanos>441000</nanos>
   <sequence>1</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
   <method>ejecutarSQL</method>
-  <thread>1</thread>
+  <thread>31</thread>
   <message>BD: CREATE TABLE IF NOT EXISTS usuario (userName string, password string, email string, avatarURL string, descripcion string)</message>
 </record>
 <record>
-  <date>2024-01-17T14:56:23.508364200Z</date>
-  <millis>1705503383508</millis>
-  <nanos>364200</nanos>
+  <date>2024-01-18T11:27:48.830436Z</date>
+  <millis>1705577268830</millis>
+  <nanos>436000</nanos>
   <sequence>2</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
   <method>ejecutarSQL</method>
-  <thread>1</thread>
+  <thread>31</thread>
   <message>BD: ALTER TABLE Usuario ADD COLUMN ultimoCambioContrasena string</message>
 </record>
 <record>
-  <date>2024-01-17T14:56:23.513359500Z</date>
-  <millis>1705503383513</millis>
-  <nanos>359500</nanos>
+  <date>2024-01-18T11:27:48.834437500Z</date>
+  <millis>1705577268834</millis>
+  <nanos>437500</nanos>
   <sequence>3</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
   <method>ejecutarSQL</method>
-  <thread>1</thread>
+  <thread>31</thread>
   <message>La operación ya se realizó anteriormente</message>
 </record>
 <record>
-  <date>2024-01-17T14:56:23.514363300Z</date>
-  <millis>1705503383514</millis>
-  <nanos>363300</nanos>
+  <date>2024-01-18T11:27:48.835437800Z</date>
+  <millis>1705577268835</millis>
+  <nanos>437800</nanos>
   <sequence>4</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
   <method>ejecutarSQL</method>
-  <thread>1</thread>
+  <thread>31</thread>
   <message>BD: UPDATE Usuario SET ultimoCambioContrasena = '2023-12-01' WHERE ultimoCambioContrasena = 'null'</message>
 </record>
 <record>
-  <date>2024-01-17T14:56:23.516361Z</date>
-  <millis>1705503383516</millis>
-  <nanos>361000</nanos>
+  <date>2024-01-18T11:27:48.836434200Z</date>
+  <millis>1705577268836</millis>
+  <nanos>434200</nanos>
   <sequence>5</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
   <method>verificarYAgregarAdmin</method>
-  <thread>1</thread>
+  <thread>31</thread>
   <message>BD: SELECT * FROM Usuario WHERE email = 'admin'</message>
 </record>
 <record>
-  <date>2024-01-17T14:56:23.519362100Z</date>
-  <millis>1705503383519</millis>
-  <nanos>362100</nanos>
+  <date>2024-01-18T11:27:48.839439Z</date>
+  <millis>1705577268839</millis>
+  <nanos>439000</nanos>
   <sequence>6</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
   <method>verUsuarios</method>
-  <thread>1</thread>
+  <thread>31</thread>
   <message>BD: select * from Usuario</message>
 </record>
 <record>
-  <date>2024-01-17T14:56:23.523366400Z</date>
-  <millis>1705503383523</millis>
-  <nanos>366400</nanos>
+  <date>2024-01-18T11:27:48.843439100Z</date>
+  <millis>1705577268843</millis>
+  <nanos>439100</nanos>
   <sequence>7</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
   <method>crearMapa</method>
-  <thread>1</thread>
+  <thread>31</thread>
   <message>BD: select * from Usuario</message>
 </record>

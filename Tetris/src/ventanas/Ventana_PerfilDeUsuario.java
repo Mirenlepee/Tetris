@@ -37,6 +37,7 @@ public class Ventana_PerfilDeUsuario extends JFrame {
         this.setSize(400, 400);
         this.setTitle("Perfil");
 		this.setLayout(new BorderLayout());
+		setResizable(false);
 		
 		JPanel pnlCentro = new JPanel();
 
@@ -219,8 +220,8 @@ public class Ventana_PerfilDeUsuario extends JFrame {
 		btnGuardar.setText("Fortfahren");
 	}
 
-	public static void main(String[] args) {
-		Ventana_PerfilDeUsuario vent = new Ventana_PerfilDeUsuario();
-		
-	}
+//	public static void main(String[] args) {
+//		Ventana_PerfilDeUsuario vent = new Ventana_PerfilDeUsuario();
+//		
+//	}
 }

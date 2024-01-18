@@ -37,6 +37,7 @@ public class Ventana_Pausa extends JFrame{
 		ventana = new JFrame("Pause");
 		ventana.setTitle("Pause");
 		ventana.setSize(300, 300);
+		setResizable(false);
 		ventana.setLocationRelativeTo(ventanaJuego);
 		ventana.setLayout(new BorderLayout());
 	

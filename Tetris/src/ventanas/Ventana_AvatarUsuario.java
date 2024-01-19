@@ -18,6 +18,7 @@ public class Ventana_AvatarUsuario extends JFrame {
     public Ventana_AvatarUsuario() {
         this.setSize(200, 200);
         this.setTitle("Choose Avatar");
+        setResizable(false);
         this.setLayout(new BorderLayout());
 
         JPanel panel = new JPanel();
@@ -106,6 +107,10 @@ public class Ventana_AvatarUsuario extends JFrame {
 		 btnSeleccionarFoto.setText("Wählen Sie ein Foto aus");
 		 btnAceptar.setText("Akzeptieren");
 	}
-
+	
+	public static void main(String[] args) {
+		Ventana_AvatarUsuario vent = new Ventana_AvatarUsuario();
+		
+	}
 	
 }

@@ -22,6 +22,7 @@ import javax.swing.text.JTextComponent;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import BD.GestionBDUsuario;
 import gestionUsuarios.Usuario;
 
 public class Ventana_PerfilDeUsuario extends JFrame { 
@@ -36,6 +37,7 @@ public class Ventana_PerfilDeUsuario extends JFrame {
         this.setSize(400, 400);
         this.setTitle("Perfil");
 		this.setLayout(new BorderLayout());
+		setResizable(false);
 		
 		JPanel pnlCentro = new JPanel();
 
@@ -109,8 +111,30 @@ public class Ventana_PerfilDeUsuario extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //CODIFICAR PARA GUARDAR EL NUEVO USUARIO
-            	new Ventana_Juego();
-            }
+            	
+	             String imagenP = "Tetris/src/ventanas/Avatar.png";
+	             String descripcion = "Descripción vacía";
+	             char[] password = Ventana_SignUp.getPassword();
+	             String username = Ventana_SignUp.getUsername();
+	             String email = Ventana_SignUp.getEmail();
+	             String cont = new String(password);
+	                
+	             // Hash de la contraseña
+	             String hashContrasenia = BCrypt.hashpw(cont, BCrypt.gensalt());
+
+	             // Crear un nuevo usuario
+	             Usuario u = new Usuario(username, hashContrasenia, email, imagenP, descripcion);
+
+	             // Establecer la fecha actual como último cambio de contraseña
+	             u.cambiarContrasena(cont);
+
+	             GestionBDUsuario.anadirUsuarioNuevo(u);
+	             JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente");
+	             limpiarCampos();
+	             Ventana_Juego vent = new Ventana_Juego();
+	             dispose();  
+	             vent.setVisible(true);
+	            }
         });
         
         pnlPerfilDeUsuario.add(pnlBoton, BorderLayout.CENTER);
@@ -132,9 +156,13 @@ public class Ventana_PerfilDeUsuario extends JFrame {
             }
         }
     }
-	
-
-
+	 
+	 private void limpiarCampos() {
+			Ventana_SignUp.setUsername("");
+			Ventana_SignUp.setEmail("");
+			Ventana_SignUp.setPassword("");
+			Ventana_SignUp.setConfirmPassword("");
+		}
 	private void limitarCaracteres(JTextComponent textComponent, int maxLength) {
 	    Document document = textComponent.getDocument();
 	    if (document instanceof AbstractDocument) {
@@ -192,8 +220,8 @@ public class Ventana_PerfilDeUsuario extends JFrame {
 		btnGuardar.setText("Fortfahren");
 	}
 
-	public static void main(String[] args) {
-		Ventana_PerfilDeUsuario vent = new Ventana_PerfilDeUsuario();
-		
-	}
+//	public static void main(String[] args) {
+//		Ventana_PerfilDeUsuario vent = new Ventana_PerfilDeUsuario();
+//		
+//	}
 }

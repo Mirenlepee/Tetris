@@ -28,6 +28,7 @@ public class Ventana_GameOver extends JFrame {
 		this.ventanaJuego = ventJuego; 
 		setSize(400, 200);
 		setLocationRelativeTo(ventJuego);
+		setResizable(false);
 		setLayout(new BorderLayout());
     	
     	lblGameOver = new JLabel("Game Over");

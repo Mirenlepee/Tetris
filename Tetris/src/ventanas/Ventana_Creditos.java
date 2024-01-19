@@ -22,6 +22,7 @@ public class Ventana_Creditos extends JFrame {
     public Ventana_Creditos() {
         setTitle("Tetris - Credits");
         setSize(800, 600); 
+        setResizable(false);
 
         pnlContenido = new JPanel(new BorderLayout());
         pnlContenido.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));

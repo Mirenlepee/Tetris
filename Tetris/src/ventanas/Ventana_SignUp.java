@@ -34,11 +34,11 @@ public class Ventana_SignUp extends JFrame{
 	private JFrame ventana;
 	private JLabel signUplbl;
 	private static JLabel usernamelbl;
-	private JTextField usernamefld;
+	private static JTextField usernamefld;
 	private static JLabel passwordlbl;
 	private static JLabel confirmPasswordlbl;
 	private static JLabel emaillbl;
-	private JTextField emailfld;
+	private static JTextField emailfld;
 	private static JButton backbtn;
 	private static JButton exitbtn;
 	private static JButton continuebtn;
@@ -47,7 +47,8 @@ public class Ventana_SignUp extends JFrame{
 	
     public Ventana_SignUp() {
         ventana = new JFrame("Sign Up");
-        ventana.setSize(400, 200);
+        ventana.setSize(400, 220);
+        setResizable(false);
         ventana.setLayout(new BorderLayout());
 
         signUplbl = new JLabel("Sign Up");
@@ -149,14 +150,12 @@ public class Ventana_SignUp extends JFrame{
 	                char[] password = passwordfld.getPassword();
 	                char[] confirmada = confirmPasswordfld.getPassword();
 	                String email = emailfld.getText();
-	                String imagenP = "";
-	                String descripcion = "Descripción vacía";
-	                if (username.equals("Nombre") || email.equals("Correo") || password.length == 0 || confirmada.length == 0) {
+	                if (username.equals("Username") || email.equals("@gmail") || password.length == 0 || confirmada.length == 0) {
 	                    JOptionPane.showMessageDialog(null, "Para registrarse, debe introducir datos en todas las casillas.");
 	                    return;
 	                }
-	                char[] confirmarContrasenia = confirmPasswordfld.getPassword();
-	                if (!Arrays.equals(password, confirmarContrasenia)) {
+	                
+	                if (!Arrays.equals(password, confirmada)) {
 	                    JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.", "Error", JOptionPane.ERROR_MESSAGE);
 	                    return;
 	                }
@@ -183,25 +182,9 @@ public class Ventana_SignUp extends JFrame{
 	                        return;
 	                    }
 	                } else {
-	                	// Hash de la contraseña
-	                    String hashContrasenia = BCrypt.hashpw(cont, BCrypt.gensalt());
-
-	                    // Crear un nuevo usuario
-	                    Usuario u = new Usuario(username, hashContrasenia, email, imagenP, descripcion);
-
-	                    // Establecer la fecha actual como último cambio de contraseña
-	                    u.cambiarContrasena(cont);
-
-//	                    BaseDeDatos.anadirUsuarioNuevo(u);
-//	                    JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente");
-//	                    limpiarCampos();
-//	                    VentanaInicio ventanaInicio = new VentanaInicio();
-//	                    dispose();  // Cierra la ventana actual
-//	                    ventanaInicio.setVisible(true);
-//	                    Main.setVentanaInicio(ventanaInicio);
-	                }
-                new Ventana_PerfilDeUsuario();
-                ventana.dispose();     
+	                	new Ventana_PerfilDeUsuario();
+	                    ventana.dispose();   
+	                }  
                 
             }
         });
@@ -224,11 +207,42 @@ public class Ventana_SignUp extends JFrame{
         }
     }
     
+    public static String getUsername() {
+        return usernamefld.getText();
+    }
+
+    public static String getEmail() {
+        return emailfld.getText();
+    }
+
+    public static char[] getPassword() {
+        return passwordfld.getPassword();
+    }
+
+    public static char[] getConfirmPassword() {
+        return confirmPasswordfld.getPassword();
+    }
+
+    public static void setUsername(String username) {
+        usernamefld.setText(username);
+    }
+
+    public static void setEmail(String email) {
+        emailfld.setText(email);
+    }
+
+    public static void setPassword(String password) {
+        passwordfld.setText(new String(password));
+    }
+
+    public static void setConfirmPassword(String confirmPassword) {
+        confirmPasswordfld.setText(new String(confirmPassword));
+    }
     
-
-
-
-
+    private boolean contraseniaCumpleRequisito(String regex, String contrasenia) {
+        return Pattern.compile(regex).matcher(contrasenia).find();
+    }
+    
 	private void enviarCorreo(String destinatario, String asunto, String cuerpo) {
         final String usuario = "tetristeamhelp@gmail.com"; 
         final String contraseña = "lhbu fanv qyiv fdvo"; 
@@ -265,9 +279,6 @@ public class Ventana_SignUp extends JFrame{
         }
     }
 
-    private boolean contraseniaCumpleRequisito(String regex, String contrasenia) {
-        return Pattern.compile(regex).matcher(contrasenia).find();
-    }
     
     public void mostrarOcultarContraseña() {
         // Obtener la contraseña actual
@@ -281,12 +292,7 @@ public class Ventana_SignUp extends JFrame{
         }
         passwordfld.setText(new String(contraseña));
     }
-	private void limpiarCampos() {
-		usernamefld.setText("");
-		emailfld.setText("");		
-		passwordfld.setText("");
-		confirmPasswordfld.setText("");
-	}
+	
 	
 	private void aplicarEstiloCampo(JTextComponent textField, String texto) {
         textField.setForeground(new Color(169, 169, 169));
@@ -455,11 +461,9 @@ public class Ventana_SignUp extends JFrame{
 	
 	}
 
-    
-    
-    public static void main(String[] args) {
-		Ventana_SignUp vent = new Ventana_SignUp();
-		
-	}
+//    public static void main(String[] args) {
+//		Ventana_SignUp vent = new Ventana_SignUp();
+//		
+//	}
 	
 }

@@ -9,7 +9,7 @@ public class Ventana_Idioma extends JFrame {
     public Ventana_Idioma() {
         setTitle("Select a Language");
         setSize(300, 150);
-
+        setResizable(false);
 
         comboBoxIdioma = new JComboBox<>(new String[]{"Español", "English","Français","Deutsch"});
         comboBoxIdioma.setSelectedIndex(1); 

@@ -162,60 +162,6 @@ public class Ventana_Juego extends JFrame {
             		
             	}
             	
-//            	Object[] options;
-//            	if(musica) {
-//            		options= new Object[]{ "Resume", "New Game","Mute Music","Exit"};
-//            	}else {
-//            		options = new Object[]{ "Resume", "New Game","Play Music","Exit"};
-//            		
-//            	}
-//                int choice = JOptionPane.showOptionDialog(
-//                        Ventana_Juego.this,
-//                        "Pause Menu",
-//                        "Paused",
-//                        JOptionPane.YES_NO_CANCEL_OPTION,
-//                        JOptionPane.QUESTION_MESSAGE,
-//                        null,
-//                        options,
-//                        options[0]);
-//
-//                if (choice == JOptionPane.YES_OPTION) {
-//                	if(musica) {
-//                		clip.start(); 
-//                	}
-//                	
-//                     timer.start();
-//                     timerContador.start(); 
-//                     panelJuego.requestFocusInWindow();
-//                   
-//                } else if (choice == JOptionPane.NO_OPTION) {
-//                	if (musica == true) {
-//               		 clip.start();
-//               	}                	
-//                	vidas=3;
-//                	((CorazonPanel) PanelEspacio2).vidasMostradas = vidas;
-//                	etiquetaTiempo.setText("00:00"); 
-//                	minutos = 0;
-//                	segundos = 0;
-//               	 timerContador.restart();
-//               
-//               	panelJuego.requestFocusInWindow();
-//                    reiniciarJuego();
-//                }else if(choice == 2) {
-//                	if(musica) {
-//                		musica = false;
-//                		clip.stop();
-//                	}else {
-//                		musica = true;
-//                		clip.start();
-//                	} 	 
-//
-//                	timer.start();
-//                    timerContador.start();
-//                    panelJuego.requestFocusInWindow();
-//                } else if (choice == 3) {
-//                    System.exit(0);
-//                }
              
             }
         });

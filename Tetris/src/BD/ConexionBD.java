@@ -55,6 +55,31 @@ public class ConexionBD {
         }
         return puntos;
     }
+
+    public static ArrayList<Integer> obtenerEstadisticasPorUsuario(int idJugador) throws SQLException {
+        ArrayList<Integer> estadisticas = new ArrayList<>();
+        Connection conexion = conectar();
+
+        // Supongamos que las estadísticas se almacenan en la tabla "EstadisticasJuego"
+        String sql = "SELECT timePlayed, dailyPlaytime, roundsPlayed, maxPoints, minPoints, totalPoints, dailyAveragePoints " +
+                     "FROM EstadisticasJuego WHERE idJugador = ?";
+
+        try (PreparedStatement statement = conexion.prepareStatement(sql)) {
+            statement.setInt(1, idJugador);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                estadisticas.add(rs.getInt("timePlayed"));
+                estadisticas.add(rs.getInt("dailyPlaytime"));
+                estadisticas.add(rs.getInt("roundsPlayed"));
+                estadisticas.add(rs.getInt("maxPoints"));
+                estadisticas.add(rs.getInt("minPoints"));
+                estadisticas.add(rs.getInt("totalPoints"));
+                estadisticas.add(rs.getInt("dailyAveragePoints"));
+            }
+        } finally {
+            desconectar(conexion);
+        }
+
+        return estadisticas;
+    }
 }
-
-

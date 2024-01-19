@@ -2,87 +2,157 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
+<<<<<<< HEAD
   <date>2024-01-17T16:13:13.842901700Z</date>
   <millis>1705507993842</millis>
   <nanos>901700</nanos>
+=======
+  <date>2024-01-18T11:27:48.821441Z</date>
+  <millis>1705577268821</millis>
+  <nanos>441000</nanos>
+>>>>>>> branch 'master' of https://github.com/Mirenlepee/Tetris.git
   <sequence>1</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
   <method>ejecutarSQL</method>
+<<<<<<< HEAD
   <thread>22</thread>
+=======
+  <thread>31</thread>
+>>>>>>> branch 'master' of https://github.com/Mirenlepee/Tetris.git
   <message>BD: CREATE TABLE IF NOT EXISTS usuario (userName string, password string, email string, avatarURL string, descripcion string)</message>
 </record>
 <record>
+<<<<<<< HEAD
   <date>2024-01-17T16:13:13.849903500Z</date>
   <millis>1705507993849</millis>
   <nanos>903500</nanos>
+=======
+  <date>2024-01-18T11:27:48.830436Z</date>
+  <millis>1705577268830</millis>
+  <nanos>436000</nanos>
+>>>>>>> branch 'master' of https://github.com/Mirenlepee/Tetris.git
   <sequence>2</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
   <method>ejecutarSQL</method>
+<<<<<<< HEAD
   <thread>22</thread>
+=======
+  <thread>31</thread>
+>>>>>>> branch 'master' of https://github.com/Mirenlepee/Tetris.git
   <message>BD: ALTER TABLE Usuario ADD COLUMN ultimoCambioContrasena string</message>
 </record>
 <record>
+<<<<<<< HEAD
   <date>2024-01-17T16:13:13.852900200Z</date>
   <millis>1705507993852</millis>
   <nanos>900200</nanos>
+=======
+  <date>2024-01-18T11:27:48.834437500Z</date>
+  <millis>1705577268834</millis>
+  <nanos>437500</nanos>
+>>>>>>> branch 'master' of https://github.com/Mirenlepee/Tetris.git
   <sequence>3</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
   <method>ejecutarSQL</method>
+<<<<<<< HEAD
   <thread>22</thread>
+=======
+  <thread>31</thread>
+>>>>>>> branch 'master' of https://github.com/Mirenlepee/Tetris.git
   <message>La operación ya se realizó anteriormente</message>
 </record>
 <record>
+<<<<<<< HEAD
   <date>2024-01-17T16:13:13.853903300Z</date>
   <millis>1705507993853</millis>
   <nanos>903300</nanos>
+=======
+  <date>2024-01-18T11:27:48.835437800Z</date>
+  <millis>1705577268835</millis>
+  <nanos>437800</nanos>
+>>>>>>> branch 'master' of https://github.com/Mirenlepee/Tetris.git
   <sequence>4</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
   <method>ejecutarSQL</method>
+<<<<<<< HEAD
   <thread>22</thread>
+=======
+  <thread>31</thread>
+>>>>>>> branch 'master' of https://github.com/Mirenlepee/Tetris.git
   <message>BD: UPDATE Usuario SET ultimoCambioContrasena = '2023-12-01' WHERE ultimoCambioContrasena = 'null'</message>
 </record>
 <record>
+<<<<<<< HEAD
   <date>2024-01-17T16:13:13.853903300Z</date>
   <millis>1705507993853</millis>
   <nanos>903300</nanos>
+=======
+  <date>2024-01-18T11:27:48.836434200Z</date>
+  <millis>1705577268836</millis>
+  <nanos>434200</nanos>
+>>>>>>> branch 'master' of https://github.com/Mirenlepee/Tetris.git
   <sequence>5</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
   <method>verificarYAgregarAdmin</method>
+<<<<<<< HEAD
   <thread>22</thread>
+=======
+  <thread>31</thread>
+>>>>>>> branch 'master' of https://github.com/Mirenlepee/Tetris.git
   <message>BD: SELECT * FROM Usuario WHERE email = 'admin'</message>
 </record>
 <record>
+<<<<<<< HEAD
   <date>2024-01-17T16:13:13.856900100Z</date>
   <millis>1705507993856</millis>
   <nanos>900100</nanos>
+=======
+  <date>2024-01-18T11:27:48.839439Z</date>
+  <millis>1705577268839</millis>
+  <nanos>439000</nanos>
+>>>>>>> branch 'master' of https://github.com/Mirenlepee/Tetris.git
   <sequence>6</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
   <method>verUsuarios</method>
+<<<<<<< HEAD
   <thread>22</thread>
+=======
+  <thread>31</thread>
+>>>>>>> branch 'master' of https://github.com/Mirenlepee/Tetris.git
   <message>BD: select * from Usuario</message>
 </record>
 <record>
+<<<<<<< HEAD
   <date>2024-01-17T16:13:13.858902200Z</date>
   <millis>1705507993858</millis>
   <nanos>902200</nanos>
+=======
+  <date>2024-01-18T11:27:48.843439100Z</date>
+  <millis>1705577268843</millis>
+  <nanos>439100</nanos>
+>>>>>>> branch 'master' of https://github.com/Mirenlepee/Tetris.git
   <sequence>7</sequence>
   <logger>BaseDeDatos</logger>
   <level>INFO</level>
   <class>BD.GestionBDUsuario</class>
   <method>crearMapa</method>
+<<<<<<< HEAD
   <thread>22</thread>
+=======
+  <thread>31</thread>
+>>>>>>> branch 'master' of https://github.com/Mirenlepee/Tetris.git
   <message>BD: select * from Usuario</message>
 </record>
 </log>

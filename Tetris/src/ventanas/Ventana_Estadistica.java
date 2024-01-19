@@ -4,25 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Vector;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
 import BD.ConexionBD;
@@ -101,13 +88,21 @@ public class Ventana_Estadistica extends JFrame{
 	public void actualizarEstadisticas(int idJugador) {
         try {
             // Obtener puntos del jugador desde la base de datos
-            ArrayList<Integer> puntos = ConexionBD.obtenerPuntosPorJugador(idJugador);
+//            ArrayList<Integer> puntos = ConexionBD.obtenerPuntosPorJugador(idJugador);
 
             // Calcular estadísticas (por ejemplo, calcular el total de puntos)
-            int totalPuntos = calcularTotalPuntos(puntos);
+  //          int totalPuntos = calcularTotalPuntos(puntos);
 
             // Actualizar la tabla con los resultados
-            ((MiTableModel) modeloDatos).addRow(new Object[]{"Total points", totalPuntos});
+    //        ((MiTableModel) modeloDatos).addRow(new Object[]{"Total points", totalPuntos});
+     
+        	
+        	// Obtener estadísticas del jugador desde la base de datos
+            // Supongamos que tu método de la base de datos se llama obtenerEstadisticasPorUsuario
+            ArrayList<Integer> estadisticas = ConexionBD.obtenerEstadisticasPorUsuario(idJugador);
+
+            // Actualizar la tabla con los resultados
+            ((MiTableModel) modeloDatos).setEstadisticas(estadisticas);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -127,11 +122,27 @@ public class Ventana_Estadistica extends JFrame{
 
 		private final Class<?>[] CLASES_COLS = {String.class, Integer.class};
 		private ArrayList<Object[]> filas = new ArrayList<>();
+		private ArrayList<Integer> estadisticas = new ArrayList<>();
+		 
 		@Override
 		public Class<?> getColumnClass(int columnIndex) {
 			// TODO Auto-generated method stub
 			return CLASES_COLS[columnIndex];
 		}
+
+		public void setEstadisticas(ArrayList<Integer> estadisticas) {
+            this.estadisticas = estadisticas;
+            fireTableDataChanged();
+        }
+
+		 public void fireTableDataChanged() {
+			 fireTableChanged(getTableModelEvent());
+		 }
+
+		 private TableModelEvent getTableModelEvent() {
+			 return new TableModelEvent(this, TableModelEvent.HEADER_ROW, TableModelEvent.HEADER_ROW,
+					 TableModelEvent.ALL_COLUMNS, TableModelEvent.UPDATE);
+		 }
 
 		@Override
 		public int getColumnCount() {

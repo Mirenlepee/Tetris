@@ -91,10 +91,10 @@ public class Ventana_Estadistica extends JFrame{
 //            ArrayList<Integer> puntos = ConexionBD.obtenerPuntosPorJugador(idJugador);
 
             // Calcular estadísticas (por ejemplo, calcular el total de puntos)
-  //          int totalPuntos = calcularTotalPuntos(puntos);
+//             int totalPuntos = calcularTotalPuntos(puntos);
 
             // Actualizar la tabla con los resultados
-    //        ((MiTableModel) modeloDatos).addRow(new Object[]{"Total points", totalPuntos});
+//            ((MiTableModel) modeloDatos).addRow(new Object[]{"Total points", totalPuntos});
      
         	
         	// Obtener estadísticas del jugador desde la base de datos

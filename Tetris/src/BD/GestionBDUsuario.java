@@ -118,7 +118,7 @@ public class GestionBDUsuario {
      * Obtiene las estadísticas de juego para un usuario específico.
      * 
      * @param usuarioId El ID del usuario.
-     * @return Un ResultSet con las estadísticas de juego del usuario.
+     * @return ResultSet con las estadísticas de juego del usuario.
      */
     public static ResultSet obtenerEstadisticasPorUsuario(int usuarioId) {
         String comentarioSQL = "SELECT * FROM EstadisticasJuego WHERE usuario_id = ?";
@@ -545,5 +545,5 @@ public class GestionBDUsuario {
             e.printStackTrace();
             return null;
         }
-    }
+    }   
 }

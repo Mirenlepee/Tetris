@@ -4,15 +4,18 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import BD.ConexionBD;
+import BD.GestionBDUsuario;
 
 public class Ventana_Estadistica extends JFrame{
 	private JFrame ventana;
@@ -72,8 +75,6 @@ public class Ventana_Estadistica extends JFrame{
         }
     }
 	
-
-
 	public void setDatos() {
 		modeloDatos = new MiTableModel();
 		tablaDatos.setModel(modeloDatos);
@@ -126,7 +127,6 @@ public class Ventana_Estadistica extends JFrame{
 		 
 		@Override
 		public Class<?> getColumnClass(int columnIndex) {
-			// TODO Auto-generated method stub
 			return CLASES_COLS[columnIndex];
 		}
 
@@ -146,13 +146,11 @@ public class Ventana_Estadistica extends JFrame{
 
 		@Override
 		public int getColumnCount() {
-			// TODO Auto-generated method stub
 			return 2;
 		}
 
 		@Override
 		public int getRowCount() {
-			// TODO Auto-generated method stub
 			return filas.size();
 		}
 		
@@ -160,13 +158,11 @@ public class Ventana_Estadistica extends JFrame{
 
 		@Override
 		public String getColumnName(int columnIndex) {
-			// TODO Auto-generated method stub
 			return cabeceras[columnIndex];
 		}
 		
 		@Override
 		public Object getValueAt(int rowIndex, int columnIndex) {
-			// TODO Auto-generated method stub
 			return filas.get(rowIndex)[columnIndex];
 			
 		}
@@ -179,18 +175,15 @@ public class Ventana_Estadistica extends JFrame{
 		
 		@Override
 		public boolean isCellEditable(int rowIndex, int columnIndex) {
-			// TODO Auto-generated method stub
 			return false;
 		}
 
 		@Override
 		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-			// TODO Auto-generated method stub
 			switch(columnIndex) {
 			case 1:
 				// aquí se pondrá el dato en la segunda columna y en la fila correspondiente.
 				break;
-		
 			}
 		}
 		
@@ -198,16 +191,12 @@ public class Ventana_Estadistica extends JFrame{
 
 		@Override
 		public void addTableModelListener(TableModelListener l) {
-			// TODO Auto-generated method stub
-			listaEsc.add(l);
-			
+			listaEsc.add(l);	
 		}
 		
 		@Override
 		public void removeTableModelListener(TableModelListener l) {
-			// TODO Auto-generated method stub
 			listaEsc.remove(l);
-			
 		}
 	
 		//DefaultTableModel lo hace así
@@ -218,6 +207,25 @@ public class Ventana_Estadistica extends JFrame{
 		}
 	}
 	
+	private void cargarEstadisticasEnTabla(int usuarioId) {
+	    DefaultTableModel modelo = (DefaultTableModel) tablaDatos.getModel();
+	    modelo.setRowCount(0); // Limpiar la tabla antes de cargar nuevos datos
+
+	    try {
+	        ArrayList<Integer> estadisticas = ConexionBD.obtenerEstadisticasPorUsuario(usuarioId);
+
+	        modelo.addRow(new Object[]{"Time played", estadisticas.get(0)});
+	        modelo.addRow(new Object[]{"Daily playtime", estadisticas.get(1)});
+	        modelo.addRow(new Object[]{"Rounds played", estadisticas.get(2)});
+	        modelo.addRow(new Object[]{"Max points", estadisticas.get(3)});
+	        modelo.addRow(new Object[]{"Min points", estadisticas.get(4)});
+	        modelo.addRow(new Object[]{"Total points", estadisticas.get(5)});
+	        modelo.addRow(new Object[]{"Daily average points", estadisticas.get(6)});
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
 	
 	public static void cambiarTextosEspañol() {
 	     signInlbl.setText("Estadística");

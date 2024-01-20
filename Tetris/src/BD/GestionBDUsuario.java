@@ -112,50 +112,7 @@ public class GestionBDUsuario {
         ejecutarSQL(comentarioSQL, Level.INFO);
     }
     
-    /**
-     * Crea la tabla 'EstadisticasJuego' en la base de datos si no existe.
-     */
-    private static void crearTablaEstadisticasJuego() {
-        String comentarioSQL = "CREATE TABLE IF NOT EXISTS EstadisticasJuego ("  + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "usuario_id INTEGER, " + "timePlayed INTEGER, " + "dailyPlaytime INTEGER, " + "roundsPlayed INTEGER, " + "maxPoints INTEGER, " + "minPoints INTEGER, " + "totalPoints INTEGER, " + "dailyAveragePoints INTEGER, " + "fecha DATE, " + "FOREIGN KEY (usuario_id) REFERENCES Usuario(id)" + ")";
-        ejecutarSQL(comentarioSQL, Level.INFO);
-    }
     
-
-    /**
-     * Inserta nuevas estadísticas de juego para un usuario.
-     * 
-     * @param usuarioId          El ID del usuario al que pertenecen las estadísticas.
-     * @param timePlayed         Tiempo total jugado.
-     * @param dailyPlaytime      Tiempo diario jugado.
-     * @param roundsPlayed       Número de rondas jugadas.
-     * @param maxPoints          Puntuación máxima alcanzada.
-     * @param minPoints          Puntuación mínima alcanzada.
-     * @param totalPoints        Puntuación total acumulada.
-     * @param dailyAveragePoints Puntuación diaria promedio.
-     * @param fecha              Fecha de registro de las estadísticas.
-     */
-    public static void insertarEstadisticasJuego(int usuarioId, int timePlayed, int dailyPlaytime, int roundsPlayed,
-            int maxPoints, int minPoints, int totalPoints, int dailyAveragePoints, String fecha) {
-        String comentarioSQL = "INSERT INTO EstadisticasJuego (usuario_id, timePlayed, dailyPlaytime, roundsPlayed, "
-                + "maxPoints, minPoints, totalPoints, dailyAveragePoints, fecha) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        try (PreparedStatement preparedStatement = con.prepareStatement(comentarioSQL)) {
-            preparedStatement.setInt(1, usuarioId);
-            preparedStatement.setInt(2, timePlayed);
-            preparedStatement.setInt(3, dailyPlaytime);
-            preparedStatement.setInt(4, roundsPlayed);
-            preparedStatement.setInt(5, maxPoints);
-            preparedStatement.setInt(6, minPoints);
-            preparedStatement.setInt(7, totalPoints);
-            preparedStatement.setInt(8, dailyAveragePoints);
-            preparedStatement.setString(9, fecha);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            manejarExcepcion(e);
-        }
-    }
-
     /**
      * Obtiene las estadísticas de juego para un usuario específico.
      * 
@@ -513,4 +470,53 @@ public class GestionBDUsuario {
 	
 	// BASE DE DATOS ESTADISTICA
 
+	/**
+     * Crea la tabla 'EstadisticasJuego' en la base de datos si no existe.
+     */
+	private static void crearTablaEstadisticasJuego() {
+	    String comentarioSQL = "CREATE TABLE IF NOT EXISTS EstadisticasJuego (id INTEGER PRIMARY KEY AUTOINCREMENT, usuario_id STRING, timePlayed INTEGER, dailyPlaytime INTEGER, roundsPlayed INTEGER, maxPoints INTEGER, minPoints INTEGER, totalPoints INTEGER, dailyAveragePoints INTEGER, fecha DATE, FOREIGN KEY (usuario_id) REFERENCES Usuario(email))";
+	    ejecutarSQL(comentarioSQL, Level.INFO);
+	}
+
+    
+    /**
+     * Inserta nuevas estadísticas de juego para un usuario.
+     * 
+     * @param usuarioId          El ID del usuario al que pertenecen las estadísticas.
+     * @param timePlayed         Tiempo total jugado.
+     * @param dailyPlaytime      Tiempo diario jugado.
+     * @param roundsPlayed       Número de rondas jugadas.
+     * @param maxPoints          Puntuación máxima alcanzada.
+     * @param minPoints          Puntuación mínima alcanzada.
+     * @param totalPoints        Puntuación total acumulada.
+     * @param dailyAveragePoints Puntuación diaria promedio.
+     * @param fecha              Fecha de registro de las estadísticas.
+     */
+    public static void insertarEstadisticasJuego(int usuarioId, int timePlayed, int dailyPlaytime, int roundsPlayed,
+            int maxPoints, int minPoints, int totalPoints, int dailyAveragePoints, String fecha) {
+        String comentarioSQL = "INSERT INTO EstadisticasJuego (usuario_id, timePlayed, dailyPlaytime, roundsPlayed, "
+                + "maxPoints, minPoints, totalPoints, dailyAveragePoints, fecha) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = con.prepareStatement(comentarioSQL)) {
+            preparedStatement.setInt(1, usuarioId);
+            preparedStatement.setInt(2, timePlayed);
+            preparedStatement.setInt(3, dailyPlaytime);
+            preparedStatement.setInt(4, roundsPlayed);
+            preparedStatement.setInt(5, maxPoints);
+            preparedStatement.setInt(6, minPoints);
+            preparedStatement.setInt(7, totalPoints);
+            preparedStatement.setInt(8, dailyAveragePoints);
+            preparedStatement.setString(9, fecha);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            manejarExcepcion(e);
+        }
+    }
+    
+    private static void insertarEstadisticasDePrueba() {
+        insertarEstadisticasJuego(1, 120, 30, 5, 500, 100, 1500, 300, "2024-01-19");
+    }
+
+	
 }

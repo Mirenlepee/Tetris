@@ -3,8 +3,11 @@ package ventanas;
 import javax.swing.*;
 import java.util.StringTokenizer;
 import java.util.List;
+import java.util.Map;
+
 import javax.swing.border.LineBorder;
 
+import BD.GestionBDUsuario;
 import juego.Celda;
 import juego.Pieza;
 
@@ -12,6 +15,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.awt.geom.GeneralPath;
 
 import javax.sound.sampled.*;
@@ -49,6 +53,7 @@ public class Ventana_Juego extends JFrame {
     protected int vidas=3;
     protected Ventana_GameOver ventGo;
     protected PanelJuego panelJuego;
+    private static Map<Integer, Integer> tiempoJugadoPorUsuario = new HashMap<>();
     
     protected boolean pres;
 
@@ -300,7 +305,7 @@ public class Ventana_Juego extends JFrame {
         if (!gameOverDisplayed) {
             gameOverDisplayed = true;
             timerContador.stop();
-
+            //GestionBDUsuario.insertarEstadisticasJuego();
 
             ventGo = new Ventana_GameOver(this);
             
@@ -702,9 +707,9 @@ public class Ventana_Juego extends JFrame {
 
 
 
-    public static void main(String[] args ) {
-    	Ventana_Juego v=new Ventana_Juego();
-	
-	
-    }
+//    public static void main(String[] args ) {
+//    	Ventana_Juego v=new Ventana_Juego();
+//	
+//	
+//    }
 }

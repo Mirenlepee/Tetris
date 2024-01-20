@@ -1,11 +1,13 @@
 package BD;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -112,7 +114,6 @@ public class GestionBDUsuario {
         ejecutarSQL(comentarioSQL, Level.INFO);
     }
     
-    
     /**
      * Obtiene las estadísticas de juego para un usuario específico.
      * 
@@ -130,7 +131,6 @@ public class GestionBDUsuario {
             return null;
         }
     }
-    
     
     /**
      * Ejecuta la sentencia SQL proporcionada y registra eventos en el logger.
@@ -330,7 +330,6 @@ public class GestionBDUsuario {
 			JOptionPane.showMessageDialog( null, "Debes rellenar los dos campos" );
 		}
 	}
-
 	
 	/**
      * Cierra la conexión, el statement y el resultado si están abiertos.
@@ -351,7 +350,6 @@ public class GestionBDUsuario {
 		// Si lo reemplazamos por esto, es mucho más seguro:
 		// return sqlInicial.replaceAll( "'", "''" );
 	}
-
 	
 	
 //visualizar por consola los usuarios registrados	
@@ -474,24 +472,10 @@ public class GestionBDUsuario {
      * Crea la tabla 'EstadisticasJuego' en la base de datos si no existe.
      */
 	private static void crearTablaEstadisticasJuego() {
-	    String comentarioSQL = "CREATE TABLE IF NOT EXISTS EstadisticasJuego (id INTEGER PRIMARY KEY AUTOINCREMENT, usuario_id STRING, timePlayed INTEGER, dailyPlaytime INTEGER, roundsPlayed INTEGER, maxPoints INTEGER, minPoints INTEGER, totalPoints INTEGER, dailyAveragePoints INTEGER, fecha DATE, FOREIGN KEY (usuario_id) REFERENCES Usuario(email))";
-	    ejecutarSQL(comentarioSQL, Level.INFO);
-	}
+        String comentarioSQL = "CREATE TABLE IF NOT EXISTS EstadisticasJuego (id INTEGER PRIMARY KEY AUTOINCREMENT, usuario_id STRING, timePlayed INTEGER, dailyPlaytime INTEGER, roundsPlayed INTEGER, maxPoints INTEGER, minPoints INTEGER, totalPoints INTEGER, dailyAveragePoints INTEGER, fecha DATE, FOREIGN KEY (usuario_id) REFERENCES Usuario(email))";
+        ejecutarSQL(comentarioSQL, Level.INFO);
+    }
 
-    
-    /**
-     * Inserta nuevas estadísticas de juego para un usuario.
-     * 
-     * @param usuarioId          El ID del usuario al que pertenecen las estadísticas.
-     * @param timePlayed         Tiempo total jugado.
-     * @param dailyPlaytime      Tiempo diario jugado.
-     * @param roundsPlayed       Número de rondas jugadas.
-     * @param maxPoints          Puntuación máxima alcanzada.
-     * @param minPoints          Puntuación mínima alcanzada.
-     * @param totalPoints        Puntuación total acumulada.
-     * @param dailyAveragePoints Puntuación diaria promedio.
-     * @param fecha              Fecha de registro de las estadísticas.
-     */
     public static void insertarEstadisticasJuego(int usuarioId, int timePlayed, int dailyPlaytime, int roundsPlayed,
             int maxPoints, int minPoints, int totalPoints, int dailyAveragePoints, String fecha) {
         String comentarioSQL = "INSERT INTO EstadisticasJuego (usuario_id, timePlayed, dailyPlaytime, roundsPlayed, "
@@ -513,10 +497,53 @@ public class GestionBDUsuario {
             manejarExcepcion(e);
         }
     }
-    
+
     private static void insertarEstadisticasDePrueba() {
         insertarEstadisticasJuego(1, 120, 30, 5, 500, 100, 1500, 300, "2024-01-19");
     }
 
-	
+    public static void insertarEstadisticasEnBD(String usuarioId, int timePlayed, int dailyPlaytime, int roundsPlayed,
+            int maxPoints, int minPoints, int totalPoints, int dailyAveragePoints) {
+        Connection conexion = obtenerConexion();
+
+        if (conexion != null) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String fecha = sdf.format(new Date());
+
+                String sql = "INSERT INTO estadisticas (usuario_id, timePlayed, dailyPlaytime, roundsPlayed, maxPoints, minPoints, totalPoints, dailyAveragePoints, fecha)  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+                PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+
+                preparedStatement.setString(1, usuarioId);
+                preparedStatement.setInt(2, timePlayed);
+                preparedStatement.setInt(3, dailyPlaytime);
+                preparedStatement.setInt(4, roundsPlayed);
+                preparedStatement.setInt(5, maxPoints);
+                preparedStatement.setInt(6, minPoints);
+                preparedStatement.setInt(7, totalPoints);
+                preparedStatement.setInt(8, dailyAveragePoints);
+                preparedStatement.setString(9, fecha);
+
+                preparedStatement.executeUpdate();
+
+                System.out.println("Estadísticas insertadas correctamente.");
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                cerrarConexiones();
+            }
+        }
+    }
+
+    private static Connection obtenerConexion() {
+        try {
+            Class.forName("org.sqlite.JDBC");
+            return DriverManager.getConnection("jdbc:sqlite:usuarios.db");
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

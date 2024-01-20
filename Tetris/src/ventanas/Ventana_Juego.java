@@ -31,6 +31,7 @@ public class Ventana_Juego extends JFrame {
         
     public static JLabel lblNivel;
 
+    private int nivelActual = 1;
     protected int minutos = 0;
     protected int segundos = 0;
     private boolean gameOverDisplayed = false;
@@ -306,6 +307,9 @@ public class Ventana_Juego extends JFrame {
             gameOverDisplayed = true;
             timerContador.stop();
             //GestionBDUsuario.insertarEstadisticasJuego();
+            
+            // Insertar estadísticas en la base de datos al mostrar el Game Over
+            insertarEstadisticasEnBD();
 
             ventGo = new Ventana_GameOver(this);
             
@@ -487,7 +491,6 @@ public class Ventana_Juego extends JFrame {
         return false;
     }
 
-    
     public int getPuntuacion() {
 		return puntos;
 	}   
@@ -496,6 +499,19 @@ public class Ventana_Juego extends JFrame {
 	    return etiquetaTiempo.getText();
 	}
 
+	public int getNivel() {
+        return nivelActual;
+    }
+	
+	 public void insertarEstadisticasEnBD() {
+	        int puntuacion = getPuntuacion();
+	        String tiempoJugado = getTiempoJugado();
+	        int nivel = getNivel();
+
+	        GestionBDUsuario.insertarEstadisticasJuego(puntuacion, tiempoJugado, nivel);
+	}
+	 
+	
 	private void fijarPiezaEnTablero() {
 	    int[][] forma = piezaActual.obtenerForma();
 	    int fila = piezaActual.obtenerFila();
@@ -705,11 +721,7 @@ public class Ventana_Juego extends JFrame {
 		lblNivel.setText("Niveau : 1");
 	}
 
-
-
 //    public static void main(String[] args ) {
 //    	Ventana_Juego v=new Ventana_Juego();
-//	
-//	
 //    }
 }

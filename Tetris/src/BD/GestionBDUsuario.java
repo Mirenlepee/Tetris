@@ -469,13 +469,14 @@ public class GestionBDUsuario {
      * @return ResultSet con las estadísticas de juego del usuario.
      */
 	public static ResultSet obtenerEstadisticasPorUsuario(String email) {
+		Connection conexion = obtenerConexion();
 	    ResultSet resultado = null;
 	    
 	    try {
 	        // Verifica que la conexión no sea null
-	        if (con != null) {
-	            String query = "SELECT * FROM estadisticas WHERE email = ?";
-	            PreparedStatement ps = con.prepareStatement(query);
+	        if (conexion != null) {
+	            String query = "SELECT * FROM EstadisticasJuego WHERE email = ?";
+	            PreparedStatement ps = conexion.prepareStatement(query);
 	            ps.setString(1, email);
 	            resultado = ps.executeQuery();
 	        } else {

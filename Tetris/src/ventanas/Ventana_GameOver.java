@@ -16,6 +16,7 @@ import ventanas.Ventana_Juego.CorazonPanel;
 public class Ventana_GameOver extends JFrame {
 	protected JTextField tfScore;
 	protected JTextField tfTimePlayed;
+	protected JTextField tfBestScore;
 	private Ventana_Juego ventanaJuego;
 	
 	private static JLabel lblGameOver;

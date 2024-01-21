@@ -340,6 +340,7 @@ public class Ventana_Juego extends JFrame {
     
     public void actualizarCampos(Ventana_GameOver vent) {
     	vent.tfScore.setText(String.valueOf(this.getPuntuacion()));
+    	vent.tfBestScore.setText(String.valueOf(this.getPuntuacion()));
 	    vent.tfTimePlayed.setText(this.getTiempoJugado());
     }
     

@@ -76,21 +76,23 @@ public class Ventana_Estadistica extends JFrame{
 	public void setDatos() {
 		modeloDatos = new MiTableModel();
 		tablaDatos.setModel(modeloDatos);
-		Object[][] datos = {{"Time played", 0}, {"Daily playtime", 0}, {"Rounds played", 0},
-	            {"Max points", 0}, {"Min points", 0}, {"Total points", 0}, {"Daily average points", 0}};
-
-	    for (Object[] d : datos) {
-	        ((MiTableModel) modeloDatos).addRow(d);
-	    }
+//		Object[][] datos = {{"Time played", 0}, {"Daily playtime", 0}, {"Rounds played", 0},
+//	            {"Max points", 0}, {"Min points", 0}, {"Total points", 0}, {"Daily average points", 0}};
+//
+//	    for (Object[] d : datos) {
+//	        ((MiTableModel) modeloDatos).addRow(d);
+//	    }
 	}
 
 
 	public void actualizarEstadisticas(String email) {
-		base = new GestionBDUsuario(); 
-	    ResultSet resultado = base.obtenerEstadisticasPorUsuario(email);
+	    ResultSet resultado = GestionBDUsuario.obtenerEstadisticasPorUsuario(email);
 
 	    if (resultado != null) {
 	        try {
+	            // Limpiar las filas existentes antes de agregar nuevas
+	            ((MiTableModel) modeloDatos).limpiarFilas();
+
 	            while (resultado.next()) {
 	                int timePlayed = resultado.getInt("timePlayed");
 	                int dailyPlayTime = resultado.getInt("dailyPlayTime");
@@ -100,21 +102,16 @@ public class Ventana_Estadistica extends JFrame{
 	                int totalPoints = resultado.getInt("totalPoints");
 	                int dailyAveragePoints = resultado.getInt("dailyAveragePoints");
 
-	                // Llena los datos en la tabla
-	                ((MiTableModel) modeloDatos).setEstadisticas(
-	                    new ArrayList<>(Arrays.asList(
-	                        new Object[]{"Time played", timePlayed},
-	                        new Object[]{"Daily playtime", dailyPlayTime},
-	                        new Object[]{"Rounds played", roundsPlayed},
-	                        new Object[]{"Max points", maxPoints},
-	                        new Object[]{"Min points", minPoints},
-	                        new Object[]{"Total points", totalPoints},
-	                        new Object[]{"Daily average points", dailyAveragePoints}
-	                    ))
-	                );
+	                // Agregar filas con los datos de la base de datos
+	                ((MiTableModel) modeloDatos).addRow(new Object[]{"Time played", timePlayed});
+	                ((MiTableModel) modeloDatos).addRow(new Object[]{"Daily playtime", dailyPlayTime});
+	                ((MiTableModel) modeloDatos).addRow(new Object[]{"Rounds played", roundsPlayed});
+	                ((MiTableModel) modeloDatos).addRow(new Object[]{"Max points", maxPoints});
+	                ((MiTableModel) modeloDatos).addRow(new Object[]{"Min points", minPoints});
+	                ((MiTableModel) modeloDatos).addRow(new Object[]{"Total points", totalPoints});
+	                ((MiTableModel) modeloDatos).addRow(new Object[]{"Daily average points", dailyAveragePoints});
 	            }
 	        } catch (SQLException e) {
-	            // Maneja la excepción, por ejemplo, muestra un mensaje de error
 	            e.printStackTrace();
 	        } finally {
 	            try {
@@ -124,7 +121,7 @@ public class Ventana_Estadistica extends JFrame{
 	            }
 	        }
 	    }
-	}	
+	}
 	private class MiTableModel implements TableModel{
 
 		private final Class<?>[] CLASES_COLS = {String.class, Integer.class};
@@ -183,13 +180,18 @@ public class Ventana_Estadistica extends JFrame{
 			return false;
 		}
 
-		@Override
 		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-			switch(columnIndex) {
-			case 1:
-				// aquí se pondrá el dato en la segunda columna y en la fila correspondiente.
-				break;
-			}
+		    if (columnIndex == 1) {
+		        filas.get(rowIndex)[columnIndex] = aValue;
+		        TableModelEvent event = new TableModelEvent(this, rowIndex, rowIndex, columnIndex, TableModelEvent.UPDATE);
+		        fireTableChanged(event);
+		    }
+		}
+		
+		private void limpiarFilas() {
+		    filas.clear();
+		    TableModelEvent event = new TableModelEvent(this, TableModelEvent.HEADER_ROW, TableModelEvent.HEADER_ROW, TableModelEvent.ALL_COLUMNS, TableModelEvent.DELETE);
+		    fireTableChanged(event);
 		}
 		
 		ArrayList<TableModelListener> listaEsc = new ArrayList<>();

@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.swing.border.LineBorder;
 
 import BD.GestionBDUsuario;
+import gestionUsuarios.Usuario;
 import juego.Celda;
 import juego.Pieza;
 
@@ -306,7 +307,6 @@ public class Ventana_Juego extends JFrame {
         if (!gameOverDisplayed) {
             gameOverDisplayed = true;
             timerContador.stop();
-            //GestionBDUsuario.insertarEstadisticasJuego();
             
             // Insertar estadísticas en la base de datos al mostrar el Game Over
             insertarEstadisticasEnBD();
@@ -508,7 +508,7 @@ public class Ventana_Juego extends JFrame {
 	        String tiempoJugado = getTiempoJugado();
 	        int nivel = getNivel();
 
-	        GestionBDUsuario.insertarEstadisticasJuego(puntuacion, tiempoJugado, nivel);
+	        //GestionBDUsuario.insertarEstadisticasJuego(puntuacion, tiempoJugado, nivel);
 	}
 	 
 	
@@ -720,8 +720,4 @@ public class Ventana_Juego extends JFrame {
 		etiquetaPuntos.setText("Punkte : " + puntos);
 		lblNivel.setText("Niveau : 1");
 	}
-
-//    public static void main(String[] args ) {
-//    	Ventana_Juego v=new Ventana_Juego();
-//    }
 }

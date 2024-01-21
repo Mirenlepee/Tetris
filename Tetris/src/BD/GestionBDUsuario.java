@@ -38,6 +38,7 @@ public class GestionBDUsuario {
             
             // Crear la tabla 'Usuario' si no existe.
             crearTablaUsuario();
+            
 
             // Añadir columna 'ultimoCambioContrasena' a la tabla 'Usuario' si no existe.
             agregarColumnaUltimoCambioContrasena();
@@ -472,18 +473,18 @@ public class GestionBDUsuario {
      * Crea la tabla 'EstadisticasJuego' en la base de datos si no existe.
      */
 	private static void crearTablaEstadisticasJuego() {
-        String comentarioSQL = "CREATE TABLE IF NOT EXISTS EstadisticasJuego (id INTEGER PRIMARY KEY AUTOINCREMENT, usuario_id STRING, timePlayed INTEGER, dailyPlaytime INTEGER, roundsPlayed INTEGER, maxPoints INTEGER, minPoints INTEGER, totalPoints INTEGER, dailyAveragePoints INTEGER, fecha DATE, FOREIGN KEY (usuario_id) REFERENCES Usuario(email))";
+        String comentarioSQL = "CREATE TABLE IF NOT EXISTS EstadisticasJuego (email STRING PRIMARY KEY, timePlayed INTEGER, dailyPlaytime INTEGER, roundsPlayed INTEGER, maxPoints INTEGER, minPoints INTEGER, totalPoints INTEGER, dailyAveragePoints INTEGER, fecha DATE, FOREIGN KEY (email) REFERENCES Usuario(email))";
         ejecutarSQL(comentarioSQL, Level.INFO);
     }
 
-    public static void insertarEstadisticasJuego(int usuarioId, int timePlayed, int dailyPlaytime, int roundsPlayed,
+    public static void insertarEstadisticasJuego(String email, int timePlayed, int dailyPlaytime, int roundsPlayed,
             int maxPoints, int minPoints, int totalPoints, int dailyAveragePoints, String fecha) {
-        String comentarioSQL = "INSERT INTO EstadisticasJuego (usuario_id, timePlayed, dailyPlaytime, roundsPlayed, "
+        String comentarioSQL = "INSERT INTO EstadisticasJuego (email, timePlayed, dailyPlaytime, roundsPlayed, "
                 + "maxPoints, minPoints, totalPoints, dailyAveragePoints, fecha) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = con.prepareStatement(comentarioSQL)) {
-            preparedStatement.setInt(1, usuarioId);
+            preparedStatement.setString(1, email);
             preparedStatement.setInt(2, timePlayed);
             preparedStatement.setInt(3, dailyPlaytime);
             preparedStatement.setInt(4, roundsPlayed);
@@ -499,7 +500,7 @@ public class GestionBDUsuario {
     }
 
     private static void insertarEstadisticasDePrueba() {
-        insertarEstadisticasJuego(1, 120, 30, 5, 500, 100, 1500, 300, "2024-01-19");
+        insertarEstadisticasJuego("oihanecam@gmail.com", 120, 30, 5, 500, 100, 1500, 300, "2024-01-19");
     }
 
     public static void insertarEstadisticasEnBD(String usuarioId, int timePlayed, int dailyPlaytime, int roundsPlayed,

@@ -279,7 +279,7 @@ public class Ventana_Juego extends JFrame {
                 gameOver = true;
                 timer.stop();
                 mostrarMessageCorazon();
-                insertarEstadisticasBD();
+                //insertarEstadisticasBD();
             }else if(verificarGameOver() && vidas == 0) {
             	gameOver = true;
                 timer.stop();
@@ -315,8 +315,8 @@ public class Ventana_Juego extends JFrame {
             gameOverDisplayed = true;
             timerContador.stop();
             
-            // Insertar estadísticas en la base de datos al mostrar el Game Over
-            insertarEstadisticasBD();
+            // Insertar estadísticas en la base de datos al mostrar el Game Over 
+            //insertarEstadisticasBD();
 
             ventGo = new Ventana_GameOver(this);
             
@@ -424,7 +424,7 @@ public class Ventana_Juego extends JFrame {
             gameOver = true;
             timer.stop();
             mostrarMessageCorazon();
-            insertarEstadisticasBD();
+            //insertarEstadisticasBD();
         } else if (verificarGameOver() && vidas == 0) {
             gameOver = true;
             timer.stop();

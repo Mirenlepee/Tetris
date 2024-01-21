@@ -11,10 +11,10 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/miren/Downloads/sqlite-jdbc-3.44.0.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/miren/Downloads/activation.jar"/>
-	<classpathentry kind="lib" path="C:/Users/miren/Downloads/javax.mail.jar"/>
-	<classpathentry kind="lib" path="C:/Users/miren/Downloads/jbcrypt-0.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/miren/Downloads/slf4j-api-1.7.20 (1).jar"/>
+	<classpathentry kind="lib" path="C:/Users/Oihane/Downloads/jar_files/javax.activation-1.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Oihane/Downloads/javax.mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Oihane/Downloads/jbcrypt-0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Oihane/Downloads/slf4j-api-1.7.20.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Oihane/Downloads/sqlite-jdbc-3.44.0.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

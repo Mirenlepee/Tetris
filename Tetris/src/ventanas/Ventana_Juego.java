@@ -515,25 +515,30 @@ public class Ventana_Juego extends JFrame {
     }
 	
 	 public void insertarEstadisticasBD() {
+		 String textoPuntos = etiquetaPuntos.getText();
+		// Elimina la parte no numérica, dejando solo los números
+		String numerosComoTexto = textoPuntos.replaceAll("\\D", "");
+		// Convierte la cadena de números a un entero
+		int puntosEntero = Integer.parseInt(numerosComoTexto);
 		 String tiempoJugado = getTiempoJugado();
 		 int tiempoEnSegundos = convertirTiempoASegundos(tiempoJugado);
 		 GestionBDUsuario.actualizarTiempoTotalJugado(obtenerUsuarioActual().getEmail(), tiempoEnSegundos);
-		 GestionBDUsuario.actualizarMaxPoints(obtenerUsuarioActual().getEmail(), getPuntuacion());
-	     GestionBDUsuario.actualizarMinPoints(obtenerUsuarioActual().getEmail(), getPuntuacion());
-	     GestionBDUsuario.actualizarTotalPoints(obtenerUsuarioActual().getEmail(), getPuntuacion());
+		 GestionBDUsuario.actualizarMaxPoints(obtenerUsuarioActual().getEmail(), puntosEntero);
+	     GestionBDUsuario.actualizarMinPoints(obtenerUsuarioActual().getEmail(), puntosEntero);
+	     GestionBDUsuario.actualizarTotalPoints(obtenerUsuarioActual().getEmail(), puntosEntero);
 	     LocalDate fechaActual = LocalDate.now();
 
 	        if (ultimaFechaJuego == null || !ultimaFechaJuego.equals(fechaActual)) {
 	            // Es un nuevo día, reinicia los contadores diarios
 	            partidasDiarias.put(fechaActual, 1);
-	            puntosDiarios.put(fechaActual, getPuntuacion());
+	            puntosDiarios.put(fechaActual, puntosEntero);
 	        } else {
 	            // Mismo día, incrementa el contador de partidas y suma los puntos
 	            int partidasHoy = partidasDiarias.getOrDefault(fechaActual, 0);
 	            partidasDiarias.put(fechaActual, partidasHoy + 1);
 
 	            int puntosHoy = puntosDiarios.getOrDefault(fechaActual, 0);
-	            puntosDiarios.put(fechaActual, puntosHoy + getPuntuacion());
+	            puntosDiarios.put(fechaActual, puntosHoy + puntosEntero);
 	        }
 
 	        ultimaFechaJuego = fechaActual;

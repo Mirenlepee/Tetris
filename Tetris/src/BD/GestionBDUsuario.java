@@ -191,8 +191,8 @@ public class GestionBDUsuario {
 			logger.log( Level.INFO, "BD: " + com );
 			rs = s.executeQuery( com );
 			if (!rs.next()) {
-				com = "insert into Usuario (userName, password, email, avatarURL, ultimoCambioContrasena ) values ('"+ 
-						usu.getUserName() +"', '" + usu.getPassword() +"', '" + usu.getEmail()+"', '" + usu.getAvatarURL()+ "', '" + usu.getUltimoCambioContrasena() +"')";
+				com = "insert into Usuario (userName, password, email, avatarURL, descripcion, ultimoCambioContrasena ) values ('"+ 
+						usu.getUserName() +"', '" + usu.getPassword() +"', '" + usu.getEmail()+"', '" + usu.getAvatarURL()+ "', '" + usu.getDescripcion()+ "', '" + usu.getUltimoCambioContrasena() +"')";
 				logger.log( Level.INFO, "BD: " + com );
 				
 				int val = s.executeUpdate( com );

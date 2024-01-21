@@ -114,7 +114,7 @@ public class Ventana_PerfilDeUsuario extends JFrame {
                 //CODIFICAR PARA GUARDAR EL NUEVO USUARIO
             	
 	             String imagenP = "Tetris/src/ventanas/Avatar.png";
-	             String descripcion = "Descripción vacía";
+	             String descripcion = txtBiografia.getText();
 	             char[] password = Ventana_SignUp.getPassword();
 	             String username = Ventana_SignUp.getUsername();
 	             String email = Ventana_SignUp.getEmail();

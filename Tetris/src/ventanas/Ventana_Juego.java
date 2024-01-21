@@ -63,7 +63,6 @@ public class Ventana_Juego extends JFrame {
     protected boolean pres;
 
     public Ventana_Juego() {
-      //pres = Ventana_Options.obtenerPresionado();
     	
     	setTitle("Tetris");
     	try {
@@ -299,8 +298,7 @@ public class Ventana_Juego extends JFrame {
 
         for (int i = 0; i < forma.length; i++) {
             for (int j = 0; j < forma[i].length; j++) {
-                // Check if the cell in the piezaActual's shape is occupied
-                // and also if the corresponding cell in tablero is occupied.
+               
                 if (forma[i][j] == 1 && tablero[fila + i][columna + j].isOcupada()) {
                     return true;
                 }
@@ -339,9 +337,7 @@ public class Ventana_Juego extends JFrame {
     }
     
     public void actualizarCampos(Ventana_GameOver vent) {
-//    	System.out.println("Debug: Ventana_Juego.actualizarCampos - vent.tfScore: " + vent.tfScore);
-//        System.out.println("Debug: Ventana_Juego.actualizarCampos - vent.tfTimePlayed: " + vent.tfTimePlayed);
-		vent.tfScore.setText(String.valueOf(this.getPuntuacion()));
+    	vent.tfScore.setText(String.valueOf(this.getPuntuacion()));
 	    vent.tfTimePlayed.setText(this.getTiempoJugado());
     }
     
@@ -596,7 +592,7 @@ public class Ventana_Juego extends JFrame {
 	            }
 	            for (int l = 0; l < ANCHO_TABLERO; l++) {
 	                tablero[0][l].setOcupada(false);
-	                tablero[0][l].setColor(null); // Set color to null or default value
+	                tablero[0][l].setColor(null); 
 	            }
 	            puntos += 100;
 	            actualizarEtiquetaPuntos();
@@ -627,7 +623,7 @@ public class Ventana_Juego extends JFrame {
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
                 if (tablero[i][j].isOcupada()) {
-                    Color colorPieza = tablero[i][j].getColor(); // Assuming Celda has a getColor() method
+                    Color colorPieza = tablero[i][j].getColor(); 
                     dibujarCelda(g, j * TAMANO_CELDA, i * TAMANO_CELDA, colorPieza);
                 }
             }

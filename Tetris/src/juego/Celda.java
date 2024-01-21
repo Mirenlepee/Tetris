@@ -8,7 +8,7 @@ public class Celda {
 
     public Celda() {
         ocupada = false;
-        color = Color.BLACK; // Set a default color
+        color = Color.BLACK;
     }
 
     public boolean isOcupada() {

@@ -143,7 +143,6 @@ public class Ventana_Juego extends JFrame {
 		btnPausa.setIcon(iconoDef);
 		lblNivel = new JLabel("Level: 1");
         
-        
         panelDerecho.add(Box.createVerticalGlue());
         panelDerecho.add(etiquetaPuntos);
         panelDerecho.add(lblNivel);
@@ -153,7 +152,6 @@ public class Ventana_Juego extends JFrame {
         panelDerecho.add(PanelEspacio2);
         panelDerecho.add(Box.createVerticalGlue());
         panelDerecho.add(btnPausa);
-        
         
         btnPausa.addActionListener(new ActionListener() {
             @Override

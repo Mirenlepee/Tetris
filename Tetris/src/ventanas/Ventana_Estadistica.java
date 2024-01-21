@@ -86,7 +86,8 @@ public class Ventana_Estadistica extends JFrame{
 
 
 	public void actualizarEstadisticas(String email) {
-	    ResultSet resultado = GestionBDUsuario.obtenerEstadisticasPorUsuario(email);
+		base = new GestionBDUsuario(); 
+	    ResultSet resultado = base.obtenerEstadisticasPorUsuario(email);
 
 	    if (resultado != null) {
 	        try {

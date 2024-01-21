@@ -615,10 +615,13 @@ public class Ventana_Juego extends JFrame {
         if(puntos==200) {
         	velocidadDeCaida=250;
             timer.setDelay(velocidadDeCaida);
-
+      
+            lblNivel.setText("Level: 2");
         }else if(puntos==1000) {
         	velocidadDeCaida=200;
             timer.setDelay(velocidadDeCaida);
+            lblNivel.setText("Level: 3");
+
 
         }
     }

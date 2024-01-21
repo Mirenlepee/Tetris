@@ -460,10 +460,4 @@ public class Ventana_SignUp extends JFrame{
 		exitbtn.setText("Beenden");
 	
 	}
-
-//    public static void main(String[] args) {
-//		Ventana_SignUp vent = new Ventana_SignUp();
-//		
-//	}
-	
 }

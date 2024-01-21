@@ -116,24 +116,6 @@ public class GestionBDUsuario {
     }
     
     /**
-     * Obtiene las estadísticas de juego para un usuario específico.
-     * 
-     * @param usuarioId El ID del usuario.
-     * @return ResultSet con las estadísticas de juego del usuario.
-     */
-    public static ResultSet obtenerEstadisticasPorUsuario(int usuarioId) {
-        String comentarioSQL = "SELECT * FROM EstadisticasJuego WHERE usuario_id = ?";
-
-        try (PreparedStatement preparedStatement = con.prepareStatement(comentarioSQL)) {
-            preparedStatement.setInt(1, usuarioId);
-            return preparedStatement.executeQuery();
-        } catch (SQLException e) {
-            manejarExcepcion(e);
-            return null;
-        }
-    }
-    
-    /**
      * Ejecuta la sentencia SQL proporcionada y registra eventos en el logger.
      * @param sql La sentencia SQL a ejecutar.
      * @param logLevel El nivel de log para el evento.
@@ -477,67 +459,240 @@ public class GestionBDUsuario {
         ejecutarSQL(comentarioSQL, Level.INFO);
     }
 
-    public static void insertarEstadisticasJuego(String email, int timePlayed, int dailyPlaytime, int roundsPlayed,
-            int maxPoints, int minPoints, int totalPoints, int dailyAveragePoints, String fecha) {
-        String comentarioSQL = "INSERT INTO EstadisticasJuego (email, timePlayed, dailyPlaytime, roundsPlayed, "
-                + "maxPoints, minPoints, totalPoints, dailyAveragePoints, fecha) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	
+	  /**
+     * Obtiene las estadísticas de juego para un usuario específico.
+     * 
+     * @param usuarioId El ID del usuario.
+     * @return ResultSet con las estadísticas de juego del usuario.
+     */
+    public static ResultSet obtenerEstadisticasPorUsuario(String email) {
+        String comentarioSQL = "SELECT * FROM EstadisticasJuego WHERE email = ?";
 
         try (PreparedStatement preparedStatement = con.prepareStatement(comentarioSQL)) {
             preparedStatement.setString(1, email);
-            preparedStatement.setInt(2, timePlayed);
-            preparedStatement.setInt(3, dailyPlaytime);
-            preparedStatement.setInt(4, roundsPlayed);
-            preparedStatement.setInt(5, maxPoints);
-            preparedStatement.setInt(6, minPoints);
-            preparedStatement.setInt(7, totalPoints);
-            preparedStatement.setInt(8, dailyAveragePoints);
-            preparedStatement.setString(9, fecha);
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            manejarExcepcion(e);
+            return null;
+        }
+    }
+    
+    public static int obtenerRoundsPlayed(String email) {
+        String query = "SELECT roundsPlayed FROM EstadisticasJuego WHERE email = ?";
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("roundsPlayed");
+            }
+        } catch (SQLException e) {
+            manejarExcepcion(e);
+        }
+        return 0; // Valor predeterminado si hay un error o no se encuentra el usuario
+    }
+    
+    public static void actualizarRoundsPlayed(String email, int nuevoRoundsPlayed) {
+        String query = "UPDATE EstadisticasJuego SET roundsPlayed = ? WHERE email = ?";
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, nuevoRoundsPlayed);
+            preparedStatement.setString(2, email);
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            manejarExcepcion(e);
+        }
+    }
+    
+    public static void actualizarMaxPoints(String email, int nuevosPuntos) {
+        ResultSet resultSet = obtenerEstadisticasPorUsuario(email);
+
+        try {
+            if (resultSet.next()) {
+                // El usuario ya tiene estadísticas
+                int maxPuntosActual = resultSet.getInt("maxPoints");
+
+                // Verifica si los nuevos puntos superan al máximo actual
+                if (nuevosPuntos > maxPuntosActual) {
+                    // Actualiza el maxPoints en la base de datos
+                    String updateMaxPointsSQL = "UPDATE EstadisticasJuego SET maxPoints = ? WHERE email = ?";
+                    try (PreparedStatement preparedStatement = con.prepareStatement(updateMaxPointsSQL)) {
+                        preparedStatement.setInt(1, nuevosPuntos);
+                        preparedStatement.setString(2, email);
+                        preparedStatement.executeUpdate();
+                    } catch (SQLException e) {
+                        manejarExcepcion(e);
+                    }
+                }
+            } else {
+                // El usuario no tiene estadísticas, inserta una nueva fila con maxPoints
+                String insertSQL = "INSERT INTO EstadisticasJuego (email, maxPoints) VALUES (?, ?)";
+                try (PreparedStatement preparedStatement = con.prepareStatement(insertSQL)) {
+                    preparedStatement.setString(1, email);
+                    preparedStatement.setInt(2, nuevosPuntos);
+                    preparedStatement.executeUpdate();
+                } catch (SQLException e) {
+                    manejarExcepcion(e);
+                }
+            }
+        } catch (SQLException e) {
+            manejarExcepcion(e);
+        }
+    }
+    
+    public static void actualizarMinPoints(String email, int nuevosPuntos) {
+        ResultSet resultSet = obtenerEstadisticasPorUsuario(email);
+
+        try {
+            if (resultSet.next()) {
+                // El usuario ya tiene estadísticas
+                int minPuntosActual = resultSet.getInt("minPoints");
+
+                // Si es la primera vez o los nuevos puntos son menores, actualiza minPoints
+                if (minPuntosActual == 0 || nuevosPuntos < minPuntosActual) {
+                    // Actualiza el minPoints en la base de datos
+                    String updateMinPointsSQL = "UPDATE EstadisticasJuego SET minPoints = ? WHERE email = ?";
+                    try (PreparedStatement preparedStatement = con.prepareStatement(updateMinPointsSQL)) {
+                        preparedStatement.setInt(1, nuevosPuntos);
+                        preparedStatement.setString(2, email);
+                        preparedStatement.executeUpdate();
+                    } catch (SQLException e) {
+                        manejarExcepcion(e);
+                    }
+                }
+            } else {
+                // El usuario no tiene estadísticas, inserta una nueva fila con minPoints
+                String insertSQL = "INSERT INTO EstadisticasJuego (email, minPoints) VALUES (?, ?)";
+                try (PreparedStatement preparedStatement = con.prepareStatement(insertSQL)) {
+                    preparedStatement.setString(1, email);
+                    preparedStatement.setInt(2, nuevosPuntos);
+                    preparedStatement.executeUpdate();
+                } catch (SQLException e) {
+                    manejarExcepcion(e);
+                }
+            }
+        } catch (SQLException e) {
+            manejarExcepcion(e);
+        }
+    }
+    
+    public static void actualizarTotalPoints(String email, int nuevosPuntos) {
+        ResultSet resultSet = obtenerEstadisticasPorUsuario(email);
+
+        try {
+            if (resultSet.next()) {
+                // El usuario ya tiene estadísticas
+                int totalPuntosActual = resultSet.getInt("totalPoints");
+
+                // Suma los nuevos puntos a totalPoints
+                int nuevoTotalPuntos = totalPuntosActual + nuevosPuntos;
+
+                // Actualiza totalPoints en la base de datos
+                String updateTotalPointsSQL = "UPDATE EstadisticasJuego SET totalPoints = ? WHERE email = ?";
+                try (PreparedStatement preparedStatement = con.prepareStatement(updateTotalPointsSQL)) {
+                    preparedStatement.setInt(1, nuevoTotalPuntos);
+                    preparedStatement.setString(2, email);
+                    preparedStatement.executeUpdate();
+                } catch (SQLException e) {
+                    manejarExcepcion(e);
+                }
+            } else {
+                // El usuario no tiene estadísticas, inserta una nueva fila con totalPoints
+                String insertSQL = "INSERT INTO EstadisticasJuego (email, totalPoints) VALUES (?, ?)";
+                try (PreparedStatement preparedStatement = con.prepareStatement(insertSQL)) {
+                    preparedStatement.setString(1, email);
+                    preparedStatement.setInt(2, nuevosPuntos);
+                    preparedStatement.executeUpdate();
+                } catch (SQLException e) {
+                    manejarExcepcion(e);
+                }
+            }
+        } catch (SQLException e) {
+            manejarExcepcion(e);
+        }
+    }
+    
+    public static void actualizarDailyAveragePoints(String email, int nuevaMedia) {
+        String updateDailyAveragePointsSQL = "UPDATE EstadisticasJuego SET dailyAveragePoints = ? WHERE email = ?";
+
+        try (PreparedStatement preparedStatement = con.prepareStatement(updateDailyAveragePointsSQL)) {
+            preparedStatement.setInt(1, nuevaMedia);
+            preparedStatement.setString(2, email);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            manejarExcepcion(e);
+        }
+    }
+    
+    public static void actualizarTiempoTotalJugado(String email, int tiempoNuevo) {
+        ResultSet resultSet = obtenerEstadisticasPorUsuario(email);
+
+        try {
+            if (resultSet.next()) {
+                // El usuario ya tiene estadísticas
+                int tiempoActual = resultSet.getInt("timePlayed");
+                int tiempoDiarioActual = resultSet.getInt("dailyPlayTime");
+
+                // Verifica si la última partida registrada fue hoy
+                Date fechaUltimaPartida = resultSet.getDate("fecha");
+                LocalDate fechaUltimaPartidaLocalDate = ((java.sql.Date) fechaUltimaPartida).toLocalDate();
+                LocalDate fechaHoy = LocalDate.now();
+
+                if (fechaUltimaPartidaLocalDate.isEqual(fechaHoy)) {
+                    // Si la última partida fue hoy, actualiza solo dailyPlayTime
+                    int tiempoDiario = tiempoDiarioActual + tiempoNuevo;
+
+                    // Actualiza el tiempo diario en la base de datos
+                    String updateDailyPlayTimeSQL = "UPDATE EstadisticasJuego SET dailyPlayTime = ? WHERE email = ?";
+                    try (PreparedStatement preparedStatement = con.prepareStatement(updateDailyPlayTimeSQL)) {
+                        preparedStatement.setInt(1, tiempoDiario);
+                        preparedStatement.setString(2, email);
+                        preparedStatement.executeUpdate();
+                    } catch (SQLException e) {
+                        manejarExcepcion(e);
+                    }
+                } else {
+                    // Si la última partida no fue hoy, actualiza ambos campos
+                    int tiempoTotal = tiempoActual + tiempoNuevo;
+                    int tiempoDiario = tiempoNuevo;
+
+                    // Actualiza el tiempo total jugado, dailyPlayTime y la fecha de la última partida en la base de datos
+                    String updateSQL = "UPDATE EstadisticasJuego SET timePlayed = ?, dailyPlayTime = ?, fecha = ? WHERE email = ?";
+                    try (PreparedStatement preparedStatement = con.prepareStatement(updateSQL)) {
+                        preparedStatement.setInt(1, tiempoTotal);
+                        preparedStatement.setInt(2, tiempoDiario);
+                        preparedStatement.setDate(3, new java.sql.Date(System.currentTimeMillis()));
+                        preparedStatement.setString(4, email);
+                        preparedStatement.executeUpdate();
+                    } catch (SQLException e) {
+                        manejarExcepcion(e);
+                    }
+                }
+            } else {
+                // El usuario no tiene estadísticas, inserta una nueva fila
+                int tiempoDiario = tiempoNuevo;
+
+                // Inserta una nueva fila con timePlayed, dailyPlayTime y la fecha de la última partida
+                String insertSQL = "INSERT INTO EstadisticasJuego (email, timePlayed, dailyPlayTime, fecha) VALUES (?, ?, ?, ?)";
+                try (PreparedStatement preparedStatement = con.prepareStatement(insertSQL)) {
+                    preparedStatement.setString(1, email);
+                    preparedStatement.setInt(2, tiempoNuevo);
+                    preparedStatement.setInt(3, tiempoDiario);
+                    preparedStatement.setDate(4, new java.sql.Date(System.currentTimeMillis()));
+                    preparedStatement.executeUpdate();
+                } catch (SQLException e) {
+                    manejarExcepcion(e);
+                }
+            }
         } catch (SQLException e) {
             manejarExcepcion(e);
         }
     }
 
     private static void insertarEstadisticasDePrueba() {
-        insertarEstadisticasJuego("oihanecam@gmail.com", 120, 30, 5, 500, 100, 1500, 300, "2024-01-19");
+    	//insertarEstadisticasEnBD("oihanecam@gmail.com", 120, 30, 5, 500, 100, 1500, 300, "2024-01-19");
     }
 
-    public static void insertarEstadisticasEnBD(String usuarioId, int timePlayed, int dailyPlaytime, int roundsPlayed,
-            int maxPoints, int minPoints, int totalPoints, int dailyAveragePoints) {
-        Connection conexion = obtenerConexion();
-
-        if (conexion != null) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                String fecha = sdf.format(new Date());
-
-                String sql = "INSERT INTO estadisticas (usuario_id, timePlayed, dailyPlaytime, roundsPlayed, maxPoints, minPoints, totalPoints, dailyAveragePoints, fecha)  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-                PreparedStatement preparedStatement = conexion.prepareStatement(sql);
-
-                preparedStatement.setString(1, usuarioId);
-                preparedStatement.setInt(2, timePlayed);
-                preparedStatement.setInt(3, dailyPlaytime);
-                preparedStatement.setInt(4, roundsPlayed);
-                preparedStatement.setInt(5, maxPoints);
-                preparedStatement.setInt(6, minPoints);
-                preparedStatement.setInt(7, totalPoints);
-                preparedStatement.setInt(8, dailyAveragePoints);
-                preparedStatement.setString(9, fecha);
-
-                preparedStatement.executeUpdate();
-
-                System.out.println("Estadísticas insertadas correctamente.");
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                cerrarConexiones();
-            }
-        }
-    }
-
+    
     private static Connection obtenerConexion() {
         try {
             Class.forName("org.sqlite.JDBC");

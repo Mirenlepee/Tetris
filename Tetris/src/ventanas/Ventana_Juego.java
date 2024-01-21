@@ -15,6 +15,7 @@ import juego.Pieza;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.geom.GeneralPath;
@@ -55,12 +56,13 @@ public class Ventana_Juego extends JFrame {
     protected int vidas=3;
     protected Ventana_GameOver ventGo;
     protected PanelJuego panelJuego;
-    private static Map<Integer, Integer> tiempoJugadoPorUsuario = new HashMap<>();
+    private Map<LocalDate, Integer> puntosDiarios = new HashMap<>();
+    private Map<LocalDate, Integer> partidasDiarias = new HashMap<>();
+    private LocalDate ultimaFechaJuego;
     
     protected boolean pres;
 
     public Ventana_Juego() {
-      //pres = Ventana_Options.obtenerPresionado();
     	
     	setTitle("Tetris");
     	try {
@@ -235,6 +237,9 @@ public class Ventana_Juego extends JFrame {
     }
 
     private void iniciarJuego() {
+    	int rondasActuales = GestionBDUsuario.obtenerRoundsPlayed(obtenerUsuarioActual().getEmail());
+    	rondasActuales++;
+    	GestionBDUsuario.actualizarRoundsPlayed(obtenerUsuarioActual().getEmail(), rondasActuales);
         piezaActual = new Pieza();
         siguientePieza = new Pieza();
         actualizarPanelEspacio1();
@@ -277,6 +282,7 @@ public class Ventana_Juego extends JFrame {
                 gameOver = true;
                 timer.stop();
                 mostrarMessageCorazon();
+                insertarEstadisticasBD();
             }else if(verificarGameOver() && vidas == 0) {
             	gameOver = true;
                 timer.stop();
@@ -292,8 +298,7 @@ public class Ventana_Juego extends JFrame {
 
         for (int i = 0; i < forma.length; i++) {
             for (int j = 0; j < forma[i].length; j++) {
-                // Check if the cell in the piezaActual's shape is occupied
-                // and also if the corresponding cell in tablero is occupied.
+               
                 if (forma[i][j] == 1 && tablero[fila + i][columna + j].isOcupada()) {
                     return true;
                 }
@@ -309,7 +314,7 @@ public class Ventana_Juego extends JFrame {
             timerContador.stop();
             
             // Insertar estadísticas en la base de datos al mostrar el Game Over
-            insertarEstadisticasEnBD();
+            insertarEstadisticasBD();
 
             ventGo = new Ventana_GameOver(this);
             
@@ -325,16 +330,14 @@ public class Ventana_Juego extends JFrame {
             if (!ventGo.isVisible()) {
             	ventGo.setResizable(false);
                 ventGo.tfScore.setText(String.valueOf(puntos));
-                ventGo.tfTimePlayed.setText(etiquetaTiempo.getText());
+                ventGo.tfTimePlayed.setText(getTiempoJugado());
                 ventGo.setVisible(true);
             }
         }
     }
     
     public void actualizarCampos(Ventana_GameOver vent) {
-//    	System.out.println("Debug: Ventana_Juego.actualizarCampos - vent.tfScore: " + vent.tfScore);
-//        System.out.println("Debug: Ventana_Juego.actualizarCampos - vent.tfTimePlayed: " + vent.tfTimePlayed);
-		vent.tfScore.setText(String.valueOf(this.getPuntuacion()));
+    	vent.tfScore.setText(String.valueOf(this.getPuntuacion()));
 	    vent.tfTimePlayed.setText(this.getTiempoJugado());
     }
     
@@ -416,6 +419,7 @@ public class Ventana_Juego extends JFrame {
             gameOver = true;
             timer.stop();
             mostrarMessageCorazon();
+            insertarEstadisticasBD();
         } else if (verificarGameOver() && vidas == 0) {
             gameOver = true;
             timer.stop();
@@ -503,15 +507,59 @@ public class Ventana_Juego extends JFrame {
         return nivelActual;
     }
 	
-	 public void insertarEstadisticasEnBD() {
-	        int puntuacion = getPuntuacion();
-	        String tiempoJugado = getTiempoJugado();
-	        int nivel = getNivel();
+	 public void insertarEstadisticasBD() {
+		 String tiempoJugado = getTiempoJugado();
+		 int tiempoEnSegundos = convertirTiempoASegundos(tiempoJugado);
+		 GestionBDUsuario.actualizarTiempoTotalJugado(obtenerUsuarioActual().getEmail(), tiempoEnSegundos);
+		 GestionBDUsuario.actualizarMaxPoints(obtenerUsuarioActual().getEmail(), getPuntuacion());
+	     GestionBDUsuario.actualizarMinPoints(obtenerUsuarioActual().getEmail(), getPuntuacion());
+	     GestionBDUsuario.actualizarTotalPoints(obtenerUsuarioActual().getEmail(), getPuntuacion());
+	     LocalDate fechaActual = LocalDate.now();
 
-	        //GestionBDUsuario.insertarEstadisticasJuego(puntuacion, tiempoJugado, nivel);
-	}
+	        if (ultimaFechaJuego == null || !ultimaFechaJuego.equals(fechaActual)) {
+	            // Es un nuevo día, reinicia los contadores diarios
+	            partidasDiarias.put(fechaActual, 1);
+	            puntosDiarios.put(fechaActual, getPuntuacion());
+	        } else {
+	            // Mismo día, incrementa el contador de partidas y suma los puntos
+	            int partidasHoy = partidasDiarias.getOrDefault(fechaActual, 0);
+	            partidasDiarias.put(fechaActual, partidasHoy + 1);
+
+	            int puntosHoy = puntosDiarios.getOrDefault(fechaActual, 0);
+	            puntosDiarios.put(fechaActual, puntosHoy + getPuntuacion());
+	        }
+
+	        ultimaFechaJuego = fechaActual;
+
+	        // Calcula la media y actualiza dailyAveragePoints en la base de datos
+	        int partidasTotales = partidasDiarias.values().stream().mapToInt(Integer::intValue).sum();
+	        int puntosTotales = puntosDiarios.values().stream().mapToInt(Integer::intValue).sum();
+
+	        int mediaPuntosDiarios = (partidasTotales > 0) ? puntosTotales / partidasTotales : 0;
+
+	        GestionBDUsuario.actualizarDailyAveragePoints(obtenerUsuarioActual().getEmail(), mediaPuntosDiarios);
+	 }
 	 
-	
+	 private int convertirTiempoASegundos(String tiempo) {
+	        String[] partesTiempo = tiempo.split(":");
+	        int minutos = Integer.parseInt(partesTiempo[0]);
+	        int segundos = Integer.parseInt(partesTiempo[1]);
+
+	        // Convierte minutos y segundos a segundos
+	        return minutos * 60 + segundos;
+	    }
+	 
+	 private Usuario obtenerUsuarioActual() {
+	        Usuario usuarioSignIn = Ventana_SignIn.getUsuarioActual();
+
+	        // Si el usuario de SignIn es nulo, obtener el usuario de SignUp
+	        if (usuarioSignIn == null) {
+	        	Usuario usuarioSingUp = Ventana_PerfilDeUsuario.getUsuarioActual();
+	            return usuarioSingUp;
+	        }
+
+	        return usuarioSignIn;
+	    }
 	private void fijarPiezaEnTablero() {
 	    int[][] forma = piezaActual.obtenerForma();
 	    int fila = piezaActual.obtenerFila();
@@ -544,7 +592,7 @@ public class Ventana_Juego extends JFrame {
 	            }
 	            for (int l = 0; l < ANCHO_TABLERO; l++) {
 	                tablero[0][l].setOcupada(false);
-	                tablero[0][l].setColor(null); // Set color to null or default value
+	                tablero[0][l].setColor(null); 
 	            }
 	            puntos += 100;
 	            actualizarEtiquetaPuntos();
@@ -575,7 +623,7 @@ public class Ventana_Juego extends JFrame {
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
                 if (tablero[i][j].isOcupada()) {
-                    Color colorPieza = tablero[i][j].getColor(); // Assuming Celda has a getColor() method
+                    Color colorPieza = tablero[i][j].getColor(); 
                     dibujarCelda(g, j * TAMANO_CELDA, i * TAMANO_CELDA, colorPieza);
                 }
             }

@@ -53,7 +53,7 @@ public class Ventana_SignIn extends JFrame {
 	private static JLabel noAccountlbl ;
 	private static CustomPasswordField txtPassword;
 	private static CustomPasswordField txtConfirm;
-	private Usuario usuarioActual;
+	private static Usuario usuarioActual;
 	static GestionBDUsuario base;
 	public static HashMap<String, Usuario> mapaUsu;
 	private static Logger logger = Logger.getLogger(Ventana_SignIn.class.getName());
@@ -533,7 +533,7 @@ public class Ventana_SignIn extends JFrame {
         return correo.matches(regex);
     }
 	
-	public Usuario getUsuarioActual() {
+	public static Usuario getUsuarioActual() {
 		return usuarioActual;
 	}
 	

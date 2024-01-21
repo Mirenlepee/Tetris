@@ -32,6 +32,7 @@ public class Ventana_PerfilDeUsuario extends JFrame {
 	protected JTextArea txtBiografia;
 	private JLabel lblContadorCaracteres;
 	private String directorioFotoSeleccionada;
+	private static Usuario usuarioActual;
 	
 	public Ventana_PerfilDeUsuario() {
         this.setSize(400, 400);
@@ -128,6 +129,7 @@ public class Ventana_PerfilDeUsuario extends JFrame {
 	             // Establecer la fecha actual como último cambio de contraseña
 	             u.cambiarContrasena(cont);
 
+	             usuarioActual = u;
 	             GestionBDUsuario.anadirUsuarioNuevo(u);
 	             JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente");
 	             limpiarCampos();
@@ -188,6 +190,9 @@ public class Ventana_PerfilDeUsuario extends JFrame {
 	            }
 	        });
 	    }
+	}
+	public static Usuario getUsuarioActual() {
+		return usuarioActual;
 	}
 	
 	private void actualizarContadorCaracteres() {

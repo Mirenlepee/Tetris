@@ -22,7 +22,6 @@ public class Ventana_Principal extends JFrame{
 	private static JButton btnPlay;
 	private static JButton btnStatistics;
 	private static JButton btnCredits;	
-	private int idJugador;
 	
 	public Ventana_Principal() {
 		setTitle("Ventana Principal");
@@ -113,7 +112,7 @@ public class Ventana_Principal extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new Ventana_Estadistica(idJugador);
+				new Ventana_Estadistica();
 			}			
 		});
 		

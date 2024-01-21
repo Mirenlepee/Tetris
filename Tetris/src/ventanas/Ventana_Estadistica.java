@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
@@ -14,7 +15,6 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import BD.ConexionBD;
 import BD.GestionBDUsuario;
 
 public class Ventana_Estadistica extends JFrame{
@@ -23,13 +23,17 @@ public class Ventana_Estadistica extends JFrame{
 	private TableModel modeloDatos;
 	private static JLabel signInlbl;
 	private static JButton btnReturn;
+	private String emailUsuario;
+	static GestionBDUsuario base;
 	
-	public Ventana_Estadistica(int idJugador) {
+	public Ventana_Estadistica() {
 		ventana = new JFrame("Estadística__");
 		ventana.setSize(600, 250);
 		ventana.setTitle("Statistics");
 		setResizable(false);
 		ventana.setLayout(new BorderLayout());
+		
+		emailUsuario = JOptionPane.showInputDialog(ventana, "Ingresa tu correo electrónico:", "Ingresar Correo Electrónico", JOptionPane.PLAIN_MESSAGE);
 		
 		signInlbl = new JLabel("Statistics");
 		signInlbl.setFont(new Font("Cambria", Font.BOLD, 24));
@@ -53,7 +57,7 @@ public class Ventana_Estadistica extends JFrame{
 		ventana.add(new JScrollPane(tablaDatos), BorderLayout.CENTER);
 		setDatos();
     
-		actualizarEstadisticas(idJugador);
+		actualizarEstadisticas(emailUsuario);
 		 
 		ventana.add(pnlBoton, BorderLayout.SOUTH);
 		ventana.setVisible(true);
@@ -86,52 +90,59 @@ public class Ventana_Estadistica extends JFrame{
 	    }
 	}
 	
-	public void actualizarEstadisticas(int idJugador) {
-        try {
-            // Obtener puntos del jugador desde la base de datos
-//            ArrayList<Integer> puntos = ConexionBD.obtenerPuntosPorJugador(idJugador);
+	public void actualizarEstadisticas(String email) {
+	    ResultSet resultado = GestionBDUsuario.obtenerEstadisticasPorUsuario(email);
 
-            // Calcular estadísticas (por ejemplo, calcular el total de puntos)
-//             int totalPuntos = calcularTotalPuntos(puntos);
+	    if (resultado != null) {
+	        try {
+	            while (resultado.next()) {
+	                int timePlayed = resultado.getInt("timePlayed");
+	                int dailyPlayTime = resultado.getInt("dailyPlayTime");
+	                int roundsPlayed = resultado.getInt("roundsPlayed");
+	                int maxPoints = resultado.getInt("maxPoints");
+	                int minPoints = resultado.getInt("minPoints");
+	                int totalPoints = resultado.getInt("totalPoints");
+	                int dailyAveragePoints = resultado.getInt("dailyAveragePoints");
 
-            // Actualizar la tabla con los resultados
-//            ((MiTableModel) modeloDatos).addRow(new Object[]{"Total points", totalPuntos});
-     
-        	
-        	// Obtener estadísticas del jugador desde la base de datos
-            // Supongamos que tu método de la base de datos se llama obtenerEstadisticasPorUsuario
-            ArrayList<Integer> estadisticas = ConexionBD.obtenerEstadisticasPorUsuario(idJugador);
-
-            // Actualizar la tabla con los resultados
-            ((MiTableModel) modeloDatos).setEstadisticas(estadisticas);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private int calcularTotalPuntos(ArrayList<Integer> puntos) {
-        // Cálculo del total de puntos a partir de la lista de puntos
-        int total = 0;
-        for (int punto : puntos) {
-            total += punto;
-        }
-        return total;
-    }
+	                // Llena los datos en la tabla
+	                ((MiTableModel) modeloDatos).setEstadisticas(
+	                    new ArrayList<>(Arrays.asList(
+	                        new Object[]{"Time played", timePlayed},
+	                        new Object[]{"Daily playtime", dailyPlayTime},
+	                        new Object[]{"Rounds played", roundsPlayed},
+	                        new Object[]{"Max points", maxPoints},
+	                        new Object[]{"Min points", minPoints},
+	                        new Object[]{"Total points", totalPoints},
+	                        new Object[]{"Daily average points", dailyAveragePoints}
+	                    ))
+	                );
+	            }
+	        } catch (SQLException e) {
+	            // Maneja la excepción, por ejemplo, muestra un mensaje de error
+	            e.printStackTrace();
+	        } finally {
+	            try {
+	                resultado.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+	    }
 	
 	
 	private class MiTableModel implements TableModel{
 
 		private final Class<?>[] CLASES_COLS = {String.class, Integer.class};
 		private ArrayList<Object[]> filas = new ArrayList<>();
-		private ArrayList<Integer> estadisticas = new ArrayList<>();
 		 
 		@Override
 		public Class<?> getColumnClass(int columnIndex) {
 			return CLASES_COLS[columnIndex];
 		}
 
-		public void setEstadisticas(ArrayList<Integer> estadisticas) {
-            this.estadisticas = estadisticas;
+		public void setEstadisticas(ArrayList<Object[]> estadisticas) {
+            this.filas = estadisticas;
             fireTableDataChanged();
         }
 
@@ -207,25 +218,6 @@ public class Ventana_Estadistica extends JFrame{
 		}
 	}
 	
-	private void cargarEstadisticasEnTabla(int usuarioId) {
-	    DefaultTableModel modelo = (DefaultTableModel) tablaDatos.getModel();
-	    modelo.setRowCount(0); // Limpiar la tabla antes de cargar nuevos datos
-
-	    try {
-	        ArrayList<Integer> estadisticas = ConexionBD.obtenerEstadisticasPorUsuario(usuarioId);
-
-	        modelo.addRow(new Object[]{"Time played", estadisticas.get(0)});
-	        modelo.addRow(new Object[]{"Daily playtime", estadisticas.get(1)});
-	        modelo.addRow(new Object[]{"Rounds played", estadisticas.get(2)});
-	        modelo.addRow(new Object[]{"Max points", estadisticas.get(3)});
-	        modelo.addRow(new Object[]{"Min points", estadisticas.get(4)});
-	        modelo.addRow(new Object[]{"Total points", estadisticas.get(5)});
-	        modelo.addRow(new Object[]{"Daily average points", estadisticas.get(6)});
-
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	}
 	
 	public static void cambiarTextosEspañol() {
 	     signInlbl.setText("Estadística");

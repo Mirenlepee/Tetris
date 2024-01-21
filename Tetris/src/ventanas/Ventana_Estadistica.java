@@ -85,7 +85,7 @@ public class Ventana_Estadistica extends JFrame{
 	}
 
 
-/*	public void actualizarEstadisticas(String email) {
+	public void actualizarEstadisticas(String email) {
 	    ResultSet resultado = GestionBDUsuario.obtenerEstadisticasPorUsuario(email);
 
 	    if (resultado != null) {
@@ -123,47 +123,7 @@ public class Ventana_Estadistica extends JFrame{
 	            }
 	        }
 	    }
-	}
-*/
-	public void actualizarEstadisticas(String email) {
-        ResultSet resultado = GestionBDUsuario.obtenerEstadisticasPorUsuario(email);
-
-        if (resultado != null) {
-            try {
-                while (resultado.next()) {
-                    int timePlayed = resultado.getInt("timePlayed");
-                    int dailyPlayTime = resultado.getInt("dailyPlayTime");
-                    int roundsPlayed = resultado.getInt("roundsPlayed");
-                    int maxPoints = resultado.getInt("maxPoints");
-                    int minPoints = resultado.getInt("minPoints");
-                    int totalPoints = resultado.getInt("totalPoints");
-                    int dailyAveragePoints = resultado.getInt("dailyAveragePoints");
-
-                    // Llena los datos en el modelo de la tabla
-                    ((MiTableModel) modeloDatos).setEstadisticas(
-                            new ArrayList<>(Arrays.asList(
-                                    new Object[]{"Time played", timePlayed},
-                                    new Object[]{"Daily playtime", dailyPlayTime},
-                                    new Object[]{"Rounds played", roundsPlayed},
-                                    new Object[]{"Max points", maxPoints},
-                                    new Object[]{"Min points", minPoints},
-                                    new Object[]{"Total points", totalPoints},
-                                    new Object[]{"Daily average points", dailyAveragePoints}
-                            ))
-                    );
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    resultado.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-		
+	}	
 	private class MiTableModel implements TableModel{
 
 		private final Class<?>[] CLASES_COLS = {String.class, Integer.class};
@@ -174,12 +134,7 @@ public class Ventana_Estadistica extends JFrame{
 			return CLASES_COLS[columnIndex];
 		}
 
-		 public void limpiarFilas() {
-			 filas.clear();
-	         fireTableDataChanged();
-		}
-
-		public void setEstadisticas(ArrayList<Object[]> estadisticas) {
+		 public void setEstadisticas(ArrayList<Object[]> estadisticas) {
 		        this.filas = estadisticas;
 		        fireTableDataChanged();
 		    }

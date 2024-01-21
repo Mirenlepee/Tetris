@@ -32,8 +32,10 @@ public class Ventana_Juego extends JFrame {
     private JButton btnPausa;
         
     public static JLabel lblNivel;
+    private boolean corazon=false;
 
     private int nivelActual = 1;
+    private int velocidadDeCaida=300;
     protected int minutos = 0;
     protected int segundos = 0;
     private boolean gameOverDisplayed = false;
@@ -64,6 +66,8 @@ public class Ventana_Juego extends JFrame {
 
     public Ventana_Juego() {
     	
+    
+    	
     	setTitle("Tetris");
     	try {
              File audioFile = new File("Tetris/src/tetris.wav");
@@ -81,7 +85,6 @@ public class Ventana_Juego extends JFrame {
          }
 
     	pres = Ventana_Options.obtenerPresionado();
-        System.out.println(pres);
         if(!pres) {
          	clip.start();
         }    	   	
@@ -193,7 +196,7 @@ public class Ventana_Juego extends JFrame {
 
         iniciarJuego();
 
-        timer = new Timer(200, new ActionListener() {
+        timer = new Timer(velocidadDeCaida, new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
                 if (!gameOver) {
@@ -204,6 +207,8 @@ public class Ventana_Juego extends JFrame {
         });
         timer.start();
       
+        
+        
         panelJuego.addKeyListener(new KeyAdapter() {
         	public void keyPressed(KeyEvent evt) {
                 teclaPresionada(evt);
@@ -219,7 +224,6 @@ public class Ventana_Juego extends JFrame {
             	
             cambiarTextosEspañol();	
             }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Français") {
-            	System.out.println("si");
             	cambiarTextosFrances();
             	
             }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Deutsch") {
@@ -343,7 +347,7 @@ public class Ventana_Juego extends JFrame {
     
     private void mostrarMessageCorazon() {
         vidas--;
-
+        corazon=true;
         if (vidas > 0) {
             Object[] options = {"Continue"};
 
@@ -365,6 +369,7 @@ public class Ventana_Juego extends JFrame {
             gameOver = true;
             timer.stop();
             mostrarGameOver();
+            corazon=false;
         }
     }
 
@@ -377,8 +382,10 @@ public class Ventana_Juego extends JFrame {
     }
 
     protected void reiniciarJuego() {
-        puntos = 0;
-        actualizarEtiquetaPuntos();
+       if(!corazon) {
+    	   puntos=0;
+       }
+       actualizarEtiquetaPuntos();
         piezasEnTablero.clear();
         tablero  = new Celda[ALTO_TABLERO][ANCHO_TABLERO];
 	    for (int i = 0; i < ALTO_TABLERO; i++) {
@@ -605,6 +612,18 @@ public class Ventana_Juego extends JFrame {
 
     private void actualizarEtiquetaPuntos() {
         etiquetaPuntos.setText("Puntos: " + puntos);
+        if(puntos==200) {
+        	velocidadDeCaida=250;
+            timer.setDelay(velocidadDeCaida);
+      
+            lblNivel.setText("Level: 2");
+        }else if(puntos==1000) {
+        	velocidadDeCaida=200;
+            timer.setDelay(velocidadDeCaida);
+            lblNivel.setText("Level: 3");
+
+
+        }
     }
 
     private void dibujarFondo(Graphics g) {
@@ -768,4 +787,5 @@ public class Ventana_Juego extends JFrame {
 		etiquetaPuntos.setText("Punkte : " + puntos);
 		lblNivel.setText("Niveau : 1");
 	}
+   
 }

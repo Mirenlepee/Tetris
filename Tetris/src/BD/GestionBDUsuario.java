@@ -1,3 +1,4 @@
+
 package BD;
 
 import java.sql.Connection;
@@ -80,7 +81,7 @@ public class GestionBDUsuario {
      * @throws SQLException Si hay un error al intentar establecer la conexión.
      * @throws ClassNotFoundException Si no se encuentra la clase del controlador JDBC.
      */
-	private static void establecerConexion() throws SQLException, ClassNotFoundException {
+	public static void establecerConexion() throws SQLException, ClassNotFoundException {
         Class.forName("org.sqlite.JDBC");
         con = DriverManager.getConnection("jdbc:sqlite:usuarios.db");
         s = con.createStatement();

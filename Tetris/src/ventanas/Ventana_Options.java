@@ -34,14 +34,10 @@ public class Ventana_Options extends JFrame{
         
         JPanel pnlLbl = new JPanel();
         pnlLbl.add(lblOptions, BorderLayout.CENTER);
-        ventana.add(pnlLbl, BorderLayout.NORTH);
-       
-        
-        
+        ventana.add(pnlLbl, BorderLayout.NORTH);        
         
         ImageIcon imgLanguage = new ImageIcon(getClass().getResource("Language.png"));
-        JButton btnLanguage = new JButton();
-        
+        JButton btnLanguage = new JButton();       
 
         int ancho2 = 30;
 		int alto2 = 30;
@@ -57,24 +53,20 @@ public class Ventana_Options extends JFrame{
         lblLanguage = new JLabel("Language");
         
         if (!presionado) {
-        cambiarImgBtn();
-        
+        	cambiarImgBtn();
         }
 
         lblHTP = new JLabel("How to play");
 
         ImageIcon imgHTP = new ImageIcon(getClass().getResource("HTP.png"));
         JButton btnHTP = new JButton();
-      
 
         int ancho3 = 30;
 		int alto3 = 30;
 		Image imagenDef3 = imgHTP.getImage().getScaledInstance(ancho3, alto3, Image.SCALE_SMOOTH);
 		ImageIcon iconoDef3 = new ImageIcon(imagenDef3);
 		btnHTP.setIcon(iconoDef3);
-        
-        
-        
+		
 		pnlPrincipal = new JPanel();
 		pnlPrincipal.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -105,29 +97,20 @@ public class Ventana_Options extends JFrame{
 		pnlPrincipal.add(createButtonLabelPanel(btnReturn, new JLabel("")), gbc); 
 
 		ventana.add(pnlPrincipal, BorderLayout.CENTER);
-        
-     
 
 	    btnSound.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
 	            cambiarImgBtn();
-	            
+	     
 	            if(presionado) {
 		            setPresionado(false);
-
 	            }else {
 		           setPresionado(true);
-
 	            }
 	            System.out.println(obtenerPresionado());
 	        }
 	    });
-
-       
-        
-   
-        
         
         btnLanguage.addActionListener(new ActionListener() {
 
@@ -136,20 +119,8 @@ public class Ventana_Options extends JFrame{
 				// TODO Auto-generated method stub
 				  Ventana_Idioma ventanaIdioma = new Ventana_Idioma();
 			        ventanaIdioma.setVisible(true);
-			        
-			       
-			        
-			        
-			        
-			        
 			}
         });
-        
-        
-       
-        
-   
-    
         
         btnHTP.addActionListener(new ActionListener() {
 
@@ -160,11 +131,6 @@ public class Ventana_Options extends JFrame{
 			}
         });
         
-    
-        
-      
-    
-        
         btnReturn.addActionListener( new ActionListener() {
 
 			@Override
@@ -174,30 +140,21 @@ public class Ventana_Options extends JFrame{
 				setImgSoundState(imgSound);
 			}
         });
-        
      
         ventana.add(pnlPrincipal,BorderLayout.CENTER);
-        
-        
-        
-           
-       
 	}
+
 	public static boolean isPresionado() {
 		return presionado;
 	}
+	
 	public void setPresionado(boolean presionado) {
 		this.presionado = presionado;
 	}
 	
-	
-	   public static boolean obtenerPresionado() {
-	        return isPresionado();
-	    }
-	   
-	   
-	   
-	   
+	public static boolean obtenerPresionado() {
+		return isPresionado();
+	}
 	   
 	private JPanel createButtonLabelPanel(JButton button, JLabel label) {
 	    JPanel panel = new JPanel();
@@ -299,5 +256,4 @@ public class Ventana_Options extends JFrame{
         lblHTP.setText("Spielanleitung");
         btnReturn.setText("Zurückkehren");
 	}
-
 }

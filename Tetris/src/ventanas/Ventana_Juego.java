@@ -279,7 +279,7 @@ public class Ventana_Juego extends JFrame {
                 gameOver = true;
                 timer.stop();
                 mostrarMessageCorazon();
-                //insertarEstadisticasBD();
+//                insertarEstadisticasBD();
             }else if(verificarGameOver() && vidas == 0) {
             	gameOver = true;
                 timer.stop();

@@ -35,6 +35,7 @@ public class Ventana_Juego extends JFrame {
     private boolean corazon=false;
 
     private int nivelActual = 1;
+    private int velocidadDeCaida=300;
     protected int minutos = 0;
     protected int segundos = 0;
     private boolean gameOverDisplayed = false;
@@ -65,6 +66,8 @@ public class Ventana_Juego extends JFrame {
 
     public Ventana_Juego() {
     	
+    
+    	
     	setTitle("Tetris");
     	try {
              File audioFile = new File("Tetris/src/tetris.wav");
@@ -82,7 +85,6 @@ public class Ventana_Juego extends JFrame {
          }
 
     	pres = Ventana_Options.obtenerPresionado();
-        System.out.println(pres);
         if(!pres) {
          	clip.start();
         }    	   	
@@ -194,7 +196,7 @@ public class Ventana_Juego extends JFrame {
 
         iniciarJuego();
 
-        timer = new Timer(200, new ActionListener() {
+        timer = new Timer(velocidadDeCaida, new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
                 if (!gameOver) {
@@ -205,6 +207,8 @@ public class Ventana_Juego extends JFrame {
         });
         timer.start();
       
+        
+        
         panelJuego.addKeyListener(new KeyAdapter() {
         	public void keyPressed(KeyEvent evt) {
                 teclaPresionada(evt);
@@ -220,7 +224,6 @@ public class Ventana_Juego extends JFrame {
             	
             cambiarTextosEspañol();	
             }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Français") {
-            	System.out.println("si");
             	cambiarTextosFrances();
             	
             }else if(Ventana_Idioma.getIdiomaSeleccionado()=="Deutsch") {
@@ -609,6 +612,15 @@ public class Ventana_Juego extends JFrame {
 
     private void actualizarEtiquetaPuntos() {
         etiquetaPuntos.setText("Puntos: " + puntos);
+        if(puntos==200) {
+        	velocidadDeCaida=250;
+            timer.setDelay(velocidadDeCaida);
+
+        }else if(puntos==1000) {
+        	velocidadDeCaida=200;
+            timer.setDelay(velocidadDeCaida);
+
+        }
     }
 
     private void dibujarFondo(Graphics g) {
@@ -772,4 +784,5 @@ public class Ventana_Juego extends JFrame {
 		etiquetaPuntos.setText("Punkte : " + puntos);
 		lblNivel.setText("Niveau : 1");
 	}
+   
 }

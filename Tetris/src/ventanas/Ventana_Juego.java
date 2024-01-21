@@ -32,6 +32,7 @@ public class Ventana_Juego extends JFrame {
     private JButton btnPausa;
         
     public static JLabel lblNivel;
+    private boolean corazon=false;
 
     private int nivelActual = 1;
     protected int minutos = 0;
@@ -343,7 +344,7 @@ public class Ventana_Juego extends JFrame {
     
     private void mostrarMessageCorazon() {
         vidas--;
-
+        corazon=true;
         if (vidas > 0) {
             Object[] options = {"Continue"};
 
@@ -365,6 +366,7 @@ public class Ventana_Juego extends JFrame {
             gameOver = true;
             timer.stop();
             mostrarGameOver();
+            corazon=false;
         }
     }
 
@@ -377,8 +379,10 @@ public class Ventana_Juego extends JFrame {
     }
 
     protected void reiniciarJuego() {
-        puntos = 0;
-        actualizarEtiquetaPuntos();
+       if(!corazon) {
+    	   puntos=0;
+       }
+       actualizarEtiquetaPuntos();
         piezasEnTablero.clear();
         tablero  = new Celda[ALTO_TABLERO][ANCHO_TABLERO];
 	    for (int i = 0; i < ALTO_TABLERO; i++) {

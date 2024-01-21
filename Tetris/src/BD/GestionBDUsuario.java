@@ -16,6 +16,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import java.sql.Types;
 import javax.swing.JOptionPane;
 
 import gestionUsuarios.Usuario;
@@ -466,17 +467,26 @@ public class GestionBDUsuario {
      * @param usuarioId El ID del usuario.
      * @return ResultSet con las estadísticas de juego del usuario.
      */
-    public static ResultSet obtenerEstadisticasPorUsuario(String email) {
-        String comentarioSQL = "SELECT * FROM EstadisticasJuego WHERE email = ?";
+	public static ResultSet obtenerEstadisticasPorUsuario(String email) {
+	    ResultSet resultado = null;
+	    
+	    try {
+	        // Verifica que la conexión no sea null
+	        if (con != null) {
+	            String query = "SELECT * FROM estadisticas WHERE email = ?";
+	            PreparedStatement ps = con.prepareStatement(query);
+	            ps.setString(1, email);
+	            resultado = ps.executeQuery();
+	        } else {
+	            System.err.println("La conexión a la base de datos es null.");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return resultado;
+	}
 
-        try (PreparedStatement preparedStatement = con.prepareStatement(comentarioSQL)) {
-            preparedStatement.setString(1, email);
-            return preparedStatement.executeQuery();
-        } catch (SQLException e) {
-            manejarExcepcion(e);
-            return null;
-        }
-    }
     
     public static int obtenerRoundsPlayed(String email) {
         String query = "SELECT roundsPlayed FROM EstadisticasJuego WHERE email = ?";
@@ -492,10 +502,14 @@ public class GestionBDUsuario {
         return 0; // Valor predeterminado si hay un error o no se encuentra el usuario
     }
     
-    public static void actualizarRoundsPlayed(String email, int nuevoRoundsPlayed) {
+    public static void actualizarRoundsPlayed(String email, Integer nuevoRoundsPlayed) {
         String query = "UPDATE EstadisticasJuego SET roundsPlayed = ? WHERE email = ?";
         try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-            preparedStatement.setInt(1, nuevoRoundsPlayed);
+            if (nuevoRoundsPlayed != null) {
+                preparedStatement.setInt(1, nuevoRoundsPlayed);
+            } else {
+                preparedStatement.setNull(1, Types.INTEGER); 
+            }
             preparedStatement.setString(2, email);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
